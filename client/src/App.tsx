@@ -11,6 +11,7 @@ import Villas from "@/pages/villas";
 import Transporte from "@/pages/transporte";
 import Blog from "@/pages/blog";
 import Contacto from "@/pages/contacto";
+import AffiliateDashboard from "@/pages/affiliate-dashboard";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/transporte" component={Transporte} />
       <Route path="/blog" component={Blog} />
       <Route path="/contacto" component={Contacto} />
+      <Route path="/affiliate-dashboard" component={AffiliateDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

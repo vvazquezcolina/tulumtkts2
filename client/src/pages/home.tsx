@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/ui/navigation";
 import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { AffiliateBanner } from "@/components/ui/affiliate-banner";
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -103,6 +105,13 @@ export default function Home() {
               </Card>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Affiliate Banner */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AffiliateBanner />
         </div>
       </section>
 
@@ -258,7 +267,14 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <Button className="w-full mt-4 bg-primary text-white hover:bg-primary/90">
+                  <Button 
+                    className="w-full mt-4 bg-primary text-white hover:bg-primary/90"
+                    onClick={() => {
+                      const affiliateUrl = generateAffiliateLink('getyourguide');
+                      trackAffiliateClick('GetYourGuide', experience.title, experience.price, 'Featured');
+                      window.open(affiliateUrl, '_blank');
+                    }}
+                  >
                     Book Now
                   </Button>
                 </CardContent>

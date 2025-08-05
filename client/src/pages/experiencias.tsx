@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, MapPin, Search, Filter, Star, Heart, Users, Camera } from "lucide-react";
+import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { AffiliateBanner } from "@/components/ui/affiliate-banner";
 
 export default function Experiencias() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -263,6 +265,13 @@ export default function Experiencias() {
         </div>
       </section>
 
+      {/* Affiliate Banner */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AffiliateBanner />
+        </div>
+      </section>
+
       {/* Content Tabs */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -462,7 +471,15 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
             <span className="text-xs text-gray-500">Desde</span>
             <div className="text-lg font-bold text-gray-900">{experience.price}</div>
           </div>
-          <Button size="sm" className="bg-primary text-white hover:bg-primary/90">
+          <Button 
+            size="sm" 
+            className="bg-primary text-white hover:bg-primary/90"
+            onClick={() => {
+              const affiliateUrl = generateAffiliateLink('getyourguide');
+              trackAffiliateClick('GetYourGuide', experience.title, experience.price, experience.category);
+              window.open(affiliateUrl, '_blank');
+            }}
+          >
             Reservar
           </Button>
         </div>
