@@ -1,12 +1,20 @@
-# TulumTkts - Tourism Experience Platform
+# TulumTkts - Comprehensive Tourism Platform
 
 ## Overview
 
-TulumTkts is a tourism experience booking platform built with React frontend and Express.js backend. The application appears to be designed for booking tours, experiences, and attractions in Tulum, featuring a modern UI with search functionality, favorites management, and newsletter signup capabilities.
+TulumTkts is a comprehensive tourism platform for Tulum, Mexico, built with React frontend and Express.js backend. The platform serves as the #1 booking destination for Tulum experiences, featuring multiple sections: Events & Festivals, Tours & Experiences, Villa Rentals, Transportation, and Travel Guides. The application supports multilingual functionality (Spanish/English/French) and includes modern UI with advanced search, filtering, and booking capabilities.
+
+## Recent Changes (Jan 2025)
+- Updated architecture to support comprehensive Tulum tourism platform
+- Added multilingual structure planning (ES/EN/FR)
+- Expanded from simple experience booking to full-service platform
 
 ## User Preferences
 
-Preferred communication style: Simple, everyday language.
+- Preferred communication style: Simple, everyday language
+- Target market: Multilingual tourists (Spanish, English, French speakers)
+- Business focus: Comprehensive Tulum tourism platform with events, experiences, accommodations, and transport
+- Content strategy: SEO-focused blog content, local expertise positioning
 
 ## System Architecture
 
