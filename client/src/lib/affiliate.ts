@@ -7,6 +7,45 @@ export interface AffiliateProvider {
   commission: number;
 }
 
+// GetYourGuide API Response Types
+export interface GetYourGuideActivity {
+  activity_id: string;
+  title: string;
+  abstract: string;
+  image_url: string;
+  rating: number;
+  number_of_ratings: number;
+  price: {
+    values: {
+      amount: number;
+      currency: string;
+    }[];
+  };
+  duration: string;
+  location: {
+    name: string;
+    latitude: number;
+    longitude: number;
+  };
+  categories: string[];
+  url: string;
+  supplier: {
+    name: string;
+  };
+  bookable: boolean;
+  instant_confirmation: boolean;
+  free_cancellation: boolean;
+}
+
+export interface GetYourGuideResponse {
+  data: GetYourGuideActivity[];
+  meta: {
+    total_count: number;
+    page: number;
+    per_page: number;
+  };
+}
+
 export const AFFILIATE_PROVIDERS: Record<string, AffiliateProvider> = {
   getyourguide: {
     name: 'GetYourGuide',

@@ -6,13 +6,23 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, MapPin, Search, Filter, Star, Heart, Users, Camera } from "lucide-react";
-import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { generateAffiliateLink, trackAffiliateClick, GetYourGuideActivity } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
+import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-getyourguide";
 
 export default function Experiencias() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Fetch real experiences from GetYourGuide API
+  const { data: experiencesData, isLoading, error } = useTulumExperiences({
+    page: currentPage,
+    per_page: 12,
+    category: categoryFilter || undefined,
+    sort_by: 'popularity'
+  });
 
   const toggleFavorite = (id: string) => {
     const newFavorites = new Set(favorites);
@@ -24,7 +34,8 @@ export default function Experiencias() {
     setFavorites(newFavorites);
   };
 
-  const experiences = [
+  // Use real GetYourGuide data or fallback to static data
+  const experiences = experiencesData?.data || [
     {
       id: "1",
       title: "Zona Arqueológica de Tulum - Castillo frente al Mar",
@@ -286,10 +297,34 @@ export default function Experiencias() {
             </TabsList>
 
             <TabsContent value="todos">
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="bg-gray-200 h-48 rounded-t-lg"></div>
+                      <div className="p-6">
+                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-3 bg-gray-200 rounded mb-4"></div>
+                        <div className="flex justify-between">
+                          <div className="h-8 w-20 bg-gray-200 rounded"></div>
+                          <div className="h-8 w-20 bg-gray-200 rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-12">
+                  <p className="text-gray-500 mb-4">Error al cargar experiencias</p>
+                  <p className="text-sm text-gray-400">Mostrando experiencias de ejemplo</p>
+                </div>
+              ) : null}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredExperiences.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
