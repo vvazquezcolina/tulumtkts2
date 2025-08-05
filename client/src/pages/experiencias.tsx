@@ -244,9 +244,9 @@ export default function Experiencias() {
                 className="pl-10"
               />
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 w-full md:w-auto">
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                <SelectTrigger className="w-[250px]">
+                <SelectTrigger className="w-full md:w-[250px]">
                   <Filter className="w-4 h-4 mr-2" />
                   <SelectValue placeholder="Categoría" />
                 </SelectTrigger>
@@ -267,7 +267,7 @@ export default function Experiencias() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="todos" className="w-full">
-            <TabsList className="grid w-full grid-cols-6 mb-8">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8 overflow-x-auto">
               <TabsTrigger value="todos">Todos</TabsTrigger>
               <TabsTrigger value="arqueologicos">Arqueológicos</TabsTrigger>
               <TabsTrigger value="cenotes">Cenotes</TabsTrigger>

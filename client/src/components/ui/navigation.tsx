@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/ui/language-selector";
+import { MobileMenu } from "@/components/ui/mobile-menu";
 import { 
-  Menu, 
-  X, 
   User, 
   Calendar,
   MapPin,
@@ -25,7 +23,6 @@ const navigationItems = [
 ];
 
 export function Navigation() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
 
   return (
@@ -69,48 +66,10 @@ export function Navigation() {
               Publicar Experiencia
             </Button>
             
-            {/* Mobile menu button */}
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </Button>
+            {/* Mobile menu */}
+            <MobileMenu />
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-100">
-              {navigationItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link key={item.href} href={item.href}>
-                    <span 
-                      className={`flex items-center px-3 py-2 text-base font-medium transition-colors cursor-pointer ${
-                        location === item.href 
-                          ? 'text-primary bg-primary/10' 
-                          : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                      }`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <Icon className="w-4 h-4 mr-3" />
-                      {item.label}
-                    </span>
-                  </Link>
-                );
-              })}
-              <div className="pt-4 border-t border-gray-100">
-                <Button className="w-full bg-primary text-white hover:bg-primary/90">
-                  Publicar Experiencia
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
