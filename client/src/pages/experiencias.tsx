@@ -267,13 +267,13 @@ export default function Experiencias() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="todos" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8 overflow-x-auto">
-              <TabsTrigger value="todos">Todos</TabsTrigger>
-              <TabsTrigger value="arqueologicos">Arqueológicos</TabsTrigger>
-              <TabsTrigger value="cenotes">Cenotes</TabsTrigger>
-              <TabsTrigger value="aventura">Aventura</TabsTrigger>
-              <TabsTrigger value="bienestar">Bienestar</TabsTrigger>
-              <TabsTrigger value="parques">Parques</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 mb-6 md:mb-8 h-auto p-1">
+              <TabsTrigger value="todos" className="text-xs sm:text-sm">Todos</TabsTrigger>
+              <TabsTrigger value="arqueologicos" className="text-xs sm:text-sm">Arqueológicos</TabsTrigger>
+              <TabsTrigger value="cenotes" className="text-xs sm:text-sm">Cenotes</TabsTrigger>
+              <TabsTrigger value="aventura" className="text-xs sm:text-sm">Aventura</TabsTrigger>
+              <TabsTrigger value="bienestar" className="text-xs sm:text-sm">Bienestar</TabsTrigger>
+              <TabsTrigger value="parques" className="text-xs sm:text-sm">Parques</TabsTrigger>
             </TabsList>
 
             <TabsContent value="todos">

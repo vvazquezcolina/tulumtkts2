@@ -48,10 +48,10 @@ export default function Home() {
         >
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-4xl mx-auto px-4">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                 Discover <span className="text-primary">Tulum's</span> Magic
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-gray-200">
+              <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200">
                 Book unforgettable experiences in paradise. From ancient ruins to cenotes, your adventure awaits.
               </p>
               
@@ -114,7 +114,7 @@ export default function Home() {
             <p className="text-lg text-gray-600">Explore the best of what Tulum has to offer</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               {
                 name: "Cenotes",
@@ -141,8 +141,8 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="text-white font-semibold text-lg">{category.name}</h3>
+                  <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4">
+                    <h3 className="text-white font-semibold text-sm md:text-lg">{category.name}</h3>
                   </div>
                 </div>
               </div>
