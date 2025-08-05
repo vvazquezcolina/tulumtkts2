@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Globe } from "lucide-react";
 
 const languages = [
-  { code: "es", name: "Español", flag: "🇪🇸" },
+  { code: "es", name: "Español", flag: "🇲🇽" },
   { code: "en", name: "English", flag: "🇺🇸" },
   { code: "fr", name: "Français", flag: "🇫🇷" }
 ];

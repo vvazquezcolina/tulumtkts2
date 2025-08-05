@@ -120,7 +120,7 @@ export default function Contacto() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="es">🇪🇸 Español</SelectItem>
+                            <SelectItem value="es">🇲🇽 Español</SelectItem>
                             <SelectItem value="en">🇺🇸 English</SelectItem>
                             <SelectItem value="fr">🇫🇷 Français</SelectItem>
                           </SelectContent>
