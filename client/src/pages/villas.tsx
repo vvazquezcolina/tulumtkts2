@@ -53,8 +53,8 @@ export default function Villas() {
       rating: 4.9,
       reviews: 127,
       images: [
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        "https://images.unsplash.com/photo-1571041804726-53e8bf082096?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        "https://images.unsplash.com/photo-1570213489059-0aac6626cade?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
       ],
       amenities: ["Playa privada", "Piscina infinity", "Chef privado disponible", "WiFi", "Estacionamiento", "Aire acondicionado"],
       featured: true

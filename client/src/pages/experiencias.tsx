@@ -34,7 +34,7 @@ export default function Experiencias() {
       rating: 4.9,
       reviews: 342,
       groupSize: "2-15 personas",
-      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Guía experto", "Entrada incluida", "Transporte", "Agua embotellada"]
     },
     {
@@ -48,7 +48,7 @@ export default function Experiencias() {
       rating: 4.8,
       reviews: 278,
       groupSize: "8-25 personas",
-      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Transporte A/C", "Guía certificado", "Almuerzo buffet", "Cenote Ik Kil", "Valladolid"]
     },
     {
@@ -62,7 +62,7 @@ export default function Experiencias() {
       rating: 4.7,
       reviews: 156,
       groupSize: "4-12 personas",
-      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1552832230-1a28d5cf8389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Transporte", "Bicicletas incluidas", "Guía bilingüe", "Refrescos"]
     },
     {
@@ -76,7 +76,7 @@ export default function Experiencias() {
       rating: 4.9,
       reviews: 423,
       groupSize: "2-10 personas",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Equipo de snorkel", "Chalecos salvavidas", "Toallas", "Cámara acuática"]
     },
     {
@@ -90,7 +90,7 @@ export default function Experiencias() {
       rating: 4.8,
       reviews: 267,
       groupSize: "4-12 personas",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Transporte", "Equipo completo", "Guía marino", "Almuerzo", "Lockers"]
     },
     {
@@ -104,7 +104,7 @@ export default function Experiencias() {
       rating: 4.9,
       reviews: 189,
       groupSize: "2-8 personas",
-      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["ATV individual", "Tirolesas", "Rappel", "Cenote privado", "Equipo seguridad"]
     },
     {
@@ -118,7 +118,7 @@ export default function Experiencias() {
       rating: 4.8,
       reviews: 134,
       groupSize: "6-12 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1572276596237-5db2c3e16c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Transporte 4x4", "Paseo en lancha", "Guía naturalista", "Almuerzo", "Binoculares"]
     },
     {
@@ -146,7 +146,7 @@ export default function Experiencias() {
       rating: 4.6,
       reviews: 156,
       groupSize: "1-15 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Mat de yoga", "Instructor certificado", "Agua de coco", "Vista al mar"]
     },
     {
@@ -160,7 +160,7 @@ export default function Experiencias() {
       rating: 4.8,
       reviews: 87,
       groupSize: "4-10 personas",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Ingredientes frescos", "Chef profesional", "Recetas impresas", "Comida completa"]
     },
     {
@@ -174,7 +174,7 @@ export default function Experiencias() {
       rating: 4.7,
       reviews: 234,
       groupSize: "1-20 personas",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1527004760525-b2e6bb39c544?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Entrada completa", "Equipo snorkel", "Buffet libre", "Bebidas incluidas"]
     },
     {
@@ -188,7 +188,7 @@ export default function Experiencias() {
       rating: 4.5,
       reviews: 78,
       groupSize: "2-12 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1607295644303-8c7ba47c70f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
       includes: ["Entrada al santuario", "Guía especialista", "Interacción guiada", "Donación incluida"]
     }
   ];
