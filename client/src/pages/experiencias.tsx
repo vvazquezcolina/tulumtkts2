@@ -25,96 +25,181 @@ export default function Experiencias() {
   const experiences = [
     {
       id: "1",
-      title: "Tour Ruinas de Tulum + Cenote + Tortugas en Akumal",
-      description: "Descubre las ruinas mayas frente al mar, nada en cenotes cristalinos y snorkelea con tortugas marinas en un día completo de aventura.",
-      duration: "8 horas",
-      location: "Tulum - Akumal",
+      title: "Zona Arqueológica de Tulum - Castillo frente al Mar",
+      description: "Explora el famoso sitio frente al mar Caribe, con su castillo sobre el acantilado y vistas espectaculares. Sumérgete en la historia maya con guías expertos.",
+      duration: "4 horas",
+      location: "Tulum",
       category: "Arqueológicos y Culturales",
-      price: "€89",
+      price: "€65",
       rating: 4.9,
-      reviews: 156,
-      groupSize: "2-12 personas",
+      reviews: 342,
+      groupSize: "2-15 personas",
       image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte", "Guía certificado", "Equipo de snorkel", "Almuerzo"]
+      includes: ["Guía experto", "Entrada incluida", "Transporte", "Agua embotellada"]
     },
     {
       id: "2",
-      title: "Aventura ATV en la Jungla y Cenote",
-      description: "Día lleno de adrenalina manejando cuatrimotos por senderos de la jungla, lanzándote en tirolesa y nadando en cenotes sagrados.",
-      duration: "6 horas",
-      location: "Selva Maya",
-      category: "Aventura y Naturaleza",
-      price: "€125",
+      title: "Chichén Itzá - Nueva Maravilla del Mundo",
+      description: "Excursión de día completo a una de las Nuevas 7 Maravillas del Mundo. Incluye parada en cenote sagrado y pueblo colonial de Valladolid.",
+      duration: "12 horas",
+      location: "Chichén Itzá",
+      category: "Arqueológicos y Culturales",
+      price: "€159",
       rating: 4.8,
-      reviews: 89,
-      groupSize: "1-8 personas",
-      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["ATV individual", "Equipo de seguridad", "Cenote privado", "Refrigerios"]
+      reviews: 278,
+      groupSize: "8-25 personas",
+      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Transporte A/C", "Guía certificado", "Almuerzo buffet", "Cenote Ik Kil", "Valladolid"]
     },
     {
       id: "3",
-      title: "Retiro de Yoga y Temazcal",
-      description: "Conecta con tu ser interior en una experiencia de bienestar que combina yoga al amanecer, ceremonia de temazcal y meditación.",
-      duration: "4 horas",
-      location: "Playa Tulum",
-      category: "Bienestar y Lifestyle",
-      price: "€75",
+      title: "Cobá - Sube a la Pirámide Nohoch Mul",
+      description: "Donde puedes subir a la pirámide Nohoch Mul para dominar la jungla. Única pirámide escalable en la región maya.",
+      duration: "6 horas",
+      location: "Cobá",
+      category: "Arqueológicos y Culturales",
+      price: "€89",
       rating: 4.7,
-      reviews: 67,
-      groupSize: "4-15 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Clase de yoga", "Ceremonia temazcal", "Té herbal", "Meditación guiada"]
+      reviews: 156,
+      groupSize: "4-12 personas",
+      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Transporte", "Bicicletas incluidas", "Guía bilingüe", "Refrescos"]
     },
     {
       id: "4",
-      title: "Expedición Sian Ka'an UNESCO",
-      description: "Explora la reserva de la biosfera Sian Ka'an, Patrimonio de la Humanidad, con avistamiento de vida silvestre y manglares.",
-      duration: "10 horas",
-      location: "Reserva Sian Ka'an",
-      category: "Aventura y Naturaleza",
-      price: "€145",
+      title: "Gran Cenote y Dos Ojos - Snorkel en Ríos Subterráneos",
+      description: "Snorkel en cenotes de agua dulce cristalina. Aprecia formaciones de estalactitas bajo el agua en los cenotes más famosos de Tulum.",
+      duration: "5 horas",
+      location: "Gran Cenote - Dos Ojos",
+      category: "Cenotes y Snorkel",
+      price: "€85",
       rating: 4.9,
-      reviews: 45,
-      groupSize: "4-10 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte 4x4", "Guía naturalista", "Almuerzo eco", "Binoculares"]
+      reviews: 423,
+      groupSize: "2-10 personas",
+      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Equipo de snorkel", "Chalecos salvavidas", "Toallas", "Cámara acuática"]
     },
     {
       id: "5",
-      title: "Tour Gastronómico Maya",
-      description: "Sumérgete en los sabores auténticos de la cocina maya con clases de cocina, visita a mercados locales y degustación.",
-      duration: "5 horas",
-      location: "Pueblo de Tulum",
-      category: "Bienestar y Lifestyle",
-      price: "€95",
-      rating: 4.6,
-      reviews: 78,
-      groupSize: "2-8 personas",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Clase de cocina", "Ingredientes locales", "Comida completa", "Recetas"]
+      title: "Tortugas Marinas en Akumal + Cenote Casa Tortuga",
+      description: "Nada con tortugas marinas en Akumal y explora varios cenotes abiertos y cerrados en Casa Tortuga. Día completo de aventura acuática.",
+      duration: "8 horas",
+      location: "Akumal - Casa Tortuga",
+      category: "Cenotes y Snorkel",
+      price: "€115",
+      rating: 4.8,
+      reviews: 267,
+      groupSize: "4-12 personas",
+      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Transporte", "Equipo completo", "Guía marino", "Almuerzo", "Lockers"]
     },
     {
       id: "6",
-      title: "Buceo en Cenotes Dos Ojos",
-      description: "Descubre el mundo subterráneo de los cenotes más famosos de México con buceo certificado en aguas cristalinas.",
-      duration: "4 horas",
-      location: "Cenote Dos Ojos",
-      category: "Aventura y Naturaleza",
-      price: "€110",
+      title: "Expedición ATV - Día Lleno de Adrenalina",
+      description: "Conduce por senderos selváticos, visita cenote para nadar y vuela en tirolesas sobre la jungla. Rappel en cenote y avistamiento de fauna.",
+      duration: "7 horas",
+      location: "Selva Maya",
+      category: "Tours de Aventura",
+      price: "€135",
+      rating: 4.9,
+      reviews: 189,
+      groupSize: "2-8 personas",
+      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["ATV individual", "Tirolesas", "Rappel", "Cenote privado", "Equipo seguridad"]
+    },
+    {
+      id: "7",
+      title: "Safari Sian Ka'an - Biosfera UNESCO",
+      description: "Recorrido en lancha por la biosfera de Sian Ka'an, avistando delfines, tortugas, aves exóticas y manglares. Naturaleza + aventura.",
+      duration: "9 horas",
+      location: "Reserva Sian Ka'an",
+      category: "Tours de Aventura",
+      price: "€165",
       rating: 4.8,
-      reviews: 92,
-      groupSize: "2-6 personas",
+      reviews: 134,
+      groupSize: "6-12 personas",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Transporte 4x4", "Paseo en lancha", "Guía naturalista", "Almuerzo", "Binoculares"]
+    },
+    {
+      id: "8",
+      title: "Ceremonia de Temazcal Tradicional",
+      description: "Ritual de vapor guiado por chamán maya para purificación del cuerpo y alma. Experiencia espiritual auténtica en ambiente sagrado.",
+      duration: "3 horas",
+      location: "Centro Ceremonial",
+      category: "Bienestar y Cultura",
+      price: "€75",
+      rating: 4.7,
+      reviews: 98,
+      groupSize: "4-8 personas",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Ceremonia completa", "Chamán certificado", "Hierbas medicinales", "Té herbal"]
+    },
+    {
+      id: "9",
+      title: "Yoga en la Playa + Meditación al Amanecer",
+      description: "Clases de yoga en la playa de Tulum con vista al mar Caribe. Sesiones de meditación al amanecer para conectar con la naturaleza.",
+      duration: "2 horas",
+      location: "Playa Tulum",
+      category: "Bienestar y Cultura",
+      price: "€45",
+      rating: 4.6,
+      reviews: 156,
+      groupSize: "1-15 personas",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Mat de yoga", "Instructor certificado", "Agua de coco", "Vista al mar"]
+    },
+    {
+      id: "10",
+      title: "Cocina Yucateca - Taller Gastronómico",
+      description: "Aprende a hacer platillos tradicionales como cochinita pibil y sopa de lima. Incluye visita al mercado local para ingredientes frescos.",
+      duration: "4 horas",
+      location: "Tulum Pueblo",
+      category: "Bienestar y Cultura",
+      price: "€85",
+      rating: 4.8,
+      reviews: 87,
+      groupSize: "4-10 personas",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Ingredientes frescos", "Chef profesional", "Recetas impresas", "Comida completa"]
+    },
+    {
+      id: "11",
+      title: "Xel-Há - Parque Natural Acuático",
+      description: "Snorkel ilimitado en caleta natural, toboganes, cenotes, río perezoso. Parque eco-arqueológico a 15 minutos de Tulum.",
+      duration: "8 horas",
+      location: "Xel-Há",
+      category: "Parques y Atracciones",
+      price: "€125",
+      rating: 4.7,
+      reviews: 234,
+      groupSize: "1-20 personas",
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Equipo de buceo", "Instructor certificado", "2 inmersiones", "Fotos incluidas"]
+      includes: ["Entrada completa", "Equipo snorkel", "Buffet libre", "Bebidas incluidas"]
+    },
+    {
+      id: "12",
+      title: "Akumal Monkey Sanctuary - Rescate Animal",
+      description: "Reserva de rescate animal donde puedes interactuar con monos araña rescatados y aprender sobre conservación de fauna local.",
+      duration: "3 horas",
+      location: "Akumal",
+      category: "Parques y Atracciones",
+      price: "€55",
+      rating: 4.5,
+      reviews: 78,
+      groupSize: "2-12 personas",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      includes: ["Entrada al santuario", "Guía especialista", "Interacción guiada", "Donación incluida"]
     }
   ];
 
   const categories = [
     "Todos",
     "Arqueológicos y Culturales", 
-    "Aventura y Naturaleza",
-    "Bienestar y Lifestyle",
-    "Vida Nocturna"
+    "Cenotes y Snorkel",
+    "Tours de Aventura",
+    "Bienestar y Cultura",
+    "Parques y Atracciones"
   ];
 
   const filteredExperiences = experiences.filter(experience => {
@@ -182,12 +267,13 @@ export default function Experiencias() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="todos" className="w-full">
-            <TabsList className="grid w-full grid-cols-5 mb-8">
+            <TabsList className="grid w-full grid-cols-6 mb-8">
               <TabsTrigger value="todos">Todos</TabsTrigger>
               <TabsTrigger value="arqueologicos">Arqueológicos</TabsTrigger>
+              <TabsTrigger value="cenotes">Cenotes</TabsTrigger>
               <TabsTrigger value="aventura">Aventura</TabsTrigger>
               <TabsTrigger value="bienestar">Bienestar</TabsTrigger>
-              <TabsTrigger value="nocturna">Vida Nocturna</TabsTrigger>
+              <TabsTrigger value="parques">Parques</TabsTrigger>
             </TabsList>
 
             <TabsContent value="todos">
@@ -206,7 +292,7 @@ export default function Experiencias() {
             <TabsContent value="arqueologicos">
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Tours Arqueológicos y Culturales</h3>
-                <p className="text-gray-600">Descubre la fascinante historia maya con visitas a ruinas, ceremonias tradicionales y experiencias culturales auténticas.</p>
+                <p className="text-gray-600">Exploraciones guiadas a los sitios arqueológicos emblemáticos de la región con guías expertos que relatan las leyendas y arquitectura de estos antiguos imperios mayas.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Arqueológicos y Culturales"]?.map((experience) => (
@@ -220,13 +306,30 @@ export default function Experiencias() {
               </div>
             </TabsContent>
 
-            <TabsContent value="aventura">
+            <TabsContent value="cenotes">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Aventura y Naturaleza</h3>
-                <p className="text-gray-600">Vive la adrenalina con actividades extremas, explora cenotes, parques eco-arqueológicos y la increíble biodiversidad de la región.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Cenotes y Snorkel</h3>
+                <p className="text-gray-600">Descubre los famosos cenotes de la región - ríos subterráneos de agua dulce cristalina. Vive una aventura refrescante explorando cenotes ocultos y snorkeleando con tortugas.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Aventura y Naturaleza"]?.map((experience) => (
+                {experiencesByCategory["Cenotes y Snorkel"]?.map((experience) => (
+                  <ExperienceCard 
+                    key={experience.id} 
+                    experience={experience} 
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="aventura">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Tours de Aventura en la Selva</h3>
+                <p className="text-gray-600">Actividades para descargar adrenalina en los alrededores selváticos. Emoción garantizada con vehículos todo-terreno, tirolesas y chapuzones en cenotes escondidos.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {experiencesByCategory["Tours de Aventura"]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.id} 
                     experience={experience} 
@@ -239,11 +342,11 @@ export default function Experiencias() {
 
             <TabsContent value="bienestar">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Bienestar y Lifestyle</h3>
-                <p className="text-gray-600">Conecta con tu ser interior a través de experiencias de yoga, temazcal, gastronomía local y relajación en entornos naturales.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Experiencias de Bienestar y Cultura</h3>
+                <p className="text-gray-600">Tulum es un epicentro bohemio y holístico. Actividades que conectan con la cultura local y el bienestar personal, desde ceremonias ancestrales hasta gastronomía yucateca.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Bienestar y Lifestyle"]?.map((experience) => (
+                {experiencesByCategory["Bienestar y Cultura"]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.id} 
                     experience={experience} 
@@ -254,16 +357,20 @@ export default function Experiencias() {
               </div>
             </TabsContent>
 
-            <TabsContent value="nocturna">
+            <TabsContent value="parques">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Vida Nocturna</h3>
-                <p className="text-gray-600">Descubre la vibrante vida nocturna de Tulum con cenas exclusivas, espectáculos y acceso VIP a los mejores beach clubs.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Parques y Atracciones Cercanas</h3>
+                <p className="text-gray-600">Aprovecha la ubicación estratégica de Tulum con entradas y tours a parques reconocidos de la Riviera Maya, desde parques acuáticos hasta santuarios de rescate animal.</p>
               </div>
-              <div className="text-center py-12">
-                <p className="text-gray-500 mb-4">Próximamente experiencias de vida nocturna</p>
-                <Button className="bg-primary text-white hover:bg-primary/90">
-                  Notificarme cuando estén disponibles
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {experiencesByCategory["Parques y Atracciones"]?.map((experience) => (
+                  <ExperienceCard 
+                    key={experience.id} 
+                    experience={experience} 
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                  />
+                ))}
               </div>
             </TabsContent>
           </Tabs>

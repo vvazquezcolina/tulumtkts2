@@ -43,7 +43,7 @@ export default function Villas() {
     {
       id: "1",
       title: "Villa Soliman Beach - Frente al Mar",
-      description: "Villa de lujo de 4 habitaciones con acceso directo a la playa privada de Soliman Bay, diseño contemporáneo y vistas espectaculares.",
+      description: "Moderna villa en la zona de la playa de Tulum con piscina infinita y chef privado. Acceso directo a la playa privada de Soliman Bay con vistas espectaculares al Caribe.",
       bedrooms: 4,
       bathrooms: 3,
       guests: 8,
@@ -56,13 +56,13 @@ export default function Villas() {
         "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
       ],
-      amenities: ["Playa privada", "Piscina infinity", "Chef privado", "WiFi", "Estacionamiento", "Aire acondicionado"],
+      amenities: ["Playa privada", "Piscina infinity", "Chef privado disponible", "WiFi", "Estacionamiento", "Aire acondicionado"],
       featured: true
     },
     {
       id: "2", 
-      title: "Casa Jungle - Retiro en la Selva",
-      description: "Refugio ecológico de 3 habitaciones rodeado de naturaleza virgen, perfecto para desconectar y reconectar con la naturaleza.",
+      title: "Eco-Villa en la Jungla - Desconexión Total",
+      description: "Eco-villa en la jungla para desconexión total. Refugio ecológico de 3 habitaciones rodeado de naturaleza virgen, perfecto para reconectar con la naturaleza.",
       bedrooms: 3,
       bathrooms: 2,
       guests: 6,
@@ -75,7 +75,7 @@ export default function Villas() {
         "https://images.unsplash.com/photo-1520637836862-4d197d17c50a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
       ],
-      amenities: ["Piscina natural", "Yoga shala", "Bicicletas", "WiFi", "Cocina completa", "Hamacas"],
+      amenities: ["Piscina natural", "Yoga shala", "Bicicletas incluidas", "WiFi", "Cocina completa", "Hamacas"],
       featured: true
     },
     {
@@ -118,13 +118,13 @@ export default function Villas() {
     },
     {
       id: "5",
-      title: "Loft Aldea Zama - Moderno y Céntrico",
-      description: "Loft contemporáneo de 1 habitación en Aldea Zama, perfecto para parejas que buscan comodidad y estilo moderno.",
+      title: "Elegante Condominio en Aldea Zamá",
+      description: "Elegante condominio en Aldea Zamá (zona residencial). Loft contemporáneo de 1 habitación perfecto para parejas que buscan comodidad y estilo moderno.",
       bedrooms: 1,
       bathrooms: 1,
       guests: 2,
       location: "Pueblo",
-      area: "Aldea Zama",
+      area: "Aldea Zamá",
       pricePerNight: 120,
       rating: 4.6,
       reviews: 203,
@@ -132,7 +132,7 @@ export default function Villas() {
         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
       ],
-      amenities: ["Piscina común", "Gym", "WiFi", "Aire acondicionado", "Cocina", "Seguridad 24h"],
+      amenities: ["Piscina común", "Gym", "WiFi", "Aire acondicionado", "Cocina equipada", "Seguridad 24h"],
       featured: false
     },
     {

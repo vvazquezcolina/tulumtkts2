@@ -33,10 +33,11 @@ export default function Transporte() {
       name: "Compacto Económico",
       model: "Nissan March o similar",
       price: 35,
-      features: ["Aire acondicionado", "5 puertas", "Manual", "Combustible eficiente"],
+      features: ["Aire acondicionado", "5 puertas", "Manual", "Tarifas transparentes"],
       passengers: 4,
       luggage: 2,
       category: "Económico",
+      description: "Autos compactos económicos para parejas. Perfectos para moverse por Tulum centro y zonas cercanas.",
       image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     },
     {
@@ -44,32 +45,35 @@ export default function Transporte() {
       name: "SUV Familiar",
       model: "Toyota RAV4 o similar",
       price: 65,
-      features: ["4x4", "Aire acondicionado", "Automático", "GPS incluido"],
+      features: ["4x4", "Aire acondicionado", "Automático", "SUVs espaciosos"],
       passengers: 5,
       luggage: 4,
       category: "SUV",
+      description: "SUVs espaciosos para familias. Ideales para explorar cenotes y carreteras de la península de Yucatán.",
       image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     },
     {
       id: "3",
-      name: "Jeep Aventura",
+      name: "Jeep 4x4 Aventurero",
       model: "Jeep Wrangler o similar", 
       price: 85,
-      features: ["Convertible", "4x4", "Ideal para playa", "Seguro todo riesgo"],
+      features: ["4x4", "Convertible", "Ideal aventureros", "Todo terreno"],
       passengers: 4,
       luggage: 2,
       category: "Premium",
+      description: "Jeeps 4x4 para aventureros que buscan explorar senderos off-road y playas remotas con estilo.",
       image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     },
     {
       id: "4",
-      name: "Minivan Grupo",
-      model: "Honda Odyssey o similar",
-      price: 95,
-      features: ["8 pasajeros", "Amplio equipaje", "Automático", "Ideal familias"],
-      passengers: 8,
-      luggage: 6,
-      category: "Van",
+      name: "Vehículo de Lujo",
+      model: "BMW X3 o similar",
+      price: 125,
+      features: ["Premium", "Automático", "Cuero", "Para quien busca estilo"],
+      passengers: 5,
+      luggage: 4,
+      category: "Lujo",
+      description: "Vehículos de lujo para quienes buscan estilo y confort durante su estadía en Tulum.",
       image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     }
   ];
@@ -77,35 +81,35 @@ export default function Transporte() {
   const transferServices = [
     {
       id: "1",
-      name: "Traslado Privado Estándar",
-      description: "Servicio directo del aeropuerto a tu hotel en vehículo cómodo y con aire acondicionado.",
+      name: "Traslado Privado en Coche",
+      description: "Traslados privados en van o coche con chofer desde/hacia el Aeropuerto Internacional de Cancún hasta Tulum. Agua y toalla refrescante de cortesía.",
       price: 65,
       duration: "1.5 horas",
       passengers: "1-4 personas",
-      vehicle: "Sedán o similar",
-      features: ["Conductor profesional", "Aire acondicionado", "WiFi gratis", "Agua cortesía"],
+      vehicle: "Sedán cómodo",
+      features: ["Conductor profesional", "Aire acondicionado", "Agua de cortesía", "Toalla refrescante"],
       image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     },
     {
       id: "2",
-      name: "Traslado SUV Premium",
-      description: "Viaja con estilo en un SUV de lujo con todas las comodidades para grupos medianos.",
+      name: "Traslado en Van Privada",
+      description: "Servicio muy demandado en van espaciosa, perfecta para familias o grupos medianos con equipaje.",
       price: 95,
       duration: "1.5 horas",
-      passengers: "1-6 personas", 
-      vehicle: "SUV Premium",
-      features: ["Vehículo de lujo", "Conductor bilingüe", "Bebidas incluidas", "Cargadores USB"],
+      passengers: "1-8 personas", 
+      vehicle: "Van espaciosa",
+      features: ["Vehículo amplio", "Conductor bilingüe", "Agua incluida", "Espacio para equipaje"],
       image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     },
     {
       id: "3",
-      name: "Van Grupal",
-      description: "Perfecto para grupos grandes o familias con mucho equipaje. Amplio y confortable.",
-      price: 125,
-      duration: "1.5 horas",
-      passengers: "7-12 personas",
-      vehicle: "Van o Sprinter",
-      features: ["Amplio espacio", "Equipaje extra", "Conductor experimentado", "Aire acondicionado"],
+      name: "Shuttle para Eventos",
+      description: "Transportes para grupos a eventos como Zamna o Day Zero, para que todos vayan y vuelvan seguros.",
+      price: 45,
+      duration: "Variable",
+      passengers: "8-15 personas",
+      vehicle: "Shuttle bus",
+      features: ["Servicio grupal", "Evento específico", "Ida y vuelta", "Conductor designado"],
       image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
     }
   ];
@@ -114,28 +118,28 @@ export default function Transporte() {
     {
       id: "1",
       name: "Renta de Bicicletas",
-      description: "Explora Tulum de forma ecológica con nuestras bicicletas de alta calidad.",
+      description: "Explora Tulum de forma ecológica. Ideales para el centro de Tulum donde restaurantes, tiendas y cenotes están a distancia cicleable.",
       price: 15,
       unit: "/día",
-      features: ["Casco incluido", "Candado de seguridad", "Mapa de rutas", "Soporte 24h"],
+      features: ["Casco incluido", "Candado de seguridad", "Mapa de rutas", "Perfecto para pueblo"],
       icon: <Bike className="w-8 h-8" />
     },
     {
       id: "2", 
       name: "Motos Scooter",
-      description: "Movilízate rápido y fácil por Tulum con nuestras motos scooter automáticas.",
+      description: "Libertad total para explorar cenotes, pueblos cercanos y playas escondidas a tu propio ritmo. Vehículos alternativos perfectos para aventureros.",
       price: 25,
       unit: "/día",
-      features: ["Licencia no requerida", "Casco incluido", "Seguro básico", "Gasolina incluida"],
+      features: ["Sin licencia requerida", "Casco incluido", "Seguro básico", "Gasolina incluida"],
       icon: <Navigation className="w-8 h-8" />
     },
     {
       id: "3",
       name: "Golf Cart",
-      description: "Perfectos para la zona hotelera, cómodos y divertidos para toda la familia.",
+      description: "Perfectos para la zona hotelera de Tulum. Cómodos y divertidos, ideales para distancias cortas con velocidades limitadas y seguras.",
       price: 45,
       unit: "/día",
-      features: ["4 pasajeros", "Fácil manejo", "Ideal playa", "Carga eléctrica"],
+      features: ["4 pasajeros", "Fácil manejo", "Ideal zona hotelera", "Eléctrico"],
       icon: <Car className="w-8 h-8" />
     }
   ];
@@ -179,9 +183,10 @@ export default function Transporte() {
             {/* Car Rentals */}
             <TabsContent value="cars">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Renta de Autos en Tulum</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Alquiler de Coches en Tulum</h2>
                 <p className="text-gray-600 mb-6">
-                  Encuentra el vehículo perfecto para explorar Tulum y la Riviera Maya a tu ritmo.
+                  Servicio de renta de autos con aliados locales y agencias internacionales. Vehículos adecuados para moverse por Tulum y la península. 
+                  La recogida puede hacerse en Tulum o en el Aeropuerto de Cancún con facilidad.
                 </p>
 
                 {/* Car Rental Search */}
@@ -247,7 +252,8 @@ export default function Transporte() {
                         </div>
                         
                         <h3 className="font-bold text-gray-900 mb-1">{car.name}</h3>
-                        <p className="text-sm text-gray-600 mb-3">{car.model}</p>
+                        <p className="text-sm text-gray-600 mb-2">{car.model}</p>
+                        <p className="text-xs text-gray-500 mb-3">{car.description}</p>
                         
                         <div className="flex items-center gap-4 mb-3 text-sm text-gray-500">
                           <div className="flex items-center">
