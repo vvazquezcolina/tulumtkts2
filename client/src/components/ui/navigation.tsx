@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { MobileMenu } from "@/components/ui/mobile-menu";
 import { 
-  User, 
   Calendar,
   MapPin,
   Home as HomeIcon,
@@ -56,15 +55,6 @@ export function Navigation() {
           {/* Right side buttons */}
           <div className="flex items-center space-x-4">
             <LanguageSelector />
-            
-            <Button variant="ghost" className="text-gray-700 hover:text-primary">
-              <User className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Iniciar Sesión</span>
-            </Button>
-            
-            <Button className="bg-primary text-white hover:bg-primary/90 hidden sm:inline-flex">
-              Publicar Experiencia
-            </Button>
             
             {/* Mobile menu */}
             <MobileMenu />
