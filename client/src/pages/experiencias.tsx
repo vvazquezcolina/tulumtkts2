@@ -471,58 +471,85 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
         <div className="flex items-center mb-2">
           <div className="flex text-yellow-400 text-xs">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3 h-3 fill-current" />
+              <Star key={i} className={`w-3 h-3 ${i < Math.floor(experience.rating || 4.5) ? 'fill-current' : ''}`} />
             ))}
           </div>
-          <span className="ml-2 text-xs text-gray-600">({experience.rating}) {experience.reviews} reseñas</span>
+          <span className="ml-2 text-xs text-gray-600">
+            ({experience.rating || 4.5}) {experience.reviews || experience.number_of_ratings || 0} reseñas
+          </span>
         </div>
         
         <h3 className="font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
           {experience.title}
         </h3>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{experience.description}</p>
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+          {experience.description || experience.abstract || 'Experiencia única en Tulum'}
+        </p>
         
         <div className="space-y-1 mb-3 text-xs text-gray-500">
           <div className="flex items-center">
             <Clock className="w-3 h-3 mr-1" />
-            <span>{experience.duration}</span>
-            <Users className="w-3 h-3 ml-3 mr-1" />
-            <span>{experience.groupSize}</span>
+            <span>{experience.duration || 'N/A'}</span>
+            {experience.groupSize && (
+              <>
+                <Users className="w-3 h-3 ml-3 mr-1" />
+                <span>{experience.groupSize}</span>
+              </>
+            )}
           </div>
           <div className="flex items-center">
             <MapPin className="w-3 h-3 mr-1" />
-            <span>{experience.location}</span>
+            <span>
+              {typeof experience.location === 'string' 
+                ? experience.location 
+                : experience.location?.name || 'Tulum'}
+            </span>
           </div>
         </div>
 
-        <div className="mb-3">
-          <div className="text-xs text-gray-500 mb-1">Incluye:</div>
-          <div className="flex flex-wrap gap-1">
-            {experience.includes.slice(0, 2).map((item: string, index: number) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                {item}
-              </Badge>
-            ))}
-            {experience.includes.length > 2 && (
-              <Badge variant="outline" className="text-xs">
-                +{experience.includes.length - 2} más
-              </Badge>
-            )}
+        {experience.includes && experience.includes.length > 0 && (
+          <div className="mb-3">
+            <div className="text-xs text-gray-500 mb-1">Incluye:</div>
+            <div className="flex flex-wrap gap-1">
+              {experience.includes.slice(0, 2).map((item: string, index: number) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {item}
+                </Badge>
+              ))}
+              {experience.includes.length > 2 && (
+                <Badge variant="outline" className="text-xs">
+                  +{experience.includes.length - 2} más
+                </Badge>
+              )}
+            </div>
           </div>
-        </div>
+        )}
         
         <div className="flex items-center justify-between">
           <div>
             <span className="text-xs text-gray-500">Desde</span>
-            <div className="text-lg font-bold text-gray-900">{experience.price}</div>
+            <div className="text-lg font-bold text-gray-900">
+              {experience.price_usd || experience.price || `$${Math.round((experience.price?.values?.[0]?.amount || 0) * 1.08)} USD`}
+            </div>
           </div>
           <Button 
             size="sm" 
             className="bg-primary text-white hover:bg-primary/90"
-            onClick={() => {
-              const affiliateUrl = generateAffiliateLink('getyourguide');
-              trackAffiliateClick('GetYourGuide', experience.title, experience.price, experience.category);
-              window.open(affiliateUrl, '_blank');
+            onClick={async () => {
+              const price = experience.price_usd || experience.price || `$${Math.round((experience.price?.values?.[0]?.amount || 0) * 1.08)} USD`;
+              const activityId = experience.activity_id || experience.id;
+              const affiliateUrl = experience.url || generateAffiliateLink('getyourguide');
+              
+              try {
+                if (experience.activity_id) {
+                  await trackAffiliateClickAPI(activityId, experience.title, price, experience.category || 'Experiencias');
+                } else {
+                  trackAffiliateClick('GetYourGuide', experience.title, price, experience.category || 'Experiencias');
+                }
+                window.open(affiliateUrl, '_blank');
+              } catch (error) {
+                window.open(affiliateUrl, '_blank');
+              }
             }}
           >
             Reservar
