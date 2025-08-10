@@ -443,9 +443,13 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
     <Card className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
       <div className="relative">
         <img 
-          src={experience.image} 
+          src={experience.image_url || experience.image} 
           alt={experience.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = 'https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
+          }}
         />
         <div className="absolute top-3 left-3">
           <Badge className="bg-primary text-white text-xs">{experience.category}</Badge>
