@@ -9,6 +9,7 @@ import { Navigation } from "@/components/ui/navigation";
 import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
+import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-getyourguide";
 
 export default function Home() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -16,6 +17,13 @@ export default function Home() {
   const [searchDate, setSearchDate] = useState("");
   const [searchGuests, setSearchGuests] = useState("");
   const [email, setEmail] = useState("");
+
+  // Fetch real experiences from GetYourGuide
+  const { data: experiencesData } = useTulumExperiences({
+    page: 1,
+    per_page: 6,
+    sort_by: 'popularity'
+  });
 
   const toggleFavorite = (id: string) => {
     const newFavorites = new Set(favorites);
@@ -174,55 +182,36 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                id: "1",
-                title: "Grand Cenote Swimming Experience",
-                description: "Swim in crystal-clear waters surrounded by stunning stalactites and tropical fish in one of Tulum's most beautiful cenotes.",
-                price: "$89",
-                duration: "4 hours",
-                rating: 4.9,
-                reviews: 127,
-                badge: "Bestseller",
-                badgeColor: "secondary",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-              },
-              {
-                id: "2",
-                title: "Chichen Itza Full Day Tour",
-                description: "Explore one of the Seven Wonders of the World with an expert guide and learn about ancient Mayan civilization.",
-                price: "$159",
-                duration: "12 hours",
-                rating: 4.8,
-                reviews: 89,
-                badge: "Popular",
-                badgeColor: "primary",
-                image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-              },
-              {
-                id: "3",
-                title: "Catamaran Sunset Cruise",
-                description: "Sail into the sunset with drinks, music, and snorkeling in the pristine waters of the Caribbean Sea.",
-                price: "$129",
-                duration: "5 hours",
-                rating: 4.6,
-                reviews: 34,
-                badge: "New",
-                badgeColor: "secondary",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-              }
-            ].map((experience) => (
-              <Card key={experience.id} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
+            {(experiencesData?.data?.slice(0, 6) || []).map((experience) => {
+              const activityId = experience.activity_id;
+              const title = experience.title;
+              const description = experience.abstract;
+              const imageUrl = experience.image_url;
+              const rating = experience.rating;
+              const reviewCount = experience.number_of_ratings;
+              const price = `€${experience.price.values[0].amount}`;
+              const duration = experience.duration;
+              const affiliateUrl = experience.url;
+
+              return (
+                <Card key={activityId} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
                 <div className="relative overflow-hidden">
                   <img 
-                    src={experience.image} 
-                    alt={experience.title}
+                    src={imageUrl} 
+                    alt={title}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className={`${experience.badgeColor === 'secondary' ? 'bg-secondary' : 'bg-primary'} text-white`}>
-                      {experience.badge}
-                    </Badge>
+                    {experience.instant_confirmation && (
+                      <Badge className="bg-green-600 text-white mr-2">
+                        Confirmación Instantánea
+                      </Badge>
+                    )}
+                    {experience.free_cancellation && (
+                      <Badge className="bg-blue-600 text-white">
+                        Cancelación Gratuita
+                      </Badge>
+                    )}
                   </div>
                   <div className="absolute top-4 right-4">
                     <Button
@@ -231,11 +220,11 @@ export default function Home() {
                       className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleFavorite(experience.id);
+                        toggleFavorite(activityId);
                       }}
                     >
                       <Heart 
-                        className={`w-4 h-4 ${favorites.has(experience.id) ? 'fill-secondary text-secondary' : 'text-gray-600'}`}
+                        className={`w-4 h-4 ${favorites.has(activityId) ? 'fill-secondary text-secondary' : 'text-gray-600'}`}
                       />
                     </Button>
                   </div>
@@ -245,41 +234,46 @@ export default function Home() {
                   <div className="flex items-center mb-2">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
+                        <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? 'fill-current' : ''}`} />
                       ))}
                     </div>
-                    <span className="ml-2 text-sm text-gray-600">({experience.rating}) {experience.reviews} reviews</span>
+                    <span className="ml-2 text-sm text-gray-600">({rating}) {reviewCount} reviews</span>
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                    {experience.title}
+                    {title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{experience.description}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{description}</p>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-gray-500 text-sm">
                       <Clock className="w-4 h-4 mr-1" />
-                      <span>{experience.duration}</span>
+                      <span>{duration}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm text-gray-500">From</span>
-                      <div className="text-2xl font-bold text-gray-900">{experience.price}</div>
+                      <span className="text-sm text-gray-500">Desde</span>
+                      <div className="text-2xl font-bold text-gray-900">{price}</div>
                     </div>
                   </div>
                   
                   <Button 
                     className="w-full mt-4 bg-primary text-white hover:bg-primary/90"
-                    onClick={() => {
-                      const affiliateUrl = generateAffiliateLink('getyourguide');
-                      trackAffiliateClick('GetYourGuide', experience.title, experience.price, 'Featured');
-                      window.open(affiliateUrl, '_blank');
+                    onClick={async () => {
+                      try {
+                        await trackAffiliateClickAPI(activityId, title, price, 'Featured Home');
+                        window.open(affiliateUrl, '_blank');
+                      } catch (error) {
+                        // Fallback to direct URL
+                        window.open(affiliateUrl, '_blank');
+                      }
                     }}
                   >
-                    Book Now
+                    Reservar Ahora
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
