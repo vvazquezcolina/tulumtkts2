@@ -189,7 +189,10 @@ export default function Home() {
               const imageUrl = experience.image_url;
               const rating = experience.rating;
               const reviewCount = experience.number_of_ratings;
-              const price = `€${experience.price.values[0].amount}`;
+              // Convert EUR to USD (approximate rate 1 EUR = 1.08 USD)
+              const eurAmount = experience.price.values[0].amount;
+              const usdAmount = Math.round(eurAmount * 1.08);
+              const price = `$${usdAmount} USD`;
               const duration = experience.duration;
               const affiliateUrl = experience.url;
 

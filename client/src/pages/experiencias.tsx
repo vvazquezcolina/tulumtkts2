@@ -35,8 +35,14 @@ export default function Experiencias() {
     setFavorites(newFavorites);
   };
 
+  // Convert EUR to USD for real GetYourGuide data
+  const convertedExperiences = experiencesData?.data?.map(exp => ({
+    ...exp,
+    price_usd: `$${Math.round(exp.price.values[0].amount * 1.08)} USD`
+  })) || [];
+
   // Use real GetYourGuide data or fallback to static data
-  const experiences = experiencesData?.data || [
+  const experiences = convertedExperiences.length > 0 ? convertedExperiences : [
     {
       id: "1",
       title: "Zona Arqueológica de Tulum - Castillo frente al Mar",
@@ -44,7 +50,7 @@ export default function Experiencias() {
       duration: "4 horas",
       location: "Tulum",
       category: "Arqueológicos y Culturales",
-      price: "€65",
+      price: "$70 USD",
       rating: 4.9,
       reviews: 342,
       groupSize: "2-15 personas",
@@ -58,7 +64,7 @@ export default function Experiencias() {
       duration: "12 horas",
       location: "Chichén Itzá",
       category: "Arqueológicos y Culturales",
-      price: "€159",
+      price: "$172 USD",
       rating: 4.8,
       reviews: 278,
       groupSize: "8-25 personas",
@@ -72,7 +78,7 @@ export default function Experiencias() {
       duration: "6 horas",
       location: "Cobá",
       category: "Arqueológicos y Culturales",
-      price: "€89",
+      price: "$96 USD",
       rating: 4.7,
       reviews: 156,
       groupSize: "4-12 personas",
@@ -86,7 +92,7 @@ export default function Experiencias() {
       duration: "5 horas",
       location: "Gran Cenote - Dos Ojos",
       category: "Cenotes y Snorkel",
-      price: "€85",
+      price: "$92 USD",
       rating: 4.9,
       reviews: 423,
       groupSize: "2-10 personas",
@@ -100,7 +106,7 @@ export default function Experiencias() {
       duration: "8 horas",
       location: "Akumal - Casa Tortuga",
       category: "Cenotes y Snorkel",
-      price: "€115",
+      price: "$124 USD",
       rating: 4.8,
       reviews: 267,
       groupSize: "4-12 personas",
@@ -114,7 +120,7 @@ export default function Experiencias() {
       duration: "7 horas",
       location: "Selva Maya",
       category: "Tours de Aventura",
-      price: "€135",
+      price: "$146 USD",
       rating: 4.9,
       reviews: 189,
       groupSize: "2-8 personas",
@@ -128,7 +134,7 @@ export default function Experiencias() {
       duration: "9 horas",
       location: "Reserva Sian Ka'an",
       category: "Tours de Aventura",
-      price: "€165",
+      price: "$178 USD",
       rating: 4.8,
       reviews: 134,
       groupSize: "6-12 personas",
@@ -142,7 +148,7 @@ export default function Experiencias() {
       duration: "3 horas",
       location: "Centro Ceremonial",
       category: "Bienestar y Cultura",
-      price: "€75",
+      price: "$81 USD",
       rating: 4.7,
       reviews: 98,
       groupSize: "4-8 personas",
@@ -156,7 +162,7 @@ export default function Experiencias() {
       duration: "2 horas",
       location: "Playa Tulum",
       category: "Bienestar y Cultura",
-      price: "€45",
+      price: "$49 USD",
       rating: 4.6,
       reviews: 156,
       groupSize: "1-15 personas",
@@ -170,7 +176,7 @@ export default function Experiencias() {
       duration: "4 horas",
       location: "Tulum Pueblo",
       category: "Bienestar y Cultura",
-      price: "€85",
+      price: "$92 USD",
       rating: 4.8,
       reviews: 87,
       groupSize: "4-10 personas",
@@ -184,7 +190,7 @@ export default function Experiencias() {
       duration: "8 horas",
       location: "Xel-Há",
       category: "Parques y Atracciones",
-      price: "€125",
+      price: "$135 USD",
       rating: 4.7,
       reviews: 234,
       groupSize: "1-20 personas",
@@ -198,7 +204,7 @@ export default function Experiencias() {
       duration: "3 horas",
       location: "Akumal",
       category: "Parques y Atracciones",
-      price: "€55",
+      price: "$59 USD",
       rating: 4.5,
       reviews: 78,
       groupSize: "2-12 personas",
