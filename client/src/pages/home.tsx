@@ -417,8 +417,11 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p className="text-gray-400 mb-2">
+              &copy; {new Date().getFullYear()} TulumTkts. All rights reserved. | Made with ❤️ for travelers
+            </p>
             <p className="text-gray-400">
-              &copy; 2024 TulumTkts. All rights reserved. | Made with ❤️ for travelers
+              Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" className="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>
             </p>
           </div>
         </div>
