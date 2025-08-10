@@ -9,6 +9,7 @@ import { Clock, MapPin, Search, Filter, Star, Heart, Users, Camera } from "lucid
 import { generateAffiliateLink, trackAffiliateClick, GetYourGuideActivity } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
 import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-getyourguide";
+import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
 
 export default function Experiencias() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -279,6 +280,9 @@ export default function Experiencias() {
       {/* Affiliate Banner */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center mb-4">
+            <ApiStatusIndicator />
+          </div>
           <AffiliateBanner />
         </div>
       </section>
