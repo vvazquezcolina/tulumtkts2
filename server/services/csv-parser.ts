@@ -24,10 +24,15 @@ export interface CSVActivity {
 
 export function parseCSVActivities(): TravelpayoutsActivity[] {
   try {
-    // Try multiple possible paths
+    // Try multiple possible paths (works in both local and Vercel)
     const possiblePaths = [
-      path.resolve(__dirname, '..', '..', 'TulumTkts_Activities.csv'),
+      // Vercel: root of project
       path.resolve(process.cwd(), 'TulumTkts_Activities.csv'),
+      // Local development: from server/services
+      path.resolve(__dirname, '..', '..', 'TulumTkts_Activities.csv'),
+      // Alternative: from dist if copied during build
+      path.resolve(process.cwd(), 'dist', 'TulumTkts_Activities.csv'),
+      // Fallback: relative to current working directory
       path.resolve(process.cwd(), 'server', '..', 'TulumTkts_Activities.csv'),
     ];
     
@@ -47,7 +52,9 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
     }
     
     if (!csvContent) {
-      console.error('CSV file not found. Tried paths:', possiblePaths);
+      console.error('❌ CSV file not found. Tried paths:', possiblePaths);
+      console.error('Current working directory:', process.cwd());
+      console.error('__dirname:', __dirname);
       return [];
     }
     
