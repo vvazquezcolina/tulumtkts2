@@ -180,3 +180,4 @@ Google Analytics 4 is integrated for tracking:
 ## License
 
 MIT License - see LICENSE file for details
+
