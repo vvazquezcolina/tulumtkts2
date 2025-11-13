@@ -8,6 +8,24 @@ import { TravelpayoutsActivity } from './travelpayouts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Helper to find project root
+function findProjectRoot(startPath: string = __dirname): string {
+  let currentPath = startPath;
+  const rootMarkers = ['package.json', 'TulumTkts_Activities.csv', '.git'];
+  
+  while (currentPath !== path.dirname(currentPath)) {
+    for (const marker of rootMarkers) {
+      const markerPath = path.join(currentPath, marker);
+      if (fs.existsSync(markerPath)) {
+        return currentPath;
+      }
+    }
+    currentPath = path.dirname(currentPath);
+  }
+  
+  return process.cwd();
+}
+
 export interface CSVActivity {
   description: string;
   categoria: string;
@@ -26,14 +44,21 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
   try {
     // Log environment info for debugging
     const cwd = process.cwd();
-    const dirname = __dirname;
+    const projectRoot = findProjectRoot();
+    
+    console.log('🔍 Searching for CSV file...');
+    console.log('📂 process.cwd():', cwd);
+    console.log('📂 __dirname:', __dirname);
+    console.log('📂 projectRoot:', projectRoot);
     
     // Try multiple possible paths (works in both local and Vercel)
     const possiblePaths = [
+      // Most reliable: from project root
+      path.resolve(projectRoot, 'TulumTkts_Activities.csv'),
       // Vercel: root of project (most likely)
       path.resolve(cwd, 'TulumTkts_Activities.csv'),
       // Local development: from server/services
-      path.resolve(dirname, '..', '..', 'TulumTkts_Activities.csv'),
+      path.resolve(__dirname, '..', '..', 'TulumTkts_Activities.csv'),
       // Alternative: from dist if copied during build
       path.resolve(cwd, 'dist', 'TulumTkts_Activities.csv'),
       // Fallback: relative to current working directory
