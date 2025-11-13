@@ -24,17 +24,30 @@ export interface CSVActivity {
 
 export function parseCSVActivities(): TravelpayoutsActivity[] {
   try {
+    // Log environment info for debugging
+    const cwd = process.cwd();
+    const dirname = __dirname;
+    
     // Try multiple possible paths (works in both local and Vercel)
     const possiblePaths = [
-      // Vercel: root of project
-      path.resolve(process.cwd(), 'TulumTkts_Activities.csv'),
+      // Vercel: root of project (most likely)
+      path.resolve(cwd, 'TulumTkts_Activities.csv'),
       // Local development: from server/services
-      path.resolve(__dirname, '..', '..', 'TulumTkts_Activities.csv'),
+      path.resolve(dirname, '..', '..', 'TulumTkts_Activities.csv'),
       // Alternative: from dist if copied during build
-      path.resolve(process.cwd(), 'dist', 'TulumTkts_Activities.csv'),
+      path.resolve(cwd, 'dist', 'TulumTkts_Activities.csv'),
       // Fallback: relative to current working directory
-      path.resolve(process.cwd(), 'server', '..', 'TulumTkts_Activities.csv'),
+      path.resolve(cwd, 'server', '..', 'TulumTkts_Activities.csv'),
+      // Vercel alternative: from api directory
+      path.resolve(cwd, '..', 'TulumTkts_Activities.csv'),
+      // Another Vercel alternative
+      path.resolve(cwd, '..', '..', 'TulumTkts_Activities.csv'),
     ];
+    
+    console.log('🔍 Searching for CSV file...');
+    console.log('📂 process.cwd():', cwd);
+    console.log('📂 __dirname:', dirname);
+    console.log('🔎 Trying paths:', possiblePaths);
     
     let csvPath = '';
     let csvContent = '';
@@ -44,17 +57,28 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
         if (fs.existsSync(possiblePath)) {
           csvPath = possiblePath;
           csvContent = fs.readFileSync(possiblePath, 'utf-8');
+          console.log('✅ Found CSV at:', csvPath);
           break;
+        } else {
+          console.log('❌ Not found:', possiblePath);
         }
       } catch (e) {
+        console.log('⚠️ Error checking:', possiblePath, e);
         continue;
       }
     }
     
     if (!csvContent) {
-      console.error('❌ CSV file not found. Tried paths:', possiblePaths);
-      console.error('Current working directory:', process.cwd());
-      console.error('__dirname:', __dirname);
+      console.error('❌ CSV file not found after trying all paths');
+      console.error('Current working directory:', cwd);
+      console.error('__dirname:', dirname);
+      // List files in cwd for debugging
+      try {
+        const files = fs.readdirSync(cwd);
+        console.error('Files in cwd:', files.slice(0, 20));
+      } catch (e) {
+        console.error('Could not list files in cwd:', e);
+      }
       return [];
     }
     
