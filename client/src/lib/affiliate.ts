@@ -1,4 +1,4 @@
-// Affiliate Link Management System
+// Affiliate Link Management System - Travelpayouts Only
 export interface AffiliateProvider {
   name: string;
   baseUrl: string;
@@ -7,56 +7,17 @@ export interface AffiliateProvider {
   commission: number;
 }
 
-// GetYourGuide API Response Types
-export interface GetYourGuideActivity {
-  activity_id: string;
-  title: string;
-  abstract: string;
-  image_url: string;
-  rating: number;
-  number_of_ratings: number;
-  price: {
-    values: {
-      amount: number;
-      currency: string;
-    }[];
-  };
-  duration: string;
-  location: {
-    name: string;
-    latitude: number;
-    longitude: number;
-  };
-  categories: string[];
-  url: string;
-  supplier: {
-    name: string;
-  };
-  bookable: boolean;
-  instant_confirmation: boolean;
-  free_cancellation: boolean;
-}
-
-export interface GetYourGuideResponse {
-  data: GetYourGuideActivity[];
-  meta: {
-    total_count: number;
-    page: number;
-    per_page: number;
-  };
-}
-
 export const AFFILIATE_PROVIDERS: Record<string, AffiliateProvider> = {
-  getyourguide: {
-    name: 'GetYourGuide',
-    baseUrl: 'https://www.getyourguide.es',
-    partnerId: 'EBGURF8',
-    campaign: 'share_to_earn',
-    commission: 8 // 8% commission rate
+  travelpayouts: {
+    name: 'Travelpayouts',
+    baseUrl: 'https://www.travelpayouts.com',
+    partnerId: '9a350c3ebd492165ade7135359165af9',
+    campaign: 'tulum_experiences',
+    commission: 10 // 10% average commission rate (varies by product)
   }
 };
 
-// Generate affiliate link for GetYourGuide experiences
+// Generate affiliate link for Travelpayouts experiences
 export function generateAffiliateLink(
   provider: keyof typeof AFFILIATE_PROVIDERS,
   productUrl?: string,
@@ -132,7 +93,7 @@ export function estimateRevenue(clicks: number, averageOrderValue: number = 200)
 } {
   const conversionRate = 0.03; // 3% conversion rate estimate
   const estimatedBookings = Math.floor(clicks * conversionRate);
-  const commission = estimatedBookings * averageOrderValue * 0.08; // 8% GetYourGuide commission
+  const commission = estimatedBookings * averageOrderValue * 0.10; // 10% Travelpayouts commission
   
   return {
     estimatedBookings,

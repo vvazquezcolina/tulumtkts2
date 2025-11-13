@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,16 +10,17 @@ import { Navigation } from "@/components/ui/navigation";
 import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
-import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-getyourguide";
+import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelpayouts";
 
 export default function Home() {
+  const [, setLocation] = useLocation();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const [searchDate, setSearchDate] = useState("");
   const [searchGuests, setSearchGuests] = useState("");
   const [email, setEmail] = useState("");
 
-  // Fetch real experiences from GetYourGuide
+  // Fetch real experiences from Travelpayouts
   const { data: experiencesData } = useTulumExperiences({
     page: 1,
     per_page: 6,
@@ -36,7 +38,21 @@ export default function Home() {
   };
 
   const handleSearch = () => {
-    console.log("Search:", { query: searchQuery, date: searchDate, guests: searchGuests });
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('q', searchQuery);
+    if (searchDate) params.set('date', searchDate);
+    if (searchGuests) params.set('guests', searchGuests);
+    
+    // Navigate to experiences page with search parameters
+    const queryString = params.toString();
+    setLocation(`/experiencias${queryString ? `?${queryString}` : ''}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   const handleNewsletterSignup = () => {
@@ -76,6 +92,7 @@ export default function Home() {
                         placeholder="Cenotes, ruins, tours..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={handleKeyPress}
                         className="focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </div>

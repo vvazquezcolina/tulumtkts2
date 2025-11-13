@@ -10,6 +10,7 @@ import Experiencias from "@/pages/experiencias";
 import Villas from "@/pages/villas";
 import Transporte from "@/pages/transporte";
 import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
 import Contacto from "@/pages/contacto";
 import AffiliateDashboard from "@/pages/affiliate-dashboard";
 
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/experiencias" component={Experiencias} />
       <Route path="/villas" component={Villas} />
       <Route path="/transporte" component={Transporte} />
+      <Route path="/blog/:id" component={BlogPost} />
       <Route path="/blog" component={Blog} />
       <Route path="/contacto" component={Contacto} />
       <Route path="/affiliate-dashboard" component={AffiliateDashboard} />

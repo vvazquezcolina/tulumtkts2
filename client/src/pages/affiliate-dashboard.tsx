@@ -40,7 +40,7 @@ export default function AffiliateDashboard() {
               Panel de Afiliados TulumTkts
             </h1>
             <p className="text-xl">
-              Seguimiento de rendimiento y comisiones de GetYourGuide
+              Seguimiento de rendimiento y comisiones de Travelpayouts
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function AffiliateDashboard() {
               <CardContent>
                 <div className="text-2xl font-bold text-green-600">€{analytics.revenue.commission.toFixed(2)}</div>
                 <p className="text-xs text-muted-foreground">
-                  8% comisión GetYourGuide
+                  10% comisión Travelpayouts
                 </p>
               </CardContent>
             </Card>
@@ -162,25 +162,25 @@ export default function AffiliateDashboard() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-semibold mb-2">GetYourGuide</h3>
+                  <h3 className="font-semibold mb-2">Travelpayouts</h3>
                   <ul className="space-y-1 text-sm text-gray-600">
-                    <li>• Comisión: 8% de la reserva completada</li>
+                    <li>• Comisión: 10% promedio (varía por producto)</li>
                     <li>• Cookie Duration: 30 días</li>
-                    <li>• Pago mínimo: €50</li>
-                    <li>• Partner ID: EBGURF8</li>
+                    <li>• Pago mínimo: $50 USD</li>
+                    <li>• Productos: Vuelos, Hoteles, Actividades</li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2">Tu Enlace de Afiliado</h3>
                   <div className="flex items-center space-x-2">
                     <code className="bg-gray-100 px-2 py-1 rounded text-xs flex-1 truncate">
-                      {generateAffiliateLink('getyourguide')}
+                      {generateAffiliateLink('travelpayouts')}
                     </code>
                     <Button 
                       size="sm" 
                       variant="outline"
                       onClick={() => {
-                        const url = generateAffiliateLink('getyourguide');
+                        const url = generateAffiliateLink('travelpayouts');
                         window.open(url, '_blank');
                       }}
                     >

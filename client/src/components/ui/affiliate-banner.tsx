@@ -9,9 +9,9 @@ interface AffiliateBannerProps {
 }
 
 export function AffiliateBanner({ className = "" }: AffiliateBannerProps) {
-  const handleGetYourGuideClick = () => {
-    const affiliateUrl = generateAffiliateLink('getyourguide');
-    trackAffiliateClick('GetYourGuide', 'Tulum Experiences Collection', '€200', 'Banner');
+  const handleTravelpayoutsClick = () => {
+    const affiliateUrl = generateAffiliateLink('travelpayouts');
+    trackAffiliateClick('Travelpayouts', 'Tulum Experiences Collection', '$200', 'Banner');
     window.open(affiliateUrl, '_blank');
   };
 
@@ -25,7 +25,7 @@ export function AffiliateBanner({ className = "" }: AffiliateBannerProps) {
                 <TrendingUp className="w-3 h-3 mr-1" />
                 Bestseller
               </Badge>
-              <span className="text-sm text-gray-600">Powered by GetYourGuide</span>
+              <span className="text-sm text-gray-600">Powered by Travelpayouts</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-1">
               Descubre las Mejores Experiencias en Tulum
@@ -36,7 +36,7 @@ export function AffiliateBanner({ className = "" }: AffiliateBannerProps) {
           </div>
           <div className="ml-6">
             <Button 
-              onClick={handleGetYourGuideClick}
+              onClick={handleTravelpayoutsClick}
               className="bg-primary text-white hover:bg-primary/90"
             >
               Ver Experiencias

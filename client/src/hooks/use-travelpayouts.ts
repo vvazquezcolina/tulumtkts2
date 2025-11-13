@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { GetYourGuideResponse, GetYourGuideActivity } from '@/lib/affiliate';
+import { TravelpayoutsActivity, ActivitiesResponse } from '@/lib/travelpayouts';
 
-// Fetch Tulum experiences from GetYourGuide API
+// Fetch Tulum experiences from Travelpayouts API (CSV data)
 export function useTulumExperiences(options: {
   page?: number;
   per_page?: number;
@@ -9,7 +9,7 @@ export function useTulumExperiences(options: {
   sort_by?: 'popularity' | 'price' | 'rating';
   enabled?: boolean;
 } = {}) {
-  return useQuery<GetYourGuideResponse>({
+  return useQuery<ActivitiesResponse>({
     queryKey: ['tulum-experiences', options],
     queryFn: async () => {
       const searchParams = new URLSearchParams();
@@ -36,7 +36,7 @@ export function useTulumExperiences(options: {
 
 // Fetch specific activity details
 export function useActivityDetails(activityId: string | null) {
-  return useQuery<GetYourGuideActivity>({
+  return useQuery<TravelpayoutsActivity>({
     queryKey: ['activity-details', activityId],
     queryFn: async () => {
       if (!activityId) throw new Error('Activity ID is required');
@@ -52,24 +52,6 @@ export function useActivityDetails(activityId: string | null) {
     enabled: !!activityId,
     staleTime: 10 * 60 * 1000, // 10 minutes
     gcTime: 30 * 60 * 1000, // 30 minutes
-  });
-}
-
-// Check GetYourGuide API status
-export function useGetYourGuideStatus() {
-  return useQuery({
-    queryKey: ['getyourguide-status'],
-    queryFn: async () => {
-      const response = await fetch('/api/getyourguide/status');
-      
-      if (!response.ok) {
-        throw new Error('Failed to check API status');
-      }
-      
-      return response.json();
-    },
-    staleTime: 60 * 1000, // 1 minute
-    gcTime: 5 * 60 * 1000, // 5 minutes
   });
 }
 
@@ -90,6 +72,7 @@ export async function trackAffiliateClickAPI(
       title,
       price,
       category,
+      type: 'activity',
     }),
   });
 
@@ -99,3 +82,5 @@ export async function trackAffiliateClickAPI(
 
   return response.json();
 }
+
+

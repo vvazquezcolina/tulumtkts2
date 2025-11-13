@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,18 +7,35 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, MapPin, Search, Filter, Star, Heart, Users, Camera } from "lucide-react";
-import { generateAffiliateLink, trackAffiliateClick, GetYourGuideActivity } from "@/lib/affiliate";
+import { trackAffiliateClick } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
-import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-getyourguide";
+import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelpayouts";
+import { TravelpayoutsActivity } from "@/lib/travelpayouts";
 import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
+import { Navigation } from "@/components/ui/navigation";
+
+// Use TravelpayoutsActivity as the main type
+type Experience = TravelpayoutsActivity;
 
 export default function Experiencias() {
+  const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch real experiences from GetYourGuide API
+  // Read search parameters from URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    const date = params.get('date');
+    const guests = params.get('guests');
+    
+    if (q) setSearchQuery(q);
+    // You can use date and guests for additional filtering if needed
+  }, [location]);
+
+  // Fetch real experiences from Travelpayouts API (CSV data)
   const { data: experiencesData, isLoading, error } = useTulumExperiences({
     page: currentPage,
     per_page: 12,
@@ -35,207 +53,106 @@ export default function Experiencias() {
     setFavorites(newFavorites);
   };
 
-  // Convert EUR to USD for real GetYourGuide data
-  const convertedExperiences = experiencesData?.data?.map(exp => ({
-    ...exp,
-    price_usd: `$${Math.round(exp.price.values[0].amount * 1.08)} USD`
-  })) || [];
-
-  // Use real GetYourGuide data or fallback to static data
-  const experiences = convertedExperiences.length > 0 ? convertedExperiences : [
-    {
-      id: "1",
-      title: "Zona Arqueológica de Tulum - Castillo frente al Mar",
-      description: "Explora el famoso sitio frente al mar Caribe, con su castillo sobre el acantilado y vistas espectaculares. Sumérgete en la historia maya con guías expertos.",
-      duration: "4 horas",
-      location: "Tulum",
-      category: "Arqueológicos y Culturales",
-      price: "$70 USD",
-      rating: 4.9,
-      reviews: 342,
-      groupSize: "2-15 personas",
-      image: "https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Guía experto", "Entrada incluida", "Transporte", "Agua embotellada"]
-    },
-    {
-      id: "2",
-      title: "Chichén Itzá - Nueva Maravilla del Mundo",
-      description: "Excursión de día completo a una de las Nuevas 7 Maravillas del Mundo. Incluye parada en cenote sagrado y pueblo colonial de Valladolid.",
-      duration: "12 horas",
-      location: "Chichén Itzá",
-      category: "Arqueológicos y Culturales",
-      price: "$172 USD",
-      rating: 4.8,
-      reviews: 278,
-      groupSize: "8-25 personas",
-      image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte A/C", "Guía certificado", "Almuerzo buffet", "Cenote Ik Kil", "Valladolid"]
-    },
-    {
-      id: "3",
-      title: "Cobá - Sube a la Pirámide Nohoch Mul",
-      description: "Donde puedes subir a la pirámide Nohoch Mul para dominar la jungla. Única pirámide escalable en la región maya.",
-      duration: "6 horas",
-      location: "Cobá",
-      category: "Arqueológicos y Culturales",
-      price: "$96 USD",
-      rating: 4.7,
-      reviews: 156,
-      groupSize: "4-12 personas",
-      image: "https://images.unsplash.com/photo-1552832230-1a28d5cf8389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte", "Bicicletas incluidas", "Guía bilingüe", "Refrescos"]
-    },
-    {
-      id: "4",
-      title: "Gran Cenote y Dos Ojos - Snorkel en Ríos Subterráneos",
-      description: "Snorkel en cenotes de agua dulce cristalina. Aprecia formaciones de estalactitas bajo el agua en los cenotes más famosos de Tulum.",
-      duration: "5 horas",
-      location: "Gran Cenote - Dos Ojos",
-      category: "Cenotes y Snorkel",
-      price: "$92 USD",
-      rating: 4.9,
-      reviews: 423,
-      groupSize: "2-10 personas",
-      image: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Equipo de snorkel", "Chalecos salvavidas", "Toallas", "Cámara acuática"]
-    },
-    {
-      id: "5",
-      title: "Tortugas Marinas en Akumal + Cenote Casa Tortuga",
-      description: "Nada con tortugas marinas en Akumal y explora varios cenotes abiertos y cerrados en Casa Tortuga. Día completo de aventura acuática.",
-      duration: "8 horas",
-      location: "Akumal - Casa Tortuga",
-      category: "Cenotes y Snorkel",
-      price: "$124 USD",
-      rating: 4.8,
-      reviews: 267,
-      groupSize: "4-12 personas",
-      image: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte", "Equipo completo", "Guía marino", "Almuerzo", "Lockers"]
-    },
-    {
-      id: "6",
-      title: "Expedición ATV - Día Lleno de Adrenalina",
-      description: "Conduce por senderos selváticos, visita cenote para nadar y vuela en tirolesas sobre la jungla. Rappel en cenote y avistamiento de fauna.",
-      duration: "7 horas",
-      location: "Selva Maya",
-      category: "Tours de Aventura",
-      price: "$146 USD",
-      rating: 4.9,
-      reviews: 189,
-      groupSize: "2-8 personas",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["ATV individual", "Tirolesas", "Rappel", "Cenote privado", "Equipo seguridad"]
-    },
-    {
-      id: "7",
-      title: "Safari Sian Ka'an - Biosfera UNESCO",
-      description: "Recorrido en lancha por la biosfera de Sian Ka'an, avistando delfines, tortugas, aves exóticas y manglares. Naturaleza + aventura.",
-      duration: "9 horas",
-      location: "Reserva Sian Ka'an",
-      category: "Tours de Aventura",
-      price: "$178 USD",
-      rating: 4.8,
-      reviews: 134,
-      groupSize: "6-12 personas",
-      image: "https://images.unsplash.com/photo-1572276596237-5db2c3e16c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Transporte 4x4", "Paseo en lancha", "Guía naturalista", "Almuerzo", "Binoculares"]
-    },
-    {
-      id: "8",
-      title: "Ceremonia de Temazcal Tradicional",
-      description: "Ritual de vapor guiado por chamán maya para purificación del cuerpo y alma. Experiencia espiritual auténtica en ambiente sagrado.",
-      duration: "3 horas",
-      location: "Centro Ceremonial",
-      category: "Bienestar y Cultura",
-      price: "$81 USD",
-      rating: 4.7,
-      reviews: 98,
-      groupSize: "4-8 personas",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Ceremonia completa", "Chamán certificado", "Hierbas medicinales", "Té herbal"]
-    },
-    {
-      id: "9",
-      title: "Yoga en la Playa + Meditación al Amanecer",
-      description: "Clases de yoga en la playa de Tulum con vista al mar Caribe. Sesiones de meditación al amanecer para conectar con la naturaleza.",
-      duration: "2 horas",
-      location: "Playa Tulum",
-      category: "Bienestar y Cultura",
-      price: "$49 USD",
-      rating: 4.6,
-      reviews: 156,
-      groupSize: "1-15 personas",
-      image: "https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Mat de yoga", "Instructor certificado", "Agua de coco", "Vista al mar"]
-    },
-    {
-      id: "10",
-      title: "Cocina Yucateca - Taller Gastronómico",
-      description: "Aprende a hacer platillos tradicionales como cochinita pibil y sopa de lima. Incluye visita al mercado local para ingredientes frescos.",
-      duration: "4 horas",
-      location: "Tulum Pueblo",
-      category: "Bienestar y Cultura",
-      price: "$92 USD",
-      rating: 4.8,
-      reviews: 87,
-      groupSize: "4-10 personas",
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Ingredientes frescos", "Chef profesional", "Recetas impresas", "Comida completa"]
-    },
-    {
-      id: "11",
-      title: "Xel-Há - Parque Natural Acuático",
-      description: "Snorkel ilimitado en caleta natural, toboganes, cenotes, río perezoso. Parque eco-arqueológico a 15 minutos de Tulum.",
-      duration: "8 horas",
-      location: "Xel-Há",
-      category: "Parques y Atracciones",
-      price: "$135 USD",
-      rating: 4.7,
-      reviews: 234,
-      groupSize: "1-20 personas",
-      image: "https://images.unsplash.com/photo-1527004760525-b2e6bb39c544?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Entrada completa", "Equipo snorkel", "Buffet libre", "Bebidas incluidas"]
-    },
-    {
-      id: "12",
-      title: "Akumal Monkey Sanctuary - Rescate Animal",
-      description: "Reserva de rescate animal donde puedes interactuar con monos araña rescatados y aprender sobre conservación de fauna local.",
-      duration: "3 horas",
-      location: "Akumal",
-      category: "Parques y Atracciones",
-      price: "$59 USD",
-      rating: 4.5,
-      reviews: 78,
-      groupSize: "2-12 personas",
-      image: "https://images.unsplash.com/photo-1607295644303-8c7ba47c70f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      includes: ["Entrada al santuario", "Guía especialista", "Interacción guiada", "Donación incluida"]
+  // Format price for display
+  const formattedExperiences = (experiencesData?.data || []).map(exp => {
+    try {
+      const amount = exp?.price?.values?.[0]?.amount || 0;
+      const currency = exp?.price?.values?.[0]?.currency || 'USD';
+      return {
+        ...exp,
+        price_usd: currency === 'USD' ? `$${Math.round(amount)} USD` : `$${Math.round(amount * 1.08)} USD`
+      };
+    } catch (error) {
+      console.error('Error formatting experience:', error, exp);
+      return {
+        ...exp,
+        price_usd: '$0 USD'
+      };
     }
-  ];
+  });
 
+  // Use real Travelpayouts data from CSV
+  const experiences: Experience[] = formattedExperiences;
+
+  // Helper function to map categories from CSV to display categories
+  const mapCategory = (category: string): string => {
+    return mapCategoryFromCSV(category);
+  };
+
+  // Categorías organizadas basadas en los datos reales del CSV
   const categories = [
     "Todos",
-    "Arqueológicos y Culturales", 
-    "Cenotes y Snorkel",
-    "Tours de Aventura",
+    "Arqueología y Cultura",
+    "Cenotes y Lagunas", 
+    "Snorkel y Buceo",
+    "Navegación y Catamaranes",
+    "Aventura en la Selva",
+    "Parques y Reservas",
+    "Gastronomía y Ciudad",
     "Bienestar y Cultura",
-    "Parques y Atracciones"
+    "Transporte",
+    "Excursiones"
   ];
 
   const filteredExperiences = experiences.filter(experience => {
-    const matchesSearch = experience.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         experience.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = !categoryFilter || categoryFilter === "Todos" || experience.category === categoryFilter;
-    return matchesSearch && matchesCategory;
+    try {
+      const searchText = experience.abstract || '';
+      const matchesSearch = !searchQuery || 
+        experience.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        searchText.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const experienceCategory = mapCategory(experience.categories?.[0] || 'otros');
+      const matchesCategory = !categoryFilter || categoryFilter === "Todos" || 
+                             experienceCategory === categoryFilter;
+      return matchesSearch && matchesCategory;
+    } catch (error) {
+      console.error('Error filtering experience:', error, experience);
+      return false;
+    }
   });
 
+  // Función para mapear categorías del CSV a las categorías de la web
+  const mapCategoryFromCSV = (category: string): string => {
+    const categoryMap: Record<string, string> = {
+      'arqueologia': 'Arqueología y Cultura',
+      'cultura': 'Arqueología y Cultura',
+      'historia': 'Arqueología y Cultura',
+      'cenotes': 'Cenotes y Lagunas',
+      'lagunas': 'Cenotes y Lagunas',
+      'naturaleza': 'Cenotes y Lagunas',
+      'snorkel': 'Snorkel y Buceo',
+      'arrecife': 'Snorkel y Buceo',
+      'marino': 'Snorkel y Buceo',
+      'laguna': 'Snorkel y Buceo',
+      'principiantes': 'Snorkel y Buceo',
+      'catamaran': 'Navegación y Catamaranes',
+      'lujo': 'Navegación y Catamaranes',
+      'aventura': 'Aventura en la Selva',
+      'atv': 'Aventura en la Selva',
+      'tirolesas': 'Aventura en la Selva',
+      'reserva': 'Parques y Reservas',
+      'eco-tour': 'Parques y Reservas',
+      'ciudad': 'Gastronomía y Ciudad',
+      'bicicleta': 'Gastronomía y Ciudad',
+      'gastronomia': 'Gastronomía y Ciudad',
+      'bienestar': 'Bienestar y Cultura',
+      'transporte': 'Transporte',
+      'excursiones': 'Excursiones'
+    };
+    return categoryMap[category.toLowerCase()] || 'Otros';
+  };
+
   const experiencesByCategory = categories.slice(1).reduce((acc, category) => {
-    acc[category] = experiences.filter(exp => exp.category === category);
+    acc[category] = experiences.filter(exp => {
+      const experienceCategory = mapCategoryFromCSV(exp.categories?.[0] || 'otros');
+      return experienceCategory === category;
+    });
     return acc;
   }, {} as Record<string, typeof experiences>);
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navigation />
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -299,11 +216,11 @@ export default function Experiencias() {
           <Tabs defaultValue="todos" className="w-full">
             <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 mb-6 md:mb-8 h-auto p-1">
               <TabsTrigger value="todos" className="text-xs sm:text-sm">Todos</TabsTrigger>
-              <TabsTrigger value="arqueologicos" className="text-xs sm:text-sm">Arqueológicos</TabsTrigger>
+              <TabsTrigger value="arqueologia" className="text-xs sm:text-sm">Arqueología</TabsTrigger>
               <TabsTrigger value="cenotes" className="text-xs sm:text-sm">Cenotes</TabsTrigger>
+              <TabsTrigger value="snorkel" className="text-xs sm:text-sm">Snorkel</TabsTrigger>
+              <TabsTrigger value="navegacion" className="text-xs sm:text-sm">Navegación</TabsTrigger>
               <TabsTrigger value="aventura" className="text-xs sm:text-sm">Aventura</TabsTrigger>
-              <TabsTrigger value="bienestar" className="text-xs sm:text-sm">Bienestar</TabsTrigger>
-              <TabsTrigger value="parques" className="text-xs sm:text-sm">Parques</TabsTrigger>
             </TabsList>
 
             <TabsContent value="todos">
@@ -334,6 +251,24 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredExperiences.map((experience) => (
                   <ExperienceCard 
+                    key={experience.activity_id} 
+                    experience={experience} 
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="arqueologia">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Arqueología y Cultura</h3>
+                <p className="text-gray-600">Exploraciones guiadas a los sitios arqueológicos emblemáticos de la región con guías expertos que relatan las leyendas y arquitectura de estos antiguos imperios mayas.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {experiencesByCategory["Arqueología y Cultura"]?.map((experience) => (
+                  <ExperienceCard 
                     key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
@@ -343,15 +278,32 @@ export default function Experiencias() {
               </div>
             </TabsContent>
 
-            <TabsContent value="arqueologicos">
+            <TabsContent value="snorkel">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Tours Arqueológicos y Culturales</h3>
-                <p className="text-gray-600">Exploraciones guiadas a los sitios arqueológicos emblemáticos de la región con guías expertos que relatan las leyendas y arquitectura de estos antiguos imperios mayas.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Snorkel y Buceo</h3>
+                <p className="text-gray-600">Explora el mundo submarino de la Riviera Maya. Desde arrecifes de coral hasta lagunas cristalinas, descubre la vida marina en su hábitat natural.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Arqueológicos y Culturales"]?.map((experience) => (
+                {experiencesByCategory["Snorkel y Buceo"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
+                    experience={experience} 
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="navegacion">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Navegación y Catamaranes</h3>
+                <p className="text-gray-600">Navega por las aguas turquesas del Caribe en catamaranes de lujo. Experiencias premium con barra libre, snorkel y vistas espectaculares.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {experiencesByCategory["Navegación y Catamaranes"]?.map((experience) => (
+                  <ExperienceCard 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
@@ -362,13 +314,13 @@ export default function Experiencias() {
 
             <TabsContent value="cenotes">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Cenotes y Snorkel</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Cenotes y Lagunas</h3>
                 <p className="text-gray-600">Descubre los famosos cenotes de la región - ríos subterráneos de agua dulce cristalina. Vive una aventura refrescante explorando cenotes ocultos y snorkeleando con tortugas.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Cenotes y Snorkel"]?.map((experience) => (
+                {experiencesByCategory["Cenotes y Lagunas"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
@@ -379,13 +331,13 @@ export default function Experiencias() {
 
             <TabsContent value="aventura">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Tours de Aventura en la Selva</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Aventura en la Selva</h3>
                 <p className="text-gray-600">Actividades para descargar adrenalina en los alrededores selváticos. Emoción garantizada con vehículos todo-terreno, tirolesas y chapuzones en cenotes escondidos.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Tours de Aventura"]?.map((experience) => (
+                {experiencesByCategory["Aventura en la Selva"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
@@ -396,13 +348,13 @@ export default function Experiencias() {
 
             <TabsContent value="bienestar">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Experiencias de Bienestar y Cultura</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Bienestar y Cultura</h3>
                 <p className="text-gray-600">Tulum es un epicentro bohemio y holístico. Actividades que conectan con la cultura local y el bienestar personal, desde ceremonias ancestrales hasta gastronomía yucateca.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Bienestar y Cultura"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
@@ -413,13 +365,13 @@ export default function Experiencias() {
 
             <TabsContent value="parques">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Parques y Atracciones Cercanas</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Parques y Reservas</h3>
                 <p className="text-gray-600">Aprovecha la ubicación estratégica de Tulum con entradas y tours a parques reconocidos de la Riviera Maya, desde parques acuáticos hasta santuarios de rescate animal.</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Parques y Atracciones"]?.map((experience) => (
+                {experiencesByCategory["Parques y Reservas"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.id} 
+                    key={experience.activity_id || experience.id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
@@ -434,16 +386,17 @@ export default function Experiencias() {
   );
 }
 
-function ExperienceCard({ experience, favorites, toggleFavorite }: {
-  experience: any;
+function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: {
+  experience: Experience;
   favorites: Set<string>;
   toggleFavorite: (id: string) => void;
+  mapCategory: (category: string) => string;
 }) {
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
       <div className="relative">
         <img 
-          src={experience.image_url || experience.image} 
+          src={experience.image_url} 
           alt={experience.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
@@ -452,7 +405,9 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
           }}
         />
         <div className="absolute top-3 left-3">
-          <Badge className="bg-primary text-white text-xs">{experience.category}</Badge>
+          <Badge className="bg-primary text-white text-xs">
+            {mapCategory(experience.categories?.[0] || 'otros')}
+          </Badge>
         </div>
         <div className="absolute top-3 right-3">
           <Button
@@ -461,11 +416,11 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
             className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white h-8 w-8"
             onClick={(e) => {
               e.stopPropagation();
-              toggleFavorite(experience.id);
+              toggleFavorite(experience.activity_id);
             }}
           >
             <Heart 
-              className={`w-3 h-3 ${favorites.has(experience.id) ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
+              className={`w-3 h-3 ${favorites.has(experience.activity_id) ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
             />
           </Button>
         </div>
@@ -475,11 +430,11 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
         <div className="flex items-center mb-2">
           <div className="flex text-yellow-400 text-xs">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`w-3 h-3 ${i < Math.floor(experience.rating || 4.5) ? 'fill-current' : ''}`} />
+              <Star key={i} className={`w-3 h-3 ${i < Math.floor(experience.rating) ? 'fill-current' : ''}`} />
             ))}
           </div>
           <span className="ml-2 text-xs text-gray-600">
-            ({experience.rating || 4.5}) {experience.reviews || experience.number_of_ratings || 0} reseñas
+            ({experience.rating.toFixed(1)}) {experience.number_of_ratings} reseñas
           </span>
         </div>
         
@@ -487,69 +442,37 @@ function ExperienceCard({ experience, favorites, toggleFavorite }: {
           {experience.title}
         </h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-          {experience.description || experience.abstract || 'Experiencia única en Tulum'}
+          {experience.abstract}
         </p>
         
         <div className="space-y-1 mb-3 text-xs text-gray-500">
           <div className="flex items-center">
             <Clock className="w-3 h-3 mr-1" />
-            <span>{experience.duration || 'N/A'}</span>
-            {experience.groupSize && (
-              <>
-                <Users className="w-3 h-3 ml-3 mr-1" />
-                <span>{experience.groupSize}</span>
-              </>
-            )}
+            <span>{experience.duration}</span>
           </div>
           <div className="flex items-center">
             <MapPin className="w-3 h-3 mr-1" />
-            <span>
-              {typeof experience.location === 'string' 
-                ? experience.location 
-                : experience.location?.name || 'Tulum'}
-            </span>
+            <span>{experience.location.name}</span>
           </div>
         </div>
-
-        {experience.includes && experience.includes.length > 0 && (
-          <div className="mb-3">
-            <div className="text-xs text-gray-500 mb-1">Incluye:</div>
-            <div className="flex flex-wrap gap-1">
-              {experience.includes.slice(0, 2).map((item: string, index: number) => (
-                <Badge key={index} variant="outline" className="text-xs">
-                  {item}
-                </Badge>
-              ))}
-              {experience.includes.length > 2 && (
-                <Badge variant="outline" className="text-xs">
-                  +{experience.includes.length - 2} más
-                </Badge>
-              )}
-            </div>
-          </div>
-        )}
         
         <div className="flex items-center justify-between">
           <div>
             <span className="text-xs text-gray-500">Desde</span>
             <div className="text-lg font-bold text-gray-900">
-              {experience.price_usd || experience.price || `$${Math.round((experience.price?.values?.[0]?.amount || 0) * 1.08)} USD`}
+              ${Math.round(experience.price.values[0].amount)} {experience.price.values[0].currency}
             </div>
           </div>
           <Button 
             size="sm" 
             className="bg-primary text-white hover:bg-primary/90"
             onClick={async () => {
-              const price = experience.price_usd || experience.price || `$${Math.round((experience.price?.values?.[0]?.amount || 0) * 1.08)} USD`;
-              const activityId = experience.activity_id || experience.id;
-              const affiliateUrl = experience.url || generateAffiliateLink('getyourguide');
+              const price = `$${Math.round(experience.price.values[0].amount)} ${experience.price.values[0].currency}`;
+              const activityId = experience.activity_id;
+              const affiliateUrl = experience.url;
               
               try {
-                if (experience.activity_id) {
-                  await trackAffiliateClickAPI(activityId, experience.title, price, experience.category || 'Experiencias');
-                } else {
-                  trackAffiliateClick('GetYourGuide', experience.title, price, experience.category || 'Experiencias');
-                }
+                await trackAffiliateClickAPI(activityId, experience.title, price, experience.categories?.[0] || 'Experiencias');
                 window.open(affiliateUrl, '_blank');
               } catch (error) {
                 window.open(affiliateUrl, '_blank');

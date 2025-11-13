@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,8 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar, Clock, Search, Filter, ArrowRight, User, Eye, Heart } from "lucide-react";
 
 export default function Blog() {
+  const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
+
+  const handlePostClick = (postId: string) => {
+    // Navigate to blog post detail page
+    setLocation(`/blog/${postId}`);
+  };
 
   const blogPosts = [
     {
@@ -178,7 +185,10 @@ export default function Blog() {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Main Featured Article */}
-              <Card className="lg:col-span-2 overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
+              <Card 
+                className="lg:col-span-2 overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
+                onClick={() => handlePostClick(featuredPosts[0].id)}
+              >
                 <div className="md:flex">
                   <div className="md:w-1/2">
                     <img 
@@ -207,7 +217,14 @@ export default function Blog() {
                         <Clock className="w-4 h-4 ml-4 mr-1" />
                         <span>{featuredPosts[0].readTime}</span>
                       </div>
-                      <Button variant="ghost" className="text-primary font-semibold">
+                      <Button 
+                        variant="ghost" 
+                        className="text-primary font-semibold"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePostClick(featuredPosts[0].id);
+                        }}
+                      >
                         Leer más <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </div>
@@ -217,7 +234,11 @@ export default function Blog() {
 
               {/* Secondary Featured Articles */}
               {featuredPosts.slice(1, 3).map((post) => (
-                <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
+                <Card 
+                  key={post.id} 
+                  className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer"
+                  onClick={() => handlePostClick(post.id)}
+                >
                   <img 
                     src={post.image} 
                     alt={post.title}
@@ -264,7 +285,11 @@ export default function Blog() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {regularPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
+              <Card 
+                key={post.id} 
+                className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer"
+                onClick={() => handlePostClick(post.id)}
+              >
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -301,7 +326,14 @@ export default function Blog() {
                     </div>
                   </div>
                   
-                  <Button variant="ghost" className="w-full mt-4 text-primary font-semibold hover:bg-primary/10">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full mt-4 text-primary font-semibold hover:bg-primary/10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePostClick(post.id);
+                    }}
+                  >
                     Leer artículo <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>

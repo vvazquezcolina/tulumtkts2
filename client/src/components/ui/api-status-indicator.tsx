@@ -1,11 +1,25 @@
 import { Badge } from "@/components/ui/badge";
-import { useGetYourGuideStatus } from "@/hooks/use-getyourguide";
-import { CheckCircle, AlertCircle, XCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 export function ApiStatusIndicator() {
-  const { data: status, isLoading } = useGetYourGuideStatus();
+  const { data: status, isLoading, error } = useQuery({
+    queryKey: ['travelpayouts-status'],
+    queryFn: async () => {
+      const response = await fetch('/api/travelpayouts/status');
+      if (!response.ok) {
+        throw new Error('Failed to check API status');
+      }
+      return response.json();
+    },
+    staleTime: 60 * 1000, // 1 minute
+    gcTime: 5 * 60 * 1000, // 5 minutes
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
 
-  if (isLoading) return null;
+  // Don't show anything if loading or error - fail silently
+  if (isLoading || error) return null;
 
   return (
     <div className="flex items-center space-x-2 text-sm">
