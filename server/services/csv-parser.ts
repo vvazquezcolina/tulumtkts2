@@ -69,9 +69,6 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
       path.resolve(cwd, '..', '..', 'TulumTkts_Activities.csv'),
     ];
     
-    console.log('🔍 Searching for CSV file...');
-    console.log('📂 process.cwd():', cwd);
-    console.log('📂 __dirname:', dirname);
     console.log('🔎 Trying paths:', possiblePaths);
     
     let csvPath = '';
