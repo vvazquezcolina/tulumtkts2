@@ -1,20 +1,16 @@
 {
-  "version": 2,
-  "buildCommand": "npm run vercel-build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/server/index.ts"
+      "destination": "/api/index"
     },
     {
       "source": "/(.*)",
-      "destination": "/server/index.ts"
+      "destination": "/api/index"
     }
   ],
   "functions": {
-    "server/index.ts": {
+    "api/index.ts": {
       "maxDuration": 30,
       "memory": 1024
     }
