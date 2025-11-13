@@ -69,14 +69,16 @@ app.use((req, res, next) => {
   const { createServer } = await import("http");
   const server = createServer(app);
   
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  // In Vercel, we're in production mode but serverless
+  // Don't setup Vite or serve static files - Vercel handles static files
+  // Only setup Vite in local development when not in Vercel
+  if (app.get("env") === "development" && process.env.VERCEL !== '1') {
     await setupVite(app, server);
-  } else {
+  } else if (process.env.VERCEL !== '1') {
+    // Only serve static files in non-Vercel production
     serveStatic(app);
   }
+  // In Vercel, static files are served automatically, we just handle API routes
   
   // Only start the server if we're not in a serverless environment
   if (process.env.VERCEL !== '1') {
