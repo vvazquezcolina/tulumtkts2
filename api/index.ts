@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "../server/routes.js";
-import { setupVite, serveStatic, log } from "../server/vite.js";
+import { log } from "../server/logger.js";
 
 const app = express();
 app.use(express.json());
@@ -72,10 +72,13 @@ app.use((req, res, next) => {
   // In Vercel, we're in production mode but serverless
   // Don't setup Vite or serve static files - Vercel handles static files
   // Only setup Vite in local development when not in Vercel
+  // Use dynamic imports to avoid loading Vite/Rollup in production
   if (app.get("env") === "development" && process.env.VERCEL !== '1') {
+    const { setupVite } = await import("../server/vite.js");
     await setupVite(app, server);
   } else if (process.env.VERCEL !== '1') {
     // Only serve static files in non-Vercel production
+    const { serveStatic } = await import("../server/vite.js");
     serveStatic(app);
   }
   // In Vercel, static files are served automatically, we just handle API routes
