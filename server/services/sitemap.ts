@@ -1,28 +1,11 @@
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-// Try to import embedded data first (works in bundled code)
-// This will be loaded dynamically when generateSitemap is called
-let embeddedBlogData: Array<{ slug: string; publishDate: string; featured: boolean }> = [];
-let embeddedDataLoaded = false;
-
-async function loadEmbeddedData() {
-  if (embeddedDataLoaded) return embeddedBlogData;
-  
-  try {
-    // Dynamic import works with ES modules and bundled code
-    const sitemapDataModule = await import('./data/sitemap-blog-data.js');
-    if (sitemapDataModule && sitemapDataModule.sitemapBlogData) {
-      embeddedBlogData = sitemapDataModule.sitemapBlogData;
-      embeddedDataLoaded = true;
-      return embeddedBlogData;
-    }
-  } catch (err) {
-    // Embedded data not available, will try file system fallback
-    embeddedDataLoaded = true; // Mark as attempted
-  }
-  return embeddedBlogData;
-}
+// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface BlogPost {
   slug: string;
@@ -56,13 +39,20 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
   let blogPosts: BlogPost[] = [];
   
   try {
-    // First try: Use embedded data (from bundled TypeScript module)
-    await loadEmbeddedData();
-    if (embeddedBlogData && embeddedBlogData.length > 0) {
-      blogPosts = embeddedBlogData;
-      console.log(`✅ Loaded ${blogPosts.length} blog posts from embedded data`);
-    } else {
-      // Fallback: Try reading from JSON file
+    // First try: Try to import embedded data dynamically
+    try {
+      const sitemapDataModule = await import('./data/sitemap-blog-data.js');
+      if (sitemapDataModule && sitemapDataModule.sitemapBlogData && Array.isArray(sitemapDataModule.sitemapBlogData)) {
+        blogPosts = sitemapDataModule.sitemapBlogData;
+        console.log(`✅ Loaded ${blogPosts.length} blog posts from embedded data`);
+      }
+    } catch (importErr) {
+      // Import failed, try file system fallback
+      console.log('ℹ️  Embedded data import failed, trying file system...');
+    }
+    
+    // Fallback: Try reading from JSON file if embedded data didn't work
+    if (blogPosts.length === 0) {
       const cwd = process.cwd();
       const possiblePaths = [
         // Vercel serverless function location (most likely)

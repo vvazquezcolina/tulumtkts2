@@ -409,38 +409,48 @@ Sitemap: ${siteUrl}/sitemap.xml
       // Get site URL from environment or request
       let siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
       
-      if (!siteUrl && process.env.VERCEL_URL) {
-        siteUrl = `https://${process.env.VERCEL_URL}`;
-      } else if (!siteUrl && req.get('host')) {
-        siteUrl = `${req.protocol}://${req.get('host')}`;
+      if (!siteUrl || siteUrl === 'https://tulumtkts.com') {
+        if (process.env.VERCEL_URL) {
+          siteUrl = `https://${process.env.VERCEL_URL}`;
+        } else if (req.get('host')) {
+          siteUrl = `${req.protocol}://${req.get('host')}`;
+        }
       }
       
+      console.log(`[Sitemap] Generating sitemap for ${siteUrl}`);
       const xml = await generateSitemap(siteUrl);
       res.setHeader('Content-Type', 'application/xml');
       res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
       res.send(xml);
     } catch (error: any) {
       // Even if sitemap generation fails, try to return a minimal sitemap
-      console.error('Error generating sitemap:', error);
+      console.error('[Sitemap] Error generating sitemap:', error);
+      console.error('[Sitemap] Error stack:', error?.stack);
       try {
-        const siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
+        const siteUrl = process.env.SITE_URL || 
+                       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://tulumtkts.com');
+        const currentDate = new Date().toISOString().split('T')[0];
         const minimalXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>${siteUrl}</loc>
+    <lastmod>${currentDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>${siteUrl}/blog</loc>
+    <lastmod>${currentDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 </urlset>`;
         res.setHeader('Content-Type', 'application/xml');
         res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+        console.log('[Sitemap] Returning minimal sitemap as fallback');
         res.send(minimalXml);
-      } catch (fallbackError) {
+      } catch (fallbackError: any) {
+        console.error('[Sitemap] Fallback also failed:', fallbackError);
         res.status(500).send('Error generating sitemap');
       }
     }
