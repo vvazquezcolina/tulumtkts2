@@ -4524,6 +4524,7 @@ export const extendedBlogPosts: BlogPost[] = [
       <p>Un itinerario de 7 días en Tulum te permite una experiencia completa con equilibrio entre actividades y relajación. Perfecto para explorar completamente Tulum y alrededores.</p>
     `
   }
+];
 
 /**
  * Export function to merge extended blogs with main blog posts
