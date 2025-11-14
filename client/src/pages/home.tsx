@@ -11,6 +11,15 @@ import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Y
 import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
 import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelpayouts";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { OrganizationSchema } from "@/components/organization-schema";
+import {
+  trackSearch,
+  trackFavoriteToggle,
+  trackAffiliateClick as trackGA4AffiliateClick,
+  trackCategoryClick,
+} from "@/lib/analytics";
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -19,6 +28,8 @@ export default function Home() {
   const [searchDate, setSearchDate] = useState("");
   const [searchGuests, setSearchGuests] = useState("");
   const [email, setEmail] = useState("");
+  
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
 
   // Fetch real experiences from Travelpayouts
   const { data: experiencesData } = useTulumExperiences({
@@ -27,17 +38,27 @@ export default function Home() {
     sort_by: 'popularity'
   });
 
-  const toggleFavorite = (id: string) => {
+  const toggleFavorite = (id: string, title: string) => {
     const newFavorites = new Set(favorites);
-    if (newFavorites.has(id)) {
+    const isFavorite = newFavorites.has(id);
+    if (isFavorite) {
       newFavorites.delete(id);
     } else {
       newFavorites.add(id);
     }
     setFavorites(newFavorites);
+    
+    // Track favorite toggle in GA4
+    trackFavoriteToggle(id, title, !isFavorite);
   };
 
   const handleSearch = () => {
+    // Track search in GA4
+    trackSearch(searchQuery || 'all', {
+      date: searchDate || undefined,
+      guests: searchGuests || undefined,
+    });
+    
     // Build query parameters
     const params = new URLSearchParams();
     if (searchQuery) params.set('q', searchQuery);
@@ -56,12 +77,38 @@ export default function Home() {
   };
 
   const handleNewsletterSignup = () => {
-    console.log("Newsletter signup:", email);
-    setEmail("");
+    if (email) {
+      console.log("Newsletter signup:", email);
+      setEmail("");
+    }
   };
 
   return (
     <div className="bg-white font-sans">
+      <SEOHead
+        title="TulumTkts - #1 Booking Destination for Tulum Experiences"
+        description="Discover and book the best tours, experiences, events, and accommodations in Tulum, Mexico. Your comprehensive tourism platform for authentic Tulum adventures."
+        keywords={[
+          'tulum',
+          'tulum mexico',
+          'tulum tours',
+          'tulum experiences',
+          'tulum events',
+          'tulum accommodations',
+          'tulum villas',
+          'tulum transportation',
+          'riviera maya',
+          'tulum travel guide'
+        ]}
+        canonicalUrl={siteUrl}
+        ogType="website"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      <OrganizationSchema 
+        name="TulumTkts"
+        url={siteUrl}
+        description="Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum."
+      />
       <Navigation />
 
       {/* Hero Section */}
@@ -167,7 +214,14 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
               }
             ].map((category) => (
-              <div key={category.name} className="group cursor-pointer">
+              <div 
+                key={category.name} 
+                className="group cursor-pointer"
+                onClick={() => {
+                  trackCategoryClick(category.name);
+                  setLocation(`/experiencias?category=${encodeURIComponent(category.name)}`);
+                }}
+              >
                 <div className="relative overflow-hidden rounded-xl aspect-square mb-3">
                   <img 
                     src={category.image} 
@@ -240,7 +294,7 @@ export default function Home() {
                       className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleFavorite(activityId);
+                        toggleFavorite(activityId, title);
                       }}
                     >
                       <Heart 
@@ -281,8 +335,12 @@ export default function Home() {
                     onClick={async () => {
                       try {
                         await trackAffiliateClickAPI(activityId, title, price, 'Featured Home');
+                        // Track in GA4
+                        trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
                         window.open(affiliateUrl, '_blank');
                       } catch (error) {
+                        // Track in GA4 even if API fails
+                        trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
                         // Fallback to direct URL
                         window.open(affiliateUrl, '_blank');
                       }
@@ -395,16 +453,28 @@ export default function Home() {
                 Your gateway to unforgettable experiences in Tulum. Discover ancient wonders, natural beauty, and adventure in paradise.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+                <a 
+                  href="#" 
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
                   <Youtube className="w-5 h-5" />
                 </a>
               </div>

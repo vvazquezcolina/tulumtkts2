@@ -2,11 +2,17 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, Eye, ArrowLeft } from "lucide-react";
+import { Calendar, Clock, User, Eye, ArrowLeft, Link2 } from "lucide-react";
 import { Navigation } from "@/components/ui/navigation";
+import { getBlogPostBySlug, allBlogPosts } from "@/data/blogPosts";
+import { BlogImage } from "@/components/blog-image";
+import { SEOHead } from "@/components/seo-head";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/json-ld";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { OrganizationSchema } from "@/components/organization-schema";
 
-// Mock blog posts data (same as in blog.tsx)
-const blogPosts: Record<string, {
+// Old blog posts data (kept for backward compatibility if needed)
+const oldBlogPosts: Record<string, {
   id: string;
   title: string;
   excerpt: string;
@@ -127,11 +133,11 @@ const blogPosts: Record<string, {
 
 export default function BlogPost() {
   const [, setLocation] = useLocation();
-  const [, params] = useRoute<{ id: string }>("/blog/:id");
+  const [, params] = useRoute<{ slug: string }>("/blog/:slug");
   
-  // Get post ID from route params
-  const postId = params?.id || '';
-  const post = blogPosts[postId];
+  // Get post slug from route params
+  const postSlug = params?.slug || '';
+  const post = getBlogPostBySlug(postSlug);
 
   if (!post) {
     return (
@@ -149,12 +155,71 @@ export default function BlogPost() {
     );
   }
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+  const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
+  
+  // Get related posts (same category or same keywords)
+  const relatedPosts = allBlogPosts
+    .filter(p => p.id !== post.id && (
+      p.category === post.category || 
+      p.keywords.some(k => post.keywords.includes(k))
+    ))
+    .slice(0, 3);
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={post.metaTitle}
+        description={post.metaDescription}
+        keywords={post.keywords}
+        canonicalUrl={canonicalUrl}
+        ogImage={post.image}
+        ogType="article"
+        articleAuthor={post.author}
+        articlePublishedTime={post.publishDate}
+        articleModifiedTime={post.publishDate}
+        articleSection={post.category}
+        articleTag={post.keywords}
+      />
+      <ArticleSchema
+        title={post.title}
+        description={post.metaDescription}
+        image={post.image}
+        datePublished={post.publishDate}
+        dateModified={post.publishDate}
+        author={post.author}
+        url={canonicalUrl}
+        category={post.category}
+        keywords={post.keywords}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Inicio', url: '/' },
+          { name: 'Blog', url: '/blog' },
+          { name: post.category, url: `/blog?category=${encodeURIComponent(post.category)}` },
+          { name: post.title, url: `/blog/${post.slug}` },
+        ]}
+      />
+      <OrganizationSchema 
+        name="TulumTkts"
+        url={siteUrl}
+        description="Guías de viaje y blog sobre Tulum, México."
+      />
       <Navigation />
       
-      {/* Back Button */}
+      {/* Breadcrumbs */}
       <div className="max-w-4xl mx-auto px-4 pt-8">
+        <Breadcrumbs
+          items={[
+            { name: 'Blog', url: '/blog' },
+            { name: post.category, url: `/blog?category=${encodeURIComponent(post.category)}` },
+            { name: post.title, url: `/blog/${post.slug}` },
+          ]}
+        />
+      </div>
+      
+      {/* Back Button */}
+      <div className="max-w-4xl mx-auto px-4">
         <Button 
           variant="ghost" 
           onClick={() => setLocation('/blog')}
@@ -167,10 +232,15 @@ export default function BlogPost() {
 
       {/* Hero Image */}
       <div className="relative h-[400px] w-full mb-8">
-        <img 
-          src={post.image} 
-          alt={post.title}
+        <BlogImage
+          pexelsQuery={post.pexelsQuery}
+          fallbackImage={post.image}
+          alt={`${post.title} - ${post.metaDescription}`}
           className="w-full h-full object-cover"
+          loading="eager"
+          width={1200}
+          height={400}
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       </div>
@@ -221,49 +291,113 @@ export default function BlogPost() {
             </div>
 
             {/* Content */}
-            <div className="prose prose-lg max-w-none">
-              <p className="text-xl text-gray-700 mb-6 font-medium">
+            <article className="prose prose-lg max-w-none">
+              <p className="text-xl text-gray-700 mb-6 font-medium" role="doc-subtitle">
                 {post.excerpt}
               </p>
               
-              <div className="text-gray-700 leading-relaxed space-y-4">
-                {post.content ? (
-                  <p>{post.content}</p>
-                ) : (
-                  <>
-                    <p>
-                      Este es un artículo completo sobre {post.title.toLowerCase()}. 
-                      Aquí encontrarás información detallada y consejos útiles para tu experiencia en Tulum.
-                    </p>
-                    <p>
-                      Tulum ofrece una experiencia única que combina la rica historia maya con la belleza natural 
-                      del Caribe mexicano. Desde sus playas de arena blanca hasta sus cenotes místicos, cada 
-                      rincón de esta ciudad costera tiene algo especial que ofrecer.
-                    </p>
-                    <p>
-                      Ya sea que estés buscando aventura, relajación, cultura o gastronomía, Tulum tiene algo 
-                      para todos los gustos. Esperamos que esta guía te ayude a planificar el viaje perfecto.
-                    </p>
-                  </>
-                )}
-              </div>
-            </div>
+              <div 
+                className="text-gray-700 leading-relaxed space-y-4 blog-content"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+                itemProp="articleBody"
+              />
+            </article>
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Compartir este artículo</h3>
               <div className="flex gap-4">
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    const url = encodeURIComponent(canonicalUrl);
+                    const text = encodeURIComponent(post.title);
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+                  }}
+                >
                   Facebook
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    const url = encodeURIComponent(canonicalUrl);
+                    const text = encodeURIComponent(post.title);
+                    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+                  }}
+                >
                   Twitter
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    const url = encodeURIComponent(canonicalUrl);
+                    const text = encodeURIComponent(post.title);
+                    window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+                  }}
+                >
                   WhatsApp
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    navigator.clipboard.writeText(canonicalUrl);
+                  }}
+                >
+                  <Link2 className="w-4 h-4 mr-2" />
+                  Copiar enlace
                 </Button>
               </div>
             </div>
+
+            {/* Related Posts */}
+            {relatedPosts.length > 0 && (
+              <div className="mt-12 pt-8 border-t border-gray-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Artículos Relacionados</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {relatedPosts.map((relatedPost) => (
+                    <Card 
+                      key={relatedPost.id}
+                      className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+                      onClick={() => setLocation(`/blog/${relatedPost.slug}`)}
+                    >
+                      <BlogImage
+                        pexelsQuery={relatedPost.pexelsQuery}
+                        fallbackImage={relatedPost.image}
+                        alt={relatedPost.title}
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      <CardContent className="p-4">
+                        <Badge variant="outline" className="mb-2 text-xs">
+                          {relatedPost.category}
+                        </Badge>
+                        <h4 className="font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                          {relatedPost.title}
+                        </h4>
+                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                          {relatedPost.excerpt}
+                        </p>
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          className="w-full text-primary text-sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setLocation(`/blog/${relatedPost.slug}`);
+                          }}
+                        >
+                          Leer más <ArrowLeft className="w-3 h-3 ml-2 rotate-180" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
       </article>

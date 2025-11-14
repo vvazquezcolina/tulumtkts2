@@ -50,6 +50,9 @@ Set these environment variables in your Vercel project:
 TRAVELPAYOUTS_API_TOKEN=your_travelpayouts_api_token_here
 TRAVELPAYOUTS_MARKER=your_travelpayouts_marker_here  # Optional, defaults to API token
 
+# Pexels API Configuration (for blog images)
+PEXELS_API_KEY=your_pexels_api_key_here  # Get from https://www.pexels.com/api/
+
 # Application Configuration
 NODE_ENV=production
 ```
@@ -101,6 +104,7 @@ NODE_ENV=production
    # Create .env.local file with your configuration
    echo "TRAVELPAYOUTS_API_TOKEN=your_travelpayouts_api_token_here" > .env.local
    echo "TRAVELPAYOUTS_MARKER=your_travelpayouts_marker_here" >> .env.local  # Optional
+   echo "PEXELS_API_KEY=your_pexels_api_key_here" >> .env.local  # For blog images
    ```
 
 4. **Start Development Server**:

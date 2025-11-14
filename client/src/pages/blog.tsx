@@ -6,119 +6,29 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, Search, Filter, ArrowRight, User, Eye, Heart } from "lucide-react";
+import { allBlogPosts, getFeaturedPosts, getPostsByCategory } from "@/data/blogPosts";
+import { BlogImage } from "@/components/blog-image";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { OrganizationSchema } from "@/components/organization-schema";
 
 export default function Blog() {
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
 
-  const handlePostClick = (postId: string) => {
-    // Navigate to blog post detail page
-    setLocation(`/blog/${postId}`);
+  const handlePostClick = (postSlug: string) => {
+    // Navigate to blog post detail page using slug for SEO
+    setLocation(`/blog/${postSlug}`);
   };
 
-  const blogPosts = [
-    {
-      id: "1",
-      title: "Agenda de Eventos en Tulum 2025-2026",
-      excerpt: "Descubre todos los festivales, conciertos y eventos imperdibles que tendrán lugar en Tulum durante la temporada 2025-2026.",
-      category: "Eventos",
-      author: "María González",
-      publishDate: "2025-01-15",
-      readTime: "8 min",
-      views: 1250,
-      featured: true,
-      image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "2",
-      title: "Las Mejores Fiestas de Año Nuevo en Tulum",
-      excerpt: "Guía completa de las celebraciones de Año Nuevo más espectaculares en Tulum, desde beach parties hasta ceremonias ancestrales.",
-      category: "Eventos", 
-      author: "Carlos Mendoza",
-      publishDate: "2024-12-20",
-      readTime: "6 min",
-      views: 987,
-      featured: true,
-      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "3",
-      title: "Guía de Cenotes Imperdibles cerca de Tulum",
-      excerpt: "Explora los cenotes más hermosos y místicos alrededor de Tulum. Desde los más famosos hasta los tesoros escondidos.",
-      category: "Aventura",
-      author: "Ana Rodríguez",
-      publishDate: "2025-01-10",
-      readTime: "12 min",
-      views: 2156,
-      featured: true,
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "4",
-      title: "Consejos para Viajar a Tulum: Clima, Seguridad y Transporte",
-      excerpt: "Todo lo que necesitas saber antes de tu viaje a Tulum. Información práctica sobre el clima, seguridad y opciones de transporte.",
-      category: "Consejos",
-      author: "Roberto Silva",
-      publishDate: "2025-01-05",
-      readTime: "10 min",
-      views: 1876,
-      featured: false,
-      image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "5",
-      title: "Top 5 Beach Clubs en Tulum para el Día y la Noche",
-      excerpt: "Descubre los beach clubs más exclusivos de Tulum, perfectos para relajarte durante el día y disfrutar la vida nocturna.",
-      category: "Lifestyle",
-      author: "Isabella Torres",
-      publishDate: "2024-12-28",
-      readTime: "7 min", 
-      views: 1543,
-      featured: false,
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "6",
-      title: "Gastronomía Maya Auténtica: Donde Comer en Tulum",
-      excerpt: "Un recorrido por los mejores restaurantes que sirven auténtica comida maya y cocina mexicana contemporánea en Tulum.",
-      category: "Gastronomía",
-      author: "Chef Miguel Pech",
-      publishDate: "2024-12-15",
-      readTime: "9 min",
-      views: 892,
-      featured: false,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "7",
-      title: "Retiros de Yoga y Bienestar en Tulum",
-      excerpt: "Guía completa de los mejores retiros de yoga, spas y experiencias de bienestar que Tulum tiene para ofrecer.",
-      category: "Bienestar",
-      author: "Sofía Martín",
-      publishDate: "2024-12-10",
-      readTime: "11 min",
-      views: 1234,
-      featured: false,
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: "8", 
-      title: "Expediciones a Sian Ka'an: Paraíso Natural UNESCO",
-      excerpt: "Todo sobre la Reserva de la Biosfera Sian Ka'an, Patrimonio de la Humanidad, y cómo planificar tu visita.",
-      category: "Aventura",
-      author: "Dr. Emilio Caamal",
-      publishDate: "2024-12-05",
-      readTime: "15 min",
-      views: 756,
-      featured: false,
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-    }
-  ];
+  // Get all blog posts from data file (includes extended blogs)
+  const allPosts = allBlogPosts;
 
-  const categories = ["Todos", "Eventos", "Aventura", "Consejos", "Lifestyle", "Gastronomía", "Bienestar"];
+  // Get unique categories from blog posts
+  const categories = ["Todos", ...Array.from(new Set(allPosts.map(post => post.category)))];
 
-  const filteredPosts = blogPosts.filter(post => {
+  const filteredPosts = allPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = !categoryFilter || categoryFilter === "Todos" || post.category === categoryFilter;
@@ -128,8 +38,23 @@ export default function Blog() {
   const featuredPosts = filteredPosts.filter(post => post.featured);
   const regularPosts = filteredPosts.filter(post => !post.featured);
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title="Blog y Guías de Viaje de Tulum | TulumTkts"
+        description="Descubre las mejores guías de viaje sobre Tulum: clima, actividades, cenotes, restaurantes, hoteles y más. Tu fuente de información experta sobre Tulum y la Riviera Maya."
+        keywords={Array.from(new Set(allPosts.flatMap(post => post.keywords))).slice(0, 10)}
+        canonicalUrl={`${siteUrl}/blog`}
+        ogType="website"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      <OrganizationSchema 
+        name="TulumTkts"
+        url={siteUrl}
+        description="Guías de viaje y blog sobre Tulum, México. Descubre los mejores consejos, actividades y experiencias en Tulum."
+      />
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -187,14 +112,19 @@ export default function Blog() {
               {/* Main Featured Article */}
               <Card 
                 className="lg:col-span-2 overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                onClick={() => handlePostClick(featuredPosts[0].id)}
+                onClick={() => handlePostClick(featuredPosts[0].slug)}
               >
                 <div className="md:flex">
                   <div className="md:w-1/2">
-                    <img 
-                      src={featuredPosts[0].image} 
-                      alt={featuredPosts[0].title}
+                    <BlogImage
+                      pexelsQuery={featuredPosts[0].pexelsQuery}
+                      fallbackImage={featuredPosts[0].image}
+                      alt={`${featuredPosts[0].title} - Artículo destacado`}
                       className="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="eager"
+                      width={800}
+                      height={450}
+                      fetchpriority="high"
                     />
                   </div>
                   <div className="md:w-1/2 p-6 md:p-8">
@@ -222,7 +152,7 @@ export default function Blog() {
                         className="text-primary font-semibold"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handlePostClick(featuredPosts[0].id);
+                          handlePostClick(featuredPosts[0].slug);
                         }}
                       >
                         Leer más <ArrowRight className="w-4 h-4 ml-2" />
@@ -237,12 +167,14 @@ export default function Blog() {
                 <Card 
                   key={post.id} 
                   className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer"
-                  onClick={() => handlePostClick(post.id)}
+                  onClick={() => handlePostClick(post.slug)}
                 >
-                  <img 
-                    src={post.image} 
+                  <BlogImage
+                    pexelsQuery={post.pexelsQuery}
+                    fallbackImage={post.image}
                     alt={post.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-3">
@@ -288,12 +220,16 @@ export default function Blog() {
               <Card 
                 key={post.id} 
                 className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer"
-                onClick={() => handlePostClick(post.id)}
+                    onClick={() => handlePostClick(post.slug)}
               >
-                <img 
-                  src={post.image} 
-                  alt={post.title}
+                <BlogImage
+                  pexelsQuery={post.pexelsQuery}
+                  fallbackImage={post.image}
+                  alt={`${post.title} - ${post.category}`}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  width={400}
+                  height={192}
                 />
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
@@ -331,7 +267,7 @@ export default function Blog() {
                     className="w-full mt-4 text-primary font-semibold hover:bg-primary/10"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handlePostClick(post.id);
+                          handlePostClick(post.slug);
                     }}
                   >
                     Leer artículo <ArrowRight className="w-4 h-4 ml-2" />
@@ -384,9 +320,16 @@ export default function Blog() {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.slice(1).map((category) => {
-              const categoryCount = blogPosts.filter(post => post.category === category).length;
+              const categoryCount = allPosts.filter(post => post.category === category).length;
               return (
-                <Card key={category} className="p-4 text-center hover:shadow-lg transition-shadow cursor-pointer group">
+                <Card 
+                  key={category} 
+                  className="p-4 text-center hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => {
+                    setCategoryFilter(category === "Todos" ? "" : category);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
                   <h4 className="font-semibold text-gray-900 group-hover:text-primary transition-colors">
                     {category}
                   </h4>

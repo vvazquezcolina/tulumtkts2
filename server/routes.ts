@@ -1,5 +1,7 @@
 import type { Express } from "express";
 import { travelpayoutsService } from "./services/travelpayouts";
+import { pexelsService } from "./services/pexels";
+import { generateSitemap } from "./services/sitemap";
 
 export async function registerRoutes(app: Express): Promise<void> {
   // Travelpayouts API routes
@@ -297,6 +299,145 @@ export async function registerRoutes(app: Express): Promise<void> {
       console.error('Error tracking affiliate click:', error);
       res.status(500).json({ error: 'Failed to track click' });
     }
+  });
+
+  // Pexels API routes for images
+  app.get('/api/pexels/search', async (req, res) => {
+    try {
+      const { query, per_page = 15, page = 1, orientation, size, color, locale } = req.query;
+      
+      if (!query) {
+        return res.status(400).json({ error: 'Query parameter is required' });
+      }
+
+      if (!pexelsService.isConfigured()) {
+        return res.status(503).json({ error: 'Pexels service is not configured. Please set PEXELS_API_KEY environment variable.' });
+      }
+
+      const photos = await pexelsService.searchPhotos(query as string, {
+        per_page: parseInt(per_page as string),
+        page: parseInt(page as string),
+        orientation: orientation as 'landscape' | 'portrait' | 'square' | undefined,
+        size: size as 'large' | 'medium' | 'small' | undefined,
+        color: color as string | undefined,
+        locale: locale as string | undefined,
+      });
+
+      if (!photos) {
+        return res.status(500).json({ error: 'Failed to fetch photos from Pexels' });
+      }
+
+      res.json({ photos });
+    } catch (error) {
+      console.error('Error fetching photos from Pexels:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  // Get a random photo for a blog post query
+  app.get('/api/pexels/blog-image', async (req, res) => {
+    try {
+      const { query, orientation = 'landscape' } = req.query;
+      
+      if (!query) {
+        return res.status(400).json({ error: 'Query parameter is required' });
+      }
+
+      if (!pexelsService.isConfigured()) {
+        return res.status(503).json({ error: 'Pexels service is not configured. Please set PEXELS_API_KEY environment variable.' });
+      }
+
+      const imageUrl = await pexelsService.getBlogImage(
+        query as string,
+        800,
+        600
+      );
+
+      if (!imageUrl) {
+        return res.status(404).json({ error: 'No images found for the query' });
+      }
+
+      res.json({ imageUrl });
+    } catch (error) {
+      console.error('Error fetching blog image from Pexels:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  // Sitemap endpoint
+  app.get('/sitemap.xml', (req, res) => {
+    try {
+      // Get site URL from environment or request
+      const siteUrl = process.env.SITE_URL || 
+                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                     req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+      
+      const xml = generateSitemap(siteUrl);
+      res.setHeader('Content-Type', 'application/xml');
+      res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+      res.send(xml);
+    } catch (error) {
+      console.error('Error generating sitemap:', error);
+      res.status(500).send('Error generating sitemap');
+    }
+  });
+
+  // Robots.txt endpoint
+  app.get('/robots.txt', (req, res) => {
+    // Get site URL from environment or request
+    const siteUrl = process.env.SITE_URL || 
+                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                   req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+    
+    const robots = `User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /affiliate-dashboard
+Disallow: /admin
+
+Sitemap: ${siteUrl}/sitemap.xml
+`;
+    
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+    res.send(robots);
+  });
+  
+  // API endpoint for sitemap (for Vercel rewrites)
+  app.get('/api/sitemap', (req, res) => {
+    try {
+      const siteUrl = process.env.SITE_URL || 
+                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                     req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+      
+      const xml = generateSitemap(siteUrl);
+      res.setHeader('Content-Type', 'application/xml');
+      res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+      res.send(xml);
+    } catch (error) {
+      console.error('Error generating sitemap:', error);
+      res.status(500).send('Error generating sitemap');
+    }
+  });
+  
+  // API endpoint for robots (for Vercel rewrites)
+  app.get('/api/robots', (req, res) => {
+    const siteUrl = process.env.SITE_URL || 
+                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                   req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+    
+    const robots = `User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /affiliate-dashboard
+Disallow: /admin
+
+Sitemap: ${siteUrl}/sitemap.xml
+`;
+    
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+    res.send(robots);
   });
 
   // Routes registered, server will be created in index.ts

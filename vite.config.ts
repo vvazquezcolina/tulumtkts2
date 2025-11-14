@@ -20,7 +20,12 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    // Copy sitemap data file if it exists
+    rollupOptions: {
+      // Ensure static files are copied
+    },
   },
+  publicDir: path.resolve(__dirname, "public"),
   server: {
     fs: {
       strict: true,

@@ -13,6 +13,10 @@ import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelp
 import { TravelpayoutsActivity } from "@/lib/travelpayouts";
 import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
 import { Navigation } from "@/components/ui/navigation";
+import {
+  trackFavoriteToggle,
+  trackAffiliateClick as trackGA4AffiliateClick,
+} from "@/lib/analytics";
 
 // Use TravelpayoutsActivity as the main type
 type Experience = TravelpayoutsActivity;
@@ -43,14 +47,18 @@ export default function Experiencias() {
     sort_by: 'popularity'
   });
 
-  const toggleFavorite = (id: string) => {
+  const toggleFavorite = (id: string, title: string) => {
     const newFavorites = new Set(favorites);
-    if (newFavorites.has(id)) {
+    const isFavorite = newFavorites.has(id);
+    if (isFavorite) {
       newFavorites.delete(id);
     } else {
       newFavorites.add(id);
     }
     setFavorites(newFavorites);
+    
+    // Track favorite toggle in GA4
+    trackFavoriteToggle(id, title, !isFavorite);
   };
 
   // Format price for display
@@ -416,7 +424,7 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: 
             className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white h-8 w-8"
             onClick={(e) => {
               e.stopPropagation();
-              toggleFavorite(experience.activity_id);
+              toggleFavorite(experience.activity_id, experience.title);
             }}
           >
             <Heart 
@@ -470,11 +478,16 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: 
               const price = `$${Math.round(experience.price.values[0].amount)} ${experience.price.values[0].currency}`;
               const activityId = experience.activity_id;
               const affiliateUrl = experience.url;
+              const category = experience.categories?.[0] || 'Experiencias';
               
               try {
-                await trackAffiliateClickAPI(activityId, experience.title, price, experience.categories?.[0] || 'Experiencias');
+                await trackAffiliateClickAPI(activityId, experience.title, price, category);
+                // Track in GA4
+                trackGA4AffiliateClick(activityId, experience.title, price, category);
                 window.open(affiliateUrl, '_blank');
               } catch (error) {
+                // Track in GA4 even if API fails
+                trackGA4AffiliateClick(activityId, experience.title, price, category);
                 window.open(affiliateUrl, '_blank');
               }
             }}

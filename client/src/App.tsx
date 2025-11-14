@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useGA4PageView } from "@/hooks/use-ga4-pageview";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Eventos from "@/pages/eventos";
@@ -22,7 +23,7 @@ function Router() {
       <Route path="/experiencias" component={Experiencias} />
       <Route path="/villas" component={Villas} />
       <Route path="/transporte" component={Transporte} />
-      <Route path="/blog/:id" component={BlogPost} />
+      <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/blog" component={Blog} />
       <Route path="/contacto" component={Contacto} />
       <Route path="/affiliate-dashboard" component={AffiliateDashboard} />
@@ -32,6 +33,9 @@ function Router() {
 }
 
 function App() {
+  // Track page views on route changes
+  useGA4PageView();
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
