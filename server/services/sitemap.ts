@@ -1,6 +1,29 @@
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
+// Try to import embedded data first (works in bundled code)
+// This will be loaded dynamically when generateSitemap is called
+let embeddedBlogData: Array<{ slug: string; publishDate: string; featured: boolean }> = [];
+let embeddedDataLoaded = false;
+
+async function loadEmbeddedData() {
+  if (embeddedDataLoaded) return embeddedBlogData;
+  
+  try {
+    // Dynamic import works with ES modules and bundled code
+    const sitemapDataModule = await import('./data/sitemap-blog-data.js');
+    if (sitemapDataModule && sitemapDataModule.sitemapBlogData) {
+      embeddedBlogData = sitemapDataModule.sitemapBlogData;
+      embeddedDataLoaded = true;
+      return embeddedBlogData;
+    }
+  } catch (err) {
+    // Embedded data not available, will try file system fallback
+    embeddedDataLoaded = true; // Mark as attempted
+  }
+  return embeddedBlogData;
+}
+
 interface BlogPost {
   slug: string;
   publishDate: string;
@@ -14,7 +37,7 @@ interface SitemapPage {
   lastmod?: string;
 }
 
-export function generateSitemap(siteUrl: string = 'https://tulumtkts.com'): string {
+export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com'): Promise<string> {
   const currentDate = new Date().toISOString().split('T')[0];
   
   // Static pages
@@ -28,49 +51,57 @@ export function generateSitemap(siteUrl: string = 'https://tulumtkts.com'): stri
     { url: '/contacto', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
   ];
 
-  // Load blog posts data from JSON file (generated during build)
+  // Load blog posts data - try embedded data first, then file system
   // This must not throw - sitemap must work even without blog data
   let blogPosts: BlogPost[] = [];
   
   try {
-    const cwd = process.cwd();
-    const possiblePaths = [
-      // Vercel serverless function location (most likely)
-      join('/var/task', 'sitemap-blog-data.json'),
-      join('/var/task', 'dist/sitemap-blog-data.json'),
-      join('/var/task', 'dist/public/sitemap-blog-data.json'),
-      // Standard build locations
-      join(cwd, 'dist/sitemap-blog-data.json'),              // Server code location
-      join(cwd, 'dist/public/sitemap-blog-data.json'),       // Static files location
-      join(cwd, 'public/sitemap-blog-data.json'),            // Source location
-      join(cwd, 'sitemap-blog-data.json'),                   // Root fallback
-      // Try relative to __dirname (bundled server code location)
-      join(__dirname, 'sitemap-blog-data.json'),
-      join(__dirname, '../sitemap-blog-data.json'),
-      join(__dirname, '../public/sitemap-blog-data.json'),
-      join(__dirname, '../../public/sitemap-blog-data.json'),
-    ];
-    
-    for (const jsonPath of possiblePaths) {
-      try {
-        if (existsSync(jsonPath)) {
-          const jsonContent = readFileSync(jsonPath, 'utf-8');
-          const parsed = JSON.parse(jsonContent);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            blogPosts = parsed;
-            console.log(`✅ Loaded ${blogPosts.length} blog posts from ${jsonPath}`);
-            break;
+    // First try: Use embedded data (from bundled TypeScript module)
+    await loadEmbeddedData();
+    if (embeddedBlogData && embeddedBlogData.length > 0) {
+      blogPosts = embeddedBlogData;
+      console.log(`✅ Loaded ${blogPosts.length} blog posts from embedded data`);
+    } else {
+      // Fallback: Try reading from JSON file
+      const cwd = process.cwd();
+      const possiblePaths = [
+        // Vercel serverless function location (most likely)
+        join('/var/task', 'sitemap-blog-data.json'),
+        join('/var/task', 'dist/sitemap-blog-data.json'),
+        join('/var/task', 'dist/public/sitemap-blog-data.json'),
+        // Standard build locations
+        join(cwd, 'dist/sitemap-blog-data.json'),              // Server code location
+        join(cwd, 'dist/public/sitemap-blog-data.json'),       // Static files location
+        join(cwd, 'public/sitemap-blog-data.json'),            // Source location
+        join(cwd, 'sitemap-blog-data.json'),                   // Root fallback
+        // Try relative to __dirname (bundled server code location)
+        join(__dirname, 'sitemap-blog-data.json'),
+        join(__dirname, '../sitemap-blog-data.json'),
+        join(__dirname, '../public/sitemap-blog-data.json'),
+        join(__dirname, '../../public/sitemap-blog-data.json'),
+      ];
+      
+      for (const jsonPath of possiblePaths) {
+        try {
+          if (existsSync(jsonPath)) {
+            const jsonContent = readFileSync(jsonPath, 'utf-8');
+            const parsed = JSON.parse(jsonContent);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              blogPosts = parsed;
+              console.log(`✅ Loaded ${blogPosts.length} blog posts from ${jsonPath}`);
+              break;
+            }
           }
+        } catch (err) {
+          // Silently continue to next path
+          continue;
         }
-      } catch (err) {
-        // Silently continue to next path
-        continue;
       }
-    }
-    
-    if (blogPosts.length === 0) {
-      // This is OK - sitemap will work with static pages only
-      console.log('ℹ️  No blog posts data found. Sitemap will include static pages only.');
+      
+      if (blogPosts.length === 0) {
+        // This is OK - sitemap will work with static pages only
+        console.log('ℹ️  No blog posts data found. Sitemap will include static pages only.');
+      }
     }
   } catch (error: any) {
     // Never throw - sitemap must always work

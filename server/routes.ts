@@ -365,14 +365,14 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   // Sitemap endpoint
-  app.get('/sitemap.xml', (req, res) => {
+  app.get('/sitemap.xml', async (req, res) => {
     try {
       // Get site URL from environment or request
       const siteUrl = process.env.SITE_URL || 
                      process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
                      req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
       
-      const xml = generateSitemap(siteUrl);
+      const xml = await generateSitemap(siteUrl);
       res.setHeader('Content-Type', 'application/xml');
       res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
       res.send(xml);
@@ -404,7 +404,7 @@ Sitemap: ${siteUrl}/sitemap.xml
   });
   
   // API endpoint for sitemap (for Vercel rewrites)
-  app.get('/api/sitemap', (req, res) => {
+  app.get('/api/sitemap', async (req, res) => {
     try {
       // Get site URL from environment or request
       let siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
@@ -415,7 +415,7 @@ Sitemap: ${siteUrl}/sitemap.xml
         siteUrl = `${req.protocol}://${req.get('host')}`;
       }
       
-      const xml = generateSitemap(siteUrl);
+      const xml = await generateSitemap(siteUrl);
       res.setHeader('Content-Type', 'application/xml');
       res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
       res.send(xml);
