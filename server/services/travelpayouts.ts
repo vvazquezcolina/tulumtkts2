@@ -475,7 +475,7 @@ class TravelpayoutsService {
   } = {}): Promise<ActivitiesResponse | null> {
     try {
       // Import CSV parser
-      const { parseCSVActivities } = await import('./csv-parser');
+      const { parseCSVActivities } = await import('./csv-parser.js');
       const allActivities = parseCSVActivities();
       
       if (allActivities.length === 0) {
@@ -547,7 +547,7 @@ class TravelpayoutsService {
   // Get specific activity details
   async getActivityDetails(activityId: string): Promise<TravelpayoutsActivity | null> {
     try {
-      const { parseCSVActivities } = await import('./csv-parser');
+      const { parseCSVActivities } = await import('./csv-parser.js');
       const allActivities = parseCSVActivities();
       return allActivities.find(activity => activity.activity_id === activityId) || null;
     } catch (error) {
