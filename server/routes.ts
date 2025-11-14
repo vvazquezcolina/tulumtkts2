@@ -406,17 +406,43 @@ Sitemap: ${siteUrl}/sitemap.xml
   // API endpoint for sitemap (for Vercel rewrites)
   app.get('/api/sitemap', (req, res) => {
     try {
-      const siteUrl = process.env.SITE_URL || 
-                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-                     req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+      // Get site URL from environment or request
+      let siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
+      
+      if (!siteUrl && process.env.VERCEL_URL) {
+        siteUrl = `https://${process.env.VERCEL_URL}`;
+      } else if (!siteUrl && req.get('host')) {
+        siteUrl = `${req.protocol}://${req.get('host')}`;
+      }
       
       const xml = generateSitemap(siteUrl);
       res.setHeader('Content-Type', 'application/xml');
       res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
       res.send(xml);
-    } catch (error) {
+    } catch (error: any) {
+      // Even if sitemap generation fails, try to return a minimal sitemap
       console.error('Error generating sitemap:', error);
-      res.status(500).send('Error generating sitemap');
+      try {
+        const siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
+        const minimalXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${siteUrl}</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/blog</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>`;
+        res.setHeader('Content-Type', 'application/xml');
+        res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+        res.send(minimalXml);
+      } catch (fallbackError) {
+        res.status(500).send('Error generating sitemap');
+      }
     }
   });
   

@@ -28,98 +28,54 @@ export function generateSitemap(siteUrl: string = 'https://tulumtkts.com'): stri
     { url: '/contacto', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
   ];
 
-  // Try to read blog posts data from generated JSON file (works in production)
+  // Load blog posts data from JSON file (generated during build)
+  // This must not throw - sitemap must work even without blog data
   let blogPosts: BlogPost[] = [];
   
-  // First try: Read from generated JSON file (production/build)
-  // In Vercel, files are in different locations depending on context
-  // Try multiple possible locations in order of likelihood
-  const cwd = process.cwd();
-  
-  // Build array of possible paths
-  const possibleJsonPaths = [
-    // Vercel serverless function location (most likely in production)
-    join('/var/task', 'dist/public/sitemap-blog-data.json'),
-    join('/var/task', 'public/sitemap-blog-data.json'),
-    // Production build location (local production)
-    join(cwd, 'dist/public/sitemap-blog-data.json'),
-    // Root public directory (development/build)
-    join(cwd, 'public/sitemap-blog-data.json'),
-    // Vercel output directory
-    join(cwd, '.vercel/output/static/sitemap-blog-data.json'),
-    // Client public directory
-    join(cwd, 'client/public/sitemap-blog-data.json'),
-    // Root directory fallback
-    join(cwd, 'sitemap-blog-data.json'),
-  ];
-  
-  let jsonPathFound = null;
-  for (const jsonPath of possibleJsonPaths) {
-    if (existsSync(jsonPath)) {
+  try {
+    const cwd = process.cwd();
+    const possiblePaths = [
+      // Vercel serverless function location (most likely)
+      join('/var/task', 'sitemap-blog-data.json'),
+      join('/var/task', 'dist/sitemap-blog-data.json'),
+      join('/var/task', 'dist/public/sitemap-blog-data.json'),
+      // Standard build locations
+      join(cwd, 'dist/sitemap-blog-data.json'),              // Server code location
+      join(cwd, 'dist/public/sitemap-blog-data.json'),       // Static files location
+      join(cwd, 'public/sitemap-blog-data.json'),            // Source location
+      join(cwd, 'sitemap-blog-data.json'),                   // Root fallback
+      // Try relative to __dirname (bundled server code location)
+      join(__dirname, 'sitemap-blog-data.json'),
+      join(__dirname, '../sitemap-blog-data.json'),
+      join(__dirname, '../public/sitemap-blog-data.json'),
+      join(__dirname, '../../public/sitemap-blog-data.json'),
+    ];
+    
+    for (const jsonPath of possiblePaths) {
       try {
-        const jsonContent = readFileSync(jsonPath, 'utf-8');
-        const parsed = JSON.parse(jsonContent);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          blogPosts = parsed;
-          jsonPathFound = jsonPath;
-          console.log(`✅ Loaded ${blogPosts.length} blog posts from ${jsonPath}`);
-          break; // Found and loaded, exit loop
+        if (existsSync(jsonPath)) {
+          const jsonContent = readFileSync(jsonPath, 'utf-8');
+          const parsed = JSON.parse(jsonContent);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            blogPosts = parsed;
+            console.log(`✅ Loaded ${blogPosts.length} blog posts from ${jsonPath}`);
+            break;
+          }
         }
-      } catch (error) {
+      } catch (err) {
         // Silently continue to next path
         continue;
       }
     }
-  }
-  
-  if (blogPosts.length === 0) {
-    console.warn('⚠️  No blog posts data found in JSON files. Trying TypeScript files as fallback...');
-    console.warn(`   Searched paths: ${possibleJsonPaths.slice(0, 3).join(', ')}...`);
-  }
-  
-  // Fallback: Try to read from TypeScript files directly (development)
-  if (blogPosts.length === 0) {
-    try {
-      const blogPostsPath = join(process.cwd(), 'client/src/data/blogPosts.ts');
-      const blogPostsExtendedPath = join(process.cwd(), 'client/src/data/blogPostsExtended.ts');
-      
-      if (existsSync(blogPostsPath) && existsSync(blogPostsExtendedPath)) {
-        const blogPostsContent = readFileSync(blogPostsPath, 'utf-8');
-        const blogPostsExtendedContent = readFileSync(blogPostsExtendedPath, 'utf-8');
-        
-        const extractBlogPost = (content: string): BlogPost[] => {
-          const posts: BlogPost[] = [];
-          const blogPostPattern = /\{\s*id:\s*"([^"]+)",[\s\S]*?slug:\s*"([^"]+)",[\s\S]*?publishDate:\s*"([^"]+)",[\s\S]*?featured:\s*(true|false)/g;
-          let match;
-          
-          while ((match = blogPostPattern.exec(content)) !== null) {
-            posts.push({
-              slug: match[2],
-              publishDate: match[3],
-              featured: match[4] === 'true',
-            });
-          }
-          
-          return posts;
-        };
-        
-        blogPosts = [
-          ...extractBlogPost(blogPostsContent),
-          ...extractBlogPost(blogPostsExtendedContent),
-        ];
-        
-        // Remove duplicates
-        const seen = new Set<string>();
-        blogPosts = blogPosts.filter(post => {
-          if (seen.has(post.slug)) return false;
-          seen.add(post.slug);
-          return true;
-        });
-      }
-    } catch (error) {
-      console.error('Error reading blog posts from TypeScript files:', error);
-      // Continue with static pages only
+    
+    if (blogPosts.length === 0) {
+      // This is OK - sitemap will work with static pages only
+      console.log('ℹ️  No blog posts data found. Sitemap will include static pages only.');
     }
+  } catch (error: any) {
+    // Never throw - sitemap must always work
+    console.log(`ℹ️  Could not load blog posts (${error?.message || 'unknown error'}). Sitemap will use static pages only.`);
+    blogPosts = [];
   }
 
   // Generate XML
