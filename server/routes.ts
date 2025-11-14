@@ -1,7 +1,7 @@
 import type { Express } from "express";
-import { travelpayoutsService } from "./services/travelpayouts";
-import { pexelsService } from "./services/pexels";
-import { generateSitemap } from "./services/sitemap";
+import { travelpayoutsService } from "./services/travelpayouts.js";
+import { pexelsService } from "./services/pexels.js";
+import { generateSitemap } from "./services/sitemap.js";
 
 export async function registerRoutes(app: Express): Promise<void> {
   // Travelpayouts API routes
