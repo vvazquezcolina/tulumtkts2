@@ -364,13 +364,23 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
+  // Helper function to get production site URL
+  // Never use preview/staging URLs for sitemap - Google requires production domain
+  function getSiteUrl(): string {
+    // Always prefer SITE_URL environment variable (should be set in production)
+    if (process.env.SITE_URL) {
+      return process.env.SITE_URL;
+    }
+    // Always use production domain as fallback - never use VERCEL_URL or req.host
+    // VERCEL_URL can be preview domains which Google Search Console rejects
+    return 'https://tulumtkts.com';
+  }
+
   // Sitemap endpoint
   app.get('/sitemap.xml', async (req, res) => {
     try {
-      // Get site URL from environment or request
-      const siteUrl = process.env.SITE_URL || 
-                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-                     req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+      // Always use production domain for sitemap
+      const siteUrl = getSiteUrl();
       
       const xml = await generateSitemap(siteUrl);
       res.setHeader('Content-Type', 'application/xml');
@@ -384,10 +394,8 @@ export async function registerRoutes(app: Express): Promise<void> {
 
   // Robots.txt endpoint
   app.get('/robots.txt', (req, res) => {
-    // Get site URL from environment or request
-    const siteUrl = process.env.SITE_URL || 
-                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-                   req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+    // Always use production domain for robots.txt (especially for sitemap reference)
+    const siteUrl = getSiteUrl();
     
     const robots = `User-agent: *
 Allow: /
@@ -406,16 +414,8 @@ Sitemap: ${siteUrl}/sitemap.xml
   // API endpoint for sitemap (for Vercel rewrites)
   app.get('/api/sitemap', async (req, res) => {
     try {
-      // Get site URL from environment or request
-      let siteUrl = process.env.SITE_URL || 'https://tulumtkts.com';
-      
-      if (!siteUrl || siteUrl === 'https://tulumtkts.com') {
-        if (process.env.VERCEL_URL) {
-          siteUrl = `https://${process.env.VERCEL_URL}`;
-        } else if (req.get('host')) {
-          siteUrl = `${req.protocol}://${req.get('host')}`;
-        }
-      }
+      // Always use production domain for sitemap - never use preview/staging URLs
+      const siteUrl = getSiteUrl();
       
       console.log(`[Sitemap] Generating sitemap for ${siteUrl}`);
       const xml = await generateSitemap(siteUrl);
@@ -427,8 +427,8 @@ Sitemap: ${siteUrl}/sitemap.xml
       console.error('[Sitemap] Error generating sitemap:', error);
       console.error('[Sitemap] Error stack:', error?.stack);
       try {
-        const siteUrl = process.env.SITE_URL || 
-                       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://tulumtkts.com');
+        // Always use production domain even in fallback
+        const siteUrl = getSiteUrl();
         const currentDate = new Date().toISOString().split('T')[0];
         const minimalXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -458,9 +458,8 @@ Sitemap: ${siteUrl}/sitemap.xml
   
   // API endpoint for robots (for Vercel rewrites)
   app.get('/api/robots', (req, res) => {
-    const siteUrl = process.env.SITE_URL || 
-                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-                   req.protocol + '://' + req.get('host') || 'https://tulumtkts.com';
+    // Always use production domain for robots.txt (especially for sitemap reference)
+    const siteUrl = getSiteUrl();
     
     const robots = `User-agent: *
 Allow: /
