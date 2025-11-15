@@ -113,12 +113,34 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative">
-        <div 
-          className="h-[600px] bg-cover bg-center bg-no-repeat relative"
-          style={{
-            backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
-          }}
-        >
+        <div className="h-[600px] relative overflow-hidden">
+          {/* YouTube Video Background */}
+          <div className="absolute inset-0 w-full h-full">
+            <iframe
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              src="https://www.youtube.com/embed/i4-XVv-TAJ8?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=i4-XVv-TAJ8&start=229&modestbranding=1&iv_load_policy=3"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              style={{
+                width: '177.78vh', // 16:9 aspect ratio based on viewport height
+                height: '177.78vw', // 16:9 aspect ratio based on viewport width
+                minWidth: '100%',
+                minHeight: '100%',
+                transform: 'translate(-50%, -50%) scale(1.15)',
+                pointerEvents: 'none',
+                border: 'none',
+              }}
+            />
+            {/* Fallback image */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: "url('https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
+              }}
+            />
+          </div>
+          {/* Overlay oscuro para legibilidad del texto */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-4xl mx-auto px-4">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
