@@ -299,7 +299,7 @@ export default function Home() {
             <p className="text-base text-gray-500 mt-2">
               {t('categories.discoverMore', { guiaCompleta: t('categories.guiaCompleta') }).split(t('categories.guiaCompleta')).map((part, i, arr) => 
                 i < arr.length - 1 ? (
-                  <span key={i}>{part}<a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">{t('categories.guiaCompleta')}</a></span>
+                  <span key={i}>{part}<a href={getLocalizedLink('/tulum-guia-completa')} className="text-primary hover:underline font-semibold">{t('categories.guiaCompleta')}</a></span>
                 ) : part
               )}
             </p>
@@ -332,9 +332,9 @@ export default function Home() {
                 onClick={() => {
                   trackCategoryClick(category.name);
                   if (category.url) {
-                    setLocation(category.url);
+                    setLocation(getLocalizedLink(category.url));
                   } else {
-                    setLocation(`/experiencias?category=${encodeURIComponent(category.name)}`);
+                    setLocation(getLocalizedLink(`/experiencias?category=${encodeURIComponent(category.name)}`));
                   }
                 }}
               >
@@ -366,7 +366,7 @@ export default function Home() {
             <Button 
               variant="ghost" 
               className="hidden md:flex text-primary font-semibold hover:underline"
-              onClick={() => setLocation('/experiencias')}
+              onClick={() => setLocation(getLocalizedLink('/experiencias'))}
             >
               {t('featured.seeAll')} <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

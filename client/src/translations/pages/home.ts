@@ -441,9 +441,9 @@ export default {
       }
     },
     footer: {
-      description: 'La tua porta d\'ingresso verso esperienze indimenticabili a Tulum. Scopri meraviglie antiche, bellezza naturale e avventura in paradiso.',
-      experiences: 'Esperienze',
-      support: 'Supporto',
+      description: 'Votre porte d\'entrée vers des expériences inoubliables à Tulum. Découvrez des merveilles anciennes, une beauté naturelle et de l\'aventure au paradis.',
+      experiences: 'Expériences',
+      support: 'Support',
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Rovine Maya',
@@ -595,6 +595,33 @@ export default {
         question: 'Cosa devo portare per Tulum?',
         answer: 'Per Tulum porta vestiti leggeri (costumi da bagno, pantaloncini, vestiti), crema solare ad alto fattore, cappello o berretto, occhiali da sole, repellente per insetti (specialmente per cenotes e aree della giungla), scarpe comode per camminare e sandali da spiaggia, una giacca leggera per le notti più fresche durante dicembre-febbraio, e attrezzatura da snorkeling se prevedi di esplorare cenotes o barriere coralline.'
       }
+    },
+    footer: {
+      description: 'La tua porta d\'ingresso verso esperienze indimenticabili a Tulum. Scopri meraviglie antiche, bellezza naturale e avventura in paradiso.',
+      experiences: 'Esperienze',
+      support: 'Supporto',
+      experienceLinks: {
+        cenotes: 'Cenotes',
+        mayanRuins: 'Rovine Maya',
+        beachTours: 'Tour della Spiaggia',
+        adventureSports: 'Sport d\'Avventura',
+        culturalTours: 'Tour Culturali',
+      },
+      supportLinks: {
+        helpCenter: 'Centro Assistenza',
+        contactUs: 'Contattaci',
+        cancellationPolicy: 'Politica di Cancellazione',
+        termsOfService: 'Termini di Servizio',
+        privacyPolicy: 'Informativa sulla Privacy',
+      },
+      copyright: 'Tutti i diritti riservati. | Fatto con ❤️ per i viaggiatori',
+      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
+    },
+    bestseller: {
+      title: 'Scopri le Migliori Esperienze a Tulum',
+      description: 'Tour unici, cenotes cristallini e rovine maya. Prenota con cancellazione gratuita.',
+      seeExperiences: 'Vedi le Esperienze',
+      poweredBy: 'Powered by Travelpayouts',
     },
   },
 };
