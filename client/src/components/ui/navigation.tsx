@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { MobileMenu } from "@/components/ui/mobile-menu";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
+import { getPathWithoutLocale } from "@/lib/routing";
 import { 
   Calendar,
   MapPin,
@@ -25,6 +27,10 @@ const navigationItems = [
 export function Navigation() {
   const [location] = useLocation();
   const { t } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
+  
+  // Obtener la ruta actual sin prefijo de idioma para comparación
+  const currentPath = getPathWithoutLocale(location);
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
@@ -32,7 +38,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/">
+            <Link href={getLocalizedLink("/")}>
               <span className="text-2xl font-bold text-primary cursor-pointer">TulumTkts</span>
             </Link>
           </div>
@@ -40,17 +46,21 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-6">
-              {navigationItems.slice(1).map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <span className={`px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                    location === item.href 
-                      ? 'text-primary border-b-2 border-primary' 
-                      : 'text-gray-700 hover:text-primary'
-                  }`}>
-                    {t(item.labelKey)}
-                  </span>
-                </Link>
-              ))}
+              {navigationItems.slice(1).map((item) => {
+                const localizedHref = getLocalizedLink(item.href);
+                const isActive = currentPath === item.href;
+                return (
+                  <Link key={item.href} href={localizedHref}>
+                    <span className={`px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                      isActive
+                        ? 'text-primary border-b-2 border-primary' 
+                        : 'text-gray-700 hover:text-primary'
+                    }`}>
+                      {t(item.labelKey)}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 

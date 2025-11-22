@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
+import { getPathWithoutLocale } from "@/lib/routing";
 import { 
   Sheet,
   SheetContent,
@@ -35,6 +37,10 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
   const { t } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
+  
+  // Obtener la ruta actual sin prefijo de idioma para comparación
+  const currentPath = getPathWithoutLocale(location);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -56,10 +62,12 @@ export function MobileMenu() {
         <div className="grid gap-4 py-6">
           {navigationItems.map((item) => {
             const Icon = item.icon;
+            const localizedHref = getLocalizedLink(item.href);
+            const isActive = currentPath === item.href;
             return (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={localizedHref}>
                 <Button
-                  variant={location === item.href ? "default" : "ghost"}
+                  variant={isActive ? "default" : "ghost"}
                   className="w-full justify-start"
                   onClick={() => setOpen(false)}
                 >

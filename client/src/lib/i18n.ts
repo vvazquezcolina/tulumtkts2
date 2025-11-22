@@ -104,8 +104,41 @@ export function setStoredLocale(locale: SupportedLocale): void {
   localStorage.setItem('tulumtkts_locale', locale);
 }
 
-// Función para obtener el idioma inicial
+// Función para obtener el idioma de la URL actual
+export function getLocaleFromUrl(): SupportedLocale | null {
+  if (typeof window === 'undefined') return null;
+  
+  const path = window.location.pathname;
+  const segments = path.split('/').filter(Boolean);
+  
+  if (segments.length === 0) return null;
+  
+  const firstSegment = segments[0];
+  
+  if (SUPPORTED_LOCALES.includes(firstSegment as SupportedLocale)) {
+    return firstSegment as SupportedLocale;
+  }
+  
+  return null;
+}
+
+// Función para obtener el idioma inicial (prioridad: URL > localStorage > browser)
 export function getInitialLocale(): SupportedLocale {
-  return getStoredLocale() || getBrowserLocale();
+  // 1. Intentar obtener de la URL (prioridad más alta)
+  const urlLocale = getLocaleFromUrl();
+  if (urlLocale) {
+    // Guardar en localStorage para persistencia
+    setStoredLocale(urlLocale);
+    return urlLocale;
+  }
+  
+  // 2. Intentar obtener de localStorage
+  const storedLocale = getStoredLocale();
+  if (storedLocale) {
+    return storedLocale;
+  }
+  
+  // 3. Usar idioma del navegador como fallback
+  return getBrowserLocale();
 }
 

@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useGA4PageView } from "@/hooks/use-ga4-pageview";
 import { I18nProvider } from "@/contexts/i18n-context";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { SUPPORTED_LOCALES } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Eventos from "@/pages/eventos";
@@ -19,20 +20,37 @@ import AffiliateDashboard from "@/pages/affiliate-dashboard";
 import TulumGuiaCompleta from "@/pages/tulum-guia-completa";
 import CenotesTulum from "@/pages/cenotes-tulum";
 
+// Componente helper para crear rutas localizadas (con y sin prefijo de idioma)
+function createLocalizedRoutes(basePath: string, component: React.ComponentType<any>) {
+  const routes: JSX.Element[] = [];
+  
+  // Ruta sin prefijo de idioma (español - default)
+  routes.push(<Route key={basePath} path={basePath} component={component} />);
+  
+  // Agregar rutas con prefijo de idioma para en, fr, it
+  SUPPORTED_LOCALES.filter(locale => locale !== 'es').forEach(locale => {
+    routes.push(
+      <Route key={`/${locale}${basePath}`} path={`/${locale}${basePath}`} component={component} />
+    );
+  });
+  
+  return routes;
+}
+
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/tulum-guia-completa" component={TulumGuiaCompleta} />
-      <Route path="/cenotes-tulum" component={CenotesTulum} />
-      <Route path="/eventos" component={Eventos} />
-      <Route path="/experiencias" component={Experiencias} />
-      <Route path="/villas" component={Villas} />
-      <Route path="/transporte" component={Transporte} />
-      <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/contacto" component={Contacto} />
-      <Route path="/affiliate-dashboard" component={AffiliateDashboard} />
+      {createLocalizedRoutes("/", Home)}
+      {createLocalizedRoutes("/tulum-guia-completa", TulumGuiaCompleta)}
+      {createLocalizedRoutes("/cenotes-tulum", CenotesTulum)}
+      {createLocalizedRoutes("/eventos", Eventos)}
+      {createLocalizedRoutes("/experiencias", Experiencias)}
+      {createLocalizedRoutes("/villas", Villas)}
+      {createLocalizedRoutes("/transporte", Transporte)}
+      {createLocalizedRoutes("/blog/:slug", BlogPost)}
+      {createLocalizedRoutes("/blog", Blog)}
+      {createLocalizedRoutes("/contacto", Contacto)}
+      {createLocalizedRoutes("/affiliate-dashboard", AffiliateDashboard)}
       <Route component={NotFound} />
     </Switch>
   );

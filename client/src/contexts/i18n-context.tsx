@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useLocation } from 'wouter';
 import { 
   SupportedLocale, 
   getInitialLocale, 
@@ -6,6 +7,7 @@ import {
   registerTranslations,
   t as translate
 } from '@/lib/i18n';
+import { getLocaleFromPath, getLocalizedPath, getPathWithoutLocale } from '@/lib/routing';
 import commonTranslations from '@/translations/common';
 import pageTranslations from '@/translations/pages';
 
@@ -50,18 +52,49 @@ try {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
+  const [location, setLocation] = useLocation();
+  
+  // Obtener el idioma de la URL o usar el inicial
+  const getCurrentLocale = (): SupportedLocale => {
+    const urlLocale = getLocaleFromPath(location);
+    if (urlLocale) {
+      return urlLocale;
+    }
+    return getInitialLocale();
+  };
+
   const [locale, setLocaleState] = useState<SupportedLocale>(() => {
     try {
-      return getInitialLocale();
+      return getCurrentLocale();
     } catch (err) {
       console.error('Error getting initial locale:', err);
       return 'es'; // Fallback a español
     }
   });
 
+  // Sincronizar locale con la URL cuando cambie la ruta
+  useEffect(() => {
+    const urlLocale = getLocaleFromPath(location);
+    if (urlLocale && urlLocale !== locale) {
+      setLocaleState(urlLocale);
+      storeLocale(urlLocale);
+    }
+  }, [location, locale]);
+
   const setLocale = (newLocale: SupportedLocale) => {
+    // Obtener la ruta actual sin prefijo de idioma
+    const currentPath = getPathWithoutLocale(location);
+    
+    // Construir la nueva URL con el prefijo de idioma
+    const newPath = getLocalizedPath(currentPath, newLocale);
+    
+    // Actualizar el estado y localStorage
     setLocaleState(newLocale);
     storeLocale(newLocale);
+    
+    // Actualizar la URL
+    setLocation(newPath);
+    
     // Actualizar el atributo lang del HTML
     if (typeof document !== 'undefined') {
       document.documentElement.lang = newLocale;

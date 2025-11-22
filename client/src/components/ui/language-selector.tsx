@@ -6,8 +6,13 @@ import { SUPPORTED_LOCALES, LOCALE_NAMES, LOCALE_FLAGS, SupportedLocale } from "
 export function LanguageSelector() {
   const { locale, setLocale } = useI18n();
 
+  const handleLanguageChange = (newLocale: SupportedLocale) => {
+    // setLocale ya actualiza la URL automáticamente
+    setLocale(newLocale);
+  };
+
   return (
-    <Select value={locale} onValueChange={(value) => setLocale(value as SupportedLocale)}>
+    <Select value={locale} onValueChange={(value) => handleLanguageChange(value as SupportedLocale)}>
       <SelectTrigger className="w-auto min-w-[100px] border-0 shadow-none bg-transparent">
         <div className="flex items-center space-x-2">
           <Globe className="w-4 h-4" />
