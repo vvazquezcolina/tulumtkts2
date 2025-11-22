@@ -335,7 +335,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.archaeology.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Arqueología y Cultura"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.archaeology')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
