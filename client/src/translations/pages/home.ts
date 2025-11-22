@@ -128,6 +128,33 @@ export default {
         answer: 'Para Tulum empaca ropa ligera (trajes de baño, shorts, vestidos), protector solar de factor alto, sombrero o gorra, gafas de sol, repelente de insectos (especialmente para cenotes y áreas de selva), zapatos cómodos para caminar y sandalias para la playa, una chaqueta ligera para las noches más frescas durante diciembre-febrero, y equipo de snorkel si planeas explorar cenotes o arrecifes.'
       }
     },
+    footer: {
+      description: 'Your gateway to unforgettable experiences in Tulum. Discover ancient wonders, natural beauty, and adventure in paradise.',
+      experiences: 'Experiences',
+      support: 'Support',
+      experienceLinks: {
+        cenotes: 'Cenotes',
+        mayanRuins: 'Mayan Ruins',
+        beachTours: 'Beach Tours',
+        adventureSports: 'Adventure Sports',
+        culturalTours: 'Cultural Tours',
+      },
+      supportLinks: {
+        helpCenter: 'Help Center',
+        contactUs: 'Contact Us',
+        cancellationPolicy: 'Cancellation Policy',
+        termsOfService: 'Terms of Service',
+        privacyPolicy: 'Privacy Policy',
+      },
+      copyright: 'All rights reserved. | Made with ❤️ for travelers',
+      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+    },
+    bestseller: {
+      title: 'Descubre las Mejores Experiencias en Tulum',
+      description: 'Tours únicos, cenotes cristalinos y ruinas mayas. Reserva con cancelación gratuita.',
+      seeExperiences: 'Ver Experiencias',
+      poweredBy: 'Powered by Travelpayouts',
+    },
   },
   en: {
     seo: {
@@ -257,6 +284,33 @@ export default {
         answer: 'For Tulum pack light clothing (swimsuits, shorts, dresses), high-factor sunscreen, hat or cap, sunglasses, insect repellent (especially for cenotes and jungle areas), comfortable walking shoes and beach sandals, a light jacket for cooler nights during December-February, and snorkeling equipment if you plan to explore cenotes or reefs.'
       }
     },
+    footer: {
+      description: 'Votre porte d\'entrée vers des expériences inoubliables à Tulum. Découvrez des merveilles anciennes, une beauté naturelle et de l\'aventure au paradis.',
+      experiences: 'Expériences',
+      support: 'Support',
+      experienceLinks: {
+        cenotes: 'Cenotes',
+        mayanRuins: 'Ruines Mayas',
+        beachTours: 'Circuits de Plage',
+        adventureSports: 'Sports d\'Aventure',
+        culturalTours: 'Circuits Culturels',
+      },
+      supportLinks: {
+        helpCenter: 'Centre d\'Aide',
+        contactUs: 'Contactez-nous',
+        cancellationPolicy: 'Politique d\'Annulation',
+        termsOfService: 'Conditions d\'Utilisation',
+        privacyPolicy: 'Politique de Confidentialité',
+      },
+      copyright: 'Tous droits réservés. | Fait avec ❤️ pour les voyageurs',
+      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+    },
+    bestseller: {
+      title: 'Découvrez les Meilleures Expériences à Tulum',
+      description: 'Circuits uniques, cenotes cristallins et ruines mayas. Réservez avec annulation gratuite.',
+      seeExperiences: 'Voir les Expériences',
+      poweredBy: 'Powered by Travelpayouts',
+    },
   },
   fr: {
     seo: {
@@ -385,6 +439,33 @@ export default {
         question: 'Que dois-je emporter pour Tulum?',
         answer: 'Pour Tulum, emportez des vêtements légers (maillots de bain, shorts, robes), crème solaire à facteur élevé, chapeau ou casquette, lunettes de soleil, répulsif anti-insectes (surtout pour les cénotes et zones de jungle), chaussures confortables pour marcher et sandales de plage, une veste légère pour les nuits plus fraîches en décembre-février, et équipement de plongée si vous prévoyez d\'explorer les cénotes ou récifs.'
       }
+    },
+    footer: {
+      description: 'La tua porta d\'ingresso verso esperienze indimenticabili a Tulum. Scopri meraviglie antiche, bellezza naturale e avventura in paradiso.',
+      experiences: 'Esperienze',
+      support: 'Supporto',
+      experienceLinks: {
+        cenotes: 'Cenotes',
+        mayanRuins: 'Rovine Maya',
+        beachTours: 'Tour della Spiaggia',
+        adventureSports: 'Sport d\'Avventura',
+        culturalTours: 'Tour Culturali',
+      },
+      supportLinks: {
+        helpCenter: 'Centro Assistenza',
+        contactUs: 'Contattaci',
+        cancellationPolicy: 'Politica di Cancellazione',
+        termsOfService: 'Termini di Servizio',
+        privacyPolicy: 'Informativa sulla Privacy',
+      },
+      copyright: 'Tutti i diritti riservati. | Fatto con ❤️ per i viaggiatori',
+      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+    },
+    bestseller: {
+      title: 'Scopri le Migliori Esperienze a Tulum',
+      description: 'Tour unici, cenotes cristallini e rovine maya. Prenota con cancellazione gratuita.',
+      seeExperiences: 'Vedi le Esperienze',
+      poweredBy: 'Powered by Travelpayouts',
     },
   },
   it: {

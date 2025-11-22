@@ -10,6 +10,7 @@ export default {
       blog: 'Blog',
       contact: 'Contacto',
     },
+    bestseller: 'Bestseller',
     buttons: {
       search: 'Buscar',
       seeMore: 'Ver más',
@@ -80,6 +81,7 @@ export default {
       blog: 'Blog',
       contact: 'Contact',
     },
+    bestseller: 'Bestseller',
     buttons: {
       search: 'Search',
       seeMore: 'See more',
@@ -150,6 +152,7 @@ export default {
       blog: 'Blog',
       contact: 'Contact',
     },
+    bestseller: 'Bestseller',
     buttons: {
       search: 'Rechercher',
       seeMore: 'Voir plus',
@@ -220,6 +223,7 @@ export default {
       blog: 'Blog',
       contact: 'Contatto',
     },
+    bestseller: 'Bestseller',
     buttons: {
       search: 'Cerca',
       seeMore: 'Vedi di più',
