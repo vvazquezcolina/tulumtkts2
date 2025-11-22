@@ -120,6 +120,9 @@ export default {
       title: 'Featured Villas',
       subtitle: 'Our most exclusive and popular properties',
     },
+    allVillas: {
+      title: 'All Properties',
+    },
     locations: {
       beach: 'Beach',
       jungle: 'Jungle',
@@ -196,6 +199,9 @@ export default {
       title: 'Villas en Vedette',
       subtitle: 'Nos propriétés les plus exclusives et populaires',
     },
+    allVillas: {
+      title: 'Toutes les Propriétés',
+    },
     locations: {
       beach: 'Plage',
       jungle: 'Jungle',
@@ -271,6 +277,9 @@ export default {
     featured: {
       title: 'Ville in Evidenza',
       subtitle: 'Le nostre proprietà più esclusive e popolari',
+    },
+    allVillas: {
+      title: 'Tutte le Proprietà',
     },
     locations: {
       beach: 'Spiaggia',

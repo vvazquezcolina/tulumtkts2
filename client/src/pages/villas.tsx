@@ -450,7 +450,7 @@ export default function Villas() {
           {/* All Villas */}
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Todas las Propiedades ({filteredVillas.length})
+              {t('villas.allVillas.title')} ({filteredVillas.length})
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVillas.map((villa) => (
@@ -463,7 +463,7 @@ export default function Villas() {
                     />
                     {villa.featured && (
                       <div className="absolute top-3 left-3">
-                        <Badge className="bg-secondary text-white text-xs">Destacada</Badge>
+                        <Badge className="bg-secondary text-white text-xs">{t('villas.villa.featured')}</Badge>
                       </div>
                     )}
                     <div className="absolute top-3 right-3">
@@ -490,7 +490,7 @@ export default function Villas() {
                           <Star key={i} className="w-3 h-3 fill-current" />
                         ))}
                       </div>
-                      <span className="ml-2 text-xs text-gray-600">({villa.rating}) {villa.reviews}</span>
+                      <span className="ml-2 text-xs text-gray-600">({villa.rating}) {villa.reviews} {t('villas.villa.reviews')}</span>
                     </div>
                     
                     <h3 className="font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
