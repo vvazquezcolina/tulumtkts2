@@ -17,6 +17,7 @@ import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
 import {
   trackFavoriteToggle,
   trackAffiliateClick as trackGA4AffiliateClick,
@@ -27,6 +28,7 @@ type Experience = TravelpayoutsActivity;
 
 export default function Experiencias() {
   const { t } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -94,17 +96,17 @@ export default function Experiencias() {
 
   // Categorías organizadas basadas en los datos reales del CSV
   const categories = [
-    "Todos",
-    "Arqueología y Cultura",
-    "Cenotes y Lagunas", 
-    "Snorkel y Buceo",
-    "Navegación y Catamaranes",
-    "Aventura en la Selva",
-    "Parques y Reservas",
-    "Gastronomía y Ciudad",
-    "Bienestar y Cultura",
-    "Transporte",
-    "Excursiones"
+    t('experiencias.filters.all'),
+    t('experiencias.filters.categories.archaeology'),
+    t('experiencias.filters.categories.cenotes'), 
+    t('experiencias.filters.categories.snorkel'),
+    t('experiencias.filters.categories.navigation'),
+    t('experiencias.filters.categories.adventure'),
+    t('experiencias.filters.categories.parks'),
+    t('experiencias.filters.categories.gastronomy'),
+    t('experiencias.filters.categories.wellness'),
+    t('experiencias.filters.categories.transport'),
+    t('experiencias.filters.categories.excursions')
   ];
 
   const filteredExperiences = experiences.filter(experience => {
@@ -115,11 +117,11 @@ export default function Experiencias() {
         searchText.toLowerCase().includes(searchQuery.toLowerCase());
       
       const experienceCategory = mapCategory(experience.categories?.[0] || 'otros');
-      const matchesCategory = !categoryFilter || categoryFilter === "Todos" || 
+      const matchesCategory = !categoryFilter || categoryFilter === t('experiencias.filters.all') || 
                              experienceCategory === categoryFilter;
       return matchesSearch && matchesCategory;
     } catch (error) {
-      console.error('Error filtering experience:', error, experience);
+      // TODO: Log error to error tracking service
       return false;
     }
   });
@@ -127,32 +129,32 @@ export default function Experiencias() {
   // Función para mapear categorías del CSV a las categorías de la web
   const mapCategoryFromCSV = (category: string): string => {
     const categoryMap: Record<string, string> = {
-      'arqueologia': 'Arqueología y Cultura',
-      'cultura': 'Arqueología y Cultura',
-      'historia': 'Arqueología y Cultura',
-      'cenotes': 'Cenotes y Lagunas',
-      'lagunas': 'Cenotes y Lagunas',
-      'naturaleza': 'Cenotes y Lagunas',
-      'snorkel': 'Snorkel y Buceo',
-      'arrecife': 'Snorkel y Buceo',
-      'marino': 'Snorkel y Buceo',
-      'laguna': 'Snorkel y Buceo',
-      'principiantes': 'Snorkel y Buceo',
-      'catamaran': 'Navegación y Catamaranes',
-      'lujo': 'Navegación y Catamaranes',
-      'aventura': 'Aventura en la Selva',
-      'atv': 'Aventura en la Selva',
-      'tirolesas': 'Aventura en la Selva',
-      'reserva': 'Parques y Reservas',
-      'eco-tour': 'Parques y Reservas',
-      'ciudad': 'Gastronomía y Ciudad',
-      'bicicleta': 'Gastronomía y Ciudad',
-      'gastronomia': 'Gastronomía y Ciudad',
-      'bienestar': 'Bienestar y Cultura',
-      'transporte': 'Transporte',
-      'excursiones': 'Excursiones'
+      'arqueologia': t('experiencias.filters.categories.archaeology'),
+      'cultura': t('experiencias.filters.categories.archaeology'),
+      'historia': t('experiencias.filters.categories.archaeology'),
+      'cenotes': t('experiencias.filters.categories.cenotes'),
+      'lagunas': t('experiencias.filters.categories.cenotes'),
+      'naturaleza': t('experiencias.filters.categories.cenotes'),
+      'snorkel': t('experiencias.filters.categories.snorkel'),
+      'arrecife': t('experiencias.filters.categories.snorkel'),
+      'marino': t('experiencias.filters.categories.snorkel'),
+      'laguna': t('experiencias.filters.categories.snorkel'),
+      'principiantes': t('experiencias.filters.categories.snorkel'),
+      'catamaran': t('experiencias.filters.categories.navigation'),
+      'lujo': t('experiencias.filters.categories.navigation'),
+      'aventura': t('experiencias.filters.categories.adventure'),
+      'atv': t('experiencias.filters.categories.adventure'),
+      'tirolesas': t('experiencias.filters.categories.adventure'),
+      'reserva': t('experiencias.filters.categories.parks'),
+      'eco-tour': t('experiencias.filters.categories.parks'),
+      'ciudad': t('experiencias.filters.categories.gastronomy'),
+      'bicicleta': t('experiencias.filters.categories.gastronomy'),
+      'gastronomia': t('experiencias.filters.categories.gastronomy'),
+      'bienestar': t('experiencias.filters.categories.wellness'),
+      'transporte': t('experiencias.filters.categories.transport'),
+      'excursiones': t('experiencias.filters.categories.excursions')
     };
-    return categoryMap[category.toLowerCase()] || 'Otros';
+    return categoryMap[category.toLowerCase()] || t('experiencias.filters.categories.archaeology');
   };
 
   const experiencesByCategory = categories.slice(1).reduce((acc, category) => {
@@ -190,34 +192,13 @@ export default function Experiencias() {
       
       {/* FAQs Schema */}
       <FAQSchema faqs={[
-        {
-          question: "¿Cuáles son los mejores tours en Tulum?",
-          answer: "Los mejores tours en Tulum incluyen tours a cenotes (Gran Cenote, Dos Ojos), tours a ruinas mayas (Ruinas de Tulum, Coba, Chichen Itza), tours de snorkel y buceo en arrecifes, tours de playa y catamaranes, tours de aventura (ATV, tirolesas), y tours culturales. Cada tipo de tour ofrece una experiencia única para descubrir la belleza natural y cultural de la Riviera Maya."
-        },
-        {
-          question: "¿Cuánto cuestan los tours en Tulum?",
-          answer: "Los precios de tours en Tulum varían según el tipo de experiencia. Tours básicos como visitas a cenotes cuestan $50-100 USD. Tours de medio día (ruinas, snorkel) cuestan $80-150 USD. Tours de día completo (múltiples actividades) cuestan $150-300 USD. Tours de lujo y privados cuestan $300-500+ USD. Los precios generalmente incluyen transporte, guía, y equipo necesario."
-        },
-        {
-          question: "¿Cómo reservar tours en Tulum?",
-          answer: "Puedes reservar tours en Tulum directamente en nuestra plataforma navegando por las experiencias disponibles, filtrando por categoría o precio, y haciendo clic en 'Reservar'. También puedes reservar a través de tu hotel, agencias locales, o directamente con operadores. Recomendamos reservar con anticipación, especialmente durante temporada alta (diciembre-abril), para asegurar disponibilidad."
-        },
-        {
-          question: "¿Qué incluyen los tours en Tulum?",
-          answer: "La mayoría de tours en Tulum incluyen: transporte de ida y vuelta desde tu hotel o punto de encuentro, guía profesional (bilingüe), entrada a atracciones, y equipo necesario (snorkel, chalecos salvavidas, etc.). Algunos tours también incluyen comidas, bebidas, y fotos. Verifica los detalles específicos de cada tour antes de reservar."
-        },
-        {
-          question: "¿Necesito experiencia previa para tours en Tulum?",
-          answer: "La mayoría de tours en Tulum están diseñados para todos los niveles de experiencia, desde principiantes hasta expertos. Tours básicos como visitas a cenotes, ruinas, o playas no requieren experiencia previa. Tours de buceo o aventura pueden requerir experiencia o certificaciones específicas, pero generalmente están disponibles para principiantes con guía profesional."
-        },
-        {
-          question: "¿Cuál es la mejor época para hacer tours en Tulum?",
-          answer: "La mejor época para hacer tours en Tulum es durante la temporada seca de noviembre a abril, cuando el clima es perfecto con días soleados y temperaturas ideales. Diciembre y enero son particularmente populares. Durante la temporada de lluvias (junio-octubre), los tours siguen siendo accesibles pero pueden verse afectados por lluvias ocasionales."
-        },
-        {
-          question: "¿Los tours en Tulum son seguros?",
-          answer: "Sí, los tours en Tulum son generalmente seguros siempre que se sigan las instrucciones de los guías, se use el equipo de seguridad proporcionado, y se respeten las reglas de cada actividad. Los operadores de tours están certificados y tienen experiencia. Es importante informar sobre cualquier condición médica o limitación física antes de reservar."
-        },
+        { question: t('experiencias.faqs.q1.question'), answer: t('experiencias.faqs.q1.answer') },
+        { question: t('experiencias.faqs.q2.question'), answer: t('experiencias.faqs.q2.answer') },
+        { question: t('experiencias.faqs.q3.question'), answer: t('experiencias.faqs.q3.answer') },
+        { question: t('experiencias.faqs.q4.question'), answer: t('experiencias.faqs.q4.answer') },
+        { question: t('experiencias.faqs.q5.question'), answer: t('experiencias.faqs.q5.answer') },
+        { question: t('experiencias.faqs.q6.question'), answer: t('experiencias.faqs.q6.answer') },
+        { question: t('experiencias.faqs.q7.question'), answer: t('experiencias.faqs.q7.answer') },
         {
           question: "¿Puedo cancelar o cambiar mi tour en Tulum?",
           answer: "Las políticas de cancelación varían según el operador y tipo de tour. La mayoría de tours permiten cancelaciones gratuitas hasta 24-48 horas antes del tour. Cancelaciones más cercanas al día del tour pueden incurrir en cargos. Cambios de fecha generalmente están disponibles sujetos a disponibilidad. Verifica las políticas específicas al momento de reservar."
@@ -230,9 +211,9 @@ export default function Experiencias() {
       <div className="bg-gray-50 border-b py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="text-sm text-gray-600">
-            <a href="/" className="hover:text-primary">{t('experiencias.breadcrumb.home')}</a>
+            <a href={getLocalizedLink("/")} className="hover:text-primary">{t('experiencias.breadcrumb.home')}</a>
             <span className="mx-2">/</span>
-            <a href="/tulum-guia-completa" className="hover:text-primary">{t('experiencias.breadcrumb.guide')}</a>
+            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">{t('experiencias.breadcrumb.guide')}</a>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{t('experiencias.breadcrumb.current')}</span>
           </nav>
@@ -373,7 +354,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.snorkel.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Snorkel y Buceo"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.snorkel')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
@@ -392,7 +373,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.navigation.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Navegación y Catamaranes"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.navigation')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
@@ -411,7 +392,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.cenotes.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Cenotes y Lagunas"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.cenotes')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
@@ -430,7 +411,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.adventure.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Aventura en la Selva"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.adventure')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
@@ -449,7 +430,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.wellness.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Bienestar y Cultura"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.wellness')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
@@ -468,7 +449,7 @@ export default function Experiencias() {
                 <p className="text-gray-600">{t('experiencias.categories.parks.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory["Parques y Reservas"]?.map((experience) => (
+                {experiencesByCategory[t('experiencias.filters.categories.parks')]?.map((experience) => (
                   <ExperienceCard 
                     key={experience.activity_id} 
                     experience={experience} 
