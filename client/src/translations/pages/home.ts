@@ -134,22 +134,6 @@ export default {
       support: 'Soporte',
       experienceLinks: {
         cenotes: 'Cenotes',
-        mayanRuins: 'Mayan Ruins',
-        beachTours: 'Beach Tours',
-        adventureSports: 'Adventure Sports',
-        culturalTours: 'Cultural Tours',
-      },
-      supportLinks: {
-        helpCenter: 'Help Center',
-        contactUs: 'Contact Us',
-        cancellationPolicy: 'Cancellation Policy',
-        termsOfService: 'Terms of Service',
-        privacyPolicy: 'Privacy Policy',
-      },
-      copyright: 'Todos los derechos reservados. | Hecho con ❤️ para viajeros',
-      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
-      experienceLinks: {
-        cenotes: 'Cenotes',
         mayanRuins: 'Ruinas Mayas',
         beachTours: 'Tours de Playa',
         adventureSports: 'Deportes de Aventura',
@@ -162,6 +146,8 @@ export default {
         termsOfService: 'Términos de Servicio',
         privacyPolicy: 'Política de Privacidad',
       },
+      copyright: 'Todos los derechos reservados. | Hecho con ❤️ para viajeros',
+      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
     },
     bestseller: {
       title: 'Descubre las Mejores Experiencias en Tulum',
