@@ -17,6 +17,38 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
+// Cargar traducciones síncronamente antes de renderizar el provider
+// Esto asegura que las traducciones estén disponibles inmediatamente
+try {
+  // Registrar traducciones comunes
+  if (commonTranslations) {
+    Object.keys(commonTranslations).forEach((lang) => {
+      try {
+        if (lang in commonTranslations && commonTranslations[lang as SupportedLocale]) {
+          registerTranslations(lang as SupportedLocale, commonTranslations[lang as SupportedLocale]);
+        }
+      } catch (err) {
+        console.error(`Error registering common translations for ${lang}:`, err);
+      }
+    });
+  }
+  // Registrar traducciones de páginas
+  if (pageTranslations) {
+    Object.keys(pageTranslations).forEach((lang) => {
+      try {
+        if (lang in pageTranslations && pageTranslations[lang as SupportedLocale]) {
+          registerTranslations(lang as SupportedLocale, pageTranslations[lang as SupportedLocale]);
+        }
+      } catch (err) {
+        console.error(`Error registering page translations for ${lang}:`, err);
+      }
+    });
+  }
+} catch (err) {
+  console.error('Error loading translations:', err);
+  // No lanzar error - permitir que la app continúe
+}
+
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<SupportedLocale>(() => {
     try {
@@ -26,39 +58,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       return 'es'; // Fallback a español
     }
   });
-
-  // Cargar traducciones síncronamente al iniciar (evita problemas de carga asíncrona)
-  useEffect(() => {
-    try {
-      // Registrar traducciones comunes
-      if (commonTranslations) {
-        Object.keys(commonTranslations).forEach((lang) => {
-          try {
-            if (lang in commonTranslations && commonTranslations[lang as SupportedLocale]) {
-              registerTranslations(lang as SupportedLocale, commonTranslations[lang as SupportedLocale]);
-            }
-          } catch (err) {
-            console.error(`Error registering common translations for ${lang}:`, err);
-          }
-        });
-      }
-      // Registrar traducciones de páginas
-      if (pageTranslations) {
-        Object.keys(pageTranslations).forEach((lang) => {
-          try {
-            if (lang in pageTranslations && pageTranslations[lang as SupportedLocale]) {
-              registerTranslations(lang as SupportedLocale, pageTranslations[lang as SupportedLocale]);
-            }
-          } catch (err) {
-            console.error(`Error registering page translations for ${lang}:`, err);
-          }
-        });
-      }
-    } catch (err) {
-      console.error('Error loading translations:', err);
-      // No lanzar error - permitir que la app continúe
-    }
-  }, []);
 
   const setLocale = (newLocale: SupportedLocale) => {
     setLocaleState(newLocale);
