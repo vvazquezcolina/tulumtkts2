@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { Navigation } from "@/components/ui/navigation";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
+import { useI18n } from "@/contexts/i18n-context";
 import { 
   Search, 
   Filter, 
@@ -23,6 +29,8 @@ import {
 } from "lucide-react";
 
 export default function Villas() {
+  const { t } = useI18n();
+  const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [priceRange, setPriceRange] = useState([100, 1000]);
@@ -182,18 +190,88 @@ export default function Villas() {
     }
   };
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={t('villas.title')}
+        description={t('villas.description')}
+        keywords={[
+          'hoteles tulum',
+          'hoteles en tulum',
+          'tulum hotels',
+          'hoteles tulum mexico',
+          'villas tulum',
+          'resorts tulum',
+          'best hotels tulum',
+          'tulum all inclusive',
+          'hoteles tulum playa',
+          'alojamiento tulum'
+        ]}
+        canonicalUrl={`${siteUrl}/villas`}
+        ogType="website"
+        currentPath="/villas"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      
+      {/* FAQs Schema */}
+      <FAQSchema faqs={[
+        {
+          question: "¿Cuáles son los mejores hoteles en Tulum?",
+          answer: "Los mejores hoteles en Tulum incluyen resorts de lujo en la playa como Azulik, Be Tulum, y Habitas Tulum, hoteles boutique ecológicos como Coco Limited y Diamante K, y villas privadas en la zona hotelera. La elección depende de tu presupuesto y preferencias: zona playa para acceso directo al mar y vida nocturna, o pueblo de Tulum para autenticidad y precios más accesibles."
+        },
+        {
+          question: "¿Cuánto cuestan los hoteles en Tulum?",
+          answer: "Los precios de hoteles en Tulum varían ampliamente. Hoteles económicos en el pueblo: $50-150 USD/noche. Hoteles boutique en zona playa: $200-500 USD/noche. Resorts de lujo: $500-1,500+ USD/noche. Villas privadas: $450-2,000+ USD/noche. Los precios son más altos durante temporada alta (diciembre-abril) y más accesibles durante temporada baja (mayo-noviembre)."
+        },
+        {
+          question: "¿Dónde es mejor hospedarse en Tulum: playa o pueblo?",
+          answer: "La zona hotelera de la playa es ideal para acceso directo a la playa, vida nocturna, y experiencias de lujo, pero es más cara y alejada del centro. El pueblo de Tulum ofrece autenticidad, precios más accesibles, y acceso fácil a restaurantes locales y cenotes, pero está a 10-15 minutos de la playa. Recomendamos zona playa para románticas o lujo, y pueblo para presupuesto o autenticidad."
+        },
+        {
+          question: "¿Cuál es la mejor época para reservar hoteles en Tulum?",
+          answer: "La mejor época para reservar hoteles en Tulum es durante la temporada seca de noviembre a abril, cuando el clima es perfecto. Diciembre y enero son los meses más populares (y caros). Mayo-octubre es temporada baja con mejores precios pero lluvias ocasionales. Reserva con 2-3 meses de anticipación durante temporada alta para mejores precios y disponibilidad."
+        },
+        {
+          question: "¿Los hoteles en Tulum incluyen desayuno?",
+          answer: "Muchos hoteles en Tulum incluyen desayuno, especialmente resorts de lujo y hoteles boutique. Los hoteles económicos generalmente no incluyen desayuno pero tienen restaurantes o cafeterías en el hotel. Hoteles todo incluido incluyen todas las comidas y bebidas. Verifica los detalles específicos al reservar."
+        },
+        {
+          question: "¿Es seguro hospedarse en Tulum?",
+          answer: "Sí, Tulum es generalmente seguro para turistas. La zona hotelera y las áreas turísticas principales son muy seguras con seguridad privada y presencia policial. El pueblo también es seguro, pero es importante tomar precauciones básicas: mantener objetos de valor seguros, ser consciente de tu entorno, y seguir las recomendaciones locales."
+        },
+        {
+          question: "¿Necesito visa para visitar Tulum?",
+          answer: "Si eres ciudadano de Estados Unidos, Canadá, Unión Europea, o la mayoría de países latinoamericanos, no necesitas visa para visitar Tulum por hasta 180 días. Solo necesitas un pasaporte válido. Ciudadanos de otros países deben verificar los requisitos específicos en el consulado mexicano de su país."
+        }
+      ]} />
+      
+      <Navigation />
+      
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="text-sm text-gray-600">
+            <a href="/" className="hover:text-primary">{t('villas.breadcrumb.home')}</a>
+            <span className="mx-2">/</span>
+            <a href="/tulum-guia-completa" className="hover:text-primary">{t('villas.breadcrumb.guide')}</a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">{t('villas.breadcrumb.current')}</span>
+          </nav>
+        </div>
+      </div>
+      
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative flex items-center justify-center h-full text-center text-white">
           <div className="max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Villas & Rentals
+              {t('villas.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Alojamientos de lujo para unas vacaciones perfectas en Tulum
+              {t('villas.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -207,7 +285,7 @@ export default function Villas() {
             <div className="lg:col-span-2 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                placeholder="Buscar por nombre, área o características..."
+                placeholder={t('villas.filters.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -218,7 +296,7 @@ export default function Villas() {
             <Select value={locationFilter} onValueChange={setLocationFilter}>
               <SelectTrigger>
                 <MapPin className="w-4 h-4 mr-2" />
-                <SelectValue placeholder="Ubicación" />
+                <SelectValue placeholder={t('villas.filters.location')} />
               </SelectTrigger>
               <SelectContent>
                 {locations.map((location) => (
@@ -233,7 +311,7 @@ export default function Villas() {
             <Select value={guestFilter} onValueChange={setGuestFilter}>
               <SelectTrigger>
                 <Users className="w-4 h-4 mr-2" />
-                <SelectValue placeholder="Huéspedes" />
+                <SelectValue placeholder={t('villas.filters.guests')} />
               </SelectTrigger>
               <SelectContent>
                 {guestOptions.map((option) => (
@@ -246,7 +324,7 @@ export default function Villas() {
 
             {/* Price Range */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Precio por noche (€)</label>
+              <label className="text-sm font-medium">{t('villas.filters.priceRange')}</label>
               <div className="px-2">
                 <Slider
                   value={priceRange}

@@ -1,12 +1,21 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, MapPin, Search, Filter, Star, Heart } from "lucide-react";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { Navigation } from "@/components/ui/navigation";
+import { EventSchema, EventSeriesSchema } from "@/components/event-schema";
+import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
+import { useI18n } from "@/contexts/i18n-context";
 
 export default function Eventos() {
+  const { t } = useI18n();
+  const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -81,18 +90,102 @@ export default function Eventos() {
     return matchesSearch && matchesCategory;
   });
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={t('eventos.title')}
+        description={t('eventos.description')}
+        keywords={[
+          'eventos tulum',
+          'eventos en tulum',
+          'tulum events',
+          'festivales tulum',
+          'tulum festival',
+          'fiestas tulum',
+          'eventos tulum mexico',
+          'calendario eventos tulum',
+          'tulum nightlife',
+          'vida nocturna tulum'
+        ]}
+        canonicalUrl={`${siteUrl}/eventos`}
+        ogType="website"
+        currentPath="/eventos"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      
+      {/* Event Schema para eventos destacados */}
+      <EventSeriesSchema 
+        events={events.filter(e => e.featured).map(event => ({
+          name: event.title,
+          description: event.description,
+          startDate: event.date === "31 Dic 2025" ? "2025-12-31T20:00:00-06:00" : 
+                    event.date === "15 Feb 2025" ? "2025-02-15T18:00:00-06:00" : 
+                    event.date === "20 Ene 2025" ? "2025-01-20T21:00:00-06:00" : 
+                    new Date().toISOString(),
+          location: {
+            name: event.location,
+            city: "Tulum",
+            country: "México"
+          },
+          image: event.image,
+          price: parseFloat(event.price.replace('€', '')),
+          priceCurrency: 'EUR',
+          url: `${siteUrl}/eventos#${event.id}`
+        }))}
+        seriesName="Eventos en Tulum México 2025"
+      />
+      
+      {/* FAQs Schema */}
+      <FAQSchema faqs={[
+        {
+          question: "¿Qué eventos hay en Tulum?",
+          answer: "Tulum ofrece una amplia variedad de eventos durante todo el año, incluyendo festivales de música electrónica (Tulum Music Festival), fiestas en la playa (Beach Party Sunset), ceremonias ancestrales (Noche de Luna Llena), eventos de bienestar (yoga, meditación), y celebraciones especiales (Año Nuevo, Full Moon Parties). La temporada alta de eventos va de noviembre a abril."
+        },
+        {
+          question: "¿Cuál es el mejor evento en Tulum?",
+          answer: "El Tulum Music Festival es uno de los eventos más populares de Tulum, atrayendo DJs internacionales y miles de visitantes cada año. Las fiestas de Año Nuevo en Tulum también son legendarias, con celebraciones en múltiples playas y clubes. Los eventos de playa como Beach Party Sunset son perfectos para experiencias más íntimas."
+        },
+        {
+          question: "¿Dónde están los eventos en Tulum?",
+          answer: "Los eventos en Tulum se realizan principalmente en la zona hotelera de la playa (Playa Paraíso, Playa Tulum), clubes de playa (Taboo Beach Club, Ziggy Beach), y en cenotes sagrados para ceremonias especiales. Muchos eventos también se realizan en hoteles y resorts de la zona."
+        },
+        {
+          question: "¿Cuánto cuestan los eventos en Tulum?",
+          answer: "Los precios de eventos en Tulum varían desde $45 USD (€45) para eventos regulares como Beach Party Sunset, hasta $120+ USD (€120+) para festivales grandes como Tulum Music Festival. Las celebraciones de Año Nuevo suelen costar $85-150 USD (€85-150). Los precios incluyen acceso al evento y pueden incluir bebidas según el tipo de evento."
+        },
+        {
+          question: "¿Necesito reservar con anticipación para eventos en Tulum?",
+          answer: "Sí, se recomienda reservar con anticipación, especialmente para eventos destacados como festivales de música y celebraciones de Año Nuevo, ya que se agotan rápidamente. Los eventos regulares como fiestas de playa pueden reservarse con menos anticipación, pero es mejor reservar al menos unos días antes."
+        }
+      ]} />
+      
+      <Navigation />
+      
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="text-sm text-gray-600">
+            <a href="/" className="hover:text-primary">{t('eventos.breadcrumb.home')}</a>
+            <span className="mx-2">/</span>
+            <a href="/tulum-guia-completa" className="hover:text-primary">{t('eventos.breadcrumb.guide')}</a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">{t('eventos.breadcrumb.current')}</span>
+          </nav>
+        </div>
+      </div>
+      
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative flex items-center justify-center h-full text-center text-white">
           <div className="max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Eventos en Tulum
+              {t('eventos.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Descubre los mejores eventos, fiestas y festivales en el paraíso caribeño
+              {t('eventos.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -105,7 +198,7 @@ export default function Eventos() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                placeholder="Buscar eventos, artistas, venues..."
+                placeholder={t('eventos.filters.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -115,7 +208,7 @@ export default function Eventos() {
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className="w-[200px]">
                   <Filter className="w-4 h-4 mr-2" />
-                  <SelectValue placeholder="Categoría" />
+                  <SelectValue placeholder={t('eventos.filters.category')} />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
@@ -135,7 +228,7 @@ export default function Eventos() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Featured Events */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Eventos Destacados</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('eventos.featured.title')}</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {filteredEvents.filter(event => event.featured).map((event) => (
                 <Card key={event.id} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
@@ -146,7 +239,7 @@ export default function Eventos() {
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-secondary text-white">Destacado</Badge>
+                      <Badge className="bg-secondary text-white">{t('eventos.event.featured')}</Badge>
                     </div>
                     <div className="absolute top-4 right-4">
                       <Button
@@ -194,7 +287,7 @@ export default function Eventos() {
                     </div>
                     
                     <Button className="w-full bg-primary text-white hover:bg-primary/90">
-                      Comprar Tickets
+                      {t('eventos.event.buyTickets')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -204,7 +297,7 @@ export default function Eventos() {
 
           {/* All Events */}
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Todos los Eventos</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('eventos.upcoming.title')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredEvents.map((event) => (
                 <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">

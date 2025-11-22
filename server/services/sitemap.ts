@@ -26,10 +26,12 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
   // Static pages
   const staticPages: SitemapPage[] = [
     { url: '', priority: '1.0', changefreq: 'daily', lastmod: currentDate },
+    { url: '/tulum-guia-completa', priority: '0.95', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/cenotes-tulum', priority: '0.9', changefreq: 'weekly', lastmod: currentDate },
     { url: '/blog', priority: '0.9', changefreq: 'daily', lastmod: currentDate },
-    { url: '/experiencias', priority: '0.8', changefreq: 'weekly', lastmod: currentDate },
-    { url: '/eventos', priority: '0.8', changefreq: 'weekly', lastmod: currentDate },
-    { url: '/villas', priority: '0.8', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/experiencias', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/eventos', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/villas', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
     { url: '/transporte', priority: '0.7', changefreq: 'monthly', lastmod: currentDate },
     { url: '/contacto', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
   ];
@@ -99,6 +101,14 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
     blogPosts = [];
   }
 
+  // Supported languages for hreflang tags
+  const languages = [
+    { code: 'es', hreflang: 'es-mx' }, // Spanish (Mexico)
+    { code: 'en', hreflang: 'en' },
+    { code: 'fr', hreflang: 'fr' },
+    { code: 'it', hreflang: 'it' },
+  ];
+
   // Generate XML
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
@@ -108,23 +118,35 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
   xml += '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n';
   xml += '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n\n';
   
-  // Add static pages
+  // Add static pages with hreflang tags
   staticPages.forEach(page => {
     xml += `  <url>\n`;
     xml += `    <loc>${siteUrl}${page.url}</loc>\n`;
     xml += `    <lastmod>${page.lastmod || currentDate}</lastmod>\n`;
     xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
     xml += `    <priority>${page.priority}</priority>\n`;
+    // Add hreflang tags for all languages (same URL, different content based on language)
+    languages.forEach(lang => {
+      xml += `    <xhtml:link rel="alternate" hreflang="${lang.hreflang}" href="${siteUrl}${page.url}" />\n`;
+    });
+    // Add x-default pointing to Spanish (default language)
+    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${page.url}" />\n`;
     xml += `  </url>\n`;
   });
   
-  // Add blog posts
+  // Add blog posts with hreflang tags
   blogPosts.forEach(post => {
     xml += `  <url>\n`;
     xml += `    <loc>${siteUrl}/blog/${post.slug}</loc>\n`;
     xml += `    <lastmod>${post.publishDate}</lastmod>\n`;
     xml += `    <changefreq>monthly</changefreq>\n`;
     xml += `    <priority>${post.featured ? '0.9' : '0.8'}</priority>\n`;
+    // Add hreflang tags for all languages (same URL, different content based on language)
+    languages.forEach(lang => {
+      xml += `    <xhtml:link rel="alternate" hreflang="${lang.hreflang}" href="${siteUrl}/blog/${post.slug}" />\n`;
+    });
+    // Add x-default pointing to Spanish (default language)
+    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}/blog/${post.slug}" />\n`;
     xml += `  </url>\n`;
   });
   

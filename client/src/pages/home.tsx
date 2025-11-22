@@ -14,6 +14,8 @@ import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelp
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { OrganizationSchema } from "@/components/organization-schema";
+import { FAQSchema, FAQAccordion, FAQ } from "@/components/faq-schema";
+import { useI18n } from "@/contexts/i18n-context";
 import {
   trackSearch,
   trackFavoriteToggle,
@@ -22,6 +24,7 @@ import {
 } from "@/lib/analytics";
 
 export default function Home() {
+  const { t, locale } = useI18n();
   const [, setLocation] = useLocation();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
@@ -86,19 +89,24 @@ export default function Home() {
   return (
     <div className="bg-white font-sans">
       <SEOHead
-        title="TulumTkts - #1 Booking Destination for Tulum Experiences"
-        description="Discover and book the best tours, experiences, events, and accommodations in Tulum, Mexico. Your comprehensive tourism platform for authentic Tulum adventures."
+        title="Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts"
+        description="Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum."
+        currentPath="/"
         keywords={[
           'tulum',
           'tulum mexico',
           'tulum tours',
-          'tulum experiences',
-          'tulum events',
-          'tulum accommodations',
-          'tulum villas',
-          'tulum transportation',
+          'tours tulum',
+          'tulum experiencias',
+          'tulum mexico things to do',
+          'best things to do in tulum',
+          'tulum cenotes',
+          'tulum ruins',
+          'tulum hotels',
+          'tulum mexico hotels',
           'riviera maya',
-          'tulum travel guide'
+          'tulum travel guide',
+          'guía tulum'
         ]}
         canonicalUrl={siteUrl}
         ogType="website"
@@ -109,6 +117,19 @@ export default function Home() {
         url={siteUrl}
         description="Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum."
       />
+      
+      {/* FAQs Schema para rich snippets */}
+      <FAQSchema faqs={[
+        { question: t('faqs.q1.question'), answer: t('faqs.q1.answer') },
+        { question: t('faqs.q2.question'), answer: t('faqs.q2.answer') },
+        { question: t('faqs.q3.question'), answer: t('faqs.q3.answer') },
+        { question: t('faqs.q4.question'), answer: t('faqs.q4.answer') },
+        { question: t('faqs.q5.question'), answer: t('faqs.q5.answer') },
+        { question: t('faqs.q6.question'), answer: t('faqs.q6.answer') },
+        { question: t('faqs.q7.question'), answer: t('faqs.q7.answer') },
+        { question: t('faqs.q8.question'), answer: t('faqs.q8.answer') },
+      ]} />
+      
       <Navigation />
 
       {/* Hero Section */}
@@ -144,10 +165,10 @@ export default function Home() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-4xl mx-auto px-4">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-                Discover <span className="text-primary">Tulum's</span> Magic
+                {t('hero.title', { tours: t('hero.tours') })}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200">
-                Book unforgettable experiences in paradise. From ancient ruins to cenotes, your adventure awaits.
+                {t('hero.subtitle')}
               </p>
               
               {/* Search Bar */}
@@ -155,10 +176,10 @@ export default function Home() {
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div className="md:col-span-2 lg:col-span-2">
-                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">What do you want to do?</Label>
+                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">{t('hero.searchLabel')}</Label>
                       <Input 
                         type="text" 
-                        placeholder="Cenotes, ruins, tours..." 
+                        placeholder={t('hero.searchPlaceholder')}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={handleKeyPress}
@@ -166,7 +187,7 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">Date</Label>
+                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">{t('hero.dateLabel')}</Label>
                       <Input 
                         type="date" 
                         value={searchDate}
@@ -175,15 +196,15 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">Guests</Label>
+                      <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">{t('hero.guestsLabel')}</Label>
                       <Select value={searchGuests} onValueChange={setSearchGuests}>
                         <SelectTrigger className="focus:ring-2 focus:ring-primary focus:border-transparent">
-                          <SelectValue placeholder="Select guests" />
+                          <SelectValue placeholder={t('labels.selectGuests')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1">1 Guest</SelectItem>
-                          <SelectItem value="2">2 Guests</SelectItem>
-                          <SelectItem value="3+">3+ Guests</SelectItem>
+                          <SelectItem value="1">{t('hero.guestOptions.one')}</SelectItem>
+                          <SelectItem value="2">{t('hero.guestOptions.two')}</SelectItem>
+                          <SelectItem value="3+">{t('hero.guestOptions.threePlus')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -193,7 +214,7 @@ export default function Home() {
                     className="w-full mt-4 bg-primary text-white py-4 text-lg font-semibold hover:bg-primary/90"
                   >
                     <Search className="w-4 h-4 mr-2" />
-                    Search Experiences
+                    {t('hero.searchButton')}
                   </Button>
                 </CardContent>
               </Card>
@@ -209,30 +230,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contenido Introductorio Optimizado para SEO */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-lg max-w-none">
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <strong>Tulum, México</strong> es uno de los destinos más populares de la Riviera Maya, atrayendo a miles de viajeros de todo el mundo con su combinación única de <strong>playas paradisíacas</strong>, <strong>ruinas mayas</strong> impresionantes, <strong>cenotes sagrados</strong> y una vibrante escena cultural y gastronómica.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              Si estás planificando tu viaje a <strong>Tulum México 2025</strong>, has llegado al lugar correcto. En TulumTkts te proporcionamos la información más completa y actualizada sobre <a href="/experiencias" className="text-primary hover:underline font-semibold">tours en Tulum</a>, <a href="/experiencias" className="text-primary hover:underline font-semibold">mejores experiencias</a>, <a href="/villas" className="text-primary hover:underline font-semibold">hoteles</a>, <a href="/eventos" className="text-primary hover:underline font-semibold">eventos</a> y todo lo que necesitas saber para hacer de tu visita una experiencia inolvidable. Explora nuestra <a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">Guía Completa de Tulum</a> con más de 600 artículos detallados.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Ya sea que busques explorar los <a href="/cenotes-tulum" className="text-primary hover:underline font-semibold">cenotes de Tulum</a>, visitar las <strong>ruinas mayas</strong>, disfrutar de las <strong>playas paradisíacas</strong> o sumergirte en la cultura local, Tulum tiene algo especial para cada visitante. Reserva tus <a href="/experiencias" className="text-primary hover:underline font-semibold">tours en Tulum</a>, encuentra el <a href="/villas" className="text-primary hover:underline font-semibold">mejor hotel</a> y descubre todas las <a href="/blog" className="text-primary hover:underline font-semibold">cosas que hacer en Tulum México</a> con nuestra <a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">guía completa de Tulum 2025</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Popular Categories */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Categories</h2>
-            <p className="text-lg text-gray-600">Explore the best of what Tulum has to offer</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('categories.title')}</h2>
+            <p className="text-lg text-gray-600">{t('categories.subtitle')}</p>
+            <p className="text-base text-gray-500 mt-2">
+              {t('categories.discoverMore', { guiaCompleta: t('categories.guiaCompleta') }).split(t('categories.guiaCompleta')).map((part, i, arr) => 
+                i < arr.length - 1 ? (
+                  <span key={i}>{part}<a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">{t('categories.guiaCompleta')}</a></span>
+                ) : part
+              )}
+            </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               {
-                name: "Cenotes",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+                name: t('categories.cenotes'),
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+                url: "/cenotes-tulum"
               },
               {
-                name: "Mayan Ruins",
-                image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+                name: t('categories.mayanRuins'),
+                image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+                url: "/experiencias?category=arqueologia"
               },
               {
-                name: "Beach Tours",
+                name: t('categories.beachTours'),
                 image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
               },
               {
-                name: "Adventure",
+                name: t('categories.adventure'),
                 image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
               }
             ].map((category) => (
@@ -241,7 +288,11 @@ export default function Home() {
                 className="group cursor-pointer"
                 onClick={() => {
                   trackCategoryClick(category.name);
-                  setLocation(`/experiencias?category=${encodeURIComponent(category.name)}`);
+                  if (category.url) {
+                    setLocation(category.url);
+                  } else {
+                    setLocation(`/experiencias?category=${encodeURIComponent(category.name)}`);
+                  }
                 }}
               >
                 <div className="relative overflow-hidden rounded-xl aspect-square mb-3">
@@ -266,11 +317,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Experiences</h2>
-              <p className="text-lg text-gray-600">Handpicked adventures you can't miss</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('featured.title')}</h2>
+              <p className="text-lg text-gray-600">{t('featured.subtitle')}</p>
             </div>
-            <Button variant="ghost" className="hidden md:flex text-primary font-semibold hover:underline">
-              View All <ArrowRight className="w-4 h-4 ml-2" />
+            <Button 
+              variant="ghost" 
+              className="hidden md:flex text-primary font-semibold hover:underline"
+              onClick={() => setLocation('/experiencias')}
+            >
+              {t('featured.seeAll')} <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
           
@@ -300,12 +355,12 @@ export default function Home() {
                   <div className="absolute top-4 left-4">
                     {experience.instant_confirmation && (
                       <Badge className="bg-green-600 text-white mr-2">
-                        Confirmación Instantánea
+                        {t('featured.instantConfirmation')}
                       </Badge>
                     )}
                     {experience.free_cancellation && (
                       <Badge className="bg-blue-600 text-white">
-                        Cancelación Gratuita
+                        {t('featured.freeCancellation')}
                       </Badge>
                     )}
                   </div>
@@ -333,7 +388,7 @@ export default function Home() {
                         <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? 'fill-current' : ''}`} />
                       ))}
                     </div>
-                    <span className="ml-2 text-sm text-gray-600">({rating}) {reviewCount} reviews</span>
+                    <span className="ml-2 text-sm text-gray-600">({rating}) {reviewCount} {t('featured.reviews')}</span>
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
@@ -347,7 +402,7 @@ export default function Home() {
                       <span>{duration}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm text-gray-500">Desde</span>
+                      <span className="text-sm text-gray-500">{t('featured.from')}</span>
                       <div className="text-2xl font-bold text-gray-900">{price}</div>
                     </div>
                   </div>
@@ -368,7 +423,7 @@ export default function Home() {
                       }
                     }}
                   >
-                    Reservar Ahora
+                    {t('featured.bookNow')}
                   </Button>
                 </CardContent>
               </Card>
@@ -382,28 +437,28 @@ export default function Home() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Travelers Say</h2>
-            <p className="text-lg text-gray-600">Real experiences from real travelers</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('testimonials.title')}</h2>
+            <p className="text-lg text-gray-600">{t('testimonials.subtitle')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                text: "Absolutely incredible experience! The cenote was even more beautiful than the photos. Our guide was knowledgeable and made sure we felt safe throughout the entire adventure.",
-                author: "Sarah Johnson",
-                location: "New York, USA",
+                text: t('testimonials.testimonial1.text'),
+                author: t('testimonials.testimonial1.author'),
+                location: t('testimonials.testimonial1.location'),
                 avatar: "https://images.unsplash.com/photo-1494790108755-2616b612c1d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150"
               },
               {
-                text: "The Chichen Itza tour was perfectly organized. Transportation was comfortable, the guide was amazing, and seeing the pyramid was a life-changing experience!",
-                author: "Mike Rodriguez",
-                location: "Los Angeles, USA",
+                text: t('testimonials.testimonial2.text'),
+                author: t('testimonials.testimonial2.author'),
+                location: t('testimonials.testimonial2.location'),
                 avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150"
               },
               {
-                text: "Best vacation ever! Easy booking, fair prices, and unforgettable memories. The sunset cruise was romantic and beautiful. Highly recommend TulumTkts!",
-                author: "Emma Chen",
-                location: "Toronto, Canada",
+                text: t('testimonials.testimonial3.text'),
+                author: t('testimonials.testimonial3.author'),
+                location: t('testimonials.testimonial3.location'),
                 avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150"
               }
             ].map((testimonial, index) => (
@@ -439,15 +494,15 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-r from-primary to-blue-500">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Never Miss a Deal
+            {t('newsletter.title')}
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Get exclusive offers and be the first to know about new experiences in Tulum
+            {t('newsletter.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input 
               type="email" 
-              placeholder="Enter your email" 
+              placeholder={t('newsletter.emailPlaceholder')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 border-0 focus:ring-4 focus:ring-white/30 focus:outline-none"
@@ -456,12 +511,33 @@ export default function Home() {
               onClick={handleNewsletterSignup}
               className="bg-secondary text-white hover:bg-secondary/90 whitespace-nowrap"
             >
-              Subscribe
+              {t('newsletter.subscribe')}
             </Button>
           </div>
           <p className="text-sm text-blue-100 mt-4">
-            No spam, unsubscribe anytime
+            {t('newsletter.noSpam')}
           </p>
+        </div>
+      </section>
+
+      {/* FAQs Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('faqs.title')}</h2>
+            <p className="text-lg text-gray-600">{t('faqs.subtitle')}</p>
+          </div>
+          
+          <FAQAccordion faqs={[
+            { question: t('faqs.q1.question'), answer: t('faqs.q1.answer') },
+            { question: t('faqs.q2.question'), answer: t('faqs.q2.answer') },
+            { question: t('faqs.q3.question'), answer: t('faqs.q3.answer') },
+            { question: t('faqs.q4.question'), answer: t('faqs.q4.answer') },
+            { question: t('faqs.q5.question'), answer: t('faqs.q5.answer') },
+            { question: t('faqs.q6.question'), answer: t('faqs.q6.answer') },
+            { question: t('faqs.q7.question'), answer: t('faqs.q7.answer') },
+            { question: t('faqs.q8.question'), answer: t('faqs.q8.answer') },
+          ]} className="bg-white rounded-lg shadow-md p-6" />
         </div>
       </section>
 

@@ -1,5 +1,7 @@
 // Import extended blog posts
 import { extendedBlogPosts } from './blogPostsExtended';
+// Import generated blog posts from CSV
+import { generatedBlogPosts } from './generatedBlogPosts';
 
 export interface BlogPost {
   id: string;
@@ -872,22 +874,22 @@ export const blogPosts: BlogPost[] = [
   }
 ];
 
+// Combine all blog posts (main + extended + generated)
+export const allBlogPosts: BlogPost[] = [...blogPosts, ...extendedBlogPosts, ...generatedBlogPosts];
+
 export function getBlogPostById(id: string): BlogPost | undefined {
-  return blogPosts.find(post => post.id === id);
+  return allBlogPosts.find(post => post.id === id);
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find(post => post.slug === slug);
+  return allBlogPosts.find(post => post.slug === slug);
 }
 
 export function getFeaturedPosts(): BlogPost[] {
-  return blogPosts.filter(post => post.featured);
+  return allBlogPosts.filter(post => post.featured);
 }
 
 export function getPostsByCategory(category: string): BlogPost[] {
-  return blogPosts.filter(post => post.category === category);
+  return allBlogPosts.filter(post => post.category === category);
 }
-
-// Combine all blog posts (main + extended)
-export const allBlogPosts: BlogPost[] = [...blogPosts, ...extendedBlogPosts];
 

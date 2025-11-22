@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
+import { Navigation } from "@/components/ui/navigation";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
+import { useI18n } from "@/contexts/i18n-context";
 import { 
   Car, 
   Plane, 
@@ -18,10 +24,12 @@ import {
   ArrowRight,
   Bike,
   Truck,
-  Navigation
+  Navigation as NavigationIcon
 } from "lucide-react";
 
 export default function Transporte() {
+  const { t } = useI18n();
+  const [, setLocation] = useLocation();
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [transferDate, setTransferDate] = useState("");
@@ -131,7 +139,7 @@ export default function Transporte() {
       price: 25,
       unit: "/día",
       features: ["Sin licencia requerida", "Casco incluido", "Seguro básico", "Gasolina incluida"],
-      icon: <Navigation className="w-8 h-8" />
+      icon: <NavigationIcon className="w-8 h-8" />
     },
     {
       id: "3",
@@ -144,18 +152,84 @@ export default function Transporte() {
     }
   ];
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={t('transporte.title')}
+        description={t('transporte.description')}
+        keywords={[
+          'transporte tulum',
+          'transporte en tulum',
+          'renta autos tulum',
+          'traslado cancun tulum',
+          'transporte aeropuerto cancun tulum',
+          'renta carros tulum',
+          'shuttle cancun tulum',
+          'taxi cancun tulum',
+          'transporte tulum mexico',
+          'como llegar a tulum'
+        ]}
+        canonicalUrl={`${siteUrl}/transporte`}
+        ogType="website"
+        currentPath="/transporte"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      
+      {/* FAQs Schema */}
+      <FAQSchema faqs={[
+        {
+          question: "¿Cómo llegar del aeropuerto de Cancún a Tulum?",
+          answer: "Desde el aeropuerto de Cancún a Tulum tienes varias opciones: traslado privado ($80-150 USD, más cómodo), shuttle compartido ($25-50 USD por persona, económico), taxi ($100-180 USD, rápido pero caro), renta de auto ($35-85 USD/día, más flexible), o ADO bus ($15-25 USD, más económico pero menos flexible). El viaje toma aproximadamente 90-120 minutos dependiendo del tráfico."
+        },
+        {
+          question: "¿Cuánto cuesta el transporte del aeropuerto de Cancún a Tulum?",
+          answer: "El costo del transporte del aeropuerto de Cancún a Tulum varía según la opción elegida: traslado privado ($80-150 USD ida y vuelta), shuttle compartido ($25-50 USD por persona), taxi ($100-180 USD), renta de auto ($35-85 USD/día más gasolina), o bus ADO ($15-25 USD). Los precios pueden variar según temporada y demanda."
+        },
+        {
+          question: "¿Necesito rentar un auto en Tulum?",
+          answer: "Rentar un auto en Tulum es recomendable si planeas explorar cenotes, ruinas, o áreas cercanas como Coba o Playa del Carmen de forma independiente. No es necesario si te quedas en la zona hotelera o pueblo de Tulum, donde puedes usar taxis, colectivos, o caminar. Los colectivos son económicos ($25-50 MXN) para viajes cortos."
+        },
+        {
+          question: "¿Cómo moverse dentro de Tulum?",
+          answer: "Dentro de Tulum puedes moverte en: bicicleta (ideal para zona hotelera, $10-20 USD/día), taxi (conveniente, $5-15 USD trayectos cortos), colectivo (económico, $25-50 MXN), caminar (zona hotelera es transitable), o renta de auto (si planeas explorar mucho). Muchos hoteles ofrecen traslados gratuitos o bicicletas para huéspedes."
+        },
+        {
+          question: "¿Es seguro conducir en Tulum?",
+          answer: "Sí, es relativamente seguro conducir en Tulum. Las carreteras principales están en buen estado, pero es importante ser precavido: conducir con cuidado especialmente de noche, respetar límites de velocidad, estar atento a topes (badenes), y evitar áreas desoladas. El tráfico puede ser pesado durante temporada alta. Un seguro de auto es recomendable."
+        },
+        {
+          question: "¿Hay transporte público en Tulum?",
+          answer: "Sí, Tulum tiene transporte público limitado pero funcional. Los colectivos (combis) conectan el pueblo con la zona hotelera, cenotes cercanos, y ciudades como Playa del Carmen ($25-50 MXN). También hay taxis disponibles en toda la zona. Para destinos más lejanos, los buses ADO conectan Tulum con Cancún, Playa del Carmen, y otras ciudades de la Riviera Maya."
+        }
+      ]} />
+      
+      <Navigation />
+      
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="text-sm text-gray-600">
+            <a href="/" className="hover:text-primary">{t('transporte.breadcrumb.home')}</a>
+            <span className="mx-2">/</span>
+            <a href="/tulum-guia-completa" className="hover:text-primary">{t('transporte.breadcrumb.guide')}</a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">{t('transporte.breadcrumb.current')}</span>
+          </nav>
+        </div>
+      </div>
+      
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative flex items-center justify-center h-full text-center text-white">
           <div className="max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Transporte en Tulum
+              {t('transporte.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Renta de autos, traslados y más opciones de movilidad
+              {t('transporte.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -168,15 +242,15 @@ export default function Transporte() {
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="cars" className="flex items-center gap-2">
                 <Car className="w-4 h-4" />
-                Renta de Autos
+                {t('transporte.tabs.carRentals')}
               </TabsTrigger>
               <TabsTrigger value="transfers" className="flex items-center gap-2">
                 <Plane className="w-4 h-4" />
-                Traslados
+                {t('transporte.tabs.transfers')}
               </TabsTrigger>
               <TabsTrigger value="other" className="flex items-center gap-2">
                 <Bike className="w-4 h-4" />
-                Otros Transportes
+                {t('transporte.tabs.other')}
               </TabsTrigger>
             </TabsList>
 
@@ -194,7 +268,7 @@ export default function Transporte() {
                   <h3 className="text-lg font-semibold mb-4">Busca tu auto ideal</h3>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Fecha de recogida</Label>
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.search.pickupDate')}</Label>
                       <Input 
                         type="date" 
                         value={pickupDate}
@@ -202,7 +276,7 @@ export default function Transporte() {
                       />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Fecha de devolución</Label>
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.search.returnDate')}</Label>
                       <Input 
                         type="date" 
                         value={returnDate}
@@ -210,22 +284,22 @@ export default function Transporte() {
                       />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Pasajeros</Label>
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.search.passengers')}</Label>
                       <Select value={passengers} onValueChange={setPassengers}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Seleccionar" />
+                          <SelectValue placeholder={t('labels.selectGuests')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="2">2 pasajeros</SelectItem>
-                          <SelectItem value="4">4 pasajeros</SelectItem>
-                          <SelectItem value="5">5 pasajeros</SelectItem>
-                          <SelectItem value="8">8+ pasajeros</SelectItem>
+                          <SelectItem value="2">2 {t('transporte.search.passengers')}</SelectItem>
+                          <SelectItem value="4">4 {t('transporte.search.passengers')}</SelectItem>
+                          <SelectItem value="5">5 {t('transporte.search.passengers')}</SelectItem>
+                          <SelectItem value="8">8+ {t('transporte.search.passengers')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="flex items-end">
                       <Button className="w-full bg-primary text-white hover:bg-primary/90">
-                        Buscar Autos
+                        {t('buttons.search')}
                       </Button>
                     </div>
                   </div>

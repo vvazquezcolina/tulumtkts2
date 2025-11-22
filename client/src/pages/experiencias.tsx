@@ -13,6 +13,10 @@ import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelp
 import { TravelpayoutsActivity } from "@/lib/travelpayouts";
 import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
 import { Navigation } from "@/components/ui/navigation";
+import { SEOHead } from "@/components/seo-head";
+import { WebsiteSchema } from "@/components/json-ld";
+import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
+import { useI18n } from "@/contexts/i18n-context";
 import {
   trackFavoriteToggle,
   trackAffiliateClick as trackGA4AffiliateClick,
@@ -22,6 +26,7 @@ import {
 type Experience = TravelpayoutsActivity;
 
 export default function Experiencias() {
+  const { t } = useI18n();
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -158,19 +163,92 @@ export default function Experiencias() {
     return acc;
   }, {} as Record<string, typeof experiences>);
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={t('experiencias.title')}
+        description={t('experiencias.description')}
+        keywords={[
+          'tours tulum',
+          'tours en tulum',
+          'tulum tours',
+          'tours tulum mexico',
+          'cenotes tulum',
+          'tours cenotes tulum',
+          'ruinas mayas tulum',
+          'experiencias tulum',
+          'best tours tulum',
+          'tulum mexico tours'
+        ]}
+        canonicalUrl={`${siteUrl}/experiencias`}
+        ogType="website"
+        currentPath="/experiencias"
+      />
+      <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
+      
+      {/* FAQs Schema */}
+      <FAQSchema faqs={[
+        {
+          question: "¿Cuáles son los mejores tours en Tulum?",
+          answer: "Los mejores tours en Tulum incluyen tours a cenotes (Gran Cenote, Dos Ojos), tours a ruinas mayas (Ruinas de Tulum, Coba, Chichen Itza), tours de snorkel y buceo en arrecifes, tours de playa y catamaranes, tours de aventura (ATV, tirolesas), y tours culturales. Cada tipo de tour ofrece una experiencia única para descubrir la belleza natural y cultural de la Riviera Maya."
+        },
+        {
+          question: "¿Cuánto cuestan los tours en Tulum?",
+          answer: "Los precios de tours en Tulum varían según el tipo de experiencia. Tours básicos como visitas a cenotes cuestan $50-100 USD. Tours de medio día (ruinas, snorkel) cuestan $80-150 USD. Tours de día completo (múltiples actividades) cuestan $150-300 USD. Tours de lujo y privados cuestan $300-500+ USD. Los precios generalmente incluyen transporte, guía, y equipo necesario."
+        },
+        {
+          question: "¿Cómo reservar tours en Tulum?",
+          answer: "Puedes reservar tours en Tulum directamente en nuestra plataforma navegando por las experiencias disponibles, filtrando por categoría o precio, y haciendo clic en 'Reservar'. También puedes reservar a través de tu hotel, agencias locales, o directamente con operadores. Recomendamos reservar con anticipación, especialmente durante temporada alta (diciembre-abril), para asegurar disponibilidad."
+        },
+        {
+          question: "¿Qué incluyen los tours en Tulum?",
+          answer: "La mayoría de tours en Tulum incluyen: transporte de ida y vuelta desde tu hotel o punto de encuentro, guía profesional (bilingüe), entrada a atracciones, y equipo necesario (snorkel, chalecos salvavidas, etc.). Algunos tours también incluyen comidas, bebidas, y fotos. Verifica los detalles específicos de cada tour antes de reservar."
+        },
+        {
+          question: "¿Necesito experiencia previa para tours en Tulum?",
+          answer: "La mayoría de tours en Tulum están diseñados para todos los niveles de experiencia, desde principiantes hasta expertos. Tours básicos como visitas a cenotes, ruinas, o playas no requieren experiencia previa. Tours de buceo o aventura pueden requerir experiencia o certificaciones específicas, pero generalmente están disponibles para principiantes con guía profesional."
+        },
+        {
+          question: "¿Cuál es la mejor época para hacer tours en Tulum?",
+          answer: "La mejor época para hacer tours en Tulum es durante la temporada seca de noviembre a abril, cuando el clima es perfecto con días soleados y temperaturas ideales. Diciembre y enero son particularmente populares. Durante la temporada de lluvias (junio-octubre), los tours siguen siendo accesibles pero pueden verse afectados por lluvias ocasionales."
+        },
+        {
+          question: "¿Los tours en Tulum son seguros?",
+          answer: "Sí, los tours en Tulum son generalmente seguros siempre que se sigan las instrucciones de los guías, se use el equipo de seguridad proporcionado, y se respeten las reglas de cada actividad. Los operadores de tours están certificados y tienen experiencia. Es importante informar sobre cualquier condición médica o limitación física antes de reservar."
+        },
+        {
+          question: "¿Puedo cancelar o cambiar mi tour en Tulum?",
+          answer: "Las políticas de cancelación varían según el operador y tipo de tour. La mayoría de tours permiten cancelaciones gratuitas hasta 24-48 horas antes del tour. Cancelaciones más cercanas al día del tour pueden incurrir en cargos. Cambios de fecha generalmente están disponibles sujetos a disponibilidad. Verifica las políticas específicas al momento de reservar."
+        }
+      ]} />
+      
       <Navigation />
+      
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="text-sm text-gray-600">
+            <a href="/" className="hover:text-primary">{t('experiencias.breadcrumb.home')}</a>
+            <span className="mx-2">/</span>
+            <a href="/tulum-guia-completa" className="hover:text-primary">{t('experiencias.breadcrumb.guide')}</a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">{t('experiencias.breadcrumb.current')}</span>
+          </nav>
+        </div>
+      </div>
+      
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative flex items-center justify-center h-full text-center text-white">
           <div className="max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Experiencias y Tours
+              {t('experiencias.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Vive aventuras únicas en Tulum y la Riviera Maya
+              {t('experiencias.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -183,7 +261,7 @@ export default function Experiencias() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                placeholder="Buscar experiencias, tours, actividades..."
+                placeholder={t('experiencias.filters.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -193,7 +271,7 @@ export default function Experiencias() {
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className="w-full md:w-[250px]">
                   <Filter className="w-4 h-4 mr-2" />
-                  <SelectValue placeholder="Categoría" />
+                  <SelectValue placeholder={t('experiencias.filters.category')} />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
@@ -264,6 +342,7 @@ export default function Experiencias() {
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
                     mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -277,10 +356,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Arqueología y Cultura"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -294,10 +377,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Snorkel y Buceo"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -311,10 +398,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Navegación y Catamaranes"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -328,10 +419,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Cenotes y Lagunas"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -345,10 +440,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Aventura en la Selva"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -362,10 +461,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Bienestar y Cultura"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -379,10 +482,14 @@ export default function Experiencias() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Parques y Reservas"]?.map((experience) => (
                   <ExperienceCard 
-                    key={experience.activity_id || experience.id} 
+                    key={experience.activity_id} 
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
+                    mapCategory={mapCategory}
+                    t={t}
+                    mapCategory={mapCategory}
+                    t={t}
                   />
                 ))}
               </div>
@@ -390,15 +497,41 @@ export default function Experiencias() {
           </Tabs>
         </div>
       </section>
+
+      {/* FAQs Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t('experiencias.faqs.title')}
+            </h2>
+            <p className="text-lg text-gray-600">
+              {t('experiencias.faqs.subtitle')}
+            </p>
+          </div>
+          
+          <FAQAccordion faqs={[
+            { question: t('experiencias.faqs.q1.question'), answer: t('experiencias.faqs.q1.answer') },
+            { question: t('experiencias.faqs.q2.question'), answer: t('experiencias.faqs.q2.answer') },
+            { question: t('experiencias.faqs.q3.question'), answer: t('experiencias.faqs.q3.answer') },
+            { question: t('experiencias.faqs.q4.question'), answer: t('experiencias.faqs.q4.answer') },
+            { question: t('experiencias.faqs.q5.question'), answer: t('experiencias.faqs.q5.answer') },
+            { question: t('experiencias.faqs.q6.question'), answer: t('experiencias.faqs.q6.answer') },
+            { question: t('experiencias.faqs.q7.question'), answer: t('experiencias.faqs.q7.answer') },
+            { question: t('experiencias.faqs.q8.question'), answer: t('experiencias.faqs.q8.answer') },
+          ]} className="bg-white rounded-lg shadow-md p-6" />
+        </div>
+      </section>
     </div>
   );
 }
 
-function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: {
+function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory, t }: {
   experience: Experience;
   favorites: Set<string>;
-  toggleFavorite: (id: string) => void;
+  toggleFavorite: (id: string, title: string) => void;
   mapCategory: (category: string) => string;
+  t: (key: string) => string;
 }) {
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
@@ -442,7 +575,7 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: 
             ))}
           </div>
           <span className="ml-2 text-xs text-gray-600">
-            ({experience.rating.toFixed(1)}) {experience.number_of_ratings} reseñas
+            ({experience.rating.toFixed(1)}) {experience.number_of_ratings} {t('experiencias.experience.reviews')}
           </span>
         </div>
         
@@ -466,7 +599,7 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: 
         
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs text-gray-500">Desde</span>
+            <span className="text-xs text-gray-500">{t('experiencias.experience.from')}</span>
             <div className="text-lg font-bold text-gray-900">
               ${Math.round(experience.price.values[0].amount)} {experience.price.values[0].currency}
             </div>
@@ -492,7 +625,7 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory }: 
               }
             }}
           >
-            Reservar
+            {t('experiencias.experience.bookNow')}
           </Button>
         </div>
       </CardContent>

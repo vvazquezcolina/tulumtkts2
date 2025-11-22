@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useGA4PageView } from "@/hooks/use-ga4-pageview";
+import { I18nProvider } from "@/contexts/i18n-context";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Eventos from "@/pages/eventos";
@@ -14,11 +15,15 @@ import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import Contacto from "@/pages/contacto";
 import AffiliateDashboard from "@/pages/affiliate-dashboard";
+import TulumGuiaCompleta from "@/pages/tulum-guia-completa";
+import CenotesTulum from "@/pages/cenotes-tulum";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/tulum-guia-completa" component={TulumGuiaCompleta} />
+      <Route path="/cenotes-tulum" component={CenotesTulum} />
       <Route path="/eventos" component={Eventos} />
       <Route path="/experiencias" component={Experiencias} />
       <Route path="/villas" component={Villas} />
@@ -38,10 +43,12 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <I18nProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

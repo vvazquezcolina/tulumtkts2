@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { MobileMenu } from "@/components/ui/mobile-menu";
+import { useI18n } from "@/contexts/i18n-context";
 import { 
   Calendar,
   MapPin,
@@ -12,17 +13,18 @@ import {
 } from "lucide-react";
 
 const navigationItems = [
-  { href: "/", label: "Inicio", icon: HomeIcon },
-  { href: "/eventos", label: "Eventos", icon: Calendar },
-  { href: "/experiencias", label: "Experiencias", icon: MapPin },
-  { href: "/villas", label: "Villas & Rentals", icon: HomeIcon },
-  { href: "/transporte", label: "Transporte", icon: Car },
-  { href: "/blog", label: "Blog", icon: BookOpen },
-  { href: "/contacto", label: "Contacto", icon: Phone }
+  { href: "/", labelKey: "nav.home", icon: HomeIcon },
+  { href: "/eventos", labelKey: "nav.events", icon: Calendar },
+  { href: "/experiencias", labelKey: "nav.experiences", icon: MapPin },
+  { href: "/villas", labelKey: "nav.villas", icon: HomeIcon },
+  { href: "/transporte", labelKey: "nav.transport", icon: Car },
+  { href: "/blog", labelKey: "nav.blog", icon: BookOpen },
+  { href: "/contacto", labelKey: "nav.contact", icon: Phone }
 ];
 
 export function Navigation() {
   const [location] = useLocation();
+  const { t } = useI18n();
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
@@ -45,7 +47,7 @@ export function Navigation() {
                       ? 'text-primary border-b-2 border-primary' 
                       : 'text-gray-700 hover:text-primary'
                   }`}>
-                    {item.label}
+                    {t(item.labelKey)}
                   </span>
                 </Link>
               ))}

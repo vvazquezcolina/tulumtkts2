@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { HreflangTags } from './hreflang-tags';
+import { useI18n } from '@/contexts/i18n-context';
 
 interface SEOHeadProps {
   title?: string;
@@ -12,6 +14,7 @@ interface SEOHeadProps {
   articleModifiedTime?: string;
   articleSection?: string;
   articleTag?: string[];
+  currentPath?: string;
 }
 
 export function SEOHead({
@@ -26,11 +29,37 @@ export function SEOHead({
   articleModifiedTime,
   articleSection,
   articleTag = [],
+  currentPath,
 }: SEOHeadProps) {
+  const { locale } = useI18n();
+
+  useEffect(() => {
+    // Agregar hreflang tags si hay currentPath
+    if (currentPath) {
+      // Hreflang tags se manejan en componente separado
+    }
+  }, [currentPath]);
+
   useEffect(() => {
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
-    const baseTitle = 'TulumTkts - #1 Booking Destination for Tulum Experiences';
-    const baseDescription = 'Discover and book the best tours, experiences, events, and accommodations in Tulum, Mexico. Your comprehensive tourism platform for authentic Tulum adventures.';
+    
+    // Base titles and descriptions by language
+    const baseTitles: Record<string, string> = {
+      es: 'TulumTkts - #1 Reserva Experiencias en Tulum',
+      en: 'TulumTkts - #1 Booking Destination for Tulum Experiences',
+      fr: 'TulumTkts - #1 Destination de Réservation pour Expériences à Tulum',
+      it: 'TulumTkts - #1 Destinazione di Prenotazione per Esperienze a Tulum',
+    };
+    
+    const baseDescriptions: Record<string, string> = {
+      es: 'Descubre y reserva los mejores tours, experiencias, eventos y alojamientos en Tulum, México. Tu plataforma turística completa para aventuras auténticas en Tulum.',
+      en: 'Discover and book the best tours, experiences, events, and accommodations in Tulum, Mexico. Your comprehensive tourism platform for authentic Tulum adventures.',
+      fr: 'Découvrez et réservez les meilleurs circuits, expériences, événements et hébergements à Tulum, Mexique. Votre plateforme touristique complète pour des aventures authentiques à Tulum.',
+      it: 'Scopri e prenota i migliori tour, esperienze, eventi e alloggi a Tulum, Messico. La tua piattaforma turistica completa per avventure autentiche a Tulum.',
+    };
+    
+    const baseTitle = baseTitles[locale] || baseTitles['es'];
+    const baseDescription = baseDescriptions[locale] || baseDescriptions['es'];
     
     // Update document title
     document.title = title ? `${title} | ${baseTitle.split(' - ')[0]}` : baseTitle;
@@ -79,7 +108,15 @@ export function SEOHead({
     updateMetaTag('og:url', canonicalUrl || (typeof window !== 'undefined' ? window.location.href : siteUrl), true);
     updateMetaTag('og:image', ogImage || `${siteUrl}/og-image.jpg`, true);
     updateMetaTag('og:site_name', 'TulumTkts', true);
-    updateMetaTag('og:locale', 'es_ES', true);
+    
+    // Dynamic locale based on current language
+    const ogLocales: Record<string, string> = {
+      es: 'es_MX',
+      en: 'en_US',
+      fr: 'fr_FR',
+      it: 'it_IT',
+    };
+    updateMetaTag('og:locale', ogLocales[locale] || 'es_MX', true);
 
     // Article specific OG tags
     if (ogType === 'article') {
@@ -109,8 +146,12 @@ export function SEOHead({
       updateMetaTag('article:published_time', articlePublishedTime, true);
     }
 
-  }, [title, description, keywords, canonicalUrl, ogImage, ogType, articleAuthor, articlePublishedTime, articleModifiedTime, articleSection, articleTag]);
+  }, [title, description, keywords, canonicalUrl, ogImage, ogType, articleAuthor, articlePublishedTime, articleModifiedTime, articleSection, articleTag, locale]);
 
-  return null;
+  return (
+    <>
+      {currentPath && <HreflangTags currentPath={currentPath} />}
+    </>
+  );
 }
 

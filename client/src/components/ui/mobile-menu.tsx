@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/contexts/i18n-context";
 import { 
   Sheet,
   SheetContent,
@@ -21,18 +22,19 @@ import {
 } from "lucide-react";
 
 const navigationItems = [
-  { href: "/", label: "Inicio", icon: HomeIcon },
-  { href: "/eventos", label: "Eventos", icon: Calendar },
-  { href: "/experiencias", label: "Experiencias", icon: MapPin },
-  { href: "/villas", label: "Villas & Rentals", icon: HomeIcon },
-  { href: "/transporte", label: "Transporte", icon: Car },
-  { href: "/blog", label: "Blog", icon: BookOpen },
-  { href: "/contacto", label: "Contacto", icon: Phone }
+  { href: "/", labelKey: "nav.home", icon: HomeIcon },
+  { href: "/eventos", labelKey: "nav.events", icon: Calendar },
+  { href: "/experiencias", labelKey: "nav.experiences", icon: MapPin },
+  { href: "/villas", labelKey: "nav.villas", icon: HomeIcon },
+  { href: "/transporte", labelKey: "nav.transport", icon: Car },
+  { href: "/blog", labelKey: "nav.blog", icon: BookOpen },
+  { href: "/contacto", labelKey: "nav.contact", icon: Phone }
 ];
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [location] = useLocation();
+  const { t } = useI18n();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -48,7 +50,7 @@ export function MobileMenu() {
             <span className="text-2xl font-bold text-primary">TulumTkts</span>
           </SheetTitle>
           <SheetDescription className="text-left">
-            Discover the magic of Tulum
+            {t('common.discoverTulum')}
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-6">
@@ -62,7 +64,7 @@ export function MobileMenu() {
                   onClick={() => setOpen(false)}
                 >
                   <Icon className="w-4 h-4 mr-3" />
-                  {item.label}
+                  {t(item.labelKey)}
                 </Button>
               </Link>
             );
@@ -70,10 +72,10 @@ export function MobileMenu() {
           <div className="border-t pt-4 mt-4">
             <Button variant="ghost" className="w-full justify-start mb-2">
               <User className="w-4 h-4 mr-3" />
-              Iniciar Sesión
+              {t('common.signIn')}
             </Button>
             <Button className="w-full bg-primary text-white hover:bg-primary/90">
-              Publicar Experiencia
+              {t('common.publishExperience')}
             </Button>
           </div>
         </div>
