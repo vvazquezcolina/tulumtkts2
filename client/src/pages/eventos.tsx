@@ -12,9 +12,11 @@ import { Navigation } from "@/components/ui/navigation";
 import { EventSchema, EventSeriesSchema } from "@/components/event-schema";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
 
 export default function Eventos() {
   const { t } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -81,12 +83,19 @@ export default function Eventos() {
     }
   ];
 
-  const categories = ["Todos", "Festivales de Música", "Beach Parties", "Nightclubs", "Ceremonias", "Conciertos"];
+  const categories = [
+    t('eventos.categories.all'),
+    t('eventos.categories.music'),
+    t('eventos.categories.beach'),
+    t('eventos.categories.nightclubs'),
+    t('eventos.categories.ceremonies'),
+    t('eventos.categories.concerts')
+  ];
 
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          event.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = !categoryFilter || categoryFilter === "Todos" || event.category === categoryFilter;
+    const matchesCategory = !categoryFilter || categoryFilter === t('eventos.categories.all') || event.category === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
@@ -134,31 +143,16 @@ export default function Eventos() {
           priceCurrency: 'EUR',
           url: `${siteUrl}/eventos#${event.id}`
         }))}
-        seriesName="Eventos en Tulum México 2025"
+        seriesName={t('eventos.hero.title')}
       />
       
       {/* FAQs Schema */}
       <FAQSchema faqs={[
-        {
-          question: "¿Qué eventos hay en Tulum?",
-          answer: "Tulum ofrece una amplia variedad de eventos durante todo el año, incluyendo festivales de música electrónica (Tulum Music Festival), fiestas en la playa (Beach Party Sunset), ceremonias ancestrales (Noche de Luna Llena), eventos de bienestar (yoga, meditación), y celebraciones especiales (Año Nuevo, Full Moon Parties). La temporada alta de eventos va de noviembre a abril."
-        },
-        {
-          question: "¿Cuál es el mejor evento en Tulum?",
-          answer: "El Tulum Music Festival es uno de los eventos más populares de Tulum, atrayendo DJs internacionales y miles de visitantes cada año. Las fiestas de Año Nuevo en Tulum también son legendarias, con celebraciones en múltiples playas y clubes. Los eventos de playa como Beach Party Sunset son perfectos para experiencias más íntimas."
-        },
-        {
-          question: "¿Dónde están los eventos en Tulum?",
-          answer: "Los eventos en Tulum se realizan principalmente en la zona hotelera de la playa (Playa Paraíso, Playa Tulum), clubes de playa (Taboo Beach Club, Ziggy Beach), y en cenotes sagrados para ceremonias especiales. Muchos eventos también se realizan en hoteles y resorts de la zona."
-        },
-        {
-          question: "¿Cuánto cuestan los eventos en Tulum?",
-          answer: "Los precios de eventos en Tulum varían desde $45 USD (€45) para eventos regulares como Beach Party Sunset, hasta $120+ USD (€120+) para festivales grandes como Tulum Music Festival. Las celebraciones de Año Nuevo suelen costar $85-150 USD (€85-150). Los precios incluyen acceso al evento y pueden incluir bebidas según el tipo de evento."
-        },
-        {
-          question: "¿Necesito reservar con anticipación para eventos en Tulum?",
-          answer: "Sí, se recomienda reservar con anticipación, especialmente para eventos destacados como festivales de música y celebraciones de Año Nuevo, ya que se agotan rápidamente. Los eventos regulares como fiestas de playa pueden reservarse con menos anticipación, pero es mejor reservar al menos unos días antes."
-        }
+        { question: t('eventos.faqs.q1.question'), answer: t('eventos.faqs.q1.answer') },
+        { question: t('eventos.faqs.q2.question'), answer: t('eventos.faqs.q2.answer') },
+        { question: t('eventos.faqs.q3.question'), answer: t('eventos.faqs.q3.answer') },
+        { question: t('eventos.faqs.q4.question'), answer: t('eventos.faqs.q4.answer') },
+        { question: t('eventos.faqs.q5.question'), answer: t('eventos.faqs.q5.answer') },
       ]} />
       
       <Navigation />
@@ -167,9 +161,9 @@ export default function Eventos() {
       <div className="bg-gray-50 border-b py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="text-sm text-gray-600">
-            <a href="/" className="hover:text-primary">{t('eventos.breadcrumb.home')}</a>
+            <a href={getLocalizedLink("/")} className="hover:text-primary">{t('eventos.breadcrumb.home')}</a>
             <span className="mx-2">/</span>
-            <a href="/tulum-guia-completa" className="hover:text-primary">{t('eventos.breadcrumb.guide')}</a>
+            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">{t('eventos.breadcrumb.guide')}</a>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{t('eventos.breadcrumb.current')}</span>
           </nav>
