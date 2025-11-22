@@ -30,6 +30,50 @@ export default {
         excursions: 'Excursiones',
       },
     },
+    tabs: {
+      all: 'Todos',
+      archaeology: 'Arqueología',
+      cenotes: 'Cenotes',
+      snorkel: 'Snorkel',
+      navigation: 'Navegación',
+      adventure: 'Aventura',
+      wellness: 'Bienestar',
+      parks: 'Parques',
+    },
+    categories: {
+      archaeology: {
+        title: 'Arqueología y Cultura',
+        description: 'Exploraciones guiadas a los sitios arqueológicos emblemáticos de la región con guías expertos que relatan las leyendas y arquitectura de estos antiguos imperios mayas.',
+      },
+      snorkel: {
+        title: 'Snorkel y Buceo',
+        description: 'Explora el mundo submarino de la Riviera Maya. Desde arrecifes de coral hasta lagunas cristalinas, descubre la vida marina en su hábitat natural.',
+      },
+      navigation: {
+        title: 'Navegación y Catamaranes',
+        description: 'Navega por las aguas turquesas del Caribe en catamaranes de lujo. Experiencias premium con barra libre, snorkel y vistas espectaculares.',
+      },
+      cenotes: {
+        title: 'Cenotes y Lagunas',
+        description: 'Descubre los famosos cenotes de la región - ríos subterráneos de agua dulce cristalina. Vive una aventura refrescante explorando cenotes ocultos y snorkeleando con tortugas.',
+      },
+      adventure: {
+        title: 'Aventura en la Selva',
+        description: 'Actividades para descargar adrenalina en los alrededores selváticos. Emoción garantizada con vehículos todo-terreno, tirolesas y chapuzones en cenotes escondidos.',
+      },
+      wellness: {
+        title: 'Bienestar y Cultura',
+        description: 'Tulum es un epicentro bohemio y holístico. Actividades que conectan con la cultura local y el bienestar personal, desde ceremonias ancestrales hasta gastronomía yucateca.',
+      },
+      parks: {
+        title: 'Parques y Reservas',
+        description: 'Aprovecha la ubicación estratégica de Tulum con entradas y tours a parques reconocidos de la Riviera Maya, desde parques acuáticos hasta santuarios de rescate animal.',
+      },
+    },
+    errors: {
+      loadError: 'Error al cargar experiencias',
+      loadErrorSubtitle: 'Mostrando experiencias de ejemplo',
+    },
     experience: {
       instantConfirmation: 'Confirmación Instantánea',
       freeCancellation: 'Cancelación Gratuita',
@@ -106,6 +150,50 @@ export default {
         transport: 'Transport',
         excursions: 'Excursions',
       },
+    },
+    tabs: {
+      all: 'All',
+      archaeology: 'Archaeology',
+      cenotes: 'Cenotes',
+      snorkel: 'Snorkel',
+      navigation: 'Navigation',
+      adventure: 'Adventure',
+      wellness: 'Wellness',
+      parks: 'Parks',
+    },
+    categories: {
+      archaeology: {
+        title: 'Archaeology and Culture',
+        description: 'Guided explorations to the emblematic archaeological sites of the region with expert guides who narrate the legends and architecture of these ancient Mayan empires.',
+      },
+      snorkel: {
+        title: 'Snorkel and Diving',
+        description: 'Explore the underwater world of the Riviera Maya. From coral reefs to crystal-clear lagoons, discover marine life in its natural habitat.',
+      },
+      navigation: {
+        title: 'Navigation and Catamarans',
+        description: 'Sail through the turquoise waters of the Caribbean on luxury catamarans. Premium experiences with open bar, snorkel and spectacular views.',
+      },
+      cenotes: {
+        title: 'Cenotes and Lagoons',
+        description: 'Discover the famous cenotes of the region - underground rivers of crystal clear fresh water. Live a refreshing adventure exploring hidden cenotes and snorkeling with turtles.',
+      },
+      adventure: {
+        title: 'Jungle Adventure',
+        description: 'Activities to unleash adrenaline in the jungle surroundings. Guaranteed excitement with all-terrain vehicles, zip lines and dips in hidden cenotes.',
+      },
+      wellness: {
+        title: 'Wellness and Culture',
+        description: 'Tulum is a bohemian and holistic epicenter. Activities that connect with local culture and personal well-being, from ancestral ceremonies to Yucatecan gastronomy.',
+      },
+      parks: {
+        title: 'Parks and Reserves',
+        description: 'Take advantage of Tulum\'s strategic location with entries and tours to recognized parks in the Riviera Maya, from water parks to animal rescue sanctuaries.',
+      },
+    },
+    errors: {
+      loadError: 'Error loading experiences',
+      loadErrorSubtitle: 'Showing sample experiences',
     },
     experience: {
       instantConfirmation: 'Instant Confirmation',
@@ -184,6 +272,50 @@ export default {
         excursions: 'Excursions',
       },
     },
+    tabs: {
+      all: 'Tous',
+      archaeology: 'Archéologie',
+      cenotes: 'Cenotes',
+      snorkel: 'Snorkel',
+      navigation: 'Navigation',
+      adventure: 'Aventure',
+      wellness: 'Bien-être',
+      parks: 'Parcs',
+    },
+    categories: {
+      archaeology: {
+        title: 'Archéologie et Culture',
+        description: 'Explorations guidées des sites archéologiques emblématiques de la région avec des guides experts qui racontent les légendes et l\'architecture de ces anciens empires mayas.',
+      },
+      snorkel: {
+        title: 'Snorkel et Plongée',
+        description: 'Explorez le monde sous-marin de la Riviera Maya. Des récifs coralliens aux lagons cristallins, découvrez la vie marine dans son habitat naturel.',
+      },
+      navigation: {
+        title: 'Navigation et Catamarans',
+        description: 'Naviguez dans les eaux turquoise des Caraïbes sur des catamarans de luxe. Expériences premium avec bar libre, snorkel et vues spectaculaires.',
+      },
+      cenotes: {
+        title: 'Cenotes et Lagons',
+        description: 'Découvrez les célèbres cenotes de la région - rivières souterraines d\'eau douce cristalline. Vivez une aventure rafraîchissante en explorant des cenotes cachés et en faisant du snorkel avec des tortues.',
+      },
+      adventure: {
+        title: 'Aventure dans la Jungle',
+        description: 'Activités pour libérer l\'adrénaline dans les environs de la jungle. Émotion garantie avec des véhicules tout-terrain, des tyroliennes et des plongeons dans des cenotes cachés.',
+      },
+      wellness: {
+        title: 'Bien-être et Culture',
+        description: 'Tulum est un épicentre bohème et holistique. Activités qui se connectent à la culture locale et au bien-être personnel, des cérémonies ancestrales à la gastronomie yucatèque.',
+      },
+      parks: {
+        title: 'Parcs et Réserves',
+        description: 'Profitez de l\'emplacement stratégique de Tulum avec des entrées et des circuits dans des parcs reconnus de la Riviera Maya, des parcs aquatiques aux sanctuaires de secours pour animaux.',
+      },
+    },
+    errors: {
+      loadError: 'Erreur lors du chargement des expériences',
+      loadErrorSubtitle: 'Affichage d\'expériences d\'exemple',
+    },
     experience: {
       instantConfirmation: 'Confirmation Instantanée',
       freeCancellation: 'Annulation Gratuite',
@@ -260,6 +392,50 @@ export default {
         transport: 'Trasporto',
         excursions: 'Escursioni',
       },
+    },
+    tabs: {
+      all: 'Tutti',
+      archaeology: 'Archeologia',
+      cenotes: 'Cenotes',
+      snorkel: 'Snorkel',
+      navigation: 'Navigazione',
+      adventure: 'Avventura',
+      wellness: 'Benessere',
+      parks: 'Parchi',
+    },
+    categories: {
+      archaeology: {
+        title: 'Archeologia e Cultura',
+        description: 'Esplorazioni guidate dei siti archeologici emblematici della regione con guide esperte che narrano le leggende e l\'architettura di questi antichi imperi maya.',
+      },
+      snorkel: {
+        title: 'Snorkel e Immersioni',
+        description: 'Esplora il mondo sottomarino della Riviera Maya. Dalle barriere coralline alle lagune cristalline, scopri la vita marina nel suo habitat naturale.',
+      },
+      navigation: {
+        title: 'Navigazione e Catamarani',
+        description: 'Naviga nelle acque turchesi dei Caraibi su catamarani di lusso. Esperienze premium con bar libero, snorkel e viste spettacolari.',
+      },
+      cenotes: {
+        title: 'Cenotes e Lagune',
+        description: 'Scopri i famosi cenotes della regione - fiumi sotterranei di acqua dolce cristallina. Vivi un\'avventura rinfrescante esplorando cenotes nascosti e facendo snorkeling con le tartarughe.',
+      },
+      adventure: {
+        title: 'Avventura nella Giungla',
+        description: 'Attività per scaricare l\'adrenalina nei dintorni della giungla. Emozione garantita con veicoli fuoristrada, zip line e tuffi in cenotes nascosti.',
+      },
+      wellness: {
+        title: 'Benessere e Cultura',
+        description: 'Tulum è un epicentro bohemien e olistico. Attività che si collegano alla cultura locale e al benessere personale, dalle cerimonie ancestrali alla gastronomia yucateca.',
+      },
+      parks: {
+        title: 'Parchi e Riserve',
+        description: 'Approfitta della posizione strategica di Tulum con ingressi e tour ai parchi riconosciuti della Riviera Maya, dai parchi acquatici ai santuari di salvataggio animali.',
+      },
+    },
+    errors: {
+      loadError: 'Errore nel caricamento delle esperienze',
+      loadErrorSubtitle: 'Mostrando esperienze di esempio',
     },
     experience: {
       instantConfirmation: 'Conferma Istantanea',
