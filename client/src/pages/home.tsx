@@ -648,9 +648,12 @@ export default function Home() {
             <p className="text-gray-400 mb-2">
               &copy; {new Date().getFullYear()} TulumTkts. {t('home.footer.copyright')}
             </p>
-            <p className="text-gray-400">
-              {t('home.footer.poweredBy')}
-            </p>
+            <p 
+              className="text-gray-400"
+              dangerouslySetInnerHTML={{
+                __html: t('home.footer.poweredBy')
+              }}
+            />
           </div>
         </div>
       </footer>

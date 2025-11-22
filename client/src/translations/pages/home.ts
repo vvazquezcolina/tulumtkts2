@@ -147,7 +147,7 @@ export default {
         privacyPolicy: 'Privacy Policy',
       },
       copyright: 'All rights reserved. | Made with ❤️ for travelers',
-      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
     },
     bestseller: {
       title: 'Descubre las Mejores Experiencias en Tulum',
