@@ -72,7 +72,7 @@ export default function Home() {
     
     // Navigate to experiences page with search parameters
     const queryString = params.toString();
-    setLocation(`/experiencias${queryString ? `?${queryString}` : ''}`);
+    setLocation(getLocalizedLink(`/experiencias${queryString ? `?${queryString}` : ''}`));
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
