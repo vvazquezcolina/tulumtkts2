@@ -301,12 +301,12 @@ export default function Experiencias() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="todos" className="w-full">
             <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 mb-6 md:mb-8 h-auto p-1">
-              <TabsTrigger value="todos" className="text-xs sm:text-sm">Todos</TabsTrigger>
-              <TabsTrigger value="arqueologia" className="text-xs sm:text-sm">Arqueología</TabsTrigger>
-              <TabsTrigger value="cenotes" className="text-xs sm:text-sm">Cenotes</TabsTrigger>
-              <TabsTrigger value="snorkel" className="text-xs sm:text-sm">Snorkel</TabsTrigger>
-              <TabsTrigger value="navegacion" className="text-xs sm:text-sm">Navegación</TabsTrigger>
-              <TabsTrigger value="aventura" className="text-xs sm:text-sm">Aventura</TabsTrigger>
+              <TabsTrigger value="todos" className="text-xs sm:text-sm">{t('experiencias.tabs.all')}</TabsTrigger>
+              <TabsTrigger value="arqueologia" className="text-xs sm:text-sm">{t('experiencias.tabs.archaeology')}</TabsTrigger>
+              <TabsTrigger value="cenotes" className="text-xs sm:text-sm">{t('experiencias.tabs.cenotes')}</TabsTrigger>
+              <TabsTrigger value="snorkel" className="text-xs sm:text-sm">{t('experiencias.tabs.snorkel')}</TabsTrigger>
+              <TabsTrigger value="navegacion" className="text-xs sm:text-sm">{t('experiencias.tabs.navigation')}</TabsTrigger>
+              <TabsTrigger value="aventura" className="text-xs sm:text-sm">{t('experiencias.tabs.adventure')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="todos">
@@ -329,8 +329,8 @@ export default function Experiencias() {
                 </div>
               ) : error ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-500 mb-4">Error al cargar experiencias</p>
-                  <p className="text-sm text-gray-400">Mostrando experiencias de ejemplo</p>
+                  <p className="text-gray-500 mb-4">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
                 </div>
               ) : null}
               
@@ -350,8 +350,8 @@ export default function Experiencias() {
 
             <TabsContent value="arqueologia">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Arqueología y Cultura</h3>
-                <p className="text-gray-600">Exploraciones guiadas a los sitios arqueológicos emblemáticos de la región con guías expertos que relatan las leyendas y arquitectura de estos antiguos imperios mayas.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.archaeology.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.archaeology.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Arqueología y Cultura"]?.map((experience) => (
@@ -369,8 +369,8 @@ export default function Experiencias() {
 
             <TabsContent value="snorkel">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Snorkel y Buceo</h3>
-                <p className="text-gray-600">Explora el mundo submarino de la Riviera Maya. Desde arrecifes de coral hasta lagunas cristalinas, descubre la vida marina en su hábitat natural.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.snorkel.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.snorkel.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Snorkel y Buceo"]?.map((experience) => (
@@ -388,8 +388,8 @@ export default function Experiencias() {
 
             <TabsContent value="navegacion">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Navegación y Catamaranes</h3>
-                <p className="text-gray-600">Navega por las aguas turquesas del Caribe en catamaranes de lujo. Experiencias premium con barra libre, snorkel y vistas espectaculares.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.navigation.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.navigation.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Navegación y Catamaranes"]?.map((experience) => (
@@ -407,8 +407,8 @@ export default function Experiencias() {
 
             <TabsContent value="cenotes">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Cenotes y Lagunas</h3>
-                <p className="text-gray-600">Descubre los famosos cenotes de la región - ríos subterráneos de agua dulce cristalina. Vive una aventura refrescante explorando cenotes ocultos y snorkeleando con tortugas.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.cenotes.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.cenotes.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Cenotes y Lagunas"]?.map((experience) => (
@@ -426,8 +426,8 @@ export default function Experiencias() {
 
             <TabsContent value="aventura">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Aventura en la Selva</h3>
-                <p className="text-gray-600">Actividades para descargar adrenalina en los alrededores selváticos. Emoción garantizada con vehículos todo-terreno, tirolesas y chapuzones en cenotes escondidos.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.adventure.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.adventure.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Aventura en la Selva"]?.map((experience) => (
@@ -445,8 +445,8 @@ export default function Experiencias() {
 
             <TabsContent value="bienestar">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Bienestar y Cultura</h3>
-                <p className="text-gray-600">Tulum es un epicentro bohemio y holístico. Actividades que conectan con la cultura local y el bienestar personal, desde ceremonias ancestrales hasta gastronomía yucateca.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.wellness.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.wellness.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Bienestar y Cultura"]?.map((experience) => (
@@ -464,8 +464,8 @@ export default function Experiencias() {
 
             <TabsContent value="parques">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Parques y Reservas</h3>
-                <p className="text-gray-600">Aprovecha la ubicación estratégica de Tulum con entradas y tours a parques reconocidos de la Riviera Maya, desde parques acuáticos hasta santuarios de rescate animal.</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.parks.title')}</h3>
+                <p className="text-gray-600">{t('experiencias.categories.parks.description')}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {experiencesByCategory["Parques y Reservas"]?.map((experience) => (
