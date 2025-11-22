@@ -83,7 +83,7 @@ export default function Home() {
 
   const handleNewsletterSignup = () => {
     if (email) {
-      console.log("Newsletter signup:", email);
+      // TODO: Implement newsletter signup API call
       setEmail("");
     }
   };
