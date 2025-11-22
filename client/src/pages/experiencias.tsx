@@ -362,8 +362,6 @@ export default function Experiencias() {
                     toggleFavorite={toggleFavorite}
                     mapCategory={mapCategory}
                     t={t}
-                    mapCategory={mapCategory}
-                    t={t}
                   />
                 ))}
               </div>
@@ -381,8 +379,6 @@ export default function Experiencias() {
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
                     mapCategory={mapCategory}
                     t={t}
                   />
@@ -404,8 +400,6 @@ export default function Experiencias() {
                     toggleFavorite={toggleFavorite}
                     mapCategory={mapCategory}
                     t={t}
-                    mapCategory={mapCategory}
-                    t={t}
                   />
                 ))}
               </div>
@@ -423,8 +417,6 @@ export default function Experiencias() {
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
                     mapCategory={mapCategory}
                     t={t}
                   />
@@ -446,8 +438,6 @@ export default function Experiencias() {
                     toggleFavorite={toggleFavorite}
                     mapCategory={mapCategory}
                     t={t}
-                    mapCategory={mapCategory}
-                    t={t}
                   />
                 ))}
               </div>
@@ -465,8 +455,6 @@ export default function Experiencias() {
                     experience={experience} 
                     favorites={favorites}
                     toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
                     mapCategory={mapCategory}
                     t={t}
                   />

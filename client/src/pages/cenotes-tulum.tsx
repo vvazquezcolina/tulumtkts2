@@ -7,7 +7,7 @@ import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Star, ArrowRight, Water, Users, Camera } from "lucide-react";
+import { MapPin, Clock, Star, ArrowRight, Droplet, Users, Camera } from "lucide-react";
 import { useI18n } from "@/contexts/i18n-context";
 import { cenotesTulum as translations } from "@/translations/pages/cenotes-tulum";
 
@@ -129,7 +129,7 @@ export default function CenotesTulum() {
             </p>
             <div className="flex flex-wrap gap-4 text-sm md:text-base">
               <div className="flex items-center gap-2">
-                <Water className="w-5 h-5" />
+                <Droplet className="w-5 h-5" />
                 <span>{t('hero.stats.cenotes')}</span>
               </div>
               <div className="flex items-center gap-2">

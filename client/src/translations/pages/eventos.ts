@@ -29,14 +29,6 @@ export default {
     event: {
       featured: 'Destacado',
       buyTickets: 'Comprar Entradas',
-      date: 'Fecha',
-      time: 'Hora',
-      location: 'Ubicación',
-      category: 'Categoría',
-    },
-    event: {
-      featured: 'Destacado',
-      buyTickets: 'Comprar Entradas',
       addToFavorites: 'Agregar a favoritos',
       date: 'Fecha',
       time: 'Hora',
