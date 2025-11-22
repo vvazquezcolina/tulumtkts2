@@ -11,6 +11,7 @@ import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { 
   Search, 
   Filter, 
@@ -30,6 +31,7 @@ import {
 
 export default function Villas() {
   const { t } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
@@ -164,27 +166,41 @@ export default function Villas() {
     }
   ];
 
-  const locations = ["Todas", "Playa", "Pueblo", "Jungla", "Laguna"];
-  const guestOptions = ["Cualquiera", "1-2 huéspedes", "3-4 huéspedes", "5-8 huéspedes", "9+ huéspedes"];
+  const locations = [
+    t('villas.filters.allLocations'),
+    t('villas.locations.beach'),
+    t('villas.locations.pueblo'),
+    t('villas.locations.jungle'),
+    t('villas.locations.lagoon')
+  ];
+  const guestOptions = [
+    t('villas.filters.anyGuests'),
+    t('villas.filters.guests1to2'),
+    t('villas.filters.guests3to4'),
+    t('villas.filters.guests5to8'),
+    t('villas.filters.guests9plus')
+  ];
 
   const filteredVillas = villas.filter(villa => {
     const matchesSearch = villa.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          villa.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          villa.area.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation = !locationFilter || locationFilter === "Todas" || villa.location === locationFilter;
+    const matchesLocation = !locationFilter || locationFilter === t('villas.filters.allLocations') || villa.location === locationFilter;
     const matchesPrice = villa.pricePerNight >= priceRange[0] && villa.pricePerNight <= priceRange[1];
-    const matchesGuests = !guestFilter || guestFilter === "Cualquiera" || 
-                         (guestFilter === "1-2 huéspedes" && villa.guests <= 2) ||
-                         (guestFilter === "3-4 huéspedes" && villa.guests >= 3 && villa.guests <= 4) ||
-                         (guestFilter === "5-8 huéspedes" && villa.guests >= 5 && villa.guests <= 8) ||
-                         (guestFilter === "9+ huéspedes" && villa.guests >= 9);
+    const matchesGuests = !guestFilter || guestFilter === t('villas.filters.anyGuests') || 
+                         (guestFilter === t('villas.filters.guests1to2') && villa.guests <= 2) ||
+                         (guestFilter === t('villas.filters.guests3to4') && villa.guests >= 3 && villa.guests <= 4) ||
+                         (guestFilter === t('villas.filters.guests5to8') && villa.guests >= 5 && villa.guests <= 8) ||
+                         (guestFilter === t('villas.filters.guests9plus') && villa.guests >= 9);
     
     return matchesSearch && matchesLocation && matchesPrice && matchesGuests;
   });
 
   const getLocationIcon = (location: string) => {
     switch (location) {
+      case t('villas.locations.beach'):
       case "Playa": return <Waves className="w-4 h-4" />;
+      case t('villas.locations.jungle'):
       case "Jungla": return <TreePine className="w-4 h-4" />;
       default: return <MapPin className="w-4 h-4" />;
     }
@@ -217,34 +233,13 @@ export default function Villas() {
       
       {/* FAQs Schema */}
       <FAQSchema faqs={[
-        {
-          question: "¿Cuáles son los mejores hoteles en Tulum?",
-          answer: "Los mejores hoteles en Tulum incluyen resorts de lujo en la playa como Azulik, Be Tulum, y Habitas Tulum, hoteles boutique ecológicos como Coco Limited y Diamante K, y villas privadas en la zona hotelera. La elección depende de tu presupuesto y preferencias: zona playa para acceso directo al mar y vida nocturna, o pueblo de Tulum para autenticidad y precios más accesibles."
-        },
-        {
-          question: "¿Cuánto cuestan los hoteles en Tulum?",
-          answer: "Los precios de hoteles en Tulum varían ampliamente. Hoteles económicos en el pueblo: $50-150 USD/noche. Hoteles boutique en zona playa: $200-500 USD/noche. Resorts de lujo: $500-1,500+ USD/noche. Villas privadas: $450-2,000+ USD/noche. Los precios son más altos durante temporada alta (diciembre-abril) y más accesibles durante temporada baja (mayo-noviembre)."
-        },
-        {
-          question: "¿Dónde es mejor hospedarse en Tulum: playa o pueblo?",
-          answer: "La zona hotelera de la playa es ideal para acceso directo a la playa, vida nocturna, y experiencias de lujo, pero es más cara y alejada del centro. El pueblo de Tulum ofrece autenticidad, precios más accesibles, y acceso fácil a restaurantes locales y cenotes, pero está a 10-15 minutos de la playa. Recomendamos zona playa para románticas o lujo, y pueblo para presupuesto o autenticidad."
-        },
-        {
-          question: "¿Cuál es la mejor época para reservar hoteles en Tulum?",
-          answer: "La mejor época para reservar hoteles en Tulum es durante la temporada seca de noviembre a abril, cuando el clima es perfecto. Diciembre y enero son los meses más populares (y caros). Mayo-octubre es temporada baja con mejores precios pero lluvias ocasionales. Reserva con 2-3 meses de anticipación durante temporada alta para mejores precios y disponibilidad."
-        },
-        {
-          question: "¿Los hoteles en Tulum incluyen desayuno?",
-          answer: "Muchos hoteles en Tulum incluyen desayuno, especialmente resorts de lujo y hoteles boutique. Los hoteles económicos generalmente no incluyen desayuno pero tienen restaurantes o cafeterías en el hotel. Hoteles todo incluido incluyen todas las comidas y bebidas. Verifica los detalles específicos al reservar."
-        },
-        {
-          question: "¿Es seguro hospedarse en Tulum?",
-          answer: "Sí, Tulum es generalmente seguro para turistas. La zona hotelera y las áreas turísticas principales son muy seguras con seguridad privada y presencia policial. El pueblo también es seguro, pero es importante tomar precauciones básicas: mantener objetos de valor seguros, ser consciente de tu entorno, y seguir las recomendaciones locales."
-        },
-        {
-          question: "¿Necesito visa para visitar Tulum?",
-          answer: "Si eres ciudadano de Estados Unidos, Canadá, Unión Europea, o la mayoría de países latinoamericanos, no necesitas visa para visitar Tulum por hasta 180 días. Solo necesitas un pasaporte válido. Ciudadanos de otros países deben verificar los requisitos específicos en el consulado mexicano de su país."
-        }
+        { question: t('villas.faqs.q1.question'), answer: t('villas.faqs.q1.answer') },
+        { question: t('villas.faqs.q2.question'), answer: t('villas.faqs.q2.answer') },
+        { question: t('villas.faqs.q3.question'), answer: t('villas.faqs.q3.answer') },
+        { question: t('villas.faqs.q4.question'), answer: t('villas.faqs.q4.answer') },
+        { question: t('villas.faqs.q5.question'), answer: t('villas.faqs.q5.answer') },
+        { question: t('villas.faqs.q6.question'), answer: t('villas.faqs.q6.answer') },
+        { question: t('villas.faqs.q7.question'), answer: t('villas.faqs.q7.answer') },
       ]} />
       
       <Navigation />
@@ -253,9 +248,9 @@ export default function Villas() {
       <div className="bg-gray-50 border-b py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="text-sm text-gray-600">
-            <a href="/" className="hover:text-primary">{t('villas.breadcrumb.home')}</a>
+            <a href={getLocalizedLink("/")} className="hover:text-primary">{t('villas.breadcrumb.home')}</a>
             <span className="mx-2">/</span>
-            <a href="/tulum-guia-completa" className="hover:text-primary">{t('villas.breadcrumb.guide')}</a>
+            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">{t('villas.breadcrumb.guide')}</a>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{t('villas.breadcrumb.current')}</span>
           </nav>
@@ -348,8 +343,8 @@ export default function Villas() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Villas Destacadas</h2>
-            <p className="text-gray-600">Nuestras propiedades más exclusivas y populares</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">{t('villas.featured.title')}</h2>
+            <p className="text-gray-600">{t('villas.featured.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
@@ -362,7 +357,7 @@ export default function Villas() {
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-secondary text-white">Destacada</Badge>
+                    <Badge className="bg-secondary text-white">{t('villas.villa.featured')}</Badge>
                   </div>
                   <div className="absolute top-4 right-4">
                     <Button
@@ -381,9 +376,9 @@ export default function Villas() {
                   </div>
                   <div className="absolute bottom-4 right-4">
                     <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2 text-white">
-                      <span className="text-sm">desde</span>
+                      <span className="text-sm">{t('villas.villa.from')}</span>
                       <div className="text-2xl font-bold">€{villa.pricePerNight}</div>
-                      <span className="text-xs">/noche</span>
+                      <span className="text-xs">/{t('villas.villa.perNight')}</span>
                     </div>
                   </div>
                 </div>
@@ -395,7 +390,7 @@ export default function Villas() {
                         <Star key={i} className="w-4 h-4 fill-current" />
                       ))}
                     </div>
-                    <span className="ml-2 text-sm text-gray-600">({villa.rating}) {villa.reviews} reseñas</span>
+                    <span className="ml-2 text-sm text-gray-600">({villa.rating}) {villa.reviews} {t('villas.villa.reviews')}</span>
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
@@ -407,15 +402,15 @@ export default function Villas() {
                     <div className="flex items-center space-x-4 text-sm text-gray-500">
                       <div className="flex items-center">
                         <Bed className="w-4 h-4 mr-1" />
-                        <span>{villa.bedrooms} hab</span>
+                        <span>{villa.bedrooms} {t('villas.villa.bedrooms')}</span>
                       </div>
                       <div className="flex items-center">
                         <Bath className="w-4 h-4 mr-1" />
-                        <span>{villa.bathrooms} baños</span>
+                        <span>{villa.bathrooms} {t('villas.villa.bathrooms')}</span>
                       </div>
                       <div className="flex items-center">
                         <Users className="w-4 h-4 mr-1" />
-                        <span>{villa.guests} huéspedes</span>
+                        <span>{villa.guests} {t('villas.villa.guests')}</span>
                       </div>
                     </div>
                     <div className="flex items-center text-sm text-gray-500">
@@ -433,7 +428,7 @@ export default function Villas() {
                       ))}
                       {villa.amenities.length > 4 && (
                         <Badge variant="outline" className="text-xs">
-                          +{villa.amenities.length - 4} más
+                          +{villa.amenities.length - 4} {t('villas.villa.more')}
                         </Badge>
                       )}
                     </div>
@@ -441,7 +436,7 @@ export default function Villas() {
                   
                   <div className="flex gap-2">
                     <Button className="flex-1 bg-primary text-white hover:bg-primary/90">
-                      Ver Disponibilidad
+                      {t('villas.villa.viewAvailability')}
                     </Button>
                     <Button variant="outline" size="icon">
                       <Calendar className="w-4 h-4" />
