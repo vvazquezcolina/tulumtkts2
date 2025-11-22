@@ -117,7 +117,7 @@ export default function Home() {
       <OrganizationSchema 
         name="TulumTkts"
         url={siteUrl}
-        description={t('seo.organizationDescription', { default: 'Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum.' })}
+        description={t('seo.organizationDescription')}
       />
       
       {/* FAQs Schema para rich snippets */}
@@ -236,14 +236,20 @@ export default function Home() {
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              <strong>{t('intro.tulum')}</strong> {t('intro.paragraph1', {
-                tulum: t('intro.tulum'),
-                playas: t('intro.playas'),
-                ruinas: t('intro.ruinas'),
-                cenotes: t('intro.cenotes'),
-              }).replace(`{tulum}`, t('intro.tulum')).replace(`{playas}`, `<strong>${t('intro.playas')}</strong>`).replace(`{ruinas}`, `<strong>${t('intro.ruinas')}</strong>`).replace(`{cenotes}`, `<strong>${t('intro.cenotes')}</strong>`)}
-            </p>
+            <p 
+              className="text-lg text-gray-700 leading-relaxed mb-4"
+              dangerouslySetInnerHTML={{
+                __html: t('intro.paragraph1', {
+                  tulum: t('intro.tulum'),
+                  playas: t('intro.playas'),
+                  ruinas: t('intro.ruinas'),
+                  cenotes: t('intro.cenotes'),
+                }).replace(`{tulum}`, `<strong>${t('intro.tulum')}</strong>`)
+                  .replace(`{playas}`, `<strong>${t('intro.playas')}</strong>`)
+                  .replace(`{ruinas}`, `<strong>${t('intro.ruinas')}</strong>`)
+                  .replace(`{cenotes}`, `<strong>${t('intro.cenotes')}</strong>`)
+              }}
+            />
             <p className="text-lg text-gray-700 leading-relaxed mb-4"
                dangerouslySetInnerHTML={{
                  __html: t('intro.paragraph2', {
@@ -254,11 +260,11 @@ export default function Home() {
                    eventos: t('intro.eventos'),
                    guiaCompleta: t('intro.guiaCompleta'),
                  }).replace(`{tulum2025}`, `<strong>${t('intro.tulum2025')}</strong>`)
-                   .replace(`{tours}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.tours')}</a>`)
-                   .replace(`{mejoresExperiencias}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.mejoresExperiencias')}</a>`)
-                   .replace(`{hoteles}`, `<a href="${getLocalizedLink('/villas')}" className="text-primary hover:underline font-semibold">${t('intro.hoteles')}</a>`)
-                   .replace(`{eventos}`, `<a href="${getLocalizedLink('/eventos')}" className="text-primary hover:underline font-semibold">${t('intro.eventos')}</a>`)
-                   .replace(`{guiaCompleta}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" className="text-primary hover:underline font-semibold">${t('intro.guiaCompleta')}</a>`)
+                   .replace(`{tours}`, `<a href="${getLocalizedLink('/experiencias')}" class="text-primary hover:underline font-semibold">${t('intro.tours')}</a>`)
+                   .replace(`{mejoresExperiencias}`, `<a href="${getLocalizedLink('/experiencias')}" class="text-primary hover:underline font-semibold">${t('intro.mejoresExperiencias')}</a>`)
+                   .replace(`{hoteles}`, `<a href="${getLocalizedLink('/villas')}" class="text-primary hover:underline font-semibold">${t('intro.hoteles')}</a>`)
+                   .replace(`{eventos}`, `<a href="${getLocalizedLink('/eventos')}" class="text-primary hover:underline font-semibold">${t('intro.eventos')}</a>`)
+                   .replace(`{guiaCompleta}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" class="text-primary hover:underline font-semibold">${t('intro.guiaCompleta')}</a>`)
                }}
             />
             <p className="text-lg text-gray-700 leading-relaxed"
@@ -271,13 +277,13 @@ export default function Home() {
                    mejorHotel: t('intro.mejorHotel'),
                    cosasQueHacer: t('intro.cosasQueHacer'),
                    guiaCompleta2025: t('intro.guiaCompleta2025'),
-                 }).replace(`{cenotesTulum}`, `<a href="${getLocalizedLink('/cenotes-tulum')}" className="text-primary hover:underline font-semibold">${t('intro.cenotesTulum')}</a>`)
+                 }).replace(`{cenotesTulum}`, `<a href="${getLocalizedLink('/cenotes-tulum')}" class="text-primary hover:underline font-semibold">${t('intro.cenotesTulum')}</a>`)
                    .replace(`{ruinasMayas}`, `<strong>${t('intro.ruinasMayas')}</strong>`)
                    .replace(`{playasParadisíacas}`, `<strong>${t('intro.playasParadisíacas')}</strong>`)
-                   .replace(`{toursEnTulum}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.toursEnTulum')}</a>`)
-                   .replace(`{mejorHotel}`, `<a href="${getLocalizedLink('/villas')}" className="text-primary hover:underline font-semibold">${t('intro.mejorHotel')}</a>`)
-                   .replace(`{cosasQueHacer}`, `<a href="${getLocalizedLink('/blog')}" className="text-primary hover:underline font-semibold">${t('intro.cosasQueHacer')}</a>`)
-                   .replace(`{guiaCompleta2025}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" className="text-primary hover:underline font-semibold">${t('intro.guiaCompleta2025')}</a>`)
+                   .replace(`{toursEnTulum}`, `<a href="${getLocalizedLink('/experiencias')}" class="text-primary hover:underline font-semibold">${t('intro.toursEnTulum')}</a>`)
+                   .replace(`{mejorHotel}`, `<a href="${getLocalizedLink('/villas')}" class="text-primary hover:underline font-semibold">${t('intro.mejorHotel')}</a>`)
+                   .replace(`{cosasQueHacer}`, `<a href="${getLocalizedLink('/blog')}" class="text-primary hover:underline font-semibold">${t('intro.cosasQueHacer')}</a>`)
+                   .replace(`{guiaCompleta2025}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" class="text-primary hover:underline font-semibold">${t('intro.guiaCompleta2025')}</a>`)
                }}
             />
           </div>
