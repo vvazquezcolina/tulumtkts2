@@ -91,8 +91,8 @@ export default function Home() {
   return (
     <div className="bg-white font-sans">
       <SEOHead
-        title={t('seo.title', { default: 'Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts' })}
-        description={t('seo.description', { default: 'Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum.' })}
+        title={t('seo.title')}
+        description={t('seo.description')}
         currentPath="/"
         keywords={[
           'tulum',
