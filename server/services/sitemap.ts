@@ -103,11 +103,19 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
 
   // Supported languages for hreflang tags
   const languages = [
-    { code: 'es', hreflang: 'es-mx' }, // Spanish (Mexico)
+    { code: 'es', hreflang: 'es-mx' }, // Spanish (Mexico) - no prefix
     { code: 'en', hreflang: 'en' },
     { code: 'fr', hreflang: 'fr' },
     { code: 'it', hreflang: 'it' },
   ];
+
+  // Helper function to get localized URL
+  const getLocalizedUrl = (baseUrl: string, langCode: string): string => {
+    if (langCode === 'es') {
+      return baseUrl; // Spanish has no prefix
+    }
+    return `/${langCode}${baseUrl}`;
+  };
 
   // Generate XML
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -118,36 +126,54 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
   xml += '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n';
   xml += '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n\n';
   
-  // Add static pages with hreflang tags
+  // Add static pages - create separate URLs for each language
   staticPages.forEach(page => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${siteUrl}${page.url}</loc>\n`;
-    xml += `    <lastmod>${page.lastmod || currentDate}</lastmod>\n`;
-    xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
-    xml += `    <priority>${page.priority}</priority>\n`;
-    // Add hreflang tags for all languages (same URL, different content based on language)
+    const baseUrl = page.url || '/';
+    
     languages.forEach(lang => {
-      xml += `    <xhtml:link rel="alternate" hreflang="${lang.hreflang}" href="${siteUrl}${page.url}" />\n`;
+      const localizedUrl = getLocalizedUrl(baseUrl, lang.code);
+      xml += `  <url>\n`;
+      xml += `    <loc>${siteUrl}${localizedUrl}</loc>\n`;
+      xml += `    <lastmod>${page.lastmod || currentDate}</lastmod>\n`;
+      xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+      xml += `    <priority>${page.priority}</priority>\n`;
+      
+      // Add hreflang tags for all language versions
+      languages.forEach(altLang => {
+        const altLocalizedUrl = getLocalizedUrl(baseUrl, altLang.code);
+        xml += `    <xhtml:link rel="alternate" hreflang="${altLang.hreflang}" href="${siteUrl}${altLocalizedUrl}" />\n`;
+      });
+      // Add x-default pointing to Spanish (default language)
+      const defaultUrl = getLocalizedUrl(baseUrl, 'es');
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${defaultUrl}" />\n`;
+      
+      xml += `  </url>\n`;
     });
-    // Add x-default pointing to Spanish (default language)
-    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${page.url}" />\n`;
-    xml += `  </url>\n`;
   });
   
-  // Add blog posts with hreflang tags
+  // Add blog posts - create separate URLs for each language
   blogPosts.forEach(post => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${siteUrl}/blog/${post.slug}</loc>\n`;
-    xml += `    <lastmod>${post.publishDate}</lastmod>\n`;
-    xml += `    <changefreq>monthly</changefreq>\n`;
-    xml += `    <priority>${post.featured ? '0.9' : '0.8'}</priority>\n`;
-    // Add hreflang tags for all languages (same URL, different content based on language)
+    const baseUrl = `/blog/${post.slug}`;
+    
     languages.forEach(lang => {
-      xml += `    <xhtml:link rel="alternate" hreflang="${lang.hreflang}" href="${siteUrl}/blog/${post.slug}" />\n`;
+      const localizedUrl = getLocalizedUrl(baseUrl, lang.code);
+      xml += `  <url>\n`;
+      xml += `    <loc>${siteUrl}${localizedUrl}</loc>\n`;
+      xml += `    <lastmod>${post.publishDate}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>${post.featured ? '0.9' : '0.8'}</priority>\n`;
+      
+      // Add hreflang tags for all language versions
+      languages.forEach(altLang => {
+        const altLocalizedUrl = getLocalizedUrl(baseUrl, altLang.code);
+        xml += `    <xhtml:link rel="alternate" hreflang="${altLang.hreflang}" href="${siteUrl}${altLocalizedUrl}" />\n`;
+      });
+      // Add x-default pointing to Spanish (default language)
+      const defaultUrl = getLocalizedUrl(baseUrl, 'es');
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${defaultUrl}" />\n`;
+      
+      xml += `  </url>\n`;
     });
-    // Add x-default pointing to Spanish (default language)
-    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}/blog/${post.slug}" />\n`;
-    xml += `  </url>\n`;
   });
   
   xml += '</urlset>';
