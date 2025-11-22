@@ -16,6 +16,7 @@ import { WebsiteSchema } from "@/components/json-ld";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { FAQSchema, FAQAccordion, FAQ } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
 import {
   trackSearch,
   trackFavoriteToggle,
@@ -25,6 +26,7 @@ import {
 
 export default function Home() {
   const { t, locale } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
   const [, setLocation] = useLocation();
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,8 +91,8 @@ export default function Home() {
   return (
     <div className="bg-white font-sans">
       <SEOHead
-        title="Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts"
-        description="Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum."
+        title={t('seo.title', { default: 'Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts' })}
+        description={t('seo.description', { default: 'Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum.' })}
         currentPath="/"
         keywords={[
           'tulum',
@@ -115,7 +117,7 @@ export default function Home() {
       <OrganizationSchema 
         name="TulumTkts"
         url={siteUrl}
-        description="Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum."
+        description={t('seo.organizationDescription', { default: 'Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum.' })}
       />
       
       {/* FAQs Schema para rich snippets */}
@@ -235,14 +237,49 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              <strong>Tulum, México</strong> es uno de los destinos más populares de la Riviera Maya, atrayendo a miles de viajeros de todo el mundo con su combinación única de <strong>playas paradisíacas</strong>, <strong>ruinas mayas</strong> impresionantes, <strong>cenotes sagrados</strong> y una vibrante escena cultural y gastronómica.
+              <strong>{t('intro.tulum')}</strong> {t('intro.paragraph1', {
+                tulum: t('intro.tulum'),
+                playas: t('intro.playas'),
+                ruinas: t('intro.ruinas'),
+                cenotes: t('intro.cenotes'),
+              }).replace(`{tulum}`, t('intro.tulum')).replace(`{playas}`, `<strong>${t('intro.playas')}</strong>`).replace(`{ruinas}`, `<strong>${t('intro.ruinas')}</strong>`).replace(`{cenotes}`, `<strong>${t('intro.cenotes')}</strong>`)}
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              Si estás planificando tu viaje a <strong>Tulum México 2025</strong>, has llegado al lugar correcto. En TulumTkts te proporcionamos la información más completa y actualizada sobre <a href="/experiencias" className="text-primary hover:underline font-semibold">tours en Tulum</a>, <a href="/experiencias" className="text-primary hover:underline font-semibold">mejores experiencias</a>, <a href="/villas" className="text-primary hover:underline font-semibold">hoteles</a>, <a href="/eventos" className="text-primary hover:underline font-semibold">eventos</a> y todo lo que necesitas saber para hacer de tu visita una experiencia inolvidable. Explora nuestra <a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">Guía Completa de Tulum</a> con más de 600 artículos detallados.
-            </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Ya sea que busques explorar los <a href="/cenotes-tulum" className="text-primary hover:underline font-semibold">cenotes de Tulum</a>, visitar las <strong>ruinas mayas</strong>, disfrutar de las <strong>playas paradisíacas</strong> o sumergirte en la cultura local, Tulum tiene algo especial para cada visitante. Reserva tus <a href="/experiencias" className="text-primary hover:underline font-semibold">tours en Tulum</a>, encuentra el <a href="/villas" className="text-primary hover:underline font-semibold">mejor hotel</a> y descubre todas las <a href="/blog" className="text-primary hover:underline font-semibold">cosas que hacer en Tulum México</a> con nuestra <a href="/tulum-guia-completa" className="text-primary hover:underline font-semibold">guía completa de Tulum 2025</a>.
-            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4"
+               dangerouslySetInnerHTML={{
+                 __html: t('intro.paragraph2', {
+                   tulum2025: t('intro.tulum2025'),
+                   tours: t('intro.tours'),
+                   mejoresExperiencias: t('intro.mejoresExperiencias'),
+                   hoteles: t('intro.hoteles'),
+                   eventos: t('intro.eventos'),
+                   guiaCompleta: t('intro.guiaCompleta'),
+                 }).replace(`{tulum2025}`, `<strong>${t('intro.tulum2025')}</strong>`)
+                   .replace(`{tours}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.tours')}</a>`)
+                   .replace(`{mejoresExperiencias}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.mejoresExperiencias')}</a>`)
+                   .replace(`{hoteles}`, `<a href="${getLocalizedLink('/villas')}" className="text-primary hover:underline font-semibold">${t('intro.hoteles')}</a>`)
+                   .replace(`{eventos}`, `<a href="${getLocalizedLink('/eventos')}" className="text-primary hover:underline font-semibold">${t('intro.eventos')}</a>`)
+                   .replace(`{guiaCompleta}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" className="text-primary hover:underline font-semibold">${t('intro.guiaCompleta')}</a>`)
+               }}
+            />
+            <p className="text-lg text-gray-700 leading-relaxed"
+               dangerouslySetInnerHTML={{
+                 __html: t('intro.paragraph3', {
+                   cenotesTulum: t('intro.cenotesTulum'),
+                   ruinasMayas: t('intro.ruinasMayas'),
+                   playasParadisíacas: t('intro.playasParadisíacas'),
+                   toursEnTulum: t('intro.toursEnTulum'),
+                   mejorHotel: t('intro.mejorHotel'),
+                   cosasQueHacer: t('intro.cosasQueHacer'),
+                   guiaCompleta2025: t('intro.guiaCompleta2025'),
+                 }).replace(`{cenotesTulum}`, `<a href="${getLocalizedLink('/cenotes-tulum')}" className="text-primary hover:underline font-semibold">${t('intro.cenotesTulum')}</a>`)
+                   .replace(`{ruinasMayas}`, `<strong>${t('intro.ruinasMayas')}</strong>`)
+                   .replace(`{playasParadisíacas}`, `<strong>${t('intro.playasParadisíacas')}</strong>`)
+                   .replace(`{toursEnTulum}`, `<a href="${getLocalizedLink('/experiencias')}" className="text-primary hover:underline font-semibold">${t('intro.toursEnTulum')}</a>`)
+                   .replace(`{mejorHotel}`, `<a href="${getLocalizedLink('/villas')}" className="text-primary hover:underline font-semibold">${t('intro.mejorHotel')}</a>`)
+                   .replace(`{cosasQueHacer}`, `<a href="${getLocalizedLink('/blog')}" className="text-primary hover:underline font-semibold">${t('intro.cosasQueHacer')}</a>`)
+                   .replace(`{guiaCompleta2025}`, `<a href="${getLocalizedLink('/tulum-guia-completa')}" className="text-primary hover:underline font-semibold">${t('intro.guiaCompleta2025')}</a>`)
+               }}
+            />
           </div>
         </div>
       </section>
