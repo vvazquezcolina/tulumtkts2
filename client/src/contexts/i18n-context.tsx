@@ -3,7 +3,8 @@ import {
   SupportedLocale, 
   getInitialLocale, 
   setStoredLocale as storeLocale,
-  registerTranslations 
+  registerTranslations,
+  t as translate
 } from '@/lib/i18n';
 
 interface I18nContextType {
@@ -52,7 +53,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   // Función t con el locale actual
   const t = (key: string, params?: Record<string, string | number>): string => {
-    const { t: translate } = require('@/lib/i18n');
     return translate(key, locale, params);
   };
 
