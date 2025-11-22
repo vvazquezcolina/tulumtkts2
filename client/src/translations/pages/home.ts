@@ -129,9 +129,9 @@ export default {
       }
     },
     footer: {
-      description: 'Your gateway to unforgettable experiences in Tulum. Discover ancient wonders, natural beauty, and adventure in paradise.',
-      experiences: 'Experiences',
-      support: 'Support',
+      description: 'Tu puerta de entrada a experiencias inolvidables en Tulum. Descubre maravillas antiguas, belleza natural y aventura en el paraíso.',
+      experiences: 'Experiencias',
+      support: 'Soporte',
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Mayan Ruins',
@@ -146,8 +146,22 @@ export default {
         termsOfService: 'Terms of Service',
         privacyPolicy: 'Privacy Policy',
       },
-      copyright: 'All rights reserved. | Made with ❤️ for travelers',
+      copyright: 'Todos los derechos reservados. | Hecho con ❤️ para viajeros',
       poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
+      experienceLinks: {
+        cenotes: 'Cenotes',
+        mayanRuins: 'Ruinas Mayas',
+        beachTours: 'Tours de Playa',
+        adventureSports: 'Deportes de Aventura',
+        culturalTours: 'Tours Culturales',
+      },
+      supportLinks: {
+        helpCenter: 'Centro de Ayuda',
+        contactUs: 'Contáctanos',
+        cancellationPolicy: 'Política de Cancelación',
+        termsOfService: 'Términos de Servicio',
+        privacyPolicy: 'Política de Privacidad',
+      },
     },
     bestseller: {
       title: 'Descubre las Mejores Experiencias en Tulum',
@@ -303,7 +317,7 @@ export default {
         privacyPolicy: 'Politique de Confidentialité',
       },
       copyright: 'Tous droits réservés. | Fait avec ❤️ pour les voyageurs',
-      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
     },
     bestseller: {
       title: 'Découvrez les Meilleures Expériences à Tulum',
@@ -459,7 +473,7 @@ export default {
         privacyPolicy: 'Informativa sulla Privacy',
       },
       copyright: 'Tutti i diritti riservati. | Fatto con ❤️ per i viaggiatori',
-      poweredBy: 'Dropped by Acidmkt | Agencia de Marketing Digital',
+      poweredBy: 'Dropped by <a href="https://acidmkt.com" target="_blank" rel="dofollow" class="text-primary hover:text-primary/80 transition-colors">Acidmkt | Agencia de Marketing Digital</a>',
     },
     bestseller: {
       title: 'Scopri le Migliori Esperienze a Tulum',
