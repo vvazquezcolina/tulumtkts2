@@ -1,6 +1,11 @@
 // Traducciones para la página Home
 export default {
   es: {
+    seo: {
+      title: 'Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts',
+      description: 'Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum.',
+      organizationDescription: 'Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum.',
+    },
     hero: {
       title: 'Tulum México 2025: {tours}, Experiencias y Guías Completas',
       tours: 'Tours',
@@ -125,6 +130,11 @@ export default {
     },
   },
   en: {
+    seo: {
+      title: 'Tulum Mexico 2025: Tours, Experiences and Complete Guides | TulumTkts',
+      description: 'Discover Tulum Mexico 2025: the best tours, experiences, hotels and complete guides. Book tours to cenotes, Mayan ruins, beaches and more. Your definitive guide to Tulum.',
+      organizationDescription: '#1 tourism platform for experiences in Tulum, Mexico. Book tours, experiences, events and accommodations in Tulum.',
+    },
     hero: {
       title: 'Tulum Mexico 2025: {tours}, Experiences and Complete Guides',
       tours: 'Tours',
@@ -249,6 +259,11 @@ export default {
     },
   },
   fr: {
+    seo: {
+      title: 'Tulum Mexique 2025: Circuits, Expériences et Guides Complets | TulumTkts',
+      description: 'Découvrez Tulum Mexique 2025: les meilleurs circuits, expériences, hôtels et guides complets. Réservez des circuits aux cenotes, ruines mayas, plages et plus. Votre guide définitif de Tulum.',
+      organizationDescription: 'Plateforme de tourisme #1 pour les expériences à Tulum, Mexique. Réservez des circuits, expériences, événements et hébergements à Tulum.',
+    },
     hero: {
       title: 'Tulum Mexique 2025: {tours}, Expériences et Guides Complets',
       tours: 'Tours',
@@ -373,6 +388,11 @@ export default {
     },
   },
   it: {
+    seo: {
+      title: 'Tulum Messico 2025: Tour, Esperienze e Guide Complete | TulumTkts',
+      description: 'Scopri Tulum Messico 2025: i migliori tour, esperienze, hotel e guide complete. Prenota tour ai cenotes, rovine maya, spiagge e altro. La tua guida definitiva a Tulum.',
+      organizationDescription: 'Piattaforma turistica #1 per esperienze a Tulum, Messico. Prenota tour, esperienze, eventi e alloggi a Tulum.',
+    },
     hero: {
       title: 'Tulum Messico 2025: {tours}, Esperienze e Guide Complete',
       tours: 'Tour',
