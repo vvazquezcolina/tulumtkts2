@@ -30,13 +30,13 @@ export function AffiliateBanner({ className = "" }: AffiliateBannerProps) {
                 <TrendingUp className="w-3 h-3 mr-1" />
                 {t('common.bestseller')}
               </Badge>
-              <span className="text-sm text-gray-600">{t('home.bestseller.poweredBy')}</span>
+              <span className="text-sm text-gray-600">{t('bestseller.poweredBy')}</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-1">
-              {t('home.bestseller.title')}
+              {t('bestseller.title')}
             </h3>
             <p className="text-sm text-gray-600">
-              {t('home.bestseller.description')}
+              {t('bestseller.description')}
             </p>
           </div>
           <div className="ml-6">
@@ -47,7 +47,7 @@ export function AffiliateBanner({ className = "" }: AffiliateBannerProps) {
               }}
               className="bg-primary text-white hover:bg-primary/90"
             >
-              {t('home.bestseller.seeExperiences')}
+              {t('bestseller.seeExperiences')}
               <ExternalLink className="w-4 h-4 ml-2" />
             </Button>
           </div>

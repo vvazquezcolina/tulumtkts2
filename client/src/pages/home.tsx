@@ -591,7 +591,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <h3 className="text-2xl font-bold text-primary mb-4">TulumTkts</h3>
               <p className="text-gray-300 mb-6 max-w-md">
-                {t('home.footer.description')}
+                {t('footer.description')}
               </p>
               <div className="flex space-x-4">
                 <a 
@@ -622,38 +622,9 @@ export default function Home() {
             </div>
             
             <div>
-              <h4 className="font-semibold text-lg mb-4">{t('home.footer.experiences')}</h4>
-              <ul className="space-y-2">
-                <li><a href={getLocalizedLink('/cenotes-tulum')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.experienceLinks.cenotes')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias?category=arqueologia')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.experienceLinks.mayanRuins')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.experienceLinks.beachTours')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.experienceLinks.adventureSports')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.experienceLinks.culturalTours')}</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-lg mb-4">{t('home.footer.support')}</h4>
-              <ul className="space-y-2">
-                <li><a href={getLocalizedLink('/contacto')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.supportLinks.helpCenter')}</a></li>
-                <li><a href={getLocalizedLink('/contacto')} className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.supportLinks.contactUs')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.supportLinks.cancellationPolicy')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.supportLinks.termsOfService')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('home.footer.supportLinks.privacyPolicy')}</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 mb-2">
-              &copy; {new Date().getFullYear()} TulumTkts. {t('home.footer.copyright')}
-            </p>
-            <p 
-              className="text-gray-400"
-              dangerouslySetInnerHTML={{
-                __html: t('home.footer.poweredBy')
-              }}
-            />
+              <p className="text-gray-300 mb-6 max-w-md">
+                {t('footer.description')}
+              </p>
           </div>
         </div>
       </footer>
