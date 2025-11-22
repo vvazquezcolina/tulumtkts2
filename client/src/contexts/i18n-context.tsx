@@ -6,6 +6,8 @@ import {
   registerTranslations,
   t as translate
 } from '@/lib/i18n';
+import commonTranslations from '@/translations/common';
+import pageTranslations from '@/translations/pages';
 
 interface I18nContextType {
   locale: SupportedLocale;
@@ -18,28 +20,24 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined);
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<SupportedLocale>(getInitialLocale());
 
-  // Cargar traducciones dinámicamente al montar
+  // Cargar traducciones síncronamente al iniciar (evita problemas de carga asíncrona)
   useEffect(() => {
-    // Importar traducciones al iniciar
-    Promise.all([
-      import('@/translations/common'),
-      import('@/translations/pages'),
-    ]).then(([common, pages]) => {
+    try {
       // Registrar traducciones comunes
-      Object.keys(common.default).forEach((lang) => {
-        if (lang in common.default) {
-          registerTranslations(lang as SupportedLocale, common.default[lang as SupportedLocale]);
+      Object.keys(commonTranslations).forEach((lang) => {
+        if (lang in commonTranslations) {
+          registerTranslations(lang as SupportedLocale, commonTranslations[lang as SupportedLocale]);
         }
       });
       // Registrar traducciones de páginas
-      Object.keys(pages.default).forEach((lang) => {
-        if (lang in pages.default) {
-          registerTranslations(lang as SupportedLocale, pages.default[lang as SupportedLocale]);
+      Object.keys(pageTranslations).forEach((lang) => {
+        if (lang in pageTranslations) {
+          registerTranslations(lang as SupportedLocale, pageTranslations[lang as SupportedLocale]);
         }
       });
-    }).catch((err) => {
+    } catch (err) {
       console.error('Error loading translations:', err);
-    });
+    }
   }, []);
 
   const setLocale = (newLocale: SupportedLocale) => {
