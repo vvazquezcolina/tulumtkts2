@@ -303,7 +303,7 @@ export default function Eventos() {
                     />
                     {event.featured && (
                       <div className="absolute top-3 left-3">
-                        <Badge className="bg-secondary text-white text-xs">Destacado</Badge>
+                        <Badge className="bg-secondary text-white text-xs">{t('eventos.event.featured')}</Badge>
                       </div>
                     )}
                     <div className="absolute top-3 right-3">
@@ -346,7 +346,7 @@ export default function Eventos() {
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-gray-900">{event.price}</span>
                       <Button size="sm" className="bg-primary text-white hover:bg-primary/90">
-                        Tickets
+                        {t('eventos.event.buyTickets')}
                       </Button>
                     </div>
                   </CardContent>
