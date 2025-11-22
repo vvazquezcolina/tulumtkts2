@@ -476,8 +476,6 @@ export default function Experiencias() {
                     toggleFavorite={toggleFavorite}
                     mapCategory={mapCategory}
                     t={t}
-                    mapCategory={mapCategory}
-                    t={t}
                   />
                 ))}
               </div>
