@@ -38,6 +38,14 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
     { url: '/cuanto-cuesta-viajar-a-tulum', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
     { url: '/mejores-hoteles-tulum', priority: '0.9', changefreq: 'weekly', lastmod: currentDate },
     { url: '/transporte', priority: '0.7', changefreq: 'monthly', lastmod: currentDate },
+    { url: '/nightlife-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/restaurantes-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/digital-nomad-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/excursiones-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/bodas-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/buceo-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/clima-tulum', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/riviera-maya', priority: '0.7', changefreq: 'weekly', lastmod: currentDate },
     { url: '/contacto', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
   ];
 
