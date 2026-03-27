@@ -456,6 +456,181 @@ export default {
       esim: { title: 'Internet Móvil en México', subtitle: 'Mantente conectado con una eSIM. Sin cambiar de chip, actívala antes de viajar y llega a Tulum con internet desde el primer momento.', buy: 'Comprar eSIM' },
       crossSell: { title: 'Completa tu viaje', subtitle: 'Todo lo que necesitas para tu aventura en Tulum, en un solo lugar.' },
     },
+    nightlife: {
+      seo: {
+        title: 'Vida Nocturna & Beach Clubs en Tulum 2026: Guía Completa | TulumTkts',
+        description: 'Descubre los mejores beach clubs y la vida nocturna de Tulum: Papaya Playa Project, Vagalume, Casa Malca y más. Horarios, precios, zonas y consejos para una noche épica.',
+      },
+      breadcrumbs: { home: 'Inicio', guide: 'Guía Tulum', current: 'Vida Nocturna & Beach Clubs' },
+      hero: {
+        badge: 'Guía Nocturna 2026',
+        title: 'Vida Nocturna & Beach Clubs en Tulum',
+        subtitle: 'De fiestas de luna llena en Papaya Playa a sunsets con champán en Bagatelle. Tu guía completa para vivir las noches más épicas de la Riviera Maya.',
+      },
+      sections: {
+        beachClubs: {
+          title: 'Los 6 Mejores Beach Clubs en Tulum',
+          subtitle: 'Desde clubs bohemios hasta venues de lujo ultramodernos, cada uno con su propio estilo y ambiente.',
+        },
+        nightlifeZones: {
+          title: 'Zonas de Vida Nocturna en Tulum',
+          subtitle: 'Conoce las diferentes áreas donde se concentra la acción nocturna para elegir la que mejor se adapta a tu estilo.',
+        },
+        tips: {
+          title: 'Consejos para la Noche en Tulum',
+          subtitle: 'Todo lo que necesitas saber para disfrutar la vida nocturna de Tulum sin sorpresas.',
+        },
+        faq: {
+          title: 'Preguntas Frecuentes sobre Vida Nocturna en Tulum',
+          subtitle: 'Resuelve todas tus dudas antes de salir de noche en Tulum.',
+        },
+      },
+      ui: {
+        priceRange: 'Rango de precio',
+        hours: 'Horario',
+        vibe: 'Ambiente',
+        visit: 'Explorar',
+        crossSellTitle: 'Completa tu viaje a Tulum',
+      },
+    },
+    restaurantes: {
+      seo: {
+        title: 'Restaurantes en Tulum - Guía Gastronómica 2026 | TulumTkts',
+        description: 'Los mejores restaurantes en Tulum: desde fine dining hasta tacos callejeros. Guía completa con precios, reseñas y consejos para comer en Tulum en 2026.',
+      },
+      hero: {
+        badge: 'Guía Gastronómica 2026',
+        title: 'Restaurantes en Tulum',
+        subtitle: 'Desde fine dining frente al mar hasta los mejores tacos callejeros. Tu guía completa para comer en Tulum.',
+      },
+      categories: {
+        all: 'Todos',
+        fine: 'Fine Dining',
+        mexican: 'Mexicano',
+        seafood: 'Mariscos',
+        vegan: 'Vegano/Saludable',
+        budget: 'Económico',
+      },
+      sections: {
+        topRestaurants: {
+          title: 'Mejores Restaurantes',
+          subtitle: 'Nuestra selección de los restaurantes más recomendados en Tulum.',
+        },
+        streetFood: {
+          title: 'Comida Callejera y Mercados',
+          subtitle: 'Los mejores tacos, ceviches y antojitos al mejor precio.',
+        },
+        tips: {
+          title: 'Consejos para Comer en Tulum',
+          subtitle: 'Lo que necesitas saber antes de reservar.',
+        },
+        faq: {
+          title: 'Preguntas Frecuentes',
+          subtitle: 'Todo sobre la escena gastronómica de Tulum.',
+        },
+      },
+      labels: {
+        cuisine: 'Cocina',
+        priceRange: 'Precio',
+        mustTry: 'Imperdible',
+        viewMenu: 'Ver Más',
+        rating: 'Rating',
+        crossSellTitle: 'Completa tu experiencia en Tulum',
+      },
+      tips: {
+        tip1: {
+          title: 'Reserva con anticipación en temporada alta',
+          description: 'Hartwood y Arca se reservan con 2-4 semanas de antelación de diciembre a abril. En temporada baja puedes conseguir mesa el mismo día, pero siempre llama antes para confirmar.',
+        },
+        tip2: {
+          title: 'Come donde no hay menú en inglés',
+          description: 'Las mejores tortillas, tamales y pozole están en los comedores del Pueblo. Busca los lugares con carteles escritos a mano y clientela local. Comerás mejor y gastarás menos.',
+        },
+        tip3: {
+          title: 'El precio de la Zona Hotelera incluye la vista',
+          description: 'Los mismos platillos cuestan 2-3 veces más frente al mar. Si el presupuesto aprieta, come en el Pueblo y ve a tomar una copa al atardecer en la Zona Hotelera.',
+        },
+        tip4: {
+          title: 'Horarios distintos al mundo occidental',
+          description: 'La mayoría de restaurantes populares abren a las 18:00 y cierran la cocina a las 22:00. Los desayunos de los mejores cafés se agotan antes de las 11:00. Ajusta tus horarios.',
+        },
+      },
+      streetFood: {
+        mercado: {
+          title: 'Mercado Municipal',
+          description: 'El mercado del Pueblo es el corazón gastronómico local. Menús del día completos con sopa, guisado, arroz y tortillas por $5-7 USD.',
+          price: 'Desde $5 USD',
+        },
+        tacos: {
+          title: 'Taquerías Callejeras',
+          description: 'Los tacos de canasta, cochinita pibil y pescado son un ritual en Tulum. Busca los puestos con más locales en fila. Son los mejores.',
+          price: 'Desde $1.50 USD/taco',
+        },
+        antojitos: {
+          title: 'Antojitos y Elotes',
+          description: 'Esquites, elotes asados, tamales y empanadas en los puestos nocturnos de la Avenida Tulum. El tour gastronómico más barato de tu vida.',
+          price: 'Desde $2 USD',
+        },
+        bannerTitle: '¿Hambre a cualquier hora?',
+        bannerDescription: 'Tulum Pueblo tiene puestos de comida abiertos desde las 7am hasta la madrugada. Desde el desayuno con chilaquiles hasta los tacos nocturnos.',
+        bannerCta: 'Ver en el mapa',
+      },
+    },
+    digitalNomad: {
+      seo: {
+        title: 'Tulum para Nómadas Digitales 2026 — Guía Completa | TulumTkts',
+        description: 'Guía completa para nómadas digitales en Tulum: coworking, costo de vida, internet, visa, vecindarios y comunidad. Todo lo que necesitas para trabajar remotamente desde Tulum en 2026.',
+      },
+      hero: {
+        badge: 'Guía Nómada Digital 2026',
+        title: 'Tulum para Nómadas Digitales',
+        subtitle: 'Trabaja remotamente desde el paraíso. Coworking con vista a la selva, internet confiable y una comunidad de nómadas en crecimiento.',
+      },
+      sections: {
+        costOfLiving: 'Costo de Vida',
+        coworking: 'Espacios de Coworking',
+        connectivity: 'Internet y Conectividad',
+        visa: 'Visa y Aspectos Legales',
+        neighborhoods: 'Mejores Vecindarios',
+        community: 'Comunidad Nómada',
+      },
+      costTitle: 'Presupuesto Mensual en Tulum',
+      costSubtitle: 'Desglose realista para 3 niveles de presupuesto para trabajar y vivir en Tulum un mes completo.',
+      costDisclaimer: 'Precios estimados en USD. Los alquileres varían según temporada y ubicación.',
+      coworkingTitle: 'Los Mejores Espacios de Coworking',
+      coworkingSubtitle: 'Oficinas con aire acondicionado, wifi rápido y comunidad. De $150 a $250/mes.',
+      connectivityTitle: 'Internet y Conectividad en Tulum',
+      connectivitySubtitle: 'Lo que debes saber sobre WiFi, eSIM y energía antes de llegar.',
+      visaTitle: 'Visa y Aspectos Legales',
+      visaSubtitle: 'Opciones para trabajar remotamente desde México de forma legal.',
+      neighborhoodsTitle: '¿Dónde Vivir como Nómada en Tulum?',
+      neighborhoodsSubtitle: 'Cada zona de Tulum tiene su propia personalidad. Encuentra la que encaja con tu estilo.',
+      communityTitle: 'Cómo Conectar con Otros Nómadas',
+      communitySubtitle: 'Tulum tiene una comunidad nómada vibrante. Así puedes integrarte.',
+      labels: {
+        category: 'Categoría',
+        budget: 'Económico',
+        midRange: 'Intermedio',
+        premium: 'Premium',
+        perMonth: '/mes',
+        wifiSpeed: 'Velocidad WiFi',
+        amenities: 'Servicios',
+        monthlyTotal: 'Total mensual estimado',
+        monthlyRent: 'Renta mensual',
+        vibe: 'Ambiente',
+        seeOptions: 'Ver opciones',
+        browseAccommodation: 'Explorar alojamientos',
+      },
+      esimCta: {
+        title: 'Llega con internet desde el primer día',
+        subtitle: 'Activa una eSIM para México antes de volar y mantente conectado en cualquier parte de Tulum.',
+        button: 'Comprar eSIM México',
+      },
+      faq: {
+        title: 'Preguntas Frecuentes — Nómada Digital en Tulum',
+        subtitle: 'Todo lo que necesitas saber antes de instalarte a trabajar desde Tulum.',
+      },
+    },
   },
   en: {
     nav: {
@@ -912,6 +1087,181 @@ export default {
       insurance: { title: 'Travel Insurance for Mexico', subtitle: 'Travel with peace of mind with medical, cancellation and luggage coverage. Protect your Tulum trip from just $1.50 USD/day.', from: 'From', perDay: 'USD/day' },
       esim: { title: 'Mobile Internet in Mexico', subtitle: 'Stay connected with an eSIM. No SIM swap needed — activate before you travel and arrive in Tulum with internet from day one.', buy: 'Buy eSIM' },
       crossSell: { title: 'Complete your trip', subtitle: 'Everything you need for your Tulum adventure, all in one place.' },
+    },
+    nightlife: {
+      seo: {
+        title: 'Nightlife & Beach Clubs in Tulum 2026: Complete Guide | TulumTkts',
+        description: 'Discover the best beach clubs and nightlife in Tulum: Papaya Playa Project, Vagalume, Casa Malca and more. Hours, prices, zones and tips for an epic night out.',
+      },
+      breadcrumbs: { home: 'Home', guide: 'Tulum Guide', current: 'Nightlife & Beach Clubs' },
+      hero: {
+        badge: 'Nightlife Guide 2026',
+        title: 'Nightlife & Beach Clubs in Tulum',
+        subtitle: 'From full moon parties at Papaya Playa to champagne sunsets at Bagatelle. Your complete guide to the most epic nights on the Riviera Maya.',
+      },
+      sections: {
+        beachClubs: {
+          title: 'The 6 Best Beach Clubs in Tulum',
+          subtitle: 'From bohemian clubs to ultra-modern luxury venues, each with its own style and atmosphere.',
+        },
+        nightlifeZones: {
+          title: 'Nightlife Zones in Tulum',
+          subtitle: 'Discover the different areas where the nightlife action concentrates and choose the one that best fits your style.',
+        },
+        tips: {
+          title: 'Tips for a Night Out in Tulum',
+          subtitle: 'Everything you need to know to enjoy Tulum nightlife without any surprises.',
+        },
+        faq: {
+          title: 'Frequently Asked Questions about Tulum Nightlife',
+          subtitle: 'Answer all your questions before heading out for a night in Tulum.',
+        },
+      },
+      ui: {
+        priceRange: 'Price range',
+        hours: 'Hours',
+        vibe: 'Vibe',
+        visit: 'Explore',
+        crossSellTitle: 'Complete your Tulum trip',
+      },
+    },
+    restaurantes: {
+      seo: {
+        title: 'Restaurants in Tulum - Food Guide 2026 | TulumTkts',
+        description: 'The best restaurants in Tulum: from fine dining to street tacos. Complete guide with prices, reviews and tips for eating in Tulum in 2026.',
+      },
+      hero: {
+        badge: 'Food Guide 2026',
+        title: 'Restaurants in Tulum',
+        subtitle: 'From beachfront fine dining to the best street tacos. Your complete guide to eating in Tulum.',
+      },
+      categories: {
+        all: 'All',
+        fine: 'Fine Dining',
+        mexican: 'Mexican',
+        seafood: 'Seafood',
+        vegan: 'Vegan/Healthy',
+        budget: 'Budget',
+      },
+      sections: {
+        topRestaurants: {
+          title: 'Best Restaurants',
+          subtitle: 'Our selection of the most recommended restaurants in Tulum.',
+        },
+        streetFood: {
+          title: 'Street Food & Markets',
+          subtitle: 'The best tacos, ceviches and local bites at the best prices.',
+        },
+        tips: {
+          title: 'Tips for Eating in Tulum',
+          subtitle: 'What you need to know before making a reservation.',
+        },
+        faq: {
+          title: 'Frequently Asked Questions',
+          subtitle: 'Everything about the Tulum food scene.',
+        },
+      },
+      labels: {
+        cuisine: 'Cuisine',
+        priceRange: 'Price',
+        mustTry: 'Must Try',
+        viewMenu: 'See More',
+        rating: 'Rating',
+        crossSellTitle: 'Complete your Tulum experience',
+      },
+      tips: {
+        tip1: {
+          title: 'Book ahead during high season',
+          description: 'Hartwood and Arca book up 2-4 weeks in advance from December to April. In low season you can often get a table the same day, but always call ahead to confirm.',
+        },
+        tip2: {
+          title: 'Eat where there is no English menu',
+          description: 'The best tortillas, tamales and pozole are in the Pueblo comedores. Look for handwritten signs and local customers. You will eat better and spend less.',
+        },
+        tip3: {
+          title: 'Hotel Zone prices include the view',
+          description: 'The same dishes cost 2-3 times more facing the sea. If you are on a budget, eat in the Pueblo and go for a sunset drink in the Hotel Zone.',
+        },
+        tip4: {
+          title: 'Different schedule from the Western world',
+          description: 'Most popular restaurants open at 6pm and close the kitchen at 10pm. The best cafes run out of breakfast items before 11am. Adjust your schedule accordingly.',
+        },
+      },
+      streetFood: {
+        mercado: {
+          title: 'Municipal Market',
+          description: 'The Pueblo market is the local gastronomic heart. Full daily menus with soup, stew, rice and tortillas for $5-7 USD.',
+          price: 'From $5 USD',
+        },
+        tacos: {
+          title: 'Street Taco Stands',
+          description: 'Basket tacos, cochinita pibil and fish tacos are a ritual in Tulum. Look for the stands with the most locals in line. Those are the best ones.',
+          price: 'From $1.50 USD/taco',
+        },
+        antojitos: {
+          title: 'Antojitos & Street Corn',
+          description: 'Esquites, grilled elotes, tamales and empanadas at the night stalls on Avenida Tulum. The cheapest food tour of your life.',
+          price: 'From $2 USD',
+        },
+        bannerTitle: 'Hungry at any hour?',
+        bannerDescription: 'Tulum Pueblo has food stalls open from 7am to the early hours. From chilaquiles breakfast to late-night tacos.',
+        bannerCta: 'View on map',
+      },
+    },
+    digitalNomad: {
+      seo: {
+        title: 'Tulum for Digital Nomads 2026 — Complete Guide | TulumTkts',
+        description: 'Complete guide for digital nomads in Tulum: coworking, cost of living, internet, visa, neighborhoods and community. Everything you need to work remotely from Tulum in 2026.',
+      },
+      hero: {
+        badge: 'Digital Nomad Guide 2026',
+        title: 'Tulum for Digital Nomads',
+        subtitle: 'Work remotely from paradise. Jungle-view coworking spaces, reliable internet, and a fast-growing nomad community.',
+      },
+      sections: {
+        costOfLiving: 'Cost of Living',
+        coworking: 'Coworking Spaces',
+        connectivity: 'Internet & Connectivity',
+        visa: 'Visa & Legal',
+        neighborhoods: 'Best Neighborhoods',
+        community: 'Nomad Community',
+      },
+      costTitle: 'Monthly Budget in Tulum',
+      costSubtitle: 'Realistic breakdown for 3 budget levels to live and work in Tulum for a full month.',
+      costDisclaimer: 'Estimated prices in USD. Rent varies by season and location.',
+      coworkingTitle: 'Best Coworking Spaces',
+      coworkingSubtitle: 'Air-conditioned offices, fast WiFi, and community vibes. From $150 to $250/month.',
+      connectivityTitle: 'Internet & Connectivity in Tulum',
+      connectivitySubtitle: 'What you need to know about WiFi, eSIM, and power before you arrive.',
+      visaTitle: 'Visa & Legal Info',
+      visaSubtitle: 'Options for working remotely from Mexico legally.',
+      neighborhoodsTitle: 'Where to Live as a Nomad in Tulum',
+      neighborhoodsSubtitle: 'Each area of Tulum has its own personality. Find the one that suits your style.',
+      communityTitle: 'How to Connect with Other Nomads',
+      communitySubtitle: 'Tulum has a vibrant nomad community. Here is how to plug in.',
+      labels: {
+        category: 'Category',
+        budget: 'Budget',
+        midRange: 'Mid-range',
+        premium: 'Premium',
+        perMonth: '/month',
+        wifiSpeed: 'WiFi Speed',
+        amenities: 'Amenities',
+        monthlyTotal: 'Estimated monthly total',
+        monthlyRent: 'Monthly rent',
+        vibe: 'Vibe',
+        seeOptions: 'See options',
+        browseAccommodation: 'Browse accommodation',
+      },
+      esimCta: {
+        title: 'Arrive with internet from day one',
+        subtitle: 'Activate a Mexico eSIM before you fly and stay connected anywhere in Tulum.',
+        button: 'Get Mexico eSIM',
+      },
+      faq: {
+        title: 'FAQ — Digital Nomad in Tulum',
+        subtitle: 'Everything you need to know before setting up to work from Tulum.',
+      },
     },
   },
   fr: {
@@ -1370,6 +1720,181 @@ export default {
       esim: { title: 'Internet Mobile au Mexique', subtitle: 'Restez connecté avec une eSIM. Sans changer de carte SIM — activez avant de voyager et arrivez à Tulum avec internet dès le premier jour.', buy: 'Acheter eSIM' },
       crossSell: { title: 'Complétez votre voyage', subtitle: 'Tout ce dont vous avez besoin pour votre aventure à Tulum, en un seul endroit.' },
     },
+    nightlife: {
+      seo: {
+        title: 'Vie Nocturne & Beach Clubs à Tulum 2026 : Guide Complet | TulumTkts',
+        description: 'Découvrez les meilleurs beach clubs et la vie nocturne de Tulum : Papaya Playa Project, Vagalume, Casa Malca et plus. Horaires, prix, zones et conseils pour une nuit épique.',
+      },
+      breadcrumbs: { home: 'Accueil', guide: 'Guide Tulum', current: 'Vie Nocturne & Beach Clubs' },
+      hero: {
+        badge: 'Guide Nuit 2026',
+        title: 'Vie Nocturne & Beach Clubs à Tulum',
+        subtitle: 'Des soirées pleine lune au Papaya Playa aux couchers de soleil au champagne au Bagatelle. Votre guide complet pour les nuits les plus épiques de la Riviera Maya.',
+      },
+      sections: {
+        beachClubs: {
+          title: 'Les 6 Meilleurs Beach Clubs de Tulum',
+          subtitle: 'Des clubs bohèmes aux venues de luxe ultra-modernes, chacun avec son propre style et ambiance.',
+        },
+        nightlifeZones: {
+          title: 'Zones de Vie Nocturne à Tulum',
+          subtitle: 'Découvrez les différentes zones où se concentre l\'action nocturne et choisissez celle qui correspond le mieux à votre style.',
+        },
+        tips: {
+          title: 'Conseils pour une Sortie à Tulum',
+          subtitle: 'Tout ce que vous devez savoir pour profiter de la vie nocturne de Tulum sans mauvaises surprises.',
+        },
+        faq: {
+          title: 'Questions Fréquentes sur la Vie Nocturne à Tulum',
+          subtitle: 'Répondez à toutes vos questions avant de sortir la nuit à Tulum.',
+        },
+      },
+      ui: {
+        priceRange: 'Gamme de prix',
+        hours: 'Horaires',
+        vibe: 'Ambiance',
+        visit: 'Explorer',
+        crossSellTitle: 'Complétez votre voyage à Tulum',
+      },
+    },
+    restaurantes: {
+      seo: {
+        title: 'Restaurants à Tulum - Guide Gastronomique 2026 | TulumTkts',
+        description: 'Les meilleurs restaurants à Tulum : du fine dining aux tacos de rue. Guide complet avec prix, avis et conseils pour manger à Tulum en 2026.',
+      },
+      hero: {
+        badge: 'Guide Gastronomique 2026',
+        title: 'Restaurants à Tulum',
+        subtitle: 'Du fine dining face à la mer aux meilleurs tacos de rue. Votre guide complet pour manger à Tulum.',
+      },
+      categories: {
+        all: 'Tous',
+        fine: 'Fine Dining',
+        mexican: 'Mexicain',
+        seafood: 'Fruits de mer',
+        vegan: 'Végane/Sain',
+        budget: 'Économique',
+      },
+      sections: {
+        topRestaurants: {
+          title: 'Meilleurs Restaurants',
+          subtitle: 'Notre sélection des restaurants les plus recommandés à Tulum.',
+        },
+        streetFood: {
+          title: 'Street Food & Marchés',
+          subtitle: 'Les meilleurs tacos, ceviches et amuse-gueules locaux aux meilleurs prix.',
+        },
+        tips: {
+          title: 'Conseils pour Manger à Tulum',
+          subtitle: 'Ce que vous devez savoir avant de réserver.',
+        },
+        faq: {
+          title: 'Questions Fréquentes',
+          subtitle: 'Tout sur la scène gastronomique de Tulum.',
+        },
+      },
+      labels: {
+        cuisine: 'Cuisine',
+        priceRange: 'Prix',
+        mustTry: 'À ne pas manquer',
+        viewMenu: 'Voir Plus',
+        rating: 'Note',
+        crossSellTitle: 'Complétez votre expérience à Tulum',
+      },
+      tips: {
+        tip1: {
+          title: 'Réservez à l\'avance en haute saison',
+          description: 'Hartwood et Arca se réservent 2-4 semaines à l\'avance de décembre à avril. En basse saison, vous pouvez souvent obtenir une table le jour même, mais appelez toujours pour confirmer.',
+        },
+        tip2: {
+          title: 'Mangez là où il n\'y a pas de menu en anglais',
+          description: 'Les meilleures tortillas, tamales et pozole se trouvent dans les comedores du Pueblo. Cherchez les enseignes écrites à la main et la clientèle locale. Vous mangerez mieux et dépenserez moins.',
+        },
+        tip3: {
+          title: 'Les prix de la Zone Hôtelière incluent la vue',
+          description: 'Les mêmes plats coûtent 2-3 fois plus cher face à la mer. Si votre budget est serré, mangez au Pueblo et allez prendre un verre au coucher du soleil dans la Zone Hôtelière.',
+        },
+        tip4: {
+          title: 'Horaires différents du monde occidental',
+          description: 'La plupart des restaurants populaires ouvrent à 18h et ferment la cuisine à 22h. Les meilleurs cafés n\'ont plus de petits déjeuners avant 11h. Adaptez votre programme.',
+        },
+      },
+      streetFood: {
+        mercado: {
+          title: 'Marché Municipal',
+          description: 'Le marché du Pueblo est le cœur gastronomique local. Menus du jour complets avec soupe, ragoût, riz et tortillas pour $5-7 USD.',
+          price: 'À partir de $5 USD',
+        },
+        tacos: {
+          title: 'Stands de Tacos',
+          description: 'Les tacos de canasta, cochinita pibil et poisson sont un rituel à Tulum. Cherchez les stands avec le plus de locaux en file. Ce sont les meilleurs.',
+          price: 'À partir de $1.50 USD/taco',
+        },
+        antojitos: {
+          title: 'Antojitos & Maïs Grillé',
+          description: 'Esquites, épis grillés, tamales et empanadas aux stands nocturnes de l\'Avenida Tulum. Le tour gastronomique le moins cher de votre vie.',
+          price: 'À partir de $2 USD',
+        },
+        bannerTitle: 'Faim à toute heure ?',
+        bannerDescription: 'Tulum Pueblo a des stands de nourriture ouverts de 7h du matin aux premières heures. Des chilaquiles du matin aux tacos de nuit.',
+        bannerCta: 'Voir sur la carte',
+      },
+    },
+    digitalNomad: {
+      seo: {
+        title: 'Tulum pour les Nomades Digitaux 2026 — Guide Complet | TulumTkts',
+        description: 'Guide complet pour les nomades digitaux à Tulum : coworking, coût de la vie, internet, visa, quartiers et communauté. Tout ce qu\'il faut pour travailler à distance depuis Tulum en 2026.',
+      },
+      hero: {
+        badge: 'Guide Nomade Digital 2026',
+        title: 'Tulum pour les Nomades Digitaux',
+        subtitle: 'Travaillez à distance depuis le paradis. Coworking vue jungle, internet fiable et une communauté de nomades en plein essor.',
+      },
+      sections: {
+        costOfLiving: 'Coût de la Vie',
+        coworking: 'Espaces de Coworking',
+        connectivity: 'Internet & Connectivité',
+        visa: 'Visa & Aspects Légaux',
+        neighborhoods: 'Meilleurs Quartiers',
+        community: 'Communauté Nomade',
+      },
+      costTitle: 'Budget Mensuel à Tulum',
+      costSubtitle: 'Répartition réaliste pour 3 niveaux de budget pour vivre et travailler à Tulum un mois complet.',
+      costDisclaimer: 'Prix estimés en USD. Les loyers varient selon la saison et l\'emplacement.',
+      coworkingTitle: 'Meilleurs Espaces de Coworking',
+      coworkingSubtitle: 'Bureaux climatisés, WiFi rapide et ambiance communautaire. De $150 à $250/mois.',
+      connectivityTitle: 'Internet & Connectivité à Tulum',
+      connectivitySubtitle: 'Ce que vous devez savoir sur le WiFi, les eSIM et l\'électricité avant d\'arriver.',
+      visaTitle: 'Visa & Informations Légales',
+      visaSubtitle: 'Options pour travailler légalement à distance depuis le Mexique.',
+      neighborhoodsTitle: 'Où Vivre en tant que Nomade à Tulum',
+      neighborhoodsSubtitle: 'Chaque quartier de Tulum a sa propre personnalité. Trouvez celui qui vous correspond.',
+      communityTitle: 'Comment Rencontrer d\'Autres Nomades',
+      communitySubtitle: 'Tulum dispose d\'une communauté nomade dynamique. Voici comment s\'y intégrer.',
+      labels: {
+        category: 'Catégorie',
+        budget: 'Économique',
+        midRange: 'Intermédiaire',
+        premium: 'Premium',
+        perMonth: '/mois',
+        wifiSpeed: 'Vitesse WiFi',
+        amenities: 'Services',
+        monthlyTotal: 'Total mensuel estimé',
+        monthlyRent: 'Loyer mensuel',
+        vibe: 'Ambiance',
+        seeOptions: 'Voir les options',
+        browseAccommodation: 'Parcourir les hébergements',
+      },
+      esimCta: {
+        title: 'Arrivez avec internet dès le premier jour',
+        subtitle: 'Activez une eSIM pour le Mexique avant de prendre l\'avion et restez connecté partout à Tulum.',
+        button: 'Acheter eSIM Mexique',
+      },
+      faq: {
+        title: 'FAQ — Nomade Digital à Tulum',
+        subtitle: 'Tout ce que vous devez savoir avant de vous installer pour travailler depuis Tulum.',
+      },
+    },
   },
   it: {
     nav: {
@@ -1826,6 +2351,181 @@ export default {
       insurance: { title: 'Assicurazione Viaggio per il Messico', subtitle: 'Viaggia tranquillo con copertura medica, cancellazione e bagaglio. Proteggi il tuo viaggio a Tulum da soli $1.50 USD/giorno.', from: 'Da', perDay: 'USD/giorno' },
       esim: { title: 'Internet Mobile in Messico', subtitle: 'Rimani connesso con una eSIM. Senza cambiare SIM — attivala prima di partire e arriva a Tulum con internet dal primo momento.', buy: 'Acquista eSIM' },
       crossSell: { title: 'Completa il tuo viaggio', subtitle: 'Tutto ciò di cui hai bisogno per la tua avventura a Tulum, in un unico posto.' },
+    },
+    nightlife: {
+      seo: {
+        title: 'Vita Notturna & Beach Clubs a Tulum 2026: Guida Completa | TulumTkts',
+        description: 'Scopri i migliori beach clubs e la vita notturna di Tulum: Papaya Playa Project, Vagalume, Casa Malca e altro. Orari, prezzi, zone e consigli per una notte epica.',
+      },
+      breadcrumbs: { home: 'Home', guide: 'Guida Tulum', current: 'Vita Notturna & Beach Clubs' },
+      hero: {
+        badge: 'Guida Notturna 2026',
+        title: 'Vita Notturna & Beach Clubs a Tulum',
+        subtitle: 'Dalle feste di luna piena al Papaya Playa ai tramonti con champagne al Bagatelle. La tua guida completa per le notti più epiche della Riviera Maya.',
+      },
+      sections: {
+        beachClubs: {
+          title: 'I 6 Migliori Beach Clubs di Tulum',
+          subtitle: 'Dai club bohémien ai venue di lusso ultra-moderni, ognuno con il proprio stile e atmosfera.',
+        },
+        nightlifeZones: {
+          title: 'Zone della Vita Notturna a Tulum',
+          subtitle: 'Scopri le diverse aree dove si concentra l\'azione notturna e scegli quella più adatta al tuo stile.',
+        },
+        tips: {
+          title: 'Consigli per una Serata a Tulum',
+          subtitle: 'Tutto quello che devi sapere per godersi la vita notturna di Tulum senza sorprese.',
+        },
+        faq: {
+          title: 'Domande Frequenti sulla Vita Notturna a Tulum',
+          subtitle: 'Risolvi tutti i tuoi dubbi prima di uscire la sera a Tulum.',
+        },
+      },
+      ui: {
+        priceRange: 'Fascia di prezzo',
+        hours: 'Orari',
+        vibe: 'Atmosfera',
+        visit: 'Esplora',
+        crossSellTitle: 'Completa il tuo viaggio a Tulum',
+      },
+    },
+    restaurantes: {
+      seo: {
+        title: 'Ristoranti a Tulum - Guida Gastronomica 2026 | TulumTkts',
+        description: 'I migliori ristoranti a Tulum: dal fine dining ai tacos di strada. Guida completa con prezzi, recensioni e consigli per mangiare a Tulum nel 2026.',
+      },
+      hero: {
+        badge: 'Guida Gastronomica 2026',
+        title: 'Ristoranti a Tulum',
+        subtitle: 'Dal fine dining fronte mare ai migliori tacos di strada. La tua guida completa per mangiare a Tulum.',
+      },
+      categories: {
+        all: 'Tutti',
+        fine: 'Fine Dining',
+        mexican: 'Messicano',
+        seafood: 'Frutti di mare',
+        vegan: 'Vegano/Sano',
+        budget: 'Economico',
+      },
+      sections: {
+        topRestaurants: {
+          title: 'Migliori Ristoranti',
+          subtitle: 'La nostra selezione dei ristoranti più consigliati a Tulum.',
+        },
+        streetFood: {
+          title: 'Street Food & Mercati',
+          subtitle: 'I migliori tacos, ceviche e spuntini locali al miglior prezzo.',
+        },
+        tips: {
+          title: 'Consigli per Mangiare a Tulum',
+          subtitle: 'Quello che devi sapere prima di prenotare.',
+        },
+        faq: {
+          title: 'Domande Frequenti',
+          subtitle: 'Tutto sulla scena gastronomica di Tulum.',
+        },
+      },
+      labels: {
+        cuisine: 'Cucina',
+        priceRange: 'Prezzo',
+        mustTry: 'Da non perdere',
+        viewMenu: 'Vedi Altro',
+        rating: 'Valutazione',
+        crossSellTitle: 'Completa la tua esperienza a Tulum',
+      },
+      tips: {
+        tip1: {
+          title: 'Prenota in anticipo in alta stagione',
+          description: 'Hartwood e Arca si prenotano con 2-4 settimane di anticipo da dicembre ad aprile. In bassa stagione puoi spesso ottenere un tavolo lo stesso giorno, ma chiama sempre per confermare.',
+        },
+        tip2: {
+          title: 'Mangia dove non c\'è menu in inglese',
+          description: 'Le migliori tortillas, tamales e pozole si trovano nei comedores del Pueblo. Cerca i posti con insegne scritte a mano e clientela locale. Mangerai meglio e spenderai meno.',
+        },
+        tip3: {
+          title: 'I prezzi della Zona Alberghiera includono la vista',
+          description: 'Gli stessi piatti costano 2-3 volte di più fronte al mare. Se il budget è limitato, mangia al Pueblo e vai a prendere un aperitivo al tramonto nella Zona Alberghiera.',
+        },
+        tip4: {
+          title: 'Orari diversi dal mondo occidentale',
+          description: 'La maggior parte dei ristoranti popolari apre alle 18:00 e chiude la cucina alle 22:00. I migliori caffè esauriscono le colazioni prima delle 11:00. Adatta i tuoi orari.',
+        },
+      },
+      streetFood: {
+        mercado: {
+          title: 'Mercato Municipale',
+          description: 'Il mercato del Pueblo è il cuore gastronomico locale. Menu del giorno completi con zuppa, stufato, riso e tortillas per $5-7 USD.',
+          price: 'Da $5 USD',
+        },
+        tacos: {
+          title: 'Bancarelle di Tacos',
+          description: 'I tacos de canasta, cochinita pibil e pesce sono un rituale a Tulum. Cerca le bancarelle con più locali in fila. Sono le migliori.',
+          price: 'Da $1.50 USD/taco',
+        },
+        antojitos: {
+          title: 'Antojitos & Mais Grigliato',
+          description: 'Esquites, mais grigliati, tamales e empanadas nei banchetti notturni dell\'Avenida Tulum. Il tour gastronomico più economico della tua vita.',
+          price: 'Da $2 USD',
+        },
+        bannerTitle: 'Fame a qualsiasi ora?',
+        bannerDescription: 'Tulum Pueblo ha bancarelle di cibo aperte dalle 7 del mattino alle prime ore. Dalla colazione con chilaquiles ai tacos notturni.',
+        bannerCta: 'Vedi sulla mappa',
+      },
+    },
+    digitalNomad: {
+      seo: {
+        title: 'Tulum per i Nomadi Digitali 2026 — Guida Completa | TulumTkts',
+        description: 'Guida completa per i nomadi digitali a Tulum: coworking, costo della vita, internet, visto, quartieri e comunità. Tutto quello che ti serve per lavorare da remoto da Tulum nel 2026.',
+      },
+      hero: {
+        badge: 'Guida Nomade Digitale 2026',
+        title: 'Tulum per i Nomadi Digitali',
+        subtitle: 'Lavora da remoto dal paradiso. Spazi di coworking con vista sulla giungla, internet affidabile e una comunità di nomadi in crescita.',
+      },
+      sections: {
+        costOfLiving: 'Costo della Vita',
+        coworking: 'Spazi di Coworking',
+        connectivity: 'Internet & Connettività',
+        visa: 'Visto & Aspetti Legali',
+        neighborhoods: 'Migliori Quartieri',
+        community: 'Comunità Nomade',
+      },
+      costTitle: 'Budget Mensile a Tulum',
+      costSubtitle: 'Ripartizione realistica per 3 livelli di budget per vivere e lavorare a Tulum per un mese intero.',
+      costDisclaimer: 'Prezzi stimati in USD. Gli affitti variano in base alla stagione e alla posizione.',
+      coworkingTitle: 'Migliori Spazi di Coworking',
+      coworkingSubtitle: 'Uffici climatizzati, WiFi veloce e atmosfera comunitaria. Da $150 a $250/mese.',
+      connectivityTitle: 'Internet & Connettività a Tulum',
+      connectivitySubtitle: 'Quello che devi sapere su WiFi, eSIM e corrente prima di arrivare.',
+      visaTitle: 'Visto & Informazioni Legali',
+      visaSubtitle: 'Opzioni per lavorare legalmente da remoto dal Messico.',
+      neighborhoodsTitle: 'Dove Vivere come Nomade a Tulum',
+      neighborhoodsSubtitle: 'Ogni zona di Tulum ha la sua personalità. Trova quella che fa per te.',
+      communityTitle: 'Come Connettersi con Altri Nomadi',
+      communitySubtitle: 'Tulum ha una comunità nomade vivace. Ecco come integrarsi.',
+      labels: {
+        category: 'Categoria',
+        budget: 'Economico',
+        midRange: 'Intermedio',
+        premium: 'Premium',
+        perMonth: '/mese',
+        wifiSpeed: 'Velocità WiFi',
+        amenities: 'Servizi',
+        monthlyTotal: 'Totale mensile stimato',
+        monthlyRent: 'Affitto mensile',
+        vibe: 'Atmosfera',
+        seeOptions: 'Vedi opzioni',
+        browseAccommodation: 'Esplora alloggi',
+      },
+      esimCta: {
+        title: 'Arriva con internet dal primo giorno',
+        subtitle: 'Attiva una eSIM per il Messico prima di volare e rimani connesso ovunque a Tulum.',
+        button: 'Acquista eSIM Messico',
+      },
+      faq: {
+        title: 'FAQ — Nomade Digitale a Tulum',
+        subtitle: 'Tutto quello che devi sapere prima di stabilirti per lavorare da Tulum.',
+      },
     },
   },
 };
