@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { CrossSell } from "@/components/cross-sell";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -355,10 +356,11 @@ export default function Villas() {
             {filteredVillas.filter(villa => villa.featured).map((villa) => (
               <Card key={villa.id} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
                 <div className="relative">
-                  <img 
-                    src={villa.images[0]} 
+                  <img
+                    src={villa.images[0]}
                     alt={villa.title}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4">
                     <Badge className="bg-secondary text-white">{t('villas.villa.featured')}</Badge>
@@ -467,10 +469,11 @@ export default function Villas() {
               {filteredVillas.map((villa) => (
                 <Card key={villa.id} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
                   <div className="relative">
-                    <img 
-                      src={villa.images[0]} 
+                    <img
+                      src={villa.images[0]}
                       alt={villa.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                     {villa.featured && (
                       <div className="absolute top-3 left-3">
@@ -650,6 +653,7 @@ export default function Villas() {
       </section>
 
       <CrossSell exclude={["hoteles"]} />
+      <Footer />
     </div>
   );
 }

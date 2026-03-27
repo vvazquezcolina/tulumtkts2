@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plane, Hotel, Compass, Car, Shield, Wifi, ArrowRight } from "lucide-react";
 import { generateFlightLink, generateHotelLink, generateCarRentalLink, generateTransferLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { useI18n } from "@/contexts/i18n-context";
 
 interface TripCost {
   flights: number;
@@ -17,6 +18,7 @@ interface TripCost {
 }
 
 export function TripPlanner() {
+  const { t } = useI18n();
   const [origin, setOrigin] = useState("MEX");
   const [nights, setNights] = useState("5");
   const [travelers, setTravelers] = useState("2");
@@ -90,27 +92,27 @@ export function TripPlanner() {
   };
 
   const items = [
-    { key: "flights", icon: Plane, label: "Vuelos", amount: flightTotal, detail: `${numTravelers} viajero${numTravelers > 1 ? "s" : ""} ida y vuelta` },
-    { key: "hotel", icon: Hotel, label: "Hotel", amount: hotelTotal, detail: `${numNights} noches` },
-    { key: "activities", icon: Compass, label: "Actividades", amount: activitiesTotal, detail: `~${Math.ceil(numNights / 2)} experiencias` },
-    { key: "transport", icon: Car, label: "Transporte", amount: transportTotal, detail: "Transfer aeropuerto + local" },
-    { key: "insurance", icon: Shield, label: "Seguro", amount: insuranceTotal, detail: `${numNights} dias cobertura` },
+    { key: "flights", icon: Plane, label: t('tripPlanner.flights'), amount: flightTotal, detail: `${numTravelers} ${t('tripPlanner.travelersUnit')} ${t('tripPlanner.roundTrip')}` },
+    { key: "hotel", icon: Hotel, label: t('tripPlanner.hotel'), amount: hotelTotal, detail: `${numNights} ${t('tripPlanner.nightsUnit')}` },
+    { key: "activities", icon: Compass, label: t('tripPlanner.activities'), amount: activitiesTotal, detail: `~${Math.ceil(numNights / 2)} ${t('tripPlanner.experiencesUnit')}` },
+    { key: "transport", icon: Car, label: t('tripPlanner.transport'), amount: transportTotal, detail: t('tripPlanner.transportDetail') },
+    { key: "insurance", icon: Shield, label: t('tripPlanner.insurance'), amount: insuranceTotal, detail: `${numNights} ${t('tripPlanner.coverageUnit')}` },
   ];
 
   return (
     <Card className="border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50">
       <CardContent className="p-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-2">
-          Calculadora de Viaje a Tulum
+          {t('tripPlanner.title')}
         </h3>
         <p className="text-gray-600 mb-6">
-          Estima el costo total de tu viaje y reserva cada parte con los mejores precios.
+          {t('tripPlanner.subtitle')}
         </p>
 
         {/* Config inputs */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div>
-            <Label className="text-sm text-gray-600">Origen</Label>
+            <Label className="text-sm text-gray-600">{t('tripPlanner.origin')}</Label>
             <Input
               value={origin}
               onChange={(e) => setOrigin(e.target.value.toUpperCase())}
@@ -120,18 +122,18 @@ export function TripPlanner() {
             />
           </div>
           <div>
-            <Label className="text-sm text-gray-600">Noches</Label>
+            <Label className="text-sm text-gray-600">{t('tripPlanner.nights')}</Label>
             <Select value={nights} onValueChange={setNights}>
               <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
               <SelectContent>
                 {[3, 4, 5, 7, 10, 14].map((n) => (
-                  <SelectItem key={n} value={n.toString()}>{n} noches</SelectItem>
+                  <SelectItem key={n} value={n.toString()}>{`${n} ${t('tripPlanner.nightsUnit')}`}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
           <div>
-            <Label className="text-sm text-gray-600">Viajeros</Label>
+            <Label className="text-sm text-gray-600">{t('tripPlanner.travelers')}</Label>
             <Select value={travelers} onValueChange={setTravelers}>
               <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
               <SelectContent>
@@ -142,13 +144,13 @@ export function TripPlanner() {
             </Select>
           </div>
           <div>
-            <Label className="text-sm text-gray-600">Presupuesto</Label>
+            <Label className="text-sm text-gray-600">{t('tripPlanner.budget')}</Label>
             <Select value={budget} onValueChange={(v) => setBudget(v as any)}>
               <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="budget">Economico</SelectItem>
-                <SelectItem value="mid">Intermedio</SelectItem>
-                <SelectItem value="luxury">Premium</SelectItem>
+                <SelectItem value="budget">{t('tripPlanner.budgetEconomy')}</SelectItem>
+                <SelectItem value="mid">{t('tripPlanner.budgetMid')}</SelectItem>
+                <SelectItem value="luxury">{t('tripPlanner.budgetPremium')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -181,12 +183,12 @@ export function TripPlanner() {
 
         {/* Total */}
         <div className="flex items-center justify-between p-4 bg-teal-600 text-white rounded-lg">
-          <span className="text-lg font-bold">Total estimado</span>
+          <span className="text-lg font-bold">{t('tripPlanner.estimatedTotal')}</span>
           <span className="text-2xl font-bold">${grandTotal.toLocaleString()} USD</span>
         </div>
 
         <p className="text-xs text-gray-500 mt-3 text-center">
-          * Precios estimados. Haz clic en cada item para ver precios reales y reservar.
+          {t('tripPlanner.disclaimer')}
         </p>
       </CardContent>
     </Card>

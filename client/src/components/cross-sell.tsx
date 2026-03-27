@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Plane, Hotel, Compass, Car, Shield, Wifi, ArrowRight, Map, DollarSign, Star } from "lucide-react";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { generateFlightLink, generateHotelLink, generateCarRentalLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { useI18n } from "@/contexts/i18n-context";
 
 interface CrossSellItem {
   icon: React.ElementType;
@@ -12,81 +13,84 @@ interface CrossSellItem {
   trackCategory?: string;
 }
 
-const allItems: Record<string, CrossSellItem> = {
-  vuelos: {
-    icon: Plane,
-    title: "Vuelos a Cancun",
-    description: "Encuentra las mejores tarifas",
-    href: "/vuelos",
-  },
-  hoteles: {
-    icon: Hotel,
-    title: "Hoteles en Tulum",
-    description: "Desde $50/noche con cancelacion gratis",
-    href: "/hoteles",
-  },
-  experiencias: {
-    icon: Compass,
-    title: "Tours y Actividades",
-    description: "Cenotes, ruinas, snorkel y mas",
-    href: "/experiencias",
-  },
-  transporte: {
-    icon: Car,
-    title: "Transfer y Autos",
-    description: "Del aeropuerto a tu hotel",
-    href: "/transporte",
-  },
-  seguro: {
-    icon: Shield,
-    title: "Seguro de Viaje",
-    description: "Viaja protegido desde $8/dia",
-    href: "https://safetywing.com/nomad-insurance",
-    isExternal: true,
-    trackCategory: "insurance",
-  },
-  esim: {
-    icon: Wifi,
-    title: "eSIM Mexico",
-    description: "Internet movil desde $4.50",
-    href: "https://www.airalo.com/mexico",
-    isExternal: true,
-    trackCategory: "esim",
-  },
-  comoLlegar: {
-    icon: Map,
-    title: "Como Llegar",
-    description: "Guia completa del aeropuerto a Tulum",
-    href: "/como-llegar-a-tulum",
-  },
-  cuantoCuesta: {
-    icon: DollarSign,
-    title: "Cuanto Cuesta",
-    description: "Calcula tu presupuesto de viaje",
-    href: "/cuanto-cuesta-viajar-a-tulum",
-  },
-  mejoresHoteles: {
-    icon: Star,
-    title: "Mejores Hoteles",
-    description: "Top 15 hospedajes en Tulum",
-    href: "/mejores-hoteles-tulum",
-  },
-};
+type CrossSellKey = 'vuelos' | 'hoteles' | 'experiencias' | 'transporte' | 'seguro' | 'esim' | 'comoLlegar' | 'cuantoCuesta' | 'mejoresHoteles';
+
+function getCrossSellItems(t: (key: string) => string): Record<CrossSellKey, CrossSellItem> {
+  return {
+    vuelos: {
+      icon: Plane,
+      title: t('crossSell.items.flights.title'),
+      description: t('crossSell.items.flights.description'),
+      href: "/vuelos",
+    },
+    hoteles: {
+      icon: Hotel,
+      title: t('crossSell.items.hotels.title'),
+      description: t('crossSell.items.hotels.description'),
+      href: "/hoteles",
+    },
+    experiencias: {
+      icon: Compass,
+      title: t('crossSell.items.experiences.title'),
+      description: t('crossSell.items.experiences.description'),
+      href: "/experiencias",
+    },
+    transporte: {
+      icon: Car,
+      title: t('crossSell.items.transport.title'),
+      description: t('crossSell.items.transport.description'),
+      href: "/transporte",
+    },
+    seguro: {
+      icon: Shield,
+      title: t('crossSell.items.insurance.title'),
+      description: t('crossSell.items.insurance.description'),
+      href: "https://safetywing.com/nomad-insurance",
+      isExternal: true,
+      trackCategory: "insurance",
+    },
+    esim: {
+      icon: Wifi,
+      title: t('crossSell.items.esim.title'),
+      description: t('crossSell.items.esim.description'),
+      href: "https://www.airalo.com/mexico",
+      isExternal: true,
+      trackCategory: "esim",
+    },
+    comoLlegar: {
+      icon: Map,
+      title: t('crossSell.items.howToGetThere.title'),
+      description: t('crossSell.items.howToGetThere.description'),
+      href: "/como-llegar-a-tulum",
+    },
+    cuantoCuesta: {
+      icon: DollarSign,
+      title: t('crossSell.items.howMuchItCosts.title'),
+      description: t('crossSell.items.howMuchItCosts.description'),
+      href: "/cuanto-cuesta-viajar-a-tulum",
+    },
+    mejoresHoteles: {
+      icon: Star,
+      title: t('crossSell.items.bestHotels.title'),
+      description: t('crossSell.items.bestHotels.description'),
+      href: "/mejores-hoteles-tulum",
+    },
+  };
+}
 
 interface CrossSellProps {
   /** Which items to show. Defaults to all internal pages. */
-  items?: (keyof typeof allItems)[];
+  items?: CrossSellKey[];
   /** Title for the section */
   title?: string;
   /** Exclude these items */
   exclude?: string[];
 }
 
-export function CrossSell({
-  items,
-  title = "Completa tu viaje a Tulum",
-  exclude = [],
-}: CrossSellProps) {
+export function CrossSell({ items, title, exclude = [] }: CrossSellProps) {
+  const { t } = useI18n();
+  const allItems = getCrossSellItems(t);
+  const displayTitle = title || t('crossSell.defaultTitle');
   const { getLocalizedLink } = useLocalizedLink();
 
   const displayItems = (items || ["vuelos", "hoteles", "experiencias", "transporte"])
@@ -110,7 +114,7 @@ export function CrossSell({
     <section className="py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-          {title}
+          {displayTitle}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {displayItems.map((item) => (

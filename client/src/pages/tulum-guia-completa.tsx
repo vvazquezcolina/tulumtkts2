@@ -1,5 +1,6 @@
 import { useLocation } from "wouter";
 import { CrossSell } from "@/components/cross-sell";
+import { Footer } from "@/components/footer";
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
@@ -8,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { allBlogPosts } from "@/data/blogPosts";
-import { ArrowRight, MapPin, Calendar, Star, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin, Star, TrendingUp } from "lucide-react";
 import { useI18n } from "@/contexts/i18n-context";
 import { tulumGuiaCompleta as translations } from "@/translations/pages/tulum-guia-completa";
 
@@ -19,7 +20,7 @@ import { tulumGuiaCompleta as translations } from "@/translations/pages/tulum-gu
  */
 export default function TulumGuiaCompleta() {
   const [, setLocation] = useLocation();
-  const { locale, t: tCommon } = useI18n();
+  const { locale } = useI18n();
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
   const t = (key: string, params?: Record<string, string | number>) => {
     const keys = key.split('.');
@@ -70,13 +71,13 @@ export default function TulumGuiaCompleta() {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title="Guía Completa de Tulum México 2025: Todo lo que Necesitas Saber | TulumTkts"
-        description="La guía más completa de Tulum México 2025: tours, hoteles, cenotes, ruinas mayas, eventos, clima, transporte y más. Todo lo que necesitas saber para planificar tu viaje perfecto a Tulum. {totalArticles}+ artículos detallados."
+        title="Guía Completa de Tulum México 2026: Todo lo que Necesitas Saber | TulumTkts"
+        description="La guía más completa de Tulum México 2026: tours, hoteles, cenotes, ruinas mayas, eventos, clima, transporte y más. Todo lo que necesitas saber para planificar tu viaje perfecto a Tulum. {totalArticles}+ artículos detallados."
         keywords={[
           'guía tulum',
           'guía completa tulum',
           'tulum mexico guia',
-          'guía tulum 2025',
+          'guía tulum 2026',
           'todo sobre tulum',
           'tulum guía completa',
           'guía turística tulum',
@@ -280,49 +281,7 @@ export default function TulumGuiaCompleta() {
 
       <CrossSell exclude={[]} />
 
-      {/* Footer con Enlaces Rápidos */}
-      <section className="py-12 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="font-bold text-gray-900 mb-4">{t('footer.planTrip')}</h3>
-              <ul className="space-y-2">
-                <li><a href="/experiencias" className="text-gray-600 hover:text-primary">{t('footer.links.tours')}</a></li>
-                <li><a href="/villas" className="text-gray-600 hover:text-primary">{t('footer.links.hotels')}</a></li>
-                <li><a href="/eventos" className="text-gray-600 hover:text-primary">{t('footer.links.events')}</a></li>
-                <li><a href="/transporte" className="text-gray-600 hover:text-primary">{t('footer.links.transport')}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 mb-4">{t('footer.guides')}</h3>
-              <ul className="space-y-2">
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.allArticles')}</a></li>
-                <li><a href="/tulum-guia-completa" className="text-gray-600 hover:text-primary">{t('footer.links.completeGuide')}</a></li>
-                <li><a href="/" className="text-gray-600 hover:text-primary">{t('footer.links.home')}</a></li>
-                <li><a href="/contacto" className="text-gray-600 hover:text-primary">{t('footer.links.contact')}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 mb-4">{t('footer.categories')}</h3>
-              <ul className="space-y-2">
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.activities')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.activities')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.hotels')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.events')}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 mb-4">{t('footer.aboutTulum')}</h3>
-              <ul className="space-y-2">
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.history')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.cenotes')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.ruins')}</a></li>
-                <li><a href="/blog" className="text-gray-600 hover:text-primary">{t('footer.links.weather')}</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 }

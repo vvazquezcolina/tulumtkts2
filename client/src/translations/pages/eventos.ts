@@ -1,15 +1,15 @@
 // Traducciones para página Eventos
 export default {
   es: {
-    title: 'Eventos en Tulum México 2025: Festivales, Fiestas y Celebraciones | TulumTkts',
-    description: 'Descubre los mejores eventos en Tulum México 2025: festivales de música, fiestas en la playa, celebraciones y eventos especiales. Calendario completo de eventos en Tulum.',
+    title: 'Eventos en Tulum México 2026: Festivales, Fiestas y Celebraciones | TulumTkts',
+    description: 'Descubre los mejores eventos en Tulum México 2026: festivales de música, fiestas en la playa, celebraciones y eventos especiales. Calendario completo de eventos en Tulum.',
     breadcrumb: {
       home: 'Inicio',
       guide: 'Guía Completa',
       current: 'Eventos',
     },
     hero: {
-      title: 'Eventos en Tulum México 2025: Festivales y Celebraciones',
+      title: 'Eventos en Tulum México 2026: Festivales y Celebraciones',
       subtitle: 'Descubre los mejores eventos, festivales de música, fiestas en la playa y celebraciones únicas en Tulum',
     },
     filters: {
@@ -67,15 +67,15 @@ export default {
     },
   },
   en: {
-    title: 'Events in Tulum Mexico 2025: Festivals, Parties and Celebrations | TulumTkts',
-    description: 'Discover the best events in Tulum Mexico 2025: music festivals, beach parties, celebrations and special events. Complete calendar of events in Tulum.',
+    title: 'Events in Tulum Mexico 2026: Festivals, Parties and Celebrations | TulumTkts',
+    description: 'Discover the best events in Tulum Mexico 2026: music festivals, beach parties, celebrations and special events. Complete calendar of events in Tulum.',
     breadcrumb: {
       home: 'Home',
       guide: 'Complete Guide',
       current: 'Events',
     },
     hero: {
-      title: 'Events in Tulum Mexico 2025: Festivals and Celebrations',
+      title: 'Events in Tulum Mexico 2026: Festivals and Celebrations',
       subtitle: 'Discover the best events, music festivals, beach parties and unique celebrations in Tulum',
     },
     filters: {
@@ -133,15 +133,15 @@ export default {
     },
   },
   fr: {
-    title: 'Événements à Tulum Mexique 2025: Festivals, Fêtes et Célébrations | TulumTkts',
-    description: 'Découvrez les meilleurs événements à Tulum Mexique 2025: festivals de musique, fêtes sur la plage, célébrations et événements spéciaux. Calendrier complet des événements à Tulum.',
+    title: 'Événements à Tulum Mexique 2026: Festivals, Fêtes et Célébrations | TulumTkts',
+    description: 'Découvrez les meilleurs événements à Tulum Mexique 2026: festivals de musique, fêtes sur la plage, célébrations et événements spéciaux. Calendrier complet des événements à Tulum.',
     breadcrumb: {
       home: 'Accueil',
       guide: 'Guide Complet',
       current: 'Événements',
     },
     hero: {
-      title: 'Événements à Tulum Mexique 2025: Festivals et Célébrations',
+      title: 'Événements à Tulum Mexique 2026: Festivals et Célébrations',
       subtitle: 'Découvrez les meilleurs événements, festivals de musique, fêtes sur la plage et célébrations uniques à Tulum',
     },
     filters: {
@@ -199,15 +199,15 @@ export default {
     },
   },
   it: {
-    title: 'Eventi a Tulum Messico 2025: Festival, Feste e Celebrazioni | TulumTkts',
-    description: 'Scopri i migliori eventi a Tulum Messico 2025: festival musicali, feste in spiaggia, celebrazioni ed eventi speciali. Calendario completo degli eventi a Tulum.',
+    title: 'Eventi a Tulum Messico 2026: Festival, Feste e Celebrazioni | TulumTkts',
+    description: 'Scopri i migliori eventi a Tulum Messico 2026: festival musicali, feste in spiaggia, celebrazioni ed eventi speciali. Calendario completo degli eventi a Tulum.',
     breadcrumb: {
       home: 'Home',
       guide: 'Guida Completa',
       current: 'Eventi',
     },
     hero: {
-      title: 'Eventi a Tulum Messico 2025: Festival e Celebrazioni',
+      title: 'Eventi a Tulum Messico 2026: Festival e Celebrazioni',
       subtitle: 'Scopri i migliori eventi, festival musicali, feste in spiaggia e celebrazioni uniche a Tulum',
     },
     filters: {

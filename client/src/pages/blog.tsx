@@ -13,6 +13,8 @@ import { WebsiteSchema } from "@/components/json-ld";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { CrossSell } from "@/components/cross-sell";
 import { generateFlightLink, generateHotelLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { Footer } from "@/components/footer";
+import { useI18n } from "@/contexts/i18n-context";
 
 // ─── Affiliate ad cards injected every 4th post ──────────────────────────────
 
@@ -29,48 +31,6 @@ interface AffiliateAdConfig {
   iconBg: string;
   iconColor: string;
 }
-
-const affiliateAds: AffiliateAdConfig[] = [
-  {
-    icon: Plane,
-    eyebrow: "Oferta de vuelos",
-    title: "Vuelos a Cancún desde $120 USD",
-    sub: "Compara cientos de aerolíneas y encuentra el mejor precio para tu próximo viaje.",
-    cta: "Buscar vuelos",
-    href: generateFlightLink("MEX", "CUN"),
-    trackKey: "blog_listing_flights",
-    gradientFrom: "from-teal-50",
-    gradientTo: "to-cyan-50",
-    iconBg: "bg-teal-100",
-    iconColor: "text-teal-600",
-  },
-  {
-    icon: Hotel,
-    eyebrow: "Hoteles en Tulum",
-    title: "Hoteles desde $50 USD/noche",
-    sub: "Más de 500 opciones con cancelación gratuita. Encuentra tu alojamiento ideal.",
-    cta: "Ver hoteles",
-    href: generateHotelLink("Tulum"),
-    trackKey: "blog_listing_hotels",
-    gradientFrom: "from-blue-50",
-    gradientTo: "to-indigo-50",
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
-  },
-  {
-    icon: Compass,
-    eyebrow: "Tours y actividades",
-    title: "Tours y cenotes desde $11 USD",
-    sub: "Cenotes, ruinas mayas, snorkel y mucho más. Reserva con guías locales expertos.",
-    cta: "Ver actividades",
-    href: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_listing_activities"),
-    trackKey: "blog_listing_activities",
-    gradientFrom: "from-emerald-50",
-    gradientTo: "to-teal-50",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
-  },
-];
 
 interface AffiliateAdCardProps {
   ad: AffiliateAdConfig;
@@ -120,18 +80,70 @@ export default function Blog() {
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
+  const { t, locale } = useI18n();
+
+  // Build locale string for toLocaleDateString
+  const dateLocale =
+    locale === "es" ? "es-ES" :
+    locale === "fr" ? "fr-FR" :
+    locale === "it" ? "it-IT" :
+    "en-US";
+
+  // Affiliate ad configs — defined inside the component so they can use t()
+  const affiliateAds: AffiliateAdConfig[] = [
+    {
+      icon: Plane,
+      eyebrow: t("blog.ads.flights.eyebrow"),
+      title: t("blog.ads.flights.title"),
+      sub: t("blog.ads.flights.sub"),
+      cta: t("blog.ads.flights.cta"),
+      href: generateFlightLink("MEX", "CUN"),
+      trackKey: "blog_listing_flights",
+      gradientFrom: "from-teal-50",
+      gradientTo: "to-cyan-50",
+      iconBg: "bg-teal-100",
+      iconColor: "text-teal-600",
+    },
+    {
+      icon: Hotel,
+      eyebrow: t("blog.ads.hotels.eyebrow"),
+      title: t("blog.ads.hotels.title"),
+      sub: t("blog.ads.hotels.sub"),
+      cta: t("blog.ads.hotels.cta"),
+      href: generateHotelLink("Tulum"),
+      trackKey: "blog_listing_hotels",
+      gradientFrom: "from-blue-50",
+      gradientTo: "to-indigo-50",
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-600",
+    },
+    {
+      icon: Compass,
+      eyebrow: t("blog.ads.activities.eyebrow"),
+      title: t("blog.ads.activities.title"),
+      sub: t("blog.ads.activities.sub"),
+      cta: t("blog.ads.activities.cta"),
+      href: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_listing_activities"),
+      trackKey: "blog_listing_activities",
+      gradientFrom: "from-emerald-50",
+      gradientTo: "to-teal-50",
+      iconBg: "bg-emerald-100",
+      iconColor: "text-emerald-600",
+    },
+  ];
 
   const handlePostClick = (postSlug: string) => {
     setLocation(`/blog/${postSlug}`);
   };
 
   const allPosts = allBlogPosts;
-  const categories = ["Todos", ...Array.from(new Set(allPosts.map(post => post.category)))];
+  const allCategoryLabel = t("blog.search.allCategories");
+  const categories = [allCategoryLabel, ...Array.from(new Set(allPosts.map(post => post.category)))];
 
   const filteredPosts = allPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = !categoryFilter || categoryFilter === "Todos" || post.category === categoryFilter;
+    const matchesCategory = !categoryFilter || categoryFilter === allCategoryLabel || post.category === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
@@ -173,10 +185,10 @@ export default function Blog() {
         <div className="relative flex items-center justify-center h-full text-center text-white">
           <div className="max-w-4xl px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Blog & Guías de Viaje
+              {t("blog.hero.title")}
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Tu fuente de información experta sobre Tulum y la Riviera Maya
+              {t("blog.hero.subtitle")}
             </p>
           </div>
         </div>
@@ -192,10 +204,10 @@ export default function Blog() {
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm sm:text-base">
-                  ¿Planeas tu viaje a Tulum?
+                  {t("blog.banner.heading")}
                 </p>
                 <p className="text-xs sm:text-sm text-gray-500">
-                  Busca vuelos baratos a Cancún y ahorra hasta un 40%
+                  {t("blog.banner.sub")}
                 </p>
               </div>
             </div>
@@ -206,7 +218,7 @@ export default function Blog() {
                 window.open(generateFlightLink("MEX", "CUN"), "_blank", "noopener");
               }}
             >
-              Buscar vuelos baratos
+              {t("blog.banner.cta")}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
@@ -220,7 +232,7 @@ export default function Blog() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                placeholder="Buscar artículos, guías, consejos..."
+                placeholder={t("blog.search.placeholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -230,7 +242,7 @@ export default function Blog() {
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className="w-[200px]">
                   <Filter className="w-4 h-4 mr-2" />
-                  <SelectValue placeholder="Categoría" />
+                  <SelectValue placeholder={t("blog.search.categoryPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
@@ -249,7 +261,7 @@ export default function Blog() {
       {featuredPosts.length > 0 && (
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Artículos Destacados</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t("blog.featured.heading")}</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Main Featured Article */}
@@ -262,7 +274,7 @@ export default function Blog() {
                     <BlogImage
                       pexelsQuery={featuredPosts[0].pexelsQuery}
                       fallbackImage={featuredPosts[0].image}
-                      alt={`${featuredPosts[0].title} - Artículo destacado`}
+                      alt={`${featuredPosts[0].title} - ${t("blog.featured.badge")}`}
                       className="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="eager"
                       width={800}
@@ -272,7 +284,7 @@ export default function Blog() {
                   </div>
                   <div className="md:w-1/2 p-6 md:p-8">
                     <div className="flex items-center gap-2 mb-3">
-                      <Badge className="bg-secondary text-white">Destacado</Badge>
+                      <Badge className="bg-secondary text-white">{t("blog.featured.badge")}</Badge>
                       <Badge variant="outline">{featuredPosts[0].category}</Badge>
                     </div>
 
@@ -286,7 +298,7 @@ export default function Blog() {
                         <User className="w-4 h-4 mr-1" />
                         <span>{featuredPosts[0].author}</span>
                         <Calendar className="w-4 h-4 ml-4 mr-1" />
-                        <span>{new Date(featuredPosts[0].publishDate).toLocaleDateString('es-ES')}</span>
+                        <span>{new Date(featuredPosts[0].publishDate).toLocaleDateString(dateLocale)}</span>
                         <Clock className="w-4 h-4 ml-4 mr-1" />
                         <span>{featuredPosts[0].readTime}</span>
                       </div>
@@ -298,7 +310,7 @@ export default function Blog() {
                           handlePostClick(featuredPosts[0].slug);
                         }}
                       >
-                        Leer más <ArrowRight className="w-4 h-4 ml-2" />
+                        {t("blog.featured.readMore")} <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </div>
                   </div>
@@ -356,7 +368,7 @@ export default function Blog() {
       {/* All Articles — with affiliate cards injected every 4 posts */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Todos los Artículos</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">{t("blog.all.heading")}</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {regularPostsWithAds.map((item, idx) => {
@@ -407,7 +419,7 @@ export default function Blog() {
                       </div>
                       <div className="flex items-center">
                         <Calendar className="w-3 h-3 mr-1" />
-                        <span>{new Date(post.publishDate).toLocaleDateString('es-ES')}</span>
+                        <span>{new Date(post.publishDate).toLocaleDateString(dateLocale)}</span>
                       </div>
                     </div>
 
@@ -419,7 +431,7 @@ export default function Blog() {
                         handlePostClick(post.slug);
                       }}
                     >
-                      Leer artículo <ArrowRight className="w-4 h-4 ml-2" />
+                      {t("blog.all.readArticle")} <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </CardContent>
                 </Card>
@@ -430,38 +442,38 @@ export default function Blog() {
           {/* Load More Button */}
           <div className="text-center mt-12">
             <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-              Cargar más artículos
+              {t("blog.all.loadMore")}
             </Button>
           </div>
         </div>
       </section>
 
       {/* CrossSell */}
-      <CrossSell title="Todo para tu viaje a Tulum" />
+      <CrossSell title={t("blog.crossSellTitle")} />
 
       {/* Newsletter Subscription */}
       <section className="py-16 bg-primary">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Mantente al día con Tulum
+            {t("blog.newsletter.heading")}
           </h2>
           <p className="text-xl text-gray-200 mb-8">
-            Recibe nuestros últimos artículos, consejos de viaje y ofertas exclusivas directamente en tu email.
+            {t("blog.newsletter.sub")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input
               type="email"
-              placeholder="Tu email"
+              placeholder={t("blog.newsletter.emailPlaceholder")}
               className="flex-1 bg-white"
             />
             <Button className="bg-secondary text-white hover:bg-secondary/90">
-              Suscribirse
+              {t("blog.newsletter.subscribe")}
             </Button>
           </div>
 
           <p className="text-sm text-gray-300 mt-4">
-            Sin spam. Cancela tu suscripción en cualquier momento.
+            {t("blog.newsletter.noSpam")}
           </p>
         </div>
       </section>
@@ -469,17 +481,20 @@ export default function Blog() {
       {/* Categories Overview */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Explora por Categorías</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">{t("blog.categories.heading")}</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.slice(1).map((category) => {
               const categoryCount = allPosts.filter(post => post.category === category).length;
+              const articleLabel = categoryCount === 1
+                ? t("blog.categories.articleCount_one")
+                : t("blog.categories.articleCount_other");
               return (
                 <Card
                   key={category}
                   className="p-4 text-center hover:shadow-lg transition-shadow cursor-pointer group"
                   onClick={() => {
-                    setCategoryFilter(category === "Todos" ? "" : category);
+                    setCategoryFilter(category === allCategoryLabel ? "" : category);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
@@ -487,7 +502,7 @@ export default function Blog() {
                     {category}
                   </h4>
                   <p className="text-sm text-gray-500 mt-1">
-                    {categoryCount} artículo{categoryCount !== 1 ? 's' : ''}
+                    {categoryCount} {articleLabel}
                   </p>
                 </Card>
               );
@@ -495,6 +510,7 @@ export default function Blog() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

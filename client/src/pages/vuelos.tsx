@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,10 +21,6 @@ import {
   ArrowRight,
   CheckCircle,
   TrendingDown,
-  Facebook,
-  Instagram,
-  Twitter,
-  Youtube,
 } from "lucide-react";
 
 interface PopularRoute {
@@ -44,7 +41,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "CDMX",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $1,200 MXN",
+    price: "$1,200 MXN",
     flag: "🇲🇽",
   },
   {
@@ -52,7 +49,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "New York",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $180 USD",
+    price: "$180 USD",
     flag: "🇺🇸",
   },
   {
@@ -60,7 +57,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "Los Angeles",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $220 USD",
+    price: "$220 USD",
     flag: "🇺🇸",
   },
   {
@@ -68,7 +65,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "Miami",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $120 USD",
+    price: "$120 USD",
     flag: "🇺🇸",
   },
   {
@@ -76,7 +73,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "Chicago",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $200 USD",
+    price: "$200 USD",
     flag: "🇺🇸",
   },
   {
@@ -84,7 +81,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "Madrid",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde €250",
+    price: "€250",
     flag: "🇪🇸",
   },
   {
@@ -92,7 +89,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "London",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde £280",
+    price: "£280",
     flag: "🇬🇧",
   },
   {
@@ -100,7 +97,7 @@ const popularRoutes: PopularRoute[] = [
     originCity: "Toronto",
     destinationCode: DESTINATION_CODE,
     destinationCity: DESTINATION_CITY,
-    price: "desde $300 CAD",
+    price: "$300 CAD",
     flag: "🇨🇦",
   },
 ];
@@ -237,7 +234,7 @@ export default function Vuelos() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center mb-10">
             <Badge className="bg-white/20 text-white border-white/30 mb-4 text-sm px-4 py-1">
-              ✈ Aeropuerto CUN · Cancún Internacional
+              {t("vuelos.hero.airportBadge")}
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
               {t("vuelos.hero.title")}
@@ -332,7 +329,7 @@ export default function Vuelos() {
                 </div>
 
                 <p className="text-xs text-gray-400 text-center">
-                  Powered by Aviasales · Comparador de vuelos en tiempo real
+                  {t("vuelos.search.poweredBy")}
                 </p>
               </CardContent>
             </Card>
@@ -443,7 +440,12 @@ export default function Vuelos() {
                     {t("vuelos.tips.cheapMonths.description")}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-3">
-                    {["Mayo", "Junio", "Sep", "Oct"].map((month) => (
+                    {[
+                      t("vuelos.tips.cheapMonths.month1"),
+                      t("vuelos.tips.cheapMonths.month2"),
+                      t("vuelos.tips.cheapMonths.month3"),
+                      t("vuelos.tips.cheapMonths.month4"),
+                    ].map((month) => (
                       <Badge key={month} variant="outline" className="text-xs text-green-700 border-green-300 bg-green-50">
                         {month}
                       </Badge>
@@ -471,11 +473,11 @@ export default function Vuelos() {
                   <div className="flex items-center gap-4 mt-3 text-xs text-gray-500">
                     <div className="flex items-center gap-1">
                       <MapPin className="w-3 h-3" />
-                      <span>130 km de Tulum</span>
+                      <span>{t("vuelos.tips.airport.distance")}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      <span>~2 horas en auto</span>
+                      <span>{t("vuelos.tips.airport.driveTime")}</span>
                     </div>
                   </div>
                 </div>
@@ -516,10 +518,10 @@ export default function Vuelos() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Preguntas frecuentes sobre vuelos a Cancún
+              {t("vuelos.faq.title")}
             </h2>
             <p className="text-lg text-gray-600">
-              Todo lo que necesitas saber para planificar tu viaje a Tulum
+              {t("vuelos.faq.subtitle")}
             </p>
           </div>
 
@@ -602,105 +604,7 @@ export default function Vuelos() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <h3 className="text-2xl font-bold text-primary mb-4">TulumTkts</h3>
-              <p className="text-gray-300 mb-6 max-w-md">
-                {t("footer.description")}
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors" aria-label="Facebook">
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors" aria-label="Instagram">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors" aria-label="Twitter">
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-primary transition-colors" aria-label="YouTube">
-                  <Youtube className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg mb-4">{t("footer.experiences")}</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href={getLocalizedLink("/cenotes-tulum")} className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.experienceLinks.cenotes")}
-                  </a>
-                </li>
-                <li>
-                  <a href={getLocalizedLink("/experiencias?category=arqueologia")} className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.experienceLinks.mayanRuins")}
-                  </a>
-                </li>
-                <li>
-                  <a href={getLocalizedLink("/vuelos")} className="text-gray-300 hover:text-primary transition-colors">
-                    Vuelos a Cancún
-                  </a>
-                </li>
-                <li>
-                  <a href={getLocalizedLink("/transporte")} className="text-gray-300 hover:text-primary transition-colors">
-                    Traslados CUN → Tulum
-                  </a>
-                </li>
-                <li>
-                  <a href={getLocalizedLink("/experiencias")} className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.experienceLinks.adventureSports")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg mb-4">{t("footer.support")}</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href={getLocalizedLink("/contacto")} className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.supportLinks.helpCenter")}
-                  </a>
-                </li>
-                <li>
-                  <a href={getLocalizedLink("/contacto")} className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.supportLinks.contactUs")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.supportLinks.cancellationPolicy")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.supportLinks.termsOfService")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-300 hover:text-primary transition-colors">
-                    {t("footer.supportLinks.privacyPolicy")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 mb-2">
-              &copy; {new Date().getFullYear()} TulumTkts. {t("footer.copyright")}
-            </p>
-            <p
-              className="text-gray-400"
-              dangerouslySetInnerHTML={{ __html: t("footer.poweredBy") }}
-            />
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

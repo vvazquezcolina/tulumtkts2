@@ -1,4 +1,5 @@
 import { useLocation } from "wouter";
+import { Footer } from "@/components/footer";
 import { CrossSell } from "@/components/cross-sell";
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
@@ -8,11 +9,12 @@ import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Star, ArrowRight, Droplet, Users, Camera, ExternalLink } from "lucide-react";
+import { MapPin, Clock, Star, ArrowRight, Droplet, ExternalLink } from "lucide-react";
 import { useI18n } from "@/contexts/i18n-context";
 import { cenotesTulum as translations } from "@/translations/pages/cenotes-tulum";
 import { TripPlanner } from "@/components/trip-planner";
-import { generateHotelLink, generateCarRentalLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { generateCarRentalLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { useLocalizedLink } from "@/hooks/use-localized-link";
 
 /**
  * Página de Destino: Cenotes en Tulum
@@ -21,7 +23,8 @@ import { generateHotelLink, generateCarRentalLink, generateAffiliateLink, trackA
  */
 export default function CenotesTulum() {
   const [, setLocation] = useLocation();
-  const { locale, t: tCommon } = useI18n();
+  const { locale } = useI18n();
+  const { getLocalizedLink } = useLocalizedLink();
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
   const t = (key: string) => {
     const keys = key.split('.');
@@ -88,8 +91,8 @@ export default function CenotesTulum() {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title="Cenotes en Tulum México 2025: Los Mejores Cenotes para Visitar | TulumTkts"
-        description="Descubre los mejores cenotes en Tulum México 2025: Gran Cenote, Dos Ojos, Calavera y más. Guía completa con precios, cómo llegar, tours y consejos para tu visita. Reserva tours a cenotes con los mejores precios."
+        title="Cenotes en Tulum México 2026: Los Mejores Cenotes para Visitar | TulumTkts"
+        description="Descubre los mejores cenotes en Tulum México 2026: Gran Cenote, Dos Ojos, Calavera y más. Guía completa con precios, cómo llegar, tours y consejos para tu visita. Reserva tours a cenotes con los mejores precios."
         keywords={[
           'cenotes tulum',
           'cenotes en tulum',
@@ -116,6 +119,19 @@ export default function CenotesTulum() {
       ]} />
       <FAQSchema faqs={faqs} />
       <Navigation />
+
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="text-sm text-gray-600">
+            <a href={getLocalizedLink("/")} className="hover:text-primary">{t('breadcrumbs.home')}</a>
+            <span className="mx-2">/</span>
+            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">{t('breadcrumbs.guide')}</a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-900">{t('breadcrumbs.cenotes')}</span>
+          </nav>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-cyan-600 to-teal-600 text-white py-20">
@@ -248,15 +264,15 @@ export default function CenotesTulum() {
               <div className="flex-1">
                 <Badge className="mb-3 bg-cyan-100 text-cyan-800 border-0">Tours Guiados</Badge>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Reserva tu tour de cenotes
+                  {t('cta.tour.title')}
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Visita los mejores cenotes de Tulum con guías expertos. Incluye transporte, equipo de snorkel y acceso a múltiples cenotes en un solo día.
+                  {t('cta.tour.description')}
                 </p>
                 <ul className="mt-3 space-y-1 text-sm text-gray-500">
-                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Transporte incluido desde Tulum</li>
-                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Guía certificado en español e inglés</li>
-                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Equipo de snorkel incluido</li>
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> {t('cta.tour.feature1')}</li>
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> {t('cta.tour.feature2')}</li>
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> {t('cta.tour.feature3')}</li>
                 </ul>
               </div>
               <div className="flex flex-col gap-3 min-w-[200px]">
@@ -273,9 +289,9 @@ export default function CenotesTulum() {
                     window.open(url, '_blank');
                   }}
                 >
-                  Ver Tours de Cenotes <ExternalLink className="w-4 h-4 ml-2" />
+                  {t('cta.tour.button')} <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
-                <p className="text-xs text-gray-400 text-center">Vía Viator — cancelación gratuita</p>
+                <p className="text-xs text-gray-400 text-center">{t('cta.tour.caption')}</p>
               </div>
             </div>
           </div>
@@ -305,10 +321,10 @@ export default function CenotesTulum() {
             <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border border-teal-100">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">🚗</span>
-                <h3 className="font-bold text-gray-900">Renta un auto</h3>
+                <h3 className="font-bold text-gray-900">{t('cta.carRental.title')}</h3>
               </div>
               <p className="text-sm text-gray-600 mb-4">
-                La forma más cómoda de visitar varios cenotes en un día. Recoge tu auto en Cancún o Tulum y explora a tu ritmo.
+                {t('cta.carRental.description')}
               </p>
               <Button
                 className="w-full bg-teal-600 hover:bg-teal-700 text-white"
@@ -317,18 +333,18 @@ export default function CenotesTulum() {
                   window.open(generateCarRentalLink('Tulum'), '_blank');
                 }}
               >
-                Buscar Autos <ExternalLink className="w-4 h-4 ml-2" />
+                {t('cta.carRental.button')} <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
-              <p className="text-xs text-gray-400 text-center mt-2">Vía DiscoverCars</p>
+              <p className="text-xs text-gray-400 text-center mt-2">{t('cta.carRental.caption')}</p>
             </div>
 
             <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">🤿</span>
-                <h3 className="font-bold text-gray-900">Tour guiado todo incluido</h3>
+                <h3 className="font-bold text-gray-900">{t('cta.guidedTour.title')}</h3>
               </div>
               <p className="text-sm text-gray-600 mb-4">
-                Sin preocupaciones: transporte, guía, equipo de snorkel y entrada a cenotes en un solo paquete.
+                {t('cta.guidedTour.description')}
               </p>
               <Button
                 className="w-full bg-cyan-600 hover:bg-cyan-700 text-white"
@@ -342,9 +358,9 @@ export default function CenotesTulum() {
                   window.open(url, '_blank');
                 }}
               >
-                Ver Tours Guiados <ExternalLink className="w-4 h-4 ml-2" />
+                {t('cta.guidedTour.button')} <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
-              <p className="text-xs text-gray-400 text-center mt-2">Vía Viator</p>
+              <p className="text-xs text-gray-400 text-center mt-2">{t('cta.guidedTour.caption')}</p>
             </div>
           </div>
         </div>
@@ -399,6 +415,7 @@ export default function CenotesTulum() {
       </section>
 
       <CrossSell exclude={["experiencias"]} />
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/ui/navigation";
-import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Star, Clock, Heart, Search, ArrowRight, MapPin } from "lucide-react";
+import { Footer } from "@/components/footer";
 import { generateAffiliateLink, generateFlightLink, generateHotelLink, trackAffiliateClick } from "@/lib/affiliate";
 import { TripPlanner } from "@/components/trip-planner";
 import { CrossSell } from "@/components/cross-sell";
@@ -35,11 +36,17 @@ export default function Home() {
   const [searchDate, setSearchDate] = useState("");
   const [searchGuests, setSearchGuests] = useState("");
   const [email, setEmail] = useState("");
-  
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoLoaded(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
 
   // Fetch real experiences from Travelpayouts
-  const { data: experiencesData } = useTulumExperiences({
+  const { data: experiencesData, isLoading: experiencesLoading } = useTulumExperiences({
     page: 1,
     per_page: 6,
     sort_by: 'popularity'
@@ -137,32 +144,34 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative">
+      <section className="relative" aria-label="Hero">
         <div className="h-[600px] relative overflow-hidden">
           {/* YouTube Video Background */}
           <div className="absolute inset-0 w-full h-full">
-            <iframe
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              src="https://www.youtube.com/embed/i4-XVv-TAJ8?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=i4-XVv-TAJ8&start=229&modestbranding=1&iv_load_policy=3"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              style={{
-                width: '177.78vh', // 16:9 aspect ratio based on viewport height
-                height: '177.78vw', // 16:9 aspect ratio based on viewport width
-                minWidth: '100%',
-                minHeight: '100%',
-                transform: 'translate(-50%, -50%) scale(1.15)',
-                pointerEvents: 'none',
-                border: 'none',
-              }}
-            />
-            {/* Fallback image */}
-            <div 
+            {/* Fallback image — always visible until video loads */}
+            <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: "url('https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
               }}
             />
+            {videoLoaded && (
+              <iframe
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                src="https://www.youtube.com/embed/i4-XVv-TAJ8?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=i4-XVv-TAJ8&start=229&modestbranding=1&iv_load_policy=3"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                style={{
+                  width: '177.78vh',
+                  height: '177.78vw',
+                  minWidth: '100%',
+                  minHeight: '100%',
+                  transform: 'translate(-50%, -50%) scale(1.15)',
+                  pointerEvents: 'none',
+                  border: 'none',
+                }}
+              />
+            )}
           </div>
           {/* Overlay oscuro para legibilidad del texto */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50" />
@@ -174,9 +183,25 @@ export default function Home() {
               <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200">
                 {t('hero.subtitle')}
               </p>
-              
+
+              {/* Trust Stats */}
+              <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mb-6">
+                <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm font-medium">4.8/5 Rating</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
+                  <MapPin className="w-4 h-4 text-emerald-400" />
+                  <span className="text-sm font-medium">500+ Tours</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
+                  <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+                  <span className="text-sm font-medium">10K+ Viajeros</span>
+                </div>
+              </div>
+
               {/* Search Bar */}
-              <Card className="p-6 shadow-2xl max-w-3xl mx-auto">
+              <Card role="search" className="p-6 shadow-2xl max-w-3xl mx-auto">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div className="md:col-span-2 lg:col-span-2">
@@ -222,6 +247,28 @@ export default function Home() {
                   </Button>
                 </CardContent>
               </Card>
+
+              {/* Popular Searches */}
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+                <span className="text-sm text-gray-300">{t('hero.popular')}:</span>
+                {[
+                  { label: t('hero.popularSearches.cenotes'), query: 'cenotes' },
+                  { label: t('hero.popularSearches.ruins'), query: 'ruinas' },
+                  { label: t('hero.popularSearches.snorkel'), query: 'snorkel' },
+                  { label: t('hero.popularSearches.beach'), query: 'playa' },
+                ].map((tag) => (
+                  <button
+                    key={tag.query}
+                    onClick={() => {
+                      setSearchQuery(tag.query);
+                      handleSearch();
+                    }}
+                    className="text-xs bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full px-3 py-1.5 transition-colors"
+                  >
+                    {tag.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -293,10 +340,10 @@ export default function Home() {
       </section>
 
       {/* Popular Categories */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="categories-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('categories.title')}</h2>
+            <h2 id="categories-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('categories.title')}</h2>
             <p className="text-lg text-gray-600">{t('categories.subtitle')}</p>
             <p className="text-base text-gray-500 mt-2">
               {t('categories.discoverMore', { guiaCompleta: t('categories.guiaCompleta') }).split(t('categories.guiaCompleta')).map((part, i, arr) => 
@@ -341,9 +388,10 @@ export default function Home() {
                 }}
               >
                 <div className="relative overflow-hidden rounded-xl aspect-square mb-3">
-                  <img 
-                    src={category.image} 
+                  <img
+                    src={category.image}
                     alt={category.name}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -358,11 +406,11 @@ export default function Home() {
       </section>
 
       {/* Featured Experiences */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="featured-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('featured.title')}</h2>
+              <h2 id="featured-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('featured.title')}</h2>
               <p className="text-lg text-gray-600">{t('featured.subtitle')}</p>
             </div>
             <Button 
@@ -375,105 +423,132 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(experiencesData?.data?.slice(0, 6) || []).map((experience) => {
-              const activityId = experience.activity_id;
-              const title = experience.title;
-              const description = experience.abstract;
-              const imageUrl = experience.image_url;
-              const rating = experience.rating;
-              const reviewCount = experience.number_of_ratings;
-              // Convert EUR to USD (approximate rate 1 EUR = 1.08 USD)
-              const eurAmount = experience.price.values[0].amount;
-              const usdAmount = Math.round(eurAmount * 1.08);
-              const price = `$${usdAmount} USD`;
-              const duration = experience.duration;
-              const affiliateUrl = experience.url;
+            {experiencesLoading ? (
+              Array.from({ length: 6 }).map((_, i) => (
+                <Card key={i} className="overflow-hidden animate-pulse">
+                  <div className="w-full h-64 bg-gray-200" />
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-2">
+                      <div className="h-4 w-24 bg-gray-200 rounded" />
+                    </div>
+                    <div className="h-6 w-3/4 bg-gray-200 rounded mb-2" />
+                    <div className="h-4 w-full bg-gray-200 rounded mb-1" />
+                    <div className="h-4 w-2/3 bg-gray-200 rounded mb-4" />
+                    <div className="flex items-center justify-between">
+                      <div className="h-4 w-16 bg-gray-200 rounded" />
+                      <div className="h-8 w-20 bg-gray-200 rounded" />
+                    </div>
+                    <div className="h-10 w-full bg-gray-200 rounded mt-4" />
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              (experiencesData?.data?.slice(0, 6) || []).map((experience) => {
+                const activityId = experience.activity_id;
+                const title = experience.title;
+                const description = experience.abstract;
+                const imageUrl = experience.image_url;
+                const rating = experience.rating;
+                const reviewCount = experience.number_of_ratings;
+                // Convert EUR to USD (approximate rate 1 EUR = 1.08 USD)
+                const eurAmount = experience.price.values[0].amount;
+                const usdAmount = Math.round(eurAmount * 1.08);
+                const price = `$${usdAmount} USD`;
+                const duration = experience.duration;
+                const affiliateUrl = experience.url;
 
-              return (
-                <Card key={activityId} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={imageUrl} 
-                    alt={title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4">
-                    {experience.instant_confirmation && (
-                      <Badge className="bg-green-600 text-white mr-2">
-                        {t('featured.instantConfirmation')}
-                      </Badge>
-                    )}
-                    {experience.free_cancellation && (
-                      <Badge className="bg-blue-600 text-white">
-                        {t('featured.freeCancellation')}
-                      </Badge>
-                    )}
+                return (
+                  <Card key={activityId} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={imageUrl}
+                      alt={title}
+                      loading="lazy"
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      {experience.instant_confirmation && (
+                        <Badge className="bg-green-600 text-white mr-2">
+                          {t('featured.instantConfirmation')}
+                        </Badge>
+                      )}
+                      {experience.free_cancellation && (
+                        <Badge className="bg-blue-600 text-white">
+                          {t('featured.freeCancellation')}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(activityId, title);
+                        }}
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${favorites.has(activityId) ? 'fill-secondary text-secondary' : 'text-gray-600'}`}
+                        />
+                      </Button>
+                    </div>
                   </div>
-                  <div className="absolute top-4 right-4">
+
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-2">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? 'fill-current' : ''}`} />
+                        ))}
+                      </div>
+                      <span className="ml-2 text-sm text-gray-600">({rating}) {reviewCount} {t('featured.reviews')}</span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                      {title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2">{description}</p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-gray-500 text-sm">
+                        <Clock className="w-4 h-4 mr-1" />
+                        <span>{duration}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-sm text-gray-500">{t('featured.from')}</span>
+                        <div className="text-2xl font-bold text-gray-900">{price}</div>
+                      </div>
+                    </div>
+
                     <Button
-                      variant="ghost"
-                      size="icon"
-                      className="bg-white/80 backdrop-blur-sm rounded-full hover:bg-white"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(activityId, title);
+                      className="w-full mt-4 bg-primary text-white hover:bg-primary/90"
+                      onClick={async () => {
+                        try {
+                          await trackAffiliateClickAPI(activityId, title, price, 'Featured Home');
+                          // Track in GA4
+                          trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
+                          window.open(affiliateUrl, '_blank');
+                        } catch (error) {
+                          // Track in GA4 even if API fails
+                          trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
+                          // Fallback to direct URL
+                          window.open(affiliateUrl, '_blank');
+                        }
                       }}
                     >
-                      <Heart 
-                        className={`w-4 h-4 ${favorites.has(activityId) ? 'fill-secondary text-secondary' : 'text-gray-600'}`}
-                      />
+                      {t('featured.bookNow')}
                     </Button>
-                  </div>
-                </div>
-                
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-2">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? 'fill-current' : ''}`} />
-                      ))}
-                    </div>
-                    <span className="ml-2 text-sm text-gray-600">({rating}) {reviewCount} {t('featured.reviews')}</span>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                    {title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{description}</p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Clock className="w-4 h-4 mr-1" />
-                      <span>{duration}</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-sm text-gray-500">{t('featured.from')}</span>
-                      <div className="text-2xl font-bold text-gray-900">{price}</div>
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    className="w-full mt-4 bg-primary text-white hover:bg-primary/90"
-                    onClick={async () => {
-                      try {
-                        await trackAffiliateClickAPI(activityId, title, price, 'Featured Home');
-                        // Track in GA4
-                        trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
-                        window.open(affiliateUrl, '_blank');
-                      } catch (error) {
-                        // Track in GA4 even if API fails
-                        trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
-                        // Fallback to direct URL
-                        window.open(affiliateUrl, '_blank');
-                      }
-                    }}
-                  >
-                    {t('featured.bookNow')}
-                  </Button>
-                </CardContent>
-              </Card>
-              );
-            })}
+                  </CardContent>
+                </Card>
+                );
+              })
+            )}
+            {!experiencesLoading && (!experiencesData?.data || experiencesData.data.length === 0) && (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-500 text-lg">No experiences available right now. Check back soon!</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -518,9 +593,10 @@ export default function Home() {
                     "{testimonial.text}"
                   </blockquote>
                   <div className="flex items-center">
-                    <img 
-                      src={testimonial.avatar} 
+                    <img
+                      src={testimonial.avatar}
                       alt={testimonial.author}
+                      loading="lazy"
                       className="w-12 h-12 rounded-full object-cover mr-4"
                     />
                     <div>
@@ -575,7 +651,7 @@ export default function Home() {
       {/* Cross-sell Section */}
       <CrossSell
         items={["vuelos", "hoteles", "experiencias", "transporte", "seguro", "esim"]}
-        title="Todo lo que necesitas para tu viaje"
+        title={t('crossSell.title')}
       />
 
       {/* FAQs Section */}
@@ -599,92 +675,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            <div className="md:col-span-2 lg:col-span-2">
-              <h3 className="text-2xl font-bold text-primary mb-4">TulumTkts</h3>
-              <p className="text-gray-300 mb-6 max-w-md">
-                {t('footer.description')}
-              </p>
-              <div className="flex space-x-4">
-                <a 
-                  href="#" 
-                  className="text-gray-400 hover:text-primary transition-colors"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="text-gray-400 hover:text-primary transition-colors"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="text-gray-400 hover:text-primary transition-colors"
-                >
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="text-gray-400 hover:text-primary transition-colors"
-                >
-                  <Youtube className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-lg mb-4">Planifica tu Viaje</h4>
-              <ul className="space-y-2">
-                <li><a href={getLocalizedLink('/vuelos')} className="text-gray-300 hover:text-primary transition-colors">Vuelos a Cancun</a></li>
-                <li><a href={getLocalizedLink('/hoteles')} className="text-gray-300 hover:text-primary transition-colors">Hoteles en Tulum</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">Tours y Actividades</a></li>
-                <li><a href={getLocalizedLink('/transporte')} className="text-gray-300 hover:text-primary transition-colors">Transporte y Autos</a></li>
-                <li><a href={getLocalizedLink('/como-llegar-a-tulum')} className="text-gray-300 hover:text-primary transition-colors">Como Llegar a Tulum</a></li>
-                <li><a href={getLocalizedLink('/cuanto-cuesta-viajar-a-tulum')} className="text-gray-300 hover:text-primary transition-colors">Cuanto Cuesta Viajar</a></li>
-                <li><a href={getLocalizedLink('/mejores-hoteles-tulum')} className="text-gray-300 hover:text-primary transition-colors">Mejores Hoteles</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-lg mb-4">{t('footer.experiences')}</h4>
-              <ul className="space-y-2">
-                <li><a href={getLocalizedLink('/cenotes-tulum')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.cenotes')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias?category=arqueologia')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.mayanRuins')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.beachTours')}</a></li>
-                <li><a href={getLocalizedLink('/tulum-guia-completa')} className="text-gray-300 hover:text-primary transition-colors">Guia Completa de Tulum</a></li>
-                <li><a href={getLocalizedLink('/blog')} className="text-gray-300 hover:text-primary transition-colors">Blog de Viajes</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-lg mb-4">{t('footer.support')}</h4>
-              <ul className="space-y-2">
-                <li><a href={getLocalizedLink('/contacto')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.supportLinks.helpCenter')}</a></li>
-                <li><a href={getLocalizedLink('/contacto')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.supportLinks.contactUs')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('footer.supportLinks.cancellationPolicy')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('footer.supportLinks.termsOfService')}</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">{t('footer.supportLinks.privacyPolicy')}</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 mb-2">
-              &copy; {new Date().getFullYear()} TulumTkts. {t('footer.copyright')}
-            </p>
-            <p 
-              className="text-gray-400"
-              dangerouslySetInnerHTML={{
-                __html: t('footer.poweredBy')
-              }}
-            />
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -287,15 +288,14 @@ export default function Transporte() {
             {/* Car Rentals */}
             <TabsContent value="cars">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Alquiler de Coches en Tulum</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('transporte.tabs.carRentals.title')}</h2>
                 <p className="text-gray-600 mb-6">
-                  Servicio de renta de autos con aliados locales y agencias internacionales. Vehículos adecuados para moverse por Tulum y la península. 
-                  La recogida puede hacerse en Tulum o en el Aeropuerto de Cancún con facilidad.
+                  {t('transporte.tabs.carRentals.description')}
                 </p>
 
                 {/* Car Rental Search */}
                 <Card className="p-6 mb-8">
-                  <h3 className="text-lg font-semibold mb-4">Busca tu auto ideal</h3>
+                  <h3 className="text-lg font-semibold mb-4">{t('transporte.tabs.carRentals.searchTitle')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                       <Label className="block text-sm font-medium mb-2">{t('transporte.search.pickupDate')}</Label>
@@ -357,7 +357,7 @@ export default function Transporte() {
                           <Badge variant="outline">{car.category}</Badge>
                           <div className="text-right">
                             <span className="text-2xl font-bold text-primary">€{car.price}</span>
-                            <span className="text-sm text-gray-500">/día</span>
+                            <span className="text-sm text-gray-500">{t('transporte.units.perDay')}</span>
                           </div>
                         </div>
                         
@@ -368,11 +368,11 @@ export default function Transporte() {
                         <div className="flex items-center gap-4 mb-3 text-sm text-gray-500">
                           <div className="flex items-center">
                             <Users className="w-4 h-4 mr-1" />
-                            <span>{car.passengers} personas</span>
+                            <span>{car.passengers} {t('transporte.units.people')}</span>
                           </div>
                           <div className="flex items-center">
                             <Truck className="w-4 h-4 mr-1" />
-                            <span>{car.luggage} maletas</span>
+                            <span>{car.luggage} {t('transporte.units.bags')}</span>
                           </div>
                         </div>
                         
@@ -385,7 +385,7 @@ export default function Transporte() {
                             ))}
                             {car.features.length > 2 && (
                               <Badge variant="outline" className="text-xs">
-                                +{car.features.length - 2} más
+                                +{car.features.length - 2} {t('transporte.units.more')}
                               </Badge>
                             )}
                           </div>
@@ -395,7 +395,7 @@ export default function Transporte() {
                           className="w-full bg-primary text-white hover:bg-primary/90"
                           onClick={() => handleCarRentalClick(car.name, car.price)}
                         >
-                          Reservar Ahora
+                          {t('transporte.buttons.bookNow')}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </CardContent>
@@ -427,39 +427,39 @@ export default function Transporte() {
             {/* Transfers */}
             <TabsContent value="transfers">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Traslados Privados</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('transporte.tabs.transfers.title')}</h2>
                 <p className="text-gray-600 mb-6">
-                  Servicio de traslado desde el Aeropuerto de Cancún hasta tu hotel en Tulum con total comodidad.
+                  {t('transporte.tabs.transfers.description')}
                 </p>
 
                 {/* Transfer Booking Form */}
                 <Card className="p-6 mb-8">
-                  <h3 className="text-lg font-semibold mb-4">Reserva tu traslado</h3>
+                  <h3 className="text-lg font-semibold mb-4">{t('transporte.tabs.transfers.searchTitle')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Fecha del vuelo</Label>
-                      <Input 
-                        type="date" 
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.form.flightDate')}</Label>
+                      <Input
+                        type="date"
                         value={transferDate}
                         onChange={(e) => setTransferDate(e.target.value)}
                       />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Hora de llegada</Label>
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.form.arrivalTime')}</Label>
                       <Input type="time" />
                     </div>
                     <div>
-                      <Label className="block text-sm font-medium mb-2">Pasajeros</Label>
+                      <Label className="block text-sm font-medium mb-2">{t('transporte.form.passengers')}</Label>
                       <Select>
                         <SelectTrigger>
-                          <SelectValue placeholder="Cantidad" />
+                          <SelectValue placeholder={t('transporte.form.quantity')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1">1 pasajero</SelectItem>
-                          <SelectItem value="2">2 pasajeros</SelectItem>
-                          <SelectItem value="4">3-4 pasajeros</SelectItem>
-                          <SelectItem value="6">5-6 pasajeros</SelectItem>
-                          <SelectItem value="8">7+ pasajeros</SelectItem>
+                          <SelectItem value="1">{t('transporte.form.passengerOptions.one')}</SelectItem>
+                          <SelectItem value="2">{t('transporte.form.passengerOptions.two')}</SelectItem>
+                          <SelectItem value="4">{t('transporte.form.passengerOptions.threeFour')}</SelectItem>
+                          <SelectItem value="6">{t('transporte.form.passengerOptions.fiveSix')}</SelectItem>
+                          <SelectItem value="8">{t('transporte.form.passengerOptions.sevenPlus')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -471,7 +471,7 @@ export default function Transporte() {
                           window.open(transferUrl, '_blank');
                         }}
                       >
-                        Cotizar Traslado
+                        {t('transporte.buttons.quoteTransfer')}
                       </Button>
                     </div>
                   </div>
@@ -519,13 +519,13 @@ export default function Transporte() {
                       <div className="flex items-center justify-between">
                         <div>
                           <span className="text-2xl font-bold text-primary">€{service.price}</span>
-                          <span className="text-sm text-gray-500">/viaje</span>
+                          <span className="text-sm text-gray-500">{t('transporte.units.perTrip')}</span>
                         </div>
                         <Button
                           className="bg-primary text-white hover:bg-primary/90"
                           onClick={() => handleTransferClick(service.name, service.price)}
                         >
-                          Reservar
+                          {t('transporte.buttons.book')}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </div>
@@ -566,9 +566,9 @@ export default function Transporte() {
             {/* Other Transport */}
             <TabsContent value="other">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Otros Transportes</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('transporte.tabs.other.title')}</h2>
                 <p className="text-gray-600">
-                  Alternativas de movilidad para explorar Tulum de manera única y divertida.
+                  {t('transporte.tabs.other.description')}
                 </p>
               </div>
 
@@ -601,7 +601,7 @@ export default function Transporte() {
                       className="w-full bg-primary text-white hover:bg-primary/90"
                       onClick={() => handleCarRentalClick(transport.name, transport.price)}
                     >
-                      Rentar Ahora
+                      {t('transporte.buttons.rentNow')}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Card>
@@ -610,7 +610,7 @@ export default function Transporte() {
 
               {/* Transportation Tips */}
               <div className="mt-12">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Consejos de Transporte en Tulum</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{t('transporte.tips.title')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Card className="p-6">
                     <h4 className="font-semibold mb-3">🚗 Para la Zona Hotelera</h4>
@@ -654,9 +654,9 @@ export default function Transporte() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
               <Shield className="w-7 h-7 text-green-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Seguro de Viaje para México</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">{t('transporte.insurance.title')}</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Viaja tranquilo con cobertura médica, cancelación y equipaje. Protege tu viaje a Tulum desde solo $1.50 USD/día.
+              {t('transporte.insurance.subtitle')}
             </p>
           </div>
 
@@ -696,8 +696,8 @@ export default function Transporte() {
 
             <Card className="p-8 border-2 border-green-100 bg-green-50">
               <div className="text-center mb-6">
-                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-1">Desde</p>
-                <p className="text-4xl font-bold text-green-600">$1.50 <span className="text-lg font-normal text-gray-500">USD/día</span></p>
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-1">{t('transporte.insurance.from')}</p>
+                <p className="text-4xl font-bold text-green-600">$1.50 <span className="text-lg font-normal text-gray-500">{t('transporte.insurance.perDay')}</span></p>
                 <p className="text-sm text-gray-500 mt-1">Con SafetyWing Nomad Insurance</p>
               </div>
               <ul className="text-sm text-gray-600 space-y-2 mb-6">
@@ -725,9 +725,9 @@ export default function Transporte() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
               <Wifi className="w-7 h-7 text-blue-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Internet Móvil en México</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">{t('transporte.esim.title')}</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Mantente conectado con una eSIM. Sin cambiar de chip, actívala antes de viajar y llega a Tulum con internet desde el primer momento.
+              {t('transporte.esim.subtitle')}
             </p>
           </div>
 
@@ -748,7 +748,7 @@ export default function Transporte() {
                 className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
                 onClick={() => handleEsimClick('eSIM 1GB 7 días', 4.50)}
               >
-                Comprar eSIM
+                {t('transporte.esim.buy')}
               </Button>
             </Card>
 
@@ -770,7 +770,7 @@ export default function Transporte() {
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 onClick={() => handleEsimClick('eSIM 3GB 30 días', 11)}
               >
-                Comprar eSIM
+                {t('transporte.esim.buy')}
               </Button>
             </Card>
 
@@ -790,7 +790,7 @@ export default function Transporte() {
                 className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
                 onClick={() => handleEsimClick('eSIM 5GB 30 días', 16)}
               >
-                Comprar eSIM
+                {t('transporte.esim.buy')}
               </Button>
             </Card>
           </div>
@@ -820,8 +820,8 @@ export default function Transporte() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Completa tu viaje</h2>
-            <p className="text-gray-600">Todo lo que necesitas para tu aventura en Tulum, en un solo lugar.</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">{t('transporte.crossSell.title')}</h2>
+            <p className="text-gray-600">{t('transporte.crossSell.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -876,6 +876,7 @@ export default function Transporte() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

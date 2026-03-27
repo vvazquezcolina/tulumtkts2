@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
+import { Footer } from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +11,7 @@ import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { Star, MapPin, Wifi, UtensilsCrossed, Waves, TreePine, Heart, ArrowRight, Search } from "lucide-react";
 import { useState } from "react";
+import { useI18n } from "@/contexts/i18n-context";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -352,6 +354,7 @@ function HotelCard({
   checkOut: string;
   guests: string;
 }) {
+  const { t } = useI18n();
   const handleClick = () => {
     trackAffiliateClick("hotellook", hotel.name, hotel.priceFrom, "mejores_hoteles");
     const url = buildHotelAffiliate(hotel.searchQuery, checkIn || undefined, checkOut || undefined, guests);
@@ -403,7 +406,7 @@ function HotelCard({
               onClick={handleClick}
               className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-semibold"
             >
-              Ver Precios
+              {t('hoteles.featured.viewPrices')}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
@@ -416,6 +419,7 @@ function HotelCard({
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function MejoresHoteles() {
+  const { t } = useI18n();
   const { getLocalizedLink } = useLocalizedLink();
 
   const [checkIn, setCheckIn] = useState("");
@@ -494,14 +498,13 @@ export default function MejoresHoteles() {
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="bg-white/20 text-white border-0 text-sm font-medium mb-4 backdrop-blur-sm">
-            Guia actualizada 2026
+            {t('mejoresHoteles.badge')}
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-            Los 15 Mejores Hoteles en Tulum
+            {t('mejoresHoteles.hero.title')}
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">
-            De eco-resorts de lujo sin electricidad a hostales con piscina por $35/noche.
-            Tu hotel ideal en Tulum existe — te ayudamos a encontrarlo.
+            {t('mejoresHoteles.hero.subtitle')}
           </p>
 
           {/* Search Card */}
@@ -510,7 +513,7 @@ export default function MejoresHoteles() {
               {/* Check-in */}
               <div className="space-y-1 text-left">
                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Entrada
+                  {t('mejoresHoteles.search.checkIn')}
                 </label>
                 <Input
                   type="date"
@@ -524,7 +527,7 @@ export default function MejoresHoteles() {
               {/* Check-out */}
               <div className="space-y-1 text-left">
                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Salida
+                  {t('mejoresHoteles.search.checkOut')}
                 </label>
                 <Input
                   type="date"
@@ -538,7 +541,7 @@ export default function MejoresHoteles() {
               {/* Guests */}
               <div className="space-y-1 text-left">
                 <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Huespedes
+                  {t('mejoresHoteles.search.guests')}
                 </label>
                 <select
                   value={guests}
@@ -547,7 +550,7 @@ export default function MejoresHoteles() {
                 >
                   {[1, 2, 3, 4, 5, 6].map((n) => (
                     <option key={n} value={String(n)}>
-                      {n} {n === 1 ? "huesped" : "huespedes"}
+                      {n} {n === 1 ? t('mejoresHoteles.search.guestSingular') : t('mejoresHoteles.search.guestPlural')}
                     </option>
                   ))}
                 </select>
@@ -559,12 +562,12 @@ export default function MejoresHoteles() {
                 className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold h-10"
               >
                 <Search className="w-4 h-4 mr-2" />
-                Buscar hoteles
+                {t('mejoresHoteles.search.button')}
               </Button>
             </div>
 
             <p className="text-xs text-gray-400 mt-3 text-center">
-              Comparamos precios en Booking, Expedia, Agoda y cientos de webs. Sin cargos extra.
+              {t('mejoresHoteles.search.caption')}
             </p>
           </div>
         </div>
@@ -575,13 +578,13 @@ export default function MejoresHoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="bg-amber-100 text-amber-700 border-0 text-sm font-medium mb-3">
-              Lujo & Exclusividad
+              {t('mejoresHoteles.luxury.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Top 5: Hoteles de Lujo
+              {t('mejoresHoteles.luxury.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Los eco-resorts y boutiques mas exclusivos de Tulum. Experiencias unicas que justifican cada peso.
+              {t('mejoresHoteles.luxury.subtitle')}
             </p>
           </div>
 
@@ -605,13 +608,13 @@ export default function MejoresHoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="bg-teal-100 text-teal-700 border-0 text-sm font-medium mb-3">
-              Mejor relacion calidad-precio
+              {t('mejoresHoteles.midRange.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Top 5: Calidad-Precio
+              {t('mejoresHoteles.midRange.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Hoteles que ofrecen mucho mas de lo que cuestan. Comodidad, ubicacion y estilo sin arruinarte.
+              {t('mejoresHoteles.midRange.subtitle')}
             </p>
           </div>
 
@@ -635,13 +638,13 @@ export default function MejoresHoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="bg-green-100 text-green-700 border-0 text-sm font-medium mb-3">
-              Presupuesto inteligente
+              {t('mejoresHoteles.budget.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Top 5: Hoteles Economicos
+              {t('mejoresHoteles.budget.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Dormir bien en Tulum sin gastar una fortuna. Hostales y hoteles que demuestran que barato no significa malo.
+              {t('mejoresHoteles.budget.subtitle')}
             </p>
           </div>
 
@@ -665,10 +668,10 @@ export default function MejoresHoteles() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Hoteles por zona
+              {t('mejoresHoteles.zones.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Cada zona de Tulum tiene personalidad propia. Elige la que mejor encaje con tu estilo de viaje.
+              {t('mejoresHoteles.zones.subtitle')}
             </p>
           </div>
 
@@ -704,7 +707,7 @@ export default function MejoresHoteles() {
                             handleZoneSearch(zone.searchSlug);
                           }}
                         >
-                          Ver hoteles
+                          {t('mejoresHoteles.zones.viewHotels')}
                           <ArrowRight className="w-3.5 h-3.5 ml-1" />
                         </Button>
                       </div>
@@ -722,10 +725,10 @@ export default function MejoresHoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Consejos para reservar tu hotel
+              {t('mejoresHoteles.tips.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Lo que aprendimos despues de anos viviendo y recomendando hoteles en Tulum.
+              {t('mejoresHoteles.tips.subtitle')}
             </p>
           </div>
 
@@ -754,10 +757,10 @@ export default function MejoresHoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Preguntas frecuentes sobre hoteles en Tulum
+              {t('mejoresHoteles.faq.title')}
             </h2>
             <p className="text-lg text-gray-600">
-              Las dudas mas comunes antes de reservar tu alojamiento.
+              {t('mejoresHoteles.faq.subtitle')}
             </p>
           </div>
 
@@ -772,10 +775,10 @@ export default function MejoresHoteles() {
       <section className="py-16 bg-gradient-to-r from-teal-700 to-teal-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Encuentra tu hotel ideal en Tulum
+            {t('mejoresHoteles.cta.title')}
           </h2>
           <p className="text-teal-100 text-lg mb-8 max-w-xl mx-auto">
-            Compara precios en cientos de webs y reserva con cancelacion gratuita. Sin cargos extra.
+            {t('mejoresHoteles.cta.subtitle')}
           </p>
           <Button
             size="lg"
@@ -783,7 +786,7 @@ export default function MejoresHoteles() {
             className="bg-white text-teal-700 hover:bg-gray-100 font-semibold px-8 text-base"
           >
             <Search className="w-5 h-5 mr-2" />
-            Comparar precios ahora
+            {t('mejoresHoteles.cta.button')}
           </Button>
         </div>
       </section>
@@ -794,6 +797,7 @@ export default function MejoresHoteles() {
         items={["vuelos", "experiencias", "transporte", "comoLlegar"]}
         title="Completa tu viaje a Tulum"
       />
+      <Footer />
     </div>
   );
 }

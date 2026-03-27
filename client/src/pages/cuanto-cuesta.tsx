@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
+import { Footer } from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,7 @@ import {
   trackAffiliateClick,
 } from "@/lib/affiliate";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
+import { useI18n } from "@/contexts/i18n-context";
 import {
   Plane,
   Hotel,
@@ -200,6 +202,7 @@ function handleAffiliateLinkClick(type: string, label: string) {
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function CuantoCuesta() {
+  const { t } = useI18n();
   const { getLocalizedLink } = useLocalizedLink();
   const siteUrl =
     typeof window !== "undefined"
@@ -246,28 +249,26 @@ export default function CuantoCuesta() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
             <Badge className="mb-4 bg-white/20 text-white border-white/30 text-sm">
-              Actualizado Marzo 2026
+              {t('cuantoCuesta.badge')}
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              ¿Cuanto Cuesta Viajar a Tulum?
+              {t('cuantoCuesta.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Presupuesto completo y desglosado para planificar tu viaje
-              perfecto a Tulum. Desde opciones economicas hasta experiencias
-              premium, con precios reales actualizados para 2026.
+              {t('cuantoCuesta.hero.subtitle')}
             </p>
             <div className="flex flex-wrap gap-6 text-sm md:text-base">
               <div className="flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-cyan-300" />
-                <span>Desde $1,500 USD / 2 personas</span>
+                <span>{t('cuantoCuesta.stats.price')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-cyan-300" />
-                <span>5 dias / 4 noches</span>
+                <span>{t('cuantoCuesta.stats.duration')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingDown className="w-5 h-5 text-cyan-300" />
-                <span>Tips para ahorrar hasta 40%</span>
+                <span>{t('cuantoCuesta.stats.savings')}</span>
               </div>
             </div>
           </div>
@@ -279,11 +280,10 @@ export default function CuantoCuesta() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Desglose de Presupuesto por Categoria
+              {t('cuantoCuesta.budget.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Comparativa detallada de costos para 3 niveles de presupuesto.
-              Todos los precios son en USD por persona, excepto donde se indique.
+              {t('cuantoCuesta.budget.subtitle')}
             </p>
           </div>
 
@@ -294,17 +294,17 @@ export default function CuantoCuesta() {
             </div>
             <div className="text-center">
               <Badge className="bg-teal-100 text-teal-800 border-teal-200">
-                Economico
+                {t('cuantoCuesta.budget.economy')}
               </Badge>
             </div>
             <div className="text-center">
               <Badge className="bg-cyan-100 text-cyan-800 border-cyan-200">
-                Intermedio
+                {t('cuantoCuesta.budget.mid')}
               </Badge>
             </div>
             <div className="text-center">
               <Badge className="bg-purple-100 text-purple-800 border-purple-200">
-                Premium
+                {t('cuantoCuesta.budget.premium')}
               </Badge>
             </div>
             <div className="w-28" />
@@ -464,9 +464,7 @@ export default function CuantoCuesta() {
           </div>
 
           <p className="text-sm text-gray-500 mt-6 text-center">
-            * Precios estimados en USD. Los vuelos son por persona ida y vuelta.
-            Hotel es por habitacion. El total es aproximado para 2 personas, 5
-            dias (4 noches).
+            {t('cuantoCuesta.disclaimer')}
           </p>
         </div>
       </section>
@@ -477,15 +475,13 @@ export default function CuantoCuesta() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-green-100 text-green-800 border-green-200">
               <TrendingDown className="w-3 h-3 mr-1 inline" />
-              Ahorra hasta 40%
+              {t('cuantoCuesta.savings.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Como Ahorrar en tu Viaje a Tulum
+              {t('cuantoCuesta.savings.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Consejos probados para reducir costos sin sacrificar la
-              experiencia. Viajeros inteligentes ahorran entre $500-$1,500 USD
-              con estos tips.
+              {t('cuantoCuesta.savings.subtitle')}
             </p>
           </div>
 
@@ -567,14 +563,13 @@ export default function CuantoCuesta() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-cyan-100 text-cyan-800 border-cyan-200">
               <Calendar className="w-3 h-3 mr-1 inline" />
-              Mejor epoca para viajar
+              {t('cuantoCuesta.seasons.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Precios por Temporada
+              {t('cuantoCuesta.seasons.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Elige la epoca adecuada y ahorra hasta 30% en tu viaje. Aqui
-              tienes como varian los precios a lo largo del ano.
+              {t('cuantoCuesta.seasons.subtitle')}
             </p>
           </div>
 
@@ -670,15 +665,13 @@ export default function CuantoCuesta() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-teal-100 text-teal-800 border-teal-200">
               <DollarSign className="w-3 h-3 mr-1 inline" />
-              Calculadora interactiva
+              {t('cuantoCuesta.calculator.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Calcula tu Presupuesto Personalizado
+              {t('cuantoCuesta.calculator.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Ajusta el numero de viajeros, noches y nivel de presupuesto para
-              obtener un estimado personalizado con links directos para reservar
-              cada componente.
+              {t('cuantoCuesta.calculator.subtitle')}
             </p>
           </div>
           <TripPlanner />
@@ -689,12 +682,10 @@ export default function CuantoCuesta() {
       <section className="py-16 bg-gradient-to-br from-teal-600 to-cyan-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            ¿Listo para planificar tu viaje a Tulum?
+            {t('cuantoCuesta.cta.title')}
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Empieza reservando tus vuelos y hotel con las mejores tarifas.
-            Nuestros links te llevan directamente a los precios mas bajos
-            disponibles.
+            {t('cuantoCuesta.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -710,7 +701,7 @@ export default function CuantoCuesta() {
                 className="bg-white text-teal-700 hover:bg-gray-100 font-bold px-8"
               >
                 <Plane className="w-5 h-5 mr-2" />
-                Buscar Vuelos Baratos
+                {t('cuantoCuesta.cta.searchFlights')}
               </Button>
             </a>
             <a
@@ -727,7 +718,7 @@ export default function CuantoCuesta() {
                 className="border-white text-white hover:bg-white/10 font-bold px-8"
               >
                 <Hotel className="w-5 h-5 mr-2" />
-                Comparar Hoteles
+                {t('cuantoCuesta.cta.compareHotels')}
               </Button>
             </a>
           </div>
@@ -740,6 +731,7 @@ export default function CuantoCuesta() {
           <CrossSell />
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

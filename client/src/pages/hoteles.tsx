@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -229,8 +230,8 @@ export default function Hoteles() {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title="Hoteles en Tulum - Encuentra el Mejor Alojamiento | TulumTkts"
-        description="Busca y compara hoteles en Tulum. Eco-resorts de lujo en la Zona Hotelera, boutiques económicos en el pueblo y retiros en la selva. Precios desde $50/noche con cancelación gratuita."
+        title={t("hoteles.seo.title")}
+        description={t("hoteles.seo.description")}
         keywords={[
           "hoteles tulum",
           "hoteles en tulum",
@@ -321,11 +322,10 @@ export default function Hoteles() {
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-            Hoteles en Tulum
+            {t("hoteles.hero.title")}
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto">
-            Encuentra el alojamiento perfecto: desde eco-resorts de lujo frente al mar hasta boutiques
-            con encanto en el corazón del pueblo.
+            {t("hoteles.hero.subtitle")}
           </p>
 
           {/* Search Card */}
@@ -334,7 +334,7 @@ export default function Hoteles() {
               {/* Check-in */}
               <div className="space-y-1 text-left">
                 <Label htmlFor="checkin" className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Entrada
+                  {t("hoteles.search.checkIn")}
                 </Label>
                 <div className="relative">
                   <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
@@ -352,7 +352,7 @@ export default function Hoteles() {
               {/* Check-out */}
               <div className="space-y-1 text-left">
                 <Label htmlFor="checkout" className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Salida
+                  {t("hoteles.search.checkOut")}
                 </Label>
                 <div className="relative">
                   <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
@@ -370,17 +370,17 @@ export default function Hoteles() {
               {/* Guests */}
               <div className="space-y-1 text-left">
                 <Label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                  Huéspedes
+                  {t("hoteles.search.guests")}
                 </Label>
                 <Select value={guests} onValueChange={setGuests}>
                   <SelectTrigger className="text-sm">
                     <Users className="w-4 h-4 mr-2 text-gray-400" />
-                    <SelectValue placeholder="Huéspedes" />
+                    <SelectValue placeholder={t("hoteles.search.guests")} />
                   </SelectTrigger>
                   <SelectContent>
                     {[1, 2, 3, 4, 5, 6].map((n) => (
                       <SelectItem key={n} value={String(n)}>
-                        {n} {n === 1 ? "huésped" : "huéspedes"}
+                        {n} {n === 1 ? t("hoteles.search.guestSingular") : t("hoteles.search.guestPlural")}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -395,13 +395,13 @@ export default function Hoteles() {
                   className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-sm h-10"
                 >
                   <Search className="w-4 h-4 mr-2" />
-                  Buscar hoteles
+                  {t("hoteles.search.searchButton")}
                 </Button>
               </div>
             </div>
 
             <p className="text-xs text-gray-400 mt-3 text-center">
-              Comparamos precios en cientos de webs. Sin cargos extra al reservar.
+              {t("hoteles.search.searchCaption")}
             </p>
           </div>
         </div>
@@ -413,19 +413,19 @@ export default function Hoteles() {
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-green-500" />
-              <span>Cancelación gratuita disponible</span>
+              <span>{t("hoteles.trust.freeCancellation")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-green-500" />
-              <span>Pago seguro</span>
+              <span>{t("hoteles.trust.securePay")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-green-500" />
-              <span>Confirmación instantánea</span>
+              <span>{t("hoteles.trust.instantConfirm")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-yellow-400 fill-current" />
-              <span>+500 hoteles en Tulum</span>
+              <span>{t("hoteles.trust.hotelCount")}</span>
             </div>
           </div>
         </div>
@@ -436,10 +436,10 @@ export default function Hoteles() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Zonas para hospedarse
+              {t("hoteles.zones.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Tulum tiene varias áreas con carácter propio. Elige la que mejor encaje con tu estilo de viaje.
+              {t("hoteles.zones.subtitle")}
             </p>
           </div>
 
@@ -455,12 +455,13 @@ export default function Hoteles() {
                     src={zone.image}
                     alt={zone.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-bold text-white mb-1">{zone.name}</h3>
                     <div className="flex items-center gap-1 text-white/90 text-sm">
-                      <span className="font-semibold">desde {zone.priceFrom}</span>
+                      <span className="font-semibold">{t("hoteles.zones.from")} {zone.priceFrom}</span>
                       <span className="text-white/70">{zone.unit}</span>
                     </div>
                   </div>
@@ -481,7 +482,7 @@ export default function Hoteles() {
                       handleZoneSearch(zone.searchSlug);
                     }}
                   >
-                    Ver hoteles en esta zona
+                    {t("hoteles.zones.viewHotels")}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
@@ -496,10 +497,10 @@ export default function Hoteles() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Hoteles destacados
+              {t("hoteles.featured.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Una selección de los mejores alojamientos en Tulum para todos los estilos y presupuestos.
+              {t("hoteles.featured.subtitle")}
             </p>
           </div>
 
@@ -515,6 +516,7 @@ export default function Hoteles() {
                     src={hotel.image}
                     alt={hotel.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src =
@@ -525,13 +527,13 @@ export default function Hoteles() {
                   <div className="absolute top-3 left-3">
                     <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
                       <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                      <span className="text-xs font-semibold text-gray-800">{hotel.stars} estrellas</span>
+                      <span className="text-xs font-semibold text-gray-800">{hotel.stars} {t("hoteles.featured.stars")}</span>
                     </div>
                   </div>
                   {/* Price badge */}
                   <div className="absolute bottom-3 right-3">
                     <div className="bg-primary text-white text-xs font-bold rounded-lg px-2 py-1">
-                      desde {hotel.priceRange}
+                      {t("hoteles.featured.from")} {hotel.priceRange}
                     </div>
                   </div>
                 </div>
@@ -576,7 +578,7 @@ export default function Hoteles() {
                       handleHotelSearch(hotel.searchQuery);
                     }}
                   >
-                    Ver precios
+                    {t("hoteles.featured.viewPrices")}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
@@ -592,7 +594,7 @@ export default function Hoteles() {
               className="border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8"
               onClick={() => handleSearch()}
             >
-              Ver todos los hoteles en Tulum
+              {t("hoteles.featured.viewAll")}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
@@ -604,11 +606,10 @@ export default function Hoteles() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Consejos para reservar
+              {t("hoteles.tips.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Lo que necesitas saber antes de reservar tu hotel en Tulum para sacar el máximo provecho
-              a tu presupuesto.
+              {t("hoteles.tips.subtitle")}
             </p>
           </div>
 
@@ -668,10 +669,10 @@ export default function Hoteles() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Preguntas frecuentes sobre hoteles en Tulum
+              {t("hoteles.faq.title")}
             </h2>
             <p className="text-lg text-gray-600">
-              Todo lo que necesitas saber antes de reservar tu alojamiento.
+              {t("hoteles.faq.subtitle")}
             </p>
           </div>
 
@@ -717,9 +718,9 @@ export default function Hoteles() {
       <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5 border-t">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Completa tu viaje</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">{t("hoteles.crossSell.title")}</h2>
             <p className="text-lg text-gray-600">
-              Tu hotel ya está listo. Ahora prepara el resto de tu aventura en Tulum.
+              {t("hoteles.crossSell.subtitle")}
             </p>
           </div>
 
@@ -786,6 +787,7 @@ export default function Hoteles() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

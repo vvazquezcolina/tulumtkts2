@@ -1,15 +1,15 @@
 // Traducciones para página Villas
 export default {
   es: {
-    title: 'Villas y Alojamiento en Tulum México 2025: Rentas de Lujo | TulumTkts',
-    description: 'Descubre las mejores villas y alojamientos en Tulum México 2025: villas frente al mar, eco-villas en la jungla, y propiedades únicas. Reserva tu estancia perfecta en Tulum.',
+    title: 'Villas y Alojamiento en Tulum México 2026: Rentas de Lujo | TulumTkts',
+    description: 'Descubre las mejores villas y alojamientos en Tulum México 2026: villas frente al mar, eco-villas en la jungla, y propiedades únicas. Reserva tu estancia perfecta en Tulum.',
     breadcrumb: {
       home: 'Inicio',
       guide: 'Guía Completa',
       current: 'Villas y Alojamiento',
     },
     hero: {
-      title: 'Villas y Alojamiento en Tulum México 2025',
+      title: 'Villas y Alojamiento en Tulum México 2026',
       subtitle: 'Descubre propiedades únicas frente al mar, en la jungla o en el corazón de Tulum pueblo',
     },
     filters: {
@@ -82,15 +82,15 @@ export default {
     },
   },
   en: {
-    title: 'Villas and Accommodation in Tulum Mexico 2025: Luxury Rentals | TulumTkts',
-    description: 'Discover the best villas and accommodations in Tulum Mexico 2025: beachfront villas, eco-villas in the jungle, and unique properties. Book your perfect stay in Tulum.',
+    title: 'Villas and Accommodation in Tulum Mexico 2026: Luxury Rentals | TulumTkts',
+    description: 'Discover the best villas and accommodations in Tulum Mexico 2026: beachfront villas, eco-villas in the jungle, and unique properties. Book your perfect stay in Tulum.',
     breadcrumb: {
       home: 'Home',
       guide: 'Complete Guide',
       current: 'Villas and Accommodation',
     },
     hero: {
-      title: 'Villas and Accommodation in Tulum Mexico 2025',
+      title: 'Villas and Accommodation in Tulum Mexico 2026',
       subtitle: 'Discover unique properties by the sea, in the jungle or in the heart of Tulum town',
     },
     filters: {
@@ -161,15 +161,15 @@ export default {
     },
   },
   fr: {
-    title: 'Villas et Hébergement à Tulum Mexique 2025: Locations de Luxe | TulumTkts',
-    description: 'Découvrez les meilleures villas et hébergements à Tulum Mexique 2025: villas face à la mer, éco-villas dans la jungle, et propriétés uniques. Réservez votre séjour parfait à Tulum.',
+    title: 'Villas et Hébergement à Tulum Mexique 2026: Locations de Luxe | TulumTkts',
+    description: 'Découvrez les meilleures villas et hébergements à Tulum Mexique 2026: villas face à la mer, éco-villas dans la jungle, et propriétés uniques. Réservez votre séjour parfait à Tulum.',
     breadcrumb: {
       home: 'Accueil',
       guide: 'Guide Complet',
       current: 'Villas et Hébergement',
     },
     hero: {
-      title: 'Villas et Hébergement à Tulum Mexique 2025',
+      title: 'Villas et Hébergement à Tulum Mexique 2026',
       subtitle: 'Découvrez des propriétés uniques face à la mer, dans la jungle ou au cœur du village de Tulum',
     },
     filters: {
@@ -240,15 +240,15 @@ export default {
     },
   },
   it: {
-    title: 'Ville e Alloggi a Tulum Messico 2025: Affitti di Lusso | TulumTkts',
-    description: 'Scopri le migliori ville e alloggi a Tulum Messico 2025: ville fronte mare, eco-ville nella giungla e proprietà uniche. Prenota il tuo soggiorno perfetto a Tulum.',
+    title: 'Ville e Alloggi a Tulum Messico 2026: Affitti di Lusso | TulumTkts',
+    description: 'Scopri le migliori ville e alloggi a Tulum Messico 2026: ville fronte mare, eco-ville nella giungla e proprietà uniche. Prenota il tuo soggiorno perfetto a Tulum.',
     breadcrumb: {
       home: 'Home',
       guide: 'Guida Completa',
       current: 'Ville e Alloggi',
     },
     hero: {
-      title: 'Ville e Alloggi a Tulum Messico 2025',
+      title: 'Ville e Alloggi a Tulum Messico 2026',
       subtitle: 'Scopri proprietà uniche sul mare, nella giungla o nel cuore del centro di Tulum',
     },
     filters: {

@@ -1,8 +1,8 @@
 export const cenotesTulum = {
   es: {
     hero: {
-      badge: "Guía Completa 2025",
-      title: "Cenotes en Tulum México 2025: Guía Completa",
+      badge: "Guía Completa 2026",
+      title: "Cenotes en Tulum México 2026: Guía Completa",
       description: "Descubre los mejores cenotes en Tulum: Gran Cenote, Dos Ojos, Calavera y más. Precios, cómo llegar, tours y consejos para tu visita perfecta a estos pozos sagrados mayas de agua cristalina.",
       stats: {
         cenotes: "15+ Cenotes",
@@ -18,7 +18,7 @@ export const cenotesTulum = {
       paragraph4: "Ya sea que busques hacer snorkel en aguas cristalinas, bucear en cuevas submarinas espectaculares, o simplemente relajarte flotando en pozos naturales únicos, los cenotes de Tulum ofrecen una experiencia inolvidable que no puedes perderte durante tu visita a esta región mágica de México."
     },
     topCenotes: {
-      title: "Los 6 Mejores Cenotes en Tulum 2025",
+      title: "Los 6 Mejores Cenotes en Tulum 2026",
       subtitle: "Descubre los cenotes más populares y fascinantes de Tulum",
       viewTours: "Ver Tours",
       topBadge: "Top",
@@ -72,7 +72,28 @@ export const cenotesTulum = {
       title: "¿Listo para Explorar los Cenotes de Tulum?",
       description: "Reserva tu tour a los mejores cenotes de Tulum con los mejores precios y experiencia garantizada.",
       viewTours: "Ver Tours a Cenotes",
-      viewGuide: "Ver Guía Completa de Tulum"
+      viewGuide: "Ver Guía Completa de Tulum",
+      tour: {
+        title: 'Reserva tu tour de cenotes',
+        description: 'Visita los mejores cenotes de Tulum con guías expertos. Tours disponibles todos los días con grupos pequeños.',
+        feature1: 'Transporte incluido desde Tulum',
+        feature2: 'Guía certificado en español e inglés',
+        feature3: 'Equipo de snorkel incluido',
+        button: 'Ver Tours de Cenotes',
+        caption: 'Vía Viator — cancelación gratuita',
+      },
+      carRental: {
+        title: 'Renta un auto',
+        description: 'La forma más cómoda de visitar varios cenotes en un día. Conduce a tu ritmo.',
+        button: 'Buscar Autos',
+        caption: 'Vía DiscoverCars',
+      },
+      guidedTour: {
+        title: 'Tour guiado todo incluido',
+        description: 'Sin preocupaciones: transporte, guía, equipo y entrada a cenotes incluidos.',
+        button: 'Ver Tours Guiados',
+        caption: 'Vía Viator',
+      },
     },
     breadcrumbs: {
       home: "Inicio",
@@ -82,8 +103,8 @@ export const cenotesTulum = {
   },
   en: {
     hero: {
-      badge: "Complete Guide 2025",
-      title: "Cenotes in Tulum Mexico 2025: Complete Guide",
+      badge: "Complete Guide 2026",
+      title: "Cenotes in Tulum Mexico 2026: Complete Guide",
       description: "Discover the best cenotes in Tulum: Gran Cenote, Dos Ojos, Calavera, and more. Prices, how to get there, tours, and tips for your perfect visit to these sacred Mayan crystal-clear water pools.",
       stats: {
         cenotes: "15+ Cenotes",
@@ -99,7 +120,7 @@ export const cenotesTulum = {
       paragraph4: "Whether you're looking to snorkel in crystal-clear waters, dive in spectacular underwater caves, or simply relax floating in unique natural pools, Tulum's cenotes offer an unforgettable experience you can't miss during your visit to this magical region of Mexico."
     },
     topCenotes: {
-      title: "The 6 Best Cenotes in Tulum 2025",
+      title: "The 6 Best Cenotes in Tulum 2026",
       subtitle: "Discover the most popular and fascinating cenotes in Tulum",
       viewTours: "View Tours",
       topBadge: "Top",
@@ -153,7 +174,28 @@ export const cenotesTulum = {
       title: "Ready to Explore Tulum's Cenotes?",
       description: "Book your tour to the best cenotes in Tulum with the best prices and guaranteed experience.",
       viewTours: "View Cenote Tours",
-      viewGuide: "View Complete Tulum Guide"
+      viewGuide: "View Complete Tulum Guide",
+      tour: {
+        title: 'Book your cenote tour',
+        description: 'Visit the best cenotes in Tulum with expert guides. Tours available every day with small groups.',
+        feature1: 'Transport included from Tulum',
+        feature2: 'Certified guide in Spanish and English',
+        feature3: 'Snorkel equipment included',
+        button: 'View Cenote Tours',
+        caption: 'Via Viator — free cancellation',
+      },
+      carRental: {
+        title: 'Rent a car',
+        description: 'The most comfortable way to visit several cenotes in one day. Drive at your own pace.',
+        button: 'Search Cars',
+        caption: 'Via DiscoverCars',
+      },
+      guidedTour: {
+        title: 'All-inclusive guided tour',
+        description: 'No worries: transport, guide, equipment, and cenote entry all included.',
+        button: 'View Guided Tours',
+        caption: 'Via Viator',
+      },
     },
     breadcrumbs: {
       home: "Home",
@@ -163,8 +205,8 @@ export const cenotesTulum = {
   },
   fr: {
     hero: {
-      badge: "Guide Complet 2025",
-      title: "Cénotes à Tulum Mexique 2025 : Guide Complet",
+      badge: "Guide Complet 2026",
+      title: "Cénotes à Tulum Mexique 2026 : Guide Complet",
       description: "Découvrez les meilleurs cénotes à Tulum : Gran Cenote, Dos Ojos, Calavera et plus encore. Prix, comment s'y rendre, visites et conseils pour votre visite parfaite de ces puits sacrés mayas aux eaux cristallines.",
       stats: {
         cenotes: "15+ Cénotes",
@@ -180,7 +222,7 @@ export const cenotesTulum = {
       paragraph4: "Que vous cherchiez à faire du snorkeling dans des eaux cristallines, plonger dans des grottes sous-marines spectaculaires, ou simplement vous détendre en flottant dans des puits naturels uniques, les cénotes de Tulum offrent une expérience inoubliable que vous ne pouvez pas manquer lors de votre visite à cette région magique du Mexique."
     },
     topCenotes: {
-      title: "Les 6 Meilleurs Cénotes à Tulum 2025",
+      title: "Les 6 Meilleurs Cénotes à Tulum 2026",
       subtitle: "Découvrez les cénotes les plus populaires et fascinants de Tulum",
       viewTours: "Voir les Visites",
       topBadge: "Top",
@@ -234,7 +276,28 @@ export const cenotesTulum = {
       title: "Prêt à Explorer les Cénotes de Tulum ?",
       description: "Réservez votre visite aux meilleurs cénotes à Tulum avec les meilleurs prix et expérience garantie.",
       viewTours: "Voir les Visites de Cénotes",
-      viewGuide: "Voir le Guide Complet de Tulum"
+      viewGuide: "Voir le Guide Complet de Tulum",
+      tour: {
+        title: 'Réservez votre visite de cénotes',
+        description: 'Visitez les meilleurs cénotes de Tulum avec des guides experts. Visites disponibles tous les jours en petits groupes.',
+        feature1: 'Transport inclus depuis Tulum',
+        feature2: 'Guide certifié en espagnol et en anglais',
+        feature3: 'Équipement de snorkeling inclus',
+        button: 'Voir les Visites de Cénotes',
+        caption: 'Via Viator — annulation gratuite',
+      },
+      carRental: {
+        title: 'Louer une voiture',
+        description: 'La façon la plus confortable de visiter plusieurs cénotes en une journée. Conduisez à votre rythme.',
+        button: 'Chercher des Voitures',
+        caption: 'Via DiscoverCars',
+      },
+      guidedTour: {
+        title: 'Visite guidée tout compris',
+        description: 'Sans soucis : transport, guide, équipement et entrée aux cénotes inclus.',
+        button: 'Voir les Visites Guidées',
+        caption: 'Via Viator',
+      },
     },
     breadcrumbs: {
       home: "Accueil",
@@ -244,8 +307,8 @@ export const cenotesTulum = {
   },
   it: {
     hero: {
-      badge: "Guida Completa 2025",
-      title: "Cenotes a Tulum Messico 2025: Guida Completa",
+      badge: "Guida Completa 2026",
+      title: "Cenotes a Tulum Messico 2026: Guida Completa",
       description: "Scopri i migliori cenotes a Tulum: Gran Cenote, Dos Ojos, Calavera e altro ancora. Prezzi, come arrivare, tour e consigli per la tua visita perfetta a queste sacre pozze maya di acque cristalline.",
       stats: {
         cenotes: "15+ Cenotes",
@@ -261,7 +324,7 @@ export const cenotesTulum = {
       paragraph4: "Che tu stia cercando di fare snorkeling in acque cristalline, immergerti in grotte sottomarine spettacolari, o semplicemente rilassarti galleggiando in pozze naturali uniche, i cenotes di Tulum offrono un'esperienza indimenticabile che non puoi perderti durante la tua visita a questa regione magica del Messico."
     },
     topCenotes: {
-      title: "I 6 Migliori Cenotes a Tulum 2025",
+      title: "I 6 Migliori Cenotes a Tulum 2026",
       subtitle: "Scopri i cenotes più popolari e affascinanti di Tulum",
       viewTours: "Vedi Tour",
       topBadge: "Top",
@@ -315,7 +378,28 @@ export const cenotesTulum = {
       title: "Pronto a Esplorare i Cenotes di Tulum?",
       description: "Prenota il tuo tour ai migliori cenotes a Tulum con i migliori prezzi e esperienza garantita.",
       viewTours: "Vedi Tour ai Cenotes",
-      viewGuide: "Vedi Guida Completa di Tulum"
+      viewGuide: "Vedi Guida Completa di Tulum",
+      tour: {
+        title: 'Prenota il tuo tour ai cenotes',
+        description: 'Visita i migliori cenotes di Tulum con guide esperte. Tour disponibili ogni giorno con piccoli gruppi.',
+        feature1: 'Trasporto incluso da Tulum',
+        feature2: 'Guida certificata in spagnolo e inglese',
+        feature3: 'Attrezzatura snorkeling inclusa',
+        button: 'Vedi Tour ai Cenotes',
+        caption: 'Via Viator — cancellazione gratuita',
+      },
+      carRental: {
+        title: 'Noleggia un\'auto',
+        description: 'Il modo più comodo per visitare più cenotes in un giorno. Guida al tuo ritmo.',
+        button: 'Cerca Auto',
+        caption: 'Via DiscoverCars',
+      },
+      guidedTour: {
+        title: 'Tour guidato tutto incluso',
+        description: 'Senza preoccupazioni: trasporto, guida, attrezzatura e ingresso ai cenotes inclusi.',
+        button: 'Vedi Tour Guidati',
+        caption: 'Via Viator',
+      },
     },
     breadcrumbs: {
       home: "Home",

@@ -2,14 +2,14 @@
 export default {
   es: {
     title: 'Transporte en Tulum México: Renta de Autos y Traslados del Aeropuerto | TulumTkts',
-    description: 'Transporte en Tulum México 2025: renta de autos, traslados del aeropuerto de Cancún a Tulum, shuttles y taxis. Compara precios y reserva tu transporte al mejor precio.',
+    description: 'Transporte en Tulum México 2026: renta de autos, traslados del aeropuerto de Cancún a Tulum, shuttles y taxis. Compara precios y reserva tu transporte al mejor precio.',
     breadcrumb: {
       home: 'Inicio',
       guide: 'Guía Completa',
       current: 'Transporte',
     },
     hero: {
-      title: 'Transporte en Tulum México: Renta de Autos y Traslados 2025',
+      title: 'Transporte en Tulum México: Renta de Autos y Traslados 2026',
       subtitle: 'Renta de autos, traslados del aeropuerto, shuttles y más opciones de transporte en Tulum',
     },
     tabs: {
@@ -44,14 +44,14 @@ export default {
   },
   en: {
     title: 'Transport in Tulum Mexico: Car Rentals and Airport Transfers | TulumTkts',
-    description: 'Transport in Tulum Mexico 2025: car rentals, transfers from Cancun Airport to Tulum, shuttles and taxis. Compare prices and book your transport at the best price.',
+    description: 'Transport in Tulum Mexico 2026: car rentals, transfers from Cancun Airport to Tulum, shuttles and taxis. Compare prices and book your transport at the best price.',
     breadcrumb: {
       home: 'Home',
       guide: 'Complete Guide',
       current: 'Transport',
     },
     hero: {
-      title: 'Transport in Tulum Mexico: Car Rentals and Transfers 2025',
+      title: 'Transport in Tulum Mexico: Car Rentals and Transfers 2026',
       subtitle: 'Car rentals, airport transfers, shuttles and more transport options in Tulum',
     },
     tabs: {
@@ -86,14 +86,14 @@ export default {
   },
   fr: {
     title: 'Transport à Tulum Mexique: Location de Voitures et Transfers Aéroport | TulumTkts',
-    description: 'Transport à Tulum Mexique 2025: location de voitures, transfers de l\'aéroport de Cancún à Tulum, navettes et taxis. Comparez les prix et réservez votre transport au meilleur prix.',
+    description: 'Transport à Tulum Mexique 2026: location de voitures, transfers de l\'aéroport de Cancún à Tulum, navettes et taxis. Comparez les prix et réservez votre transport au meilleur prix.',
     breadcrumb: {
       home: 'Accueil',
       guide: 'Guide Complet',
       current: 'Transport',
     },
     hero: {
-      title: 'Transport à Tulum Mexique: Location de Voitures et Transfers 2025',
+      title: 'Transport à Tulum Mexique: Location de Voitures et Transfers 2026',
       subtitle: 'Location de voitures, transfers aéroport, navettes et plus d\'options de transport à Tulum',
     },
     tabs: {
@@ -128,14 +128,14 @@ export default {
   },
   it: {
     title: 'Trasporto a Tulum Messico: Noleggio Auto e Trasferimenti Aeroporto | TulumTkts',
-    description: 'Trasporto a Tulum Messico 2025: noleggio auto, trasferimenti dall\'aeroporto di Cancún a Tulum, navette e taxi. Confronta prezzi e prenota il tuo trasporto al miglior prezzo.',
+    description: 'Trasporto a Tulum Messico 2026: noleggio auto, trasferimenti dall\'aeroporto di Cancún a Tulum, navette e taxi. Confronta prezzi e prenota il tuo trasporto al miglior prezzo.',
     breadcrumb: {
       home: 'Home',
       guide: 'Guida Completa',
       current: 'Trasporto',
     },
     hero: {
-      title: 'Trasporto a Tulum Messico: Noleggio Auto e Trasferimenti 2025',
+      title: 'Trasporto a Tulum Messico: Noleggio Auto e Trasferimenti 2026',
       subtitle: 'Noleggio auto, trasferimenti aeroporto, navette e più opzioni di trasporto a Tulum',
     },
     tabs: {

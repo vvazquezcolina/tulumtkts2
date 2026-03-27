@@ -1,15 +1,15 @@
 // Traducciones para página Experiencias
 export default {
   es: {
-    title: 'Tours y Experiencias en Tulum México 2025 | Reserva Tours a Cenotes y Ruinas Mayas',
-    description: 'Descubre los mejores tours en Tulum México: tours a cenotes, ruinas mayas, playas y más. Reserva experiencias únicas en Tulum con los mejores precios y disponibilidad 2025.',
+    title: 'Tours y Experiencias en Tulum México 2026 | Reserva Tours a Cenotes y Ruinas Mayas',
+    description: 'Descubre los mejores tours en Tulum México: tours a cenotes, ruinas mayas, playas y más. Reserva experiencias únicas en Tulum con los mejores precios y disponibilidad 2026.',
     breadcrumb: {
       home: 'Inicio',
       guide: 'Guía Completa',
       current: 'Tours y Experiencias',
     },
     hero: {
-      title: 'Tours y Experiencias en Tulum México 2025',
+      title: 'Tours y Experiencias en Tulum México 2026',
       subtitle: 'Descubre aventuras únicas en cenotes, ruinas mayas, playas paradisíacas y más',
     },
     filters: {
@@ -122,15 +122,15 @@ export default {
     },
   },
   en: {
-    title: 'Tours and Experiences in Tulum Mexico 2025 | Book Tours to Cenotes and Mayan Ruins',
-    description: 'Discover the best tours in Tulum Mexico: tours to cenotes, Mayan ruins, beaches and more. Book unique experiences in Tulum with the best prices and availability 2025.',
+    title: 'Tours and Experiences in Tulum Mexico 2026 | Book Tours to Cenotes and Mayan Ruins',
+    description: 'Discover the best tours in Tulum Mexico: tours to cenotes, Mayan ruins, beaches and more. Book unique experiences in Tulum with the best prices and availability 2026.',
     breadcrumb: {
       home: 'Home',
       guide: 'Complete Guide',
       current: 'Tours and Experiences',
     },
     hero: {
-      title: 'Tours and Experiences in Tulum Mexico 2025',
+      title: 'Tours and Experiences in Tulum Mexico 2026',
       subtitle: 'Discover unique adventures in cenotes, Mayan ruins, paradise beaches and more',
     },
     filters: {
@@ -243,15 +243,15 @@ export default {
     },
   },
   fr: {
-    title: 'Circuits et Expériences à Tulum Mexique 2025 | Réservez des Circuits aux Cenotes et Ruines Mayas',
-    description: 'Découvrez les meilleurs circuits à Tulum Mexique: circuits aux cenotes, ruines mayas, plages et plus. Réservez des expériences uniques à Tulum aux meilleurs prix et disponibilités 2025.',
+    title: 'Circuits et Expériences à Tulum Mexique 2026 | Réservez des Circuits aux Cenotes et Ruines Mayas',
+    description: 'Découvrez les meilleurs circuits à Tulum Mexique: circuits aux cenotes, ruines mayas, plages et plus. Réservez des expériences uniques à Tulum aux meilleurs prix et disponibilités 2026.',
     breadcrumb: {
       home: 'Accueil',
       guide: 'Guide Complet',
       current: 'Circuits et Expériences',
     },
     hero: {
-      title: 'Circuits et Expériences à Tulum Mexique 2025',
+      title: 'Circuits et Expériences à Tulum Mexique 2026',
       subtitle: 'Découvrez des aventures uniques dans les cenotes, ruines mayas, plages paradisiaques et plus',
     },
     filters: {
@@ -364,15 +364,15 @@ export default {
     },
   },
   it: {
-    title: 'Tour ed Esperienze a Tulum Messico 2025 | Prenota Tour ai Cenotes e Rovine Maya',
-    description: 'Scopri i migliori tour a Tulum Messico: tour ai cenotes, rovine maya, spiagge e altro. Prenota esperienze uniche a Tulum ai migliori prezzi e disponibilità 2025.',
+    title: 'Tour ed Esperienze a Tulum Messico 2026 | Prenota Tour ai Cenotes e Rovine Maya',
+    description: 'Scopri i migliori tour a Tulum Messico: tour ai cenotes, rovine maya, spiagge e altro. Prenota esperienze uniche a Tulum ai migliori prezzi e disponibilità 2026.',
     breadcrumb: {
       home: 'Home',
       guide: 'Guida Completa',
       current: 'Tour ed Esperienze',
     },
     hero: {
-      title: 'Tour ed Esperienze a Tulum Messico 2025',
+      title: 'Tour ed Esperienze a Tulum Messico 2026',
       subtitle: 'Scopri avventure uniche nei cenotes, rovine maya, spiagge paradisiache e altro',
     },
     filters: {

@@ -2,12 +2,12 @@
 export default {
   es: {
     seo: {
-      title: 'Tulum México 2025: Tours, Experiencias y Guías Completas | TulumTkts',
-      description: 'Descubre Tulum México 2025: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum.',
+      title: 'Tulum México 2026: Tours, Experiencias y Guías Completas | TulumTkts',
+      description: 'Descubre Tulum México 2026: los mejores tours, experiencias, hoteles y guías completas. Reserva tours a cenotes, ruinas mayas, playas y más. Tu guía definitiva de Tulum.',
       organizationDescription: 'Plataforma de turismo #1 para experiencias en Tulum, México. Reserva tours, experiencias, eventos y alojamientos en Tulum.',
     },
     hero: {
-      title: 'Tulum México 2025: {tours}, Experiencias y Guías Completas',
+      title: 'Tulum México 2026: {tours}, Experiencias y Guías Completas',
       tours: 'Tours',
       subtitle: 'Descubre los mejores tours en Tulum, México. Reserva experiencias únicas en cenotes, ruinas mayas, playas paradisíacas y más. Tu guía definitiva de Tulum.',
       searchPlaceholder: 'Cenotes, ruinas, tours...',
@@ -20,13 +20,20 @@ export default {
         two: '2 Huéspedes',
         threePlus: '3+ Huéspedes',
       },
+      popular: 'Populares',
+      popularSearches: {
+        cenotes: 'Cenotes',
+        ruins: 'Ruinas Mayas',
+        snorkel: 'Snorkel',
+        beach: 'Tours de Playa',
+      },
     },
     intro: {
       paragraph1: '{tulum} es uno de los destinos más populares de la Riviera Maya, atrayendo a miles de viajeros de todo el mundo con su combinación única de {playas}, {ruinas} impresionantes, {cenotes} sagrados y una vibrante escena cultural y gastronómica.',
       paragraph2: 'Si estás planificando tu viaje a {tulum2025}, has llegado al lugar correcto. En TulumTkts te proporcionamos la información más completa y actualizada sobre {tours}, {mejoresExperiencias}, {hoteles}, {eventos} y todo lo que necesitas saber para hacer de tu visita una experiencia inolvidable. Explora nuestra {guiaCompleta} con más de 600 artículos detallados.',
       paragraph3: 'Ya sea que busques explorar los {cenotesTulum}, visitar las {ruinasMayas}, disfrutar de las {playasParadisíacas} o sumergirte en la cultura local, Tulum tiene algo especial para cada visitante. Reserva tus {toursEnTulum}, encuentra el {mejorHotel} y descubre todas las {cosasQueHacer} con nuestra {guiaCompleta2025}.',
       tulum: 'Tulum, México',
-      tulum2025: 'Tulum México 2025',
+      tulum2025: 'Tulum México 2026',
       playas: 'playas paradisíacas',
       ruinas: 'ruinas mayas',
       cenotes: 'cenotes sagrados',
@@ -41,7 +48,7 @@ export default {
       toursEnTulum: 'tours en Tulum',
       mejorHotel: 'mejor hotel',
       cosasQueHacer: 'cosas que hacer en Tulum México',
-      guiaCompleta2025: 'guía completa de Tulum 2025',
+      guiaCompleta2025: 'guía completa de Tulum 2026',
     },
     categories: {
       title: 'Categorías Populares en Tulum',
@@ -128,16 +135,31 @@ export default {
         answer: 'Para Tulum empaca ropa ligera (trajes de baño, shorts, vestidos), protector solar de factor alto, sombrero o gorra, gafas de sol, repelente de insectos (especialmente para cenotes y áreas de selva), zapatos cómodos para caminar y sandalias para la playa, una chaqueta ligera para las noches más frescas durante diciembre-febrero, y equipo de snorkel si planeas explorar cenotes o arrecifes.'
       }
     },
+    crossSell: {
+      title: 'Todo lo que necesitas para tu viaje',
+    },
     footer: {
       description: 'Tu puerta de entrada a experiencias inolvidables en Tulum. Descubre maravillas antiguas, belleza natural y aventura en el paraíso.',
       experiences: 'Experiencias',
       support: 'Soporte',
+      planYourTrip: 'Planifica tu Viaje',
+      planLinks: {
+        flights: 'Vuelos a Cancún',
+        hotels: 'Hoteles en Tulum',
+        tours: 'Tours y Actividades',
+        transport: 'Transporte y Autos',
+        howToGetThere: 'Cómo Llegar a Tulum',
+        howMuchItCosts: 'Cuánto Cuesta Viajar',
+        bestHotels: 'Mejores Hoteles',
+      },
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Ruinas Mayas',
         beachTours: 'Tours de Playa',
         adventureSports: 'Deportes de Aventura',
         culturalTours: 'Tours Culturales',
+        completeGuide: 'Guía Completa de Tulum',
+        blog: 'Blog de Viajes',
       },
       supportLinks: {
         helpCenter: 'Centro de Ayuda',
@@ -158,12 +180,12 @@ export default {
   },
   en: {
     seo: {
-      title: 'Tulum Mexico 2025: Tours, Experiences and Complete Guides | TulumTkts',
-      description: 'Discover Tulum Mexico 2025: the best tours, experiences, hotels and complete guides. Book tours to cenotes, Mayan ruins, beaches and more. Your definitive guide to Tulum.',
+      title: 'Tulum Mexico 2026: Tours, Experiences and Complete Guides | TulumTkts',
+      description: 'Discover Tulum Mexico 2026: the best tours, experiences, hotels and complete guides. Book tours to cenotes, Mayan ruins, beaches and more. Your definitive guide to Tulum.',
       organizationDescription: '#1 tourism platform for experiences in Tulum, Mexico. Book tours, experiences, events and accommodations in Tulum.',
     },
     hero: {
-      title: 'Tulum Mexico 2025: {tours}, Experiences and Complete Guides',
+      title: 'Tulum Mexico 2026: {tours}, Experiences and Complete Guides',
       tours: 'Tours',
       subtitle: 'Discover the best tours in Tulum, Mexico. Book unique experiences in cenotes, Mayan ruins, paradise beaches and more. Your definitive guide to Tulum.',
       searchPlaceholder: 'Cenotes, ruins, tours...',
@@ -176,13 +198,20 @@ export default {
         two: '2 Guests',
         threePlus: '3+ Guests',
       },
+      popular: 'Popular',
+      popularSearches: {
+        cenotes: 'Cenotes',
+        ruins: 'Mayan Ruins',
+        snorkel: 'Snorkeling',
+        beach: 'Beach Tours',
+      },
     },
     intro: {
       paragraph1: '{tulum} is one of the most popular destinations in the Riviera Maya, attracting thousands of travelers from around the world with its unique combination of {playas}, impressive {ruinas}, sacred {cenotes} and a vibrant cultural and gastronomic scene.',
       paragraph2: 'If you are planning your trip to {tulum2025}, you have come to the right place. At TulumTkts we provide you with the most complete and up-to-date information about {tours}, {mejoresExperiencias}, {hoteles}, {eventos} and everything you need to know to make your visit an unforgettable experience. Explore our {guiaCompleta} with more than 600 detailed articles.',
       paragraph3: 'Whether you want to explore the {cenotesTulum}, visit the {ruinasMayas}, enjoy the {playasParadisíacas} or immerse yourself in the local culture, Tulum has something special for every visitor. Book your {toursEnTulum}, find the {mejorHotel} and discover all {cosasQueHacer} with our {guiaCompleta2025}.',
       tulum: 'Tulum, Mexico',
-      tulum2025: 'Tulum Mexico 2025',
+      tulum2025: 'Tulum Mexico 2026',
       playas: 'paradise beaches',
       ruinas: 'Mayan ruins',
       cenotes: 'sacred cenotes',
@@ -197,7 +226,7 @@ export default {
       toursEnTulum: 'tours in Tulum',
       mejorHotel: 'best hotel',
       cosasQueHacer: 'things to do in Tulum Mexico',
-      guiaCompleta2025: 'complete guide to Tulum 2025',
+      guiaCompleta2025: 'complete guide to Tulum 2026',
     },
     categories: {
       title: 'Popular Categories in Tulum',
@@ -284,16 +313,31 @@ export default {
         answer: 'For Tulum pack light clothing (swimsuits, shorts, dresses), high-factor sunscreen, hat or cap, sunglasses, insect repellent (especially for cenotes and jungle areas), comfortable walking shoes and beach sandals, a light jacket for cooler nights during December-February, and snorkeling equipment if you plan to explore cenotes or reefs.'
       }
     },
+    crossSell: {
+      title: 'Everything you need for your trip',
+    },
     footer: {
       description: 'Your gateway to unforgettable experiences in Tulum. Discover ancient wonders, natural beauty, and adventure in paradise.',
       experiences: 'Experiences',
       support: 'Support',
+      planYourTrip: 'Plan Your Trip',
+      planLinks: {
+        flights: 'Flights to Cancún',
+        hotels: 'Hotels in Tulum',
+        tours: 'Tours & Activities',
+        transport: 'Transport & Cars',
+        howToGetThere: 'How to Get to Tulum',
+        howMuchItCosts: 'How Much It Costs',
+        bestHotels: 'Best Hotels',
+      },
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Mayan Ruins',
         beachTours: 'Beach Tours',
         adventureSports: 'Adventure Sports',
         culturalTours: 'Cultural Tours',
+        completeGuide: 'Complete Guide to Tulum',
+        blog: 'Travel Blog',
       },
       supportLinks: {
         helpCenter: 'Help Center',
@@ -314,12 +358,12 @@ export default {
   },
   fr: {
     seo: {
-      title: 'Tulum Mexique 2025: Circuits, Expériences et Guides Complets | TulumTkts',
-      description: 'Découvrez Tulum Mexique 2025: les meilleurs circuits, expériences, hôtels et guides complets. Réservez des circuits aux cenotes, ruines mayas, plages et plus. Votre guide définitif de Tulum.',
+      title: 'Tulum Mexique 2026: Circuits, Expériences et Guides Complets | TulumTkts',
+      description: 'Découvrez Tulum Mexique 2026: les meilleurs circuits, expériences, hôtels et guides complets. Réservez des circuits aux cenotes, ruines mayas, plages et plus. Votre guide définitif de Tulum.',
       organizationDescription: 'Plateforme de tourisme #1 pour les expériences à Tulum, Mexique. Réservez des circuits, expériences, événements et hébergements à Tulum.',
     },
     hero: {
-      title: 'Tulum Mexique 2025: {tours}, Expériences et Guides Complets',
+      title: 'Tulum Mexique 2026: {tours}, Expériences et Guides Complets',
       tours: 'Tours',
       subtitle: 'Découvrez les meilleurs circuits à Tulum, Mexique. Réservez des expériences uniques dans les cenotes, les ruines mayas, les plages paradisiaques et plus encore. Votre guide définitif de Tulum.',
       searchPlaceholder: 'Cenotes, ruines, circuits...',
@@ -332,13 +376,20 @@ export default {
         two: '2 Invités',
         threePlus: '3+ Invités',
       },
+      popular: 'Populaires',
+      popularSearches: {
+        cenotes: 'Cenotes',
+        ruins: 'Ruines Mayas',
+        snorkel: 'Plongée',
+        beach: 'Tours de Plage',
+      },
     },
     intro: {
       paragraph1: '{tulum} est l\'une des destinations les plus populaires de la Riviera Maya, attirant des milliers de voyageurs du monde entier avec sa combinaison unique de {playas}, d\'impressionnantes {ruinas}, de {cenotes} sacrés et d\'une scène culturelle et gastronomique vibrante.',
       paragraph2: 'Si vous planifiez votre voyage à {tulum2025}, vous êtes au bon endroit. Chez TulumTkts, nous vous fournissons les informations les plus complètes et à jour sur {tours}, {mejoresExperiencias}, {hoteles}, {eventos} et tout ce que vous devez savoir pour rendre votre visite inoubliable. Explorez notre {guiaCompleta} avec plus de 600 articles détaillés.',
       paragraph3: 'Que vous souhaitiez explorer les {cenotesTulum}, visiter les {ruinasMayas}, profiter des {playasParadisíacas} ou vous immerger dans la culture locale, Tulum a quelque chose de spécial pour chaque visiteur. Réservez vos {toursEnTulum}, trouvez le {mejorHotel} et découvrez tout {cosasQueHacer} avec notre {guiaCompleta2025}.',
       tulum: 'Tulum, Mexique',
-      tulum2025: 'Tulum Mexique 2025',
+      tulum2025: 'Tulum Mexique 2026',
       playas: 'plages paradisiaques',
       ruinas: 'ruines mayas',
       cenotes: 'cenotes sacrés',
@@ -353,7 +404,7 @@ export default {
       toursEnTulum: 'circuits à Tulum',
       mejorHotel: 'meilleur hôtel',
       cosasQueHacer: 'choses à faire à Tulum Mexique',
-      guiaCompleta2025: 'guide complet de Tulum 2025',
+      guiaCompleta2025: 'guide complet de Tulum 2026',
     },
     categories: {
       title: 'Catégories Populaires à Tulum',
@@ -440,16 +491,31 @@ export default {
         answer: 'Pour Tulum, emportez des vêtements légers (maillots de bain, shorts, robes), crème solaire à facteur élevé, chapeau ou casquette, lunettes de soleil, répulsif anti-insectes (surtout pour les cénotes et zones de jungle), chaussures confortables pour marcher et sandales de plage, une veste légère pour les nuits plus fraîches en décembre-février, et équipement de plongée si vous prévoyez d\'explorer les cénotes ou récifs.'
       }
     },
+    crossSell: {
+      title: 'Tout ce dont vous avez besoin pour votre voyage',
+    },
     footer: {
       description: 'Votre porte d\'entrée vers des expériences inoubliables à Tulum. Découvrez des merveilles anciennes, une beauté naturelle et de l\'aventure au paradis.',
       experiences: 'Expériences',
       support: 'Support',
+      planYourTrip: 'Planifiez votre Voyage',
+      planLinks: {
+        flights: 'Vols vers Cancún',
+        hotels: 'Hôtels à Tulum',
+        tours: 'Circuits et Activités',
+        transport: 'Transport et Voitures',
+        howToGetThere: 'Comment Aller à Tulum',
+        howMuchItCosts: 'Combien Ça Coûte',
+        bestHotels: 'Meilleurs Hôtels',
+      },
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Ruines Mayas',
         beachTours: 'Circuits de Plage',
         adventureSports: 'Sports d\'Aventure',
         culturalTours: 'Circuits Culturels',
+        completeGuide: 'Guide Complet de Tulum',
+        blog: 'Blog de Voyage',
       },
       supportLinks: {
         helpCenter: 'Centre d\'Aide',
@@ -470,12 +536,12 @@ export default {
   },
   it: {
     seo: {
-      title: 'Tulum Messico 2025: Tour, Esperienze e Guide Complete | TulumTkts',
-      description: 'Scopri Tulum Messico 2025: i migliori tour, esperienze, hotel e guide complete. Prenota tour ai cenotes, rovine maya, spiagge e altro. La tua guida definitiva a Tulum.',
+      title: 'Tulum Messico 2026: Tour, Esperienze e Guide Complete | TulumTkts',
+      description: 'Scopri Tulum Messico 2026: i migliori tour, esperienze, hotel e guide complete. Prenota tour ai cenotes, rovine maya, spiagge e altro. La tua guida definitiva a Tulum.',
       organizationDescription: 'Piattaforma turistica #1 per esperienze a Tulum, Messico. Prenota tour, esperienze, eventi e alloggi a Tulum.',
     },
     hero: {
-      title: 'Tulum Messico 2025: {tours}, Esperienze e Guide Complete',
+      title: 'Tulum Messico 2026: {tours}, Esperienze e Guide Complete',
       tours: 'Tour',
       subtitle: 'Scopri i migliori tour a Tulum, Messico. Prenota esperienze uniche in cenotes, rovine maya, spiagge paradisiache e altro ancora. La tua guida definitiva a Tulum.',
       searchPlaceholder: 'Cenotes, rovine, tour...',
@@ -488,13 +554,20 @@ export default {
         two: '2 Ospiti',
         threePlus: '3+ Ospiti',
       },
+      popular: 'Popolari',
+      popularSearches: {
+        cenotes: 'Cenotes',
+        ruins: 'Rovine Maya',
+        snorkel: 'Snorkeling',
+        beach: 'Tour in Spiaggia',
+      },
     },
     intro: {
       paragraph1: '{tulum} è una delle destinazioni più popolari della Riviera Maya, attirando migliaia di viaggiatori da tutto il mondo con la sua combinazione unica di {playas}, impressionanti {ruinas}, sacri {cenotes} e una vivace scena culturale e gastronomica.',
       paragraph2: 'Se stai pianificando il tuo viaggio a {tulum2025}, sei nel posto giusto. Su TulumTkts ti forniamo le informazioni più complete e aggiornate su {tours}, {mejoresExperiencias}, {hoteles}, {eventos} e tutto ciò che devi sapere per rendere la tua visita un\'esperienza indimenticabile. Esplora la nostra {guiaCompleta} con oltre 600 articoli dettagliati.',
       paragraph3: 'Che tu voglia esplorare i {cenotesTulum}, visitare le {ruinasMayas}, goderti le {playasParadisíacas} o immergerti nella cultura locale, Tulum ha qualcosa di speciale per ogni visitatore. Prenota i tuoi {toursEnTulum}, trova il {mejorHotel} e scopri tutte le {cosasQueHacer} con la nostra {guiaCompleta2025}.',
       tulum: 'Tulum, Messico',
-      tulum2025: 'Tulum Messico 2025',
+      tulum2025: 'Tulum Messico 2026',
       playas: 'spiagge paradisiache',
       ruinas: 'rovine maya',
       cenotes: 'cenotes sacri',
@@ -509,7 +582,7 @@ export default {
       toursEnTulum: 'tour a Tulum',
       mejorHotel: 'miglior hotel',
       cosasQueHacer: 'cose da fare a Tulum Messico',
-      guiaCompleta2025: 'guida completa a Tulum 2025',
+      guiaCompleta2025: 'guida completa a Tulum 2026',
     },
     categories: {
       title: 'Categorie Popolari a Tulum',
@@ -596,16 +669,31 @@ export default {
         answer: 'Per Tulum porta vestiti leggeri (costumi da bagno, pantaloncini, vestiti), crema solare ad alto fattore, cappello o berretto, occhiali da sole, repellente per insetti (specialmente per cenotes e aree della giungla), scarpe comode per camminare e sandali da spiaggia, una giacca leggera per le notti più fresche durante dicembre-febbraio, e attrezzatura da snorkeling se prevedi di esplorare cenotes o barriere coralline.'
       }
     },
+    crossSell: {
+      title: 'Tutto ciò di cui hai bisogno per il tuo viaggio',
+    },
     footer: {
       description: 'La tua porta d\'ingresso verso esperienze indimenticabili a Tulum. Scopri meraviglie antiche, bellezza naturale e avventura in paradiso.',
       experiences: 'Esperienze',
       support: 'Supporto',
+      planYourTrip: 'Pianifica il tuo Viaggio',
+      planLinks: {
+        flights: 'Voli per Cancún',
+        hotels: 'Hotel a Tulum',
+        tours: 'Tour e Attività',
+        transport: 'Trasporti e Auto',
+        howToGetThere: 'Come Arrivare a Tulum',
+        howMuchItCosts: 'Quanto Costa Viaggiare',
+        bestHotels: 'Migliori Hotel',
+      },
       experienceLinks: {
         cenotes: 'Cenotes',
         mayanRuins: 'Rovine Maya',
         beachTours: 'Tour della Spiaggia',
         adventureSports: 'Sport d\'Avventura',
         culturalTours: 'Tour Culturali',
+        completeGuide: 'Guida Completa di Tulum',
+        blog: 'Blog di Viaggio',
       },
       supportLinks: {
         helpCenter: 'Centro Assistenza',

@@ -19,6 +19,7 @@ import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
+import { Footer } from "@/components/footer";
 import {
   trackFavoriteToggle,
   trackAffiliateClick as trackGA4AffiliateClick,
@@ -493,6 +494,7 @@ export default function Experiencias() {
 
       {/* Cross-sell */}
       <CrossSell exclude={["experiencias"]} />
+      <Footer />
     </div>
   );
 }
@@ -507,10 +509,11 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory, t 
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
       <div className="relative">
-        <img 
-          src={experience.image_url} 
+        <img
+          src={experience.image_url}
           alt={experience.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = 'https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';

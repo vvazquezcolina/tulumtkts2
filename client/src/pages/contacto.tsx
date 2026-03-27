@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useI18n } from "@/contexts/i18n-context";
 import { CrossSell } from "@/components/cross-sell";
+import { SEOHead } from "@/components/seo-head";
+import { Navigation } from "@/components/ui/navigation";
 import { 
   Phone, 
   Mail, 
@@ -42,6 +45,19 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={t('contacto.hero.title')}
+        description={t('contacto.hero.subtitle')}
+        keywords={[
+          'contacto tulum',
+          'contactar tulumtkts',
+          'soporte tulum',
+          'ayuda tulum',
+          'reservas tulum',
+        ]}
+        canonicalUrl="/contacto"
+      />
+      <Navigation />
       {/* Hero Section */}
       <section className="relative h-[400px] bg-gradient-to-r from-primary to-secondary">
         <div className="absolute inset-0 bg-black/30"></div>
@@ -347,6 +363,7 @@ export default function Contacto() {
         title="Mientras tanto, planifica tu viaje"
         items={["vuelos", "hoteles", "experiencias", "transporte", "comoLlegar", "cuantoCuesta"]}
       />
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useLocation, useRoute } from "wouter";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { OrganizationSchema } from "@/components/organization-schema";
 import { CrossSell } from "@/components/cross-sell";
 import { generateFlightLink, generateHotelLink, generateAffiliateLink, generateCarRentalLink, generateTransferLink, trackAffiliateClick } from "@/lib/affiliate";
+import { useI18n } from "@/contexts/i18n-context";
 
 // ─── Contextual affiliate CTA ────────────────────────────────────────────────
 
@@ -25,15 +27,15 @@ interface CTAConfig {
   trackKey: string;
 }
 
-function getCtaConfig(keywords: string[], category: string): CTAConfig {
+function getCtaConfig(keywords: string[], category: string, t: (key: string) => string): CTAConfig {
   const text = [...keywords, category].join(" ").toLowerCase();
 
   if (text.includes("cenote") || text.includes("tour") || text.includes("aventura") || text.includes("actividad") || text.includes("snorkel") || text.includes("buceo")) {
     return {
       icon: Compass,
-      title: "Reserva tu tour de cenotes",
-      pitch: "Explora los cenotes más espectaculares de Tulum con guías expertos. ¡Tours desde $11 USD!",
-      buttonText: "Ver tours disponibles",
+      title: t("blogPost.cta.cenotes.title"),
+      pitch: t("blogPost.cta.cenotes.pitch"),
+      buttonText: t("blogPost.cta.cenotes.button"),
       link: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_activities_cta"),
       trackKey: "blog_activities",
     };
@@ -42,9 +44,9 @@ function getCtaConfig(keywords: string[], category: string): CTAConfig {
   if (text.includes("hotel") || text.includes("hospedaje") || text.includes("alojamiento") || text.includes("hostel") || text.includes("resort") || text.includes("villa")) {
     return {
       icon: Hotel,
-      title: "Encuentra tu hotel ideal en Tulum",
-      pitch: "Hoteles con cancelación gratuita desde $50/noche. Compara precios y reserva al instante.",
-      buttonText: "Buscar hoteles",
+      title: t("blogPost.cta.hotels.title"),
+      pitch: t("blogPost.cta.hotels.pitch"),
+      buttonText: t("blogPost.cta.hotels.button"),
       link: generateHotelLink("Tulum"),
       trackKey: "blog_hotels",
     };
@@ -53,9 +55,9 @@ function getCtaConfig(keywords: string[], category: string): CTAConfig {
   if (text.includes("vuelo") || text.includes("viajar") || text.includes("llegar") || text.includes("flight") || text.includes("aeropuerto") || text.includes("avion") || text.includes("cancun")) {
     return {
       icon: Plane,
-      title: "Vuelos baratos a Cancún",
-      pitch: "Compara cientos de aerolíneas y encuentra el mejor precio para tu vuelo a Cancún (CUN).",
-      buttonText: "Buscar vuelos",
+      title: t("blogPost.cta.flights.title"),
+      pitch: t("blogPost.cta.flights.pitch"),
+      buttonText: t("blogPost.cta.flights.button"),
       link: generateFlightLink("MEX", "CUN"),
       trackKey: "blog_flights",
     };
@@ -64,9 +66,9 @@ function getCtaConfig(keywords: string[], category: string): CTAConfig {
   if (text.includes("transporte") || text.includes("transfer") || text.includes("traslado") || text.includes("taxi") || text.includes("bus") || text.includes("ado")) {
     return {
       icon: Car,
-      title: "Transfer privado aeropuerto → Tulum",
-      pitch: "Traslado cómodo y seguro desde el Aeropuerto de Cancún hasta Tulum. Reserva con anticipación.",
-      buttonText: "Reservar transfer",
+      title: t("blogPost.cta.transport.title"),
+      pitch: t("blogPost.cta.transport.pitch"),
+      buttonText: t("blogPost.cta.transport.button"),
       link: generateTransferLink("Cancun Airport", "Tulum"),
       trackKey: "blog_transfers",
     };
@@ -75,9 +77,9 @@ function getCtaConfig(keywords: string[], category: string): CTAConfig {
   // Default
   return {
     icon: Plane,
-    title: "Planifica tu viaje a Tulum",
-    pitch: "Encuentra los mejores vuelos a Cancún y empieza a vivir la magia de Tulum.",
-    buttonText: "Buscar vuelos baratos",
+    title: t("blogPost.cta.default.title"),
+    pitch: t("blogPost.cta.default.pitch"),
+    buttonText: t("blogPost.cta.default.button"),
     link: generateFlightLink("MEX", "CUN"),
     trackKey: "blog_default",
   };
@@ -89,7 +91,8 @@ interface BlogAffiliateCTAProps {
 }
 
 function BlogAffiliateCTA({ keywords, category }: BlogAffiliateCTAProps) {
-  const config = getCtaConfig(keywords, category);
+  const { t } = useI18n();
+  const config = getCtaConfig(keywords, category, t);
   const Icon = config.icon;
 
   const handleClick = () => {
@@ -107,7 +110,7 @@ function BlogAffiliateCTA({ keywords, category }: BlogAffiliateCTAProps) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-0.5">
-                Recomendado
+                {t("blogPost.cta.recommended")}
               </p>
               <h4 className="text-lg font-bold text-gray-900 mb-1">
                 {config.title}
@@ -133,25 +136,27 @@ function BlogAffiliateCTA({ keywords, category }: BlogAffiliateCTAProps) {
 // ─── Bottom sidebar / trip CTA ───────────────────────────────────────────────
 
 function BlogTripCTA() {
+  const { t } = useI18n();
+
   const links = [
     {
       icon: Plane,
-      label: "Buscar vuelos",
-      sub: "Desde $120 USD ida y vuelta",
+      label: t("blogPost.tripCta.flights.label"),
+      sub: t("blogPost.tripCta.flights.sub"),
       href: generateFlightLink("MEX", "CUN"),
       track: "blog_trip_flights",
     },
     {
       icon: Hotel,
-      label: "Reservar hotel",
-      sub: "Desde $50/noche en Tulum",
+      label: t("blogPost.tripCta.hotels.label"),
+      sub: t("blogPost.tripCta.hotels.sub"),
       href: generateHotelLink("Tulum"),
       track: "blog_trip_hotels",
     },
     {
       icon: Compass,
-      label: "Ver actividades",
-      sub: "Tours y cenotes desde $11 USD",
+      label: t("blogPost.tripCta.activities.label"),
+      sub: t("blogPost.tripCta.activities.sub"),
       href: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_trip_activities"),
       track: "blog_trip_activities",
     },
@@ -166,10 +171,10 @@ function BlogTripCTA() {
     <Card className="border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl shadow-md mt-12">
       <CardContent className="p-6 md:p-8">
         <h3 className="text-xl font-bold text-gray-900 mb-1">
-          Planifica tu viaje a Tulum
+          {t("blogPost.tripCta.title")}
         </h3>
         <p className="text-sm text-gray-500 mb-5">
-          Todo lo que necesitas para un viaje perfecto, en un solo lugar.
+          {t("blogPost.tripCta.subtitle")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {links.map((item) => {
@@ -202,6 +207,8 @@ function BlogTripCTA() {
 // ─── Newsletter CTA ──────────────────────────────────────────────────────────
 
 function NewsletterCTA() {
+  const { t } = useI18n();
+
   return (
     <div className="my-10">
       <Card className="bg-gradient-to-r from-teal-600 to-cyan-600 border-0 rounded-xl shadow-lg">
@@ -210,22 +217,22 @@ function NewsletterCTA() {
             <Mail className="w-6 h-6 text-white" />
           </div>
           <h3 className="text-xl font-bold text-white mb-2">
-            Recibe guías exclusivas de Tulum
+            {t("blogPost.newsletter.title")}
           </h3>
           <p className="text-teal-100 text-sm mb-5 max-w-md mx-auto">
-            Suscríbete y recibe consejos de viaje, ofertas en hoteles y actividades, y guías actualizadas directo en tu email.
+            {t("blogPost.newsletter.subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-sm mx-auto">
             <Input
               type="email"
-              placeholder="tu@email.com"
+              placeholder={t("blogPost.newsletter.emailPlaceholder")}
               className="flex-1 bg-white border-0 text-gray-900 placeholder:text-gray-400"
             />
             <Button className="bg-white text-teal-700 hover:bg-teal-50 font-semibold px-6 transition-colors">
-              Suscribirse
+              {t("blogPost.newsletter.subscribe")}
             </Button>
           </div>
-          <p className="text-xs text-teal-200 mt-3">Sin spam. Cancela cuando quieras.</p>
+          <p className="text-xs text-teal-200 mt-3">{t("blogPost.newsletter.noSpam")}</p>
         </CardContent>
       </Card>
     </div>
@@ -283,16 +290,16 @@ const oldBlogPosts: Record<string, {
 }> = {
   "1": {
     id: "1",
-    title: "Agenda de Eventos en Tulum 2025-2026",
-    excerpt: "Descubre todos los festivales, conciertos y eventos imperdibles que tendrán lugar en Tulum durante la temporada 2025-2026.",
+    title: "Agenda de Eventos en Tulum 2026-2027",
+    excerpt: "Descubre todos los festivales, conciertos y eventos imperdibles que tendrán lugar en Tulum durante la temporada 2026-2027.",
     category: "Eventos",
     author: "María González",
-    publishDate: "2025-01-15",
+    publishDate: "2026-01-15",
     readTime: "8 min",
     views: 1250,
     featured: true,
     image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    content: "Tulum se ha convertido en uno de los destinos más vibrantes de México, especialmente durante la temporada 2025-2026. La ciudad maya costera ofrece una agenda repleta de eventos que combinan cultura, música, bienestar y aventura..."
+    content: "Tulum se ha convertido en uno de los destinos más vibrantes de México, especialmente durante la temporada 2026-2027. La ciudad maya costera ofrece una agenda repleta de eventos que combinan cultura, música, bienestar y aventura..."
   },
   "2": {
     id: "2",
@@ -313,7 +320,7 @@ const oldBlogPosts: Record<string, {
     excerpt: "Explora los cenotes más hermosos y místicos alrededor de Tulum. Desde los más famosos hasta los tesoros escondidos.",
     category: "Aventura",
     author: "Ana Rodríguez",
-    publishDate: "2025-01-10",
+    publishDate: "2026-01-10",
     readTime: "12 min",
     views: 2156,
     featured: true,
@@ -326,7 +333,7 @@ const oldBlogPosts: Record<string, {
     excerpt: "Todo lo que necesitas saber antes de tu viaje a Tulum. Información práctica sobre el clima, seguridad y opciones de transporte.",
     category: "Consejos",
     author: "Roberto Silva",
-    publishDate: "2025-01-05",
+    publishDate: "2026-01-05",
     readTime: "10 min",
     views: 1876,
     featured: false,
@@ -390,6 +397,7 @@ const oldBlogPosts: Record<string, {
 // ─── Main page component ─────────────────────────────────────────────────────
 
 export default function BlogPost() {
+  const { t } = useI18n();
   const [, setLocation] = useLocation();
   const [, params] = useRoute<{ slug: string }>("/blog/:slug");
 
@@ -401,11 +409,11 @@ export default function BlogPost() {
       <div className="min-h-screen bg-gray-50">
         <Navigation />
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Artículo no encontrado</h1>
-          <p className="text-gray-600 mb-8">El artículo que buscas no existe.</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">{t("blogPost.notFound.title")}</h1>
+          <p className="text-gray-600 mb-8">{t("blogPost.notFound.subtitle")}</p>
           <Button onClick={() => setLocation('/blog')}>
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al Blog
+            {t("blogPost.notFound.backToBlog")}
           </Button>
         </div>
       </div>
@@ -482,7 +490,7 @@ export default function BlogPost() {
           className="mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver al Blog
+          {t("blogPost.backToBlog")}
         </Button>
       </div>
 
@@ -513,7 +521,7 @@ export default function BlogPost() {
                 </Badge>
                 {post.featured && (
                   <Badge className="bg-secondary text-white text-sm">
-                    Destacado
+                    {t("blogPost.featured")}
                   </Badge>
                 )}
               </div>
@@ -537,11 +545,11 @@ export default function BlogPost() {
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
-                  <span>{post.readTime} de lectura</span>
+                  <span>{post.readTime} {t("blogPost.readingTime")}</span>
                 </div>
                 <div className="flex items-center">
                   <Eye className="w-4 h-4 mr-2" />
-                  <span>{post.views} vistas</span>
+                  <span>{post.views} {t("blogPost.views")}</span>
                 </div>
               </div>
             </div>
@@ -564,7 +572,7 @@ export default function BlogPost() {
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Compartir este artículo</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t("blogPost.shareTitle")}</h3>
               <div className="flex gap-4">
                 <Button
                   variant="outline"
@@ -607,7 +615,7 @@ export default function BlogPost() {
                   }}
                 >
                   <Link2 className="w-4 h-4 mr-2" />
-                  Copiar enlace
+                  {t("blogPost.copyLink")}
                 </Button>
               </div>
             </div>
@@ -615,7 +623,7 @@ export default function BlogPost() {
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
               <div className="mt-12 pt-8 border-t border-gray-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Artículos Relacionados</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t("blogPost.relatedTitle")}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedPosts.map((relatedPost) => (
                     <Card
@@ -649,7 +657,7 @@ export default function BlogPost() {
                             setLocation(`/blog/${relatedPost.slug}`);
                           }}
                         >
-                          Leer más <ArrowLeft className="w-3 h-3 ml-2 rotate-180" />
+                          {t("blogPost.readMore")} <ArrowLeft className="w-3 h-3 ml-2 rotate-180" />
                         </Button>
                       </CardContent>
                     </Card>
@@ -667,7 +675,8 @@ export default function BlogPost() {
       </div>
 
       {/* CrossSell */}
-      <CrossSell title="Completa tu viaje a Tulum" />
+      <CrossSell title={t("blog.crossSellTitle")} />
+      <Footer />
     </div>
   );
 }

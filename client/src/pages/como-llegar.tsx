@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,13 +24,10 @@ import {
   Bus,
   Clock,
   MapPin,
-  DollarSign,
   ArrowRight,
   CheckCircle,
   Search,
   Calendar,
-  Users,
-  Star,
   AlertCircle,
   Navigation as NavigationIcon,
 } from "lucide-react";
@@ -252,11 +250,11 @@ export default function ComoLlegar() {
       <div className="bg-white border-b py-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="text-sm text-gray-600 flex flex-wrap gap-1 items-center">
-            <a href={getLocalizedLink("/")} className="hover:text-primary">Inicio</a>
+            <a href={getLocalizedLink("/")} className="hover:text-primary">{t('comoLlegar.breadcrumbs.home')}</a>
             <span>/</span>
-            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">Guía Tulum</a>
+            <a href={getLocalizedLink("/tulum-guia-completa")} className="hover:text-primary">{t('comoLlegar.breadcrumbs.guide')}</a>
             <span>/</span>
-            <span className="text-gray-900">Cómo Llegar</span>
+            <span className="text-gray-900">{t('comoLlegar.breadcrumbs.current')}</span>
           </nav>
         </div>
       </div>
@@ -270,26 +268,26 @@ export default function ComoLlegar() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center mb-10">
             <Badge className="bg-white/20 text-white border-white/30 mb-4 text-sm px-4 py-1">
-              Aeropuerto CUN · 130 km de Tulum
+              {t('comoLlegar.hero.badge')}
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-              Cómo Llegar a Tulum
+              {t('comoLlegar.hero.title')}
             </h1>
             <p className="text-xl md:text-2xl text-teal-100 max-w-3xl mx-auto">
-              Guía Completa 2026 · Vuelos, Transfers, Bus y Renta de Auto
+              {t('comoLlegar.hero.subtitle')}
             </p>
             <div className="flex flex-wrap justify-center gap-3 mt-6">
               <div className="flex items-center gap-2 bg-white/15 rounded-full px-4 py-2 text-white text-sm">
                 <Plane className="w-4 h-4" />
-                Vuelos desde $120 USD
+                {t('comoLlegar.stats.flights')}
               </div>
               <div className="flex items-center gap-2 bg-white/15 rounded-full px-4 py-2 text-white text-sm">
                 <Car className="w-4 h-4" />
-                Transfer desde $50 USD
+                {t('comoLlegar.stats.transfer')}
               </div>
               <div className="flex items-center gap-2 bg-white/15 rounded-full px-4 py-2 text-white text-sm">
                 <Bus className="w-4 h-4" />
-                Bus ADO $15 USD
+                {t('comoLlegar.stats.bus')}
               </div>
             </div>
           </div>
@@ -304,10 +302,10 @@ export default function ComoLlegar() {
               <Plane className="w-7 h-7 text-blue-600" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Paso 1: Volar al Aeropuerto de Cancún (CUN)
+              {t('comoLlegar.step1.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              El Aeropuerto Internacional de Cancún es el punto de entrada a Tulum. Busca vuelos directos desde tu ciudad.
+              {t('comoLlegar.step1.description')}
             </p>
           </div>
 
@@ -317,11 +315,11 @@ export default function ComoLlegar() {
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                   <Search className="w-5 h-5 text-primary" />
-                  Buscar vuelos baratos a Cancún (CUN)
+                  {t('comoLlegar.step1.searchTitle')}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                   <div className="md:col-span-1">
-                    <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Ciudad de origen</Label>
+                    <Label className="text-sm font-medium text-gray-700 mb-1.5 block">{t('comoLlegar.step1.originLabel')}</Label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <Input
@@ -334,7 +332,7 @@ export default function ComoLlegar() {
                     </div>
                   </div>
                   <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-1.5 block">Ida</Label>
+                    <Label className="text-sm font-medium text-gray-700 mb-1.5 block">{t('comoLlegar.step1.departureLabel')}</Label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <Input
@@ -353,15 +351,15 @@ export default function ComoLlegar() {
                       disabled={isSearching || !origin.trim()}
                     >
                       {isSearching ? (
-                        <><Clock className="w-4 h-4 mr-2 animate-spin" />Buscando...</>
+                        <><Clock className="w-4 h-4 mr-2 animate-spin" />{t('comoLlegar.step1.searching')}</>
                       ) : (
-                        <><Search className="w-4 h-4 mr-2" />Buscar Vuelos</>
+                        <><Search className="w-4 h-4 mr-2" />{t('comoLlegar.step1.searchButton')}</>
                       )}
                     </Button>
                   </div>
                 </div>
                 <p className="text-xs text-gray-400 text-center">
-                  Powered by Aviasales · Comparador de vuelos en tiempo real
+                  {t('comoLlegar.step1.poweredBy')}
                 </p>
               </CardContent>
             </Card>
@@ -397,10 +395,10 @@ export default function ComoLlegar() {
               <MapPin className="w-7 h-7 text-green-600" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Paso 2: Del Aeropuerto de Cancún a Tulum
+              {t('comoLlegar.step2.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              130 km separan CUN de Tulum. Estas son todas las opciones de transporte con precios reales.
+              {t('comoLlegar.step2.description')}
             </p>
           </div>
 
@@ -416,7 +414,7 @@ export default function ComoLlegar() {
                 >
                   {option.recommended && (
                     <div className="bg-primary text-white text-xs font-bold px-4 py-1.5 text-center rounded-t-md">
-                      RECOMENDADO · Mejor relación calidad/precio
+                      {t('comoLlegar.step2.recommended')}
                     </div>
                   )}
                   <CardContent className="p-6">
@@ -447,7 +445,7 @@ export default function ComoLlegar() {
 
                     <div className="grid grid-cols-2 gap-3 mb-4">
                       <div>
-                        <p className="text-xs font-semibold text-green-700 mb-1.5">Ventajas</p>
+                        <p className="text-xs font-semibold text-green-700 mb-1.5">{t('comoLlegar.step2.pros')}</p>
                         <ul className="space-y-1">
                           {option.pros.map((pro) => (
                             <li key={pro} className="text-xs text-gray-600 flex items-center gap-1">
@@ -458,7 +456,7 @@ export default function ComoLlegar() {
                         </ul>
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-red-600 mb-1.5">Desventajas</p>
+                        <p className="text-xs font-semibold text-red-600 mb-1.5">{t('comoLlegar.step2.cons')}</p>
                         <ul className="space-y-1">
                           {option.cons.map((con) => (
                             <li key={con} className="text-xs text-gray-600 flex items-center gap-1">
@@ -508,10 +506,10 @@ export default function ComoLlegar() {
               <NavigationIcon className="w-7 h-7 text-purple-600" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Desde Otras Ciudades de México
+              {t('comoLlegar.step3.title')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              ¿Ya estás en la Riviera Maya o en el sureste? Estas son las mejores opciones para llegar a Tulum.
+              {t('comoLlegar.step3.description')}
             </p>
           </div>
 
@@ -547,19 +545,19 @@ export default function ComoLlegar() {
           {/* CTA for car rental */}
           <div className="mt-10 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-center text-white">
             <Car className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-2">Explora la Riviera Maya a tu ritmo</h3>
+            <h3 className="text-2xl font-bold mb-2">{t('comoLlegar.carCta.title')}</h3>
             <p className="text-gray-300 mb-6 max-w-xl mx-auto">
-              Con una renta de auto desde Cancún puedes visitar Tulum, Cobá, Bacalar, Playa del Carmen y más destinos en un solo viaje sin depender de horarios.
+              {t('comoLlegar.carCta.subtitle')}
             </p>
             <Button
               size="lg"
               className="bg-primary text-white hover:bg-primary/90 font-bold px-8"
               onClick={handleCarClick}
             >
-              Ver autos desde $35/día
+              {t('comoLlegar.carCta.button')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <p className="text-xs text-gray-400 mt-3">Powered by DiscoverCars · +500 empresas comparadas</p>
+            <p className="text-xs text-gray-400 mt-3">{t('comoLlegar.carCta.poweredBy')}</p>
           </div>
         </div>
       </section>
@@ -569,10 +567,10 @@ export default function ComoLlegar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Planifica Todo tu Viaje a Tulum
+              {t('comoLlegar.planner.title')}
             </h2>
             <p className="text-lg text-gray-600">
-              Calcula el presupuesto total de tu viaje: vuelos, hotel, transporte y actividades.
+              {t('comoLlegar.planner.subtitle')}
             </p>
           </div>
           <TripPlanner />
@@ -584,10 +582,10 @@ export default function ComoLlegar() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-              Preguntas Frecuentes
+              {t('comoLlegar.faq.title')}
             </h2>
             <p className="text-lg text-gray-600">
-              Todo lo que necesitas saber para llegar a Tulum sin sorpresas.
+              {t('comoLlegar.faq.subtitle')}
             </p>
           </div>
           <FAQAccordion faqs={faqs} className="bg-gray-50 rounded-lg p-6" />
@@ -597,28 +595,10 @@ export default function ComoLlegar() {
       {/* CrossSell */}
       <CrossSell
         exclude={["transporte"]}
-        title="También necesitas para tu viaje a Tulum"
+        title={t('comoLlegar.crossSellTitle')}
       />
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-primary mb-3">TulumTkts</h3>
-          <p className="text-gray-400 mb-4 max-w-md mx-auto">
-            Tu guía completa para viajar a Tulum: vuelos, hoteles, transfers y experiencias únicas.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
-            <a href={getLocalizedLink("/")} className="hover:text-primary transition-colors">Inicio</a>
-            <a href={getLocalizedLink("/vuelos")} className="hover:text-primary transition-colors">Vuelos</a>
-            <a href={getLocalizedLink("/hoteles")} className="hover:text-primary transition-colors">Hoteles</a>
-            <a href={getLocalizedLink("/transporte")} className="hover:text-primary transition-colors">Transporte</a>
-            <a href={getLocalizedLink("/experiencias")} className="hover:text-primary transition-colors">Experiencias</a>
-          </div>
-          <p className="text-gray-500 text-sm mt-6">
-            &copy; {new Date().getFullYear()} TulumTkts. Todos los derechos reservados.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

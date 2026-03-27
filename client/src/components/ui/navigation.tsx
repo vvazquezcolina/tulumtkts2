@@ -13,7 +13,8 @@ import {
   BookOpen,
   Phone,
   Plane,
-  Hotel
+  Hotel,
+  Droplets
 } from "lucide-react";
 
 const navigationItems = [
@@ -21,6 +22,8 @@ const navigationItems = [
   { href: "/vuelos", labelKey: "nav.flights", icon: Plane },
   { href: "/hoteles", labelKey: "nav.hotels", icon: Hotel },
   { href: "/experiencias", labelKey: "nav.experiences", icon: MapPin },
+  { href: "/cenotes-tulum", labelKey: "nav.cenotes", icon: Droplets },
+  { href: "/eventos", labelKey: "nav.events", icon: Calendar },
   { href: "/transporte", labelKey: "nav.transport", icon: Car },
   { href: "/blog", labelKey: "nav.blog", icon: BookOpen },
   { href: "/contacto", labelKey: "nav.contact", icon: Phone }

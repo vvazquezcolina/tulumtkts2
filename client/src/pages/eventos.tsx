@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { CrossSell } from "@/components/cross-sell";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar, Clock, MapPin, Search, Filter, Star, Heart } from "lucide-react";
+import { Calendar, Clock, MapPin, Search, Filter, Heart } from "lucide-react";
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { Navigation } from "@/components/ui/navigation";
-import { EventSchema, EventSeriesSchema } from "@/components/event-schema";
+import { EventSeriesSchema } from "@/components/event-schema";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
@@ -36,9 +37,9 @@ export default function Eventos() {
   const events = [
     {
       id: "1",
-      title: "Temporada Año Nuevo 2025-26 en Tulum",
+      title: "Temporada Año Nuevo 2026-27 en Tulum",
       description: "Celebra el Año Nuevo en las mejores fiestas de Tulum con DJs internacionales y experiencias únicas en la playa.",
-      date: "31 Dic 2025",
+      date: "31 Dic 2026",
       time: "20:00",
       location: "Playa Paraíso",
       category: "Festivales",
@@ -48,9 +49,9 @@ export default function Eventos() {
     },
     {
       id: "2",
-      title: "Tulum Music Festival 2025",
+      title: "Tulum Music Festival 2026",
       description: "Festival de música electrónica con los mejores DJs internacionales en un ambiente mágico frente al mar.",
-      date: "15 Feb 2025",
+      date: "15 Feb 2026",
       time: "18:00",
       location: "Playa Tulum",
       category: "Festivales de Música",
@@ -74,7 +75,7 @@ export default function Eventos() {
       id: "4",
       title: "Noche de Luna Llena",
       description: "Experiencia única de baile bajo la luna llena con ceremonias ancestrales y música tribal.",
-      date: "20 Ene 2025",
+      date: "20 Ene 2026",
       time: "21:00",
       location: "Cenote Sagrado",
       category: "Ceremonias",
@@ -130,9 +131,9 @@ export default function Eventos() {
         events={events.filter(e => e.featured).map(event => ({
           name: event.title,
           description: event.description,
-          startDate: event.date === "31 Dic 2025" ? "2025-12-31T20:00:00-06:00" : 
-                    event.date === "15 Feb 2025" ? "2025-02-15T18:00:00-06:00" : 
-                    event.date === "20 Ene 2025" ? "2025-01-20T21:00:00-06:00" : 
+          startDate: event.date === "31 Dic 2026" ? "2026-12-31T20:00:00-06:00" :
+                    event.date === "15 Feb 2026" ? "2026-02-15T18:00:00-06:00" :
+                    event.date === "20 Ene 2026" ? "2026-01-20T21:00:00-06:00" :
                     new Date().toISOString(),
           location: {
             name: event.location,
@@ -228,10 +229,11 @@ export default function Eventos() {
               {filteredEvents.filter(event => event.featured).map((event) => (
                 <Card key={event.id} className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
                   <div className="relative">
-                    <img 
-                      src={event.image} 
+                    <img
+                      src={event.image}
                       alt={event.title}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-secondary text-white">{t('eventos.event.featured')}</Badge>
@@ -297,10 +299,11 @@ export default function Eventos() {
               {filteredEvents.map((event) => (
                 <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
                   <div className="relative">
-                    <img 
-                      src={event.image} 
+                    <img
+                      src={event.image}
                       alt={event.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                     {event.featured && (
                       <div className="absolute top-3 left-3">
@@ -359,6 +362,7 @@ export default function Eventos() {
       </section>
 
       <CrossSell exclude={["experiencias"]} />
+      <Footer />
     </div>
   );
 }
