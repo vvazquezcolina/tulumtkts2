@@ -118,7 +118,15 @@ export default function Home() {
           'tulum mexico hotels',
           'riviera maya',
           'tulum travel guide',
-          'guía tulum'
+          'guía tulum',
+          'tulum mexico 2026',
+          'que hacer en tulum',
+          'tours en tulum mexico',
+          'tulum cenotes tours',
+          'tulum beach clubs',
+          'tulum all inclusive',
+          'tulum vacation packages',
+          'things to do in tulum 2026'
         ]}
         canonicalUrl={siteUrl}
         ogType="website"

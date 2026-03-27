@@ -184,7 +184,13 @@ export default function Experiencias() {
           'ruinas mayas tulum',
           'experiencias tulum',
           'best tours tulum',
-          'tulum mexico tours'
+          'tulum mexico tours',
+          'tulum day trips',
+          'tulum excursions',
+          'tulum snorkeling',
+          'tulum ruins tour',
+          'best tours in tulum mexico',
+          'tulum activities for couples'
         ]}
         canonicalUrl={`${siteUrl}/experiencias`}
         ogType="website"

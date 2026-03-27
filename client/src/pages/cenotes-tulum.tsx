@@ -105,7 +105,13 @@ export default function CenotesTulum() {
           'dos ojos cenote',
           'cenotes tulum buceo',
           'cenotes tulum snorkel',
-          'cenotes cerca de tulum'
+          'cenotes cerca de tulum',
+          'best cenotes in tulum',
+          'cenotes near tulum',
+          'gran cenote',
+          'cenote dos ojos',
+          'cenotes tulum price',
+          'cenotes tulum tour'
         ]}
         canonicalUrl={`${siteUrl}/cenotes-tulum`}
         ogType="website"
