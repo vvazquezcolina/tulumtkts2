@@ -170,7 +170,28 @@ export default function Contacto() {
             {/* Contact Information */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('contacto.contact.title')}</h2>
-              
+
+              {/* Quick Contact - WhatsApp */}
+              <Card className="bg-green-50 border-green-200 mb-4">
+                <CardContent className="p-4 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{t('contacto.quickContact.whatsapp')}</h3>
+                    <p className="text-sm text-gray-600">{t('contacto.quickContact.whatsappDesc')}</p>
+                  </div>
+                  <a
+                    href="https://wa.me/529841234567"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
+                  >
+                    {t('contacto.quickContact.chat')}
+                  </a>
+                </CardContent>
+              </Card>
+
               {/* Contact Methods */}
               <div className="space-y-6 mb-8">
                 <Card className="p-6">

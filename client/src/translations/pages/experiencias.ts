@@ -73,6 +73,7 @@ export default {
     errors: {
       loadError: 'Error al cargar experiencias',
       loadErrorSubtitle: 'Mostrando experiencias de ejemplo',
+      noResults: 'No se encontraron experiencias. Intenta con otra búsqueda.',
     },
     experience: {
       instantConfirmation: 'Confirmación Instantánea',
@@ -194,6 +195,7 @@ export default {
     errors: {
       loadError: 'Error loading experiences',
       loadErrorSubtitle: 'Showing sample experiences',
+      noResults: 'No experiences found. Try a different search.',
     },
     experience: {
       instantConfirmation: 'Instant Confirmation',
@@ -315,6 +317,7 @@ export default {
     errors: {
       loadError: 'Erreur lors du chargement des expériences',
       loadErrorSubtitle: 'Affichage d\'expériences d\'exemple',
+      noResults: 'Aucune expérience trouvée. Essayez une autre recherche.',
     },
     experience: {
       instantConfirmation: 'Confirmation Instantanée',
@@ -436,6 +439,7 @@ export default {
     errors: {
       loadError: 'Errore nel caricamento delle esperienze',
       loadErrorSubtitle: 'Mostrando esperienze di esempio',
+      noResults: 'Nessuna esperienza trovata. Prova un\'altra ricerca.',
     },
     experience: {
       instantConfirmation: 'Conferma Istantanea',

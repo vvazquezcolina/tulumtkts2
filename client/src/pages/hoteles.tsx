@@ -250,6 +250,7 @@ export default function Hoteles() {
         ]}
         canonicalUrl={`${siteUrl}/hoteles`}
         ogType="website"
+        ogImage="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
         currentPath="/hoteles"
       />
       <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />

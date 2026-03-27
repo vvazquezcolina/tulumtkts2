@@ -188,6 +188,7 @@ export default function Experiencias() {
         ]}
         canonicalUrl={`${siteUrl}/experiencias`}
         ogType="website"
+        ogImage="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
         currentPath="/experiencias"
       />
       <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
@@ -296,39 +297,44 @@ export default function Experiencias() {
               {isLoading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[...Array(6)].map((_, i) => (
-                    <div key={i} className="animate-pulse">
-                      <div className="bg-gray-200 h-48 rounded-t-lg"></div>
-                      <div className="p-6">
-                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                        <div className="h-6 bg-gray-200 rounded mb-2"></div>
-                        <div className="h-3 bg-gray-200 rounded mb-4"></div>
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
                         <div className="flex justify-between">
-                          <div className="h-8 w-20 bg-gray-200 rounded"></div>
-                          <div className="h-8 w-20 bg-gray-200 rounded"></div>
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
                         </div>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
                   ))}
                 </div>
               ) : error ? (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 mb-4">{t('experiencias.errors.loadError')}</p>
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
                   <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
                 </div>
-              ) : null}
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredExperiences.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              ) : filteredExperiences.length === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredExperiences.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="arqueologia">
@@ -336,18 +342,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.archaeology.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.archaeology.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.archaeology')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.archaeology')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.archaeology')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="snorkel">
@@ -355,18 +390,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.snorkel.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.snorkel.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.snorkel')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.snorkel')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.snorkel')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="navegacion">
@@ -374,18 +438,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.navigation.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.navigation.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.navigation')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.navigation')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.navigation')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="cenotes">
@@ -393,18 +486,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.cenotes.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.cenotes.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.cenotes')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.cenotes')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.cenotes')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="aventura">
@@ -412,18 +534,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.adventure.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.adventure.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.adventure')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.adventure')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.adventure')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="bienestar">
@@ -431,18 +582,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.wellness.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.wellness.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.wellness')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.wellness')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.wellness')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="parques">
@@ -450,18 +630,47 @@ export default function Experiencias() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{t('experiencias.categories.parks.title')}</h3>
                 <p className="text-gray-600">{t('experiencias.categories.parks.description')}</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {experiencesByCategory[t('experiencias.filters.categories.parks')]?.map((experience) => (
-                  <ExperienceCard 
-                    key={experience.activity_id} 
-                    experience={experience} 
-                    favorites={favorites}
-                    toggleFavorite={toggleFavorite}
-                    mapCategory={mapCategory}
-                    t={t}
-                  />
-                ))}
-              </div>
+              {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(6)].map((_, i) => (
+                    <Card key={i} className="overflow-hidden animate-pulse">
+                      <div className="w-full h-48 bg-gray-200" />
+                      <CardContent className="p-4">
+                        <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                        <div className="h-3 w-full bg-gray-200 rounded mb-1" />
+                        <div className="h-3 w-2/3 bg-gray-200 rounded mb-4" />
+                        <div className="flex justify-between">
+                          <div className="h-4 w-16 bg-gray-200 rounded" />
+                          <div className="h-6 w-20 bg-gray-200 rounded" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="text-center py-16">
+                  <p className="text-gray-500 text-lg mb-2">{t('experiencias.errors.loadError')}</p>
+                  <p className="text-sm text-gray-400">{t('experiencias.errors.loadErrorSubtitle')}</p>
+                </div>
+              ) : (experiencesByCategory[t('experiencias.filters.categories.parks')]?.length ?? 0) === 0 ? (
+                <div className="text-center py-16">
+                  <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">{t('experiencias.errors.noResults')}</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {experiencesByCategory[t('experiencias.filters.categories.parks')]?.map((experience) => (
+                    <ExperienceCard
+                      key={experience.activity_id}
+                      experience={experience}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                      mapCategory={mapCategory}
+                      t={t}
+                    />
+                  ))}
+                </div>
+              )}
             </TabsContent>
           </Tabs>
         </div>

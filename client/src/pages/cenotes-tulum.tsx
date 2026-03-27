@@ -109,6 +109,7 @@ export default function CenotesTulum() {
         ]}
         canonicalUrl={`${siteUrl}/cenotes-tulum`}
         ogType="website"
+        ogImage="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
         currentPath="/cenotes-tulum"
       />
       <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />

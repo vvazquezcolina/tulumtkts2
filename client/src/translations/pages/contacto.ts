@@ -39,6 +39,11 @@ export default {
         it: 'Italiano',
       },
     },
+    quickContact: {
+      whatsapp: 'WhatsApp Directo',
+      whatsappDesc: 'Respuesta en minutos',
+      chat: 'Chatear',
+    },
     contact: {
       title: 'Información de Contacto',
       phone: 'Teléfono',
@@ -138,6 +143,11 @@ export default {
         fr: 'Français',
         it: 'Italiano',
       },
+    },
+    quickContact: {
+      whatsapp: 'Direct WhatsApp',
+      whatsappDesc: 'Response in minutes',
+      chat: 'Chat',
     },
     contact: {
       title: 'Contact Information',
@@ -239,6 +249,11 @@ export default {
         it: 'Italiano',
       },
     },
+    quickContact: {
+      whatsapp: 'WhatsApp Direct',
+      whatsappDesc: 'Réponse en minutes',
+      chat: 'Discuter',
+    },
     contact: {
       title: 'Informations de Contact',
       phone: 'Téléphone',
@@ -338,6 +353,11 @@ export default {
         fr: 'Français',
         it: 'Italiano',
       },
+    },
+    quickContact: {
+      whatsapp: 'WhatsApp Diretto',
+      whatsappDesc: 'Risposta in pochi minuti',
+      chat: 'Chatta',
     },
     contact: {
       title: 'Informazioni di Contatto',
