@@ -13,12 +13,17 @@ import Eventos from "@/pages/eventos";
 import Experiencias from "@/pages/experiencias";
 import Villas from "@/pages/villas";
 import Transporte from "@/pages/transporte";
+import Vuelos from "@/pages/vuelos";
+import Hoteles from "@/pages/hoteles";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import Contacto from "@/pages/contacto";
 import AffiliateDashboard from "@/pages/affiliate-dashboard";
 import TulumGuiaCompleta from "@/pages/tulum-guia-completa";
 import CenotesTulum from "@/pages/cenotes-tulum";
+import ComoLlegar from "@/pages/como-llegar";
+import CuantoCuesta from "@/pages/cuanto-cuesta";
+import MejoresHoteles from "@/pages/mejores-hoteles";
 
 // Componente helper para crear rutas localizadas (con y sin prefijo de idioma)
 function createLocalizedRoutes(basePath: string, component: React.ComponentType<any>) {
@@ -47,6 +52,11 @@ function Router() {
       {createLocalizedRoutes("/experiencias", Experiencias)}
       {createLocalizedRoutes("/villas", Villas)}
       {createLocalizedRoutes("/transporte", Transporte)}
+      {createLocalizedRoutes("/vuelos", Vuelos)}
+      {createLocalizedRoutes("/hoteles", Hoteles)}
+      {createLocalizedRoutes("/como-llegar-a-tulum", ComoLlegar)}
+      {createLocalizedRoutes("/cuanto-cuesta-viajar-a-tulum", CuantoCuesta)}
+      {createLocalizedRoutes("/mejores-hoteles-tulum", MejoresHoteles)}
       {createLocalizedRoutes("/blog/:slug", BlogPost)}
       {createLocalizedRoutes("/blog", Blog)}
       {createLocalizedRoutes("/contacto", Contacto)}

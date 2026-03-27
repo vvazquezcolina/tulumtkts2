@@ -3,6 +3,8 @@ export default {
   es: {
     nav: {
       home: 'Inicio',
+      flights: 'Vuelos',
+      hotels: 'Hoteles',
       experiences: 'Experiencias',
       events: 'Eventos',
       villas: 'Villas',
@@ -74,6 +76,8 @@ export default {
   en: {
     nav: {
       home: 'Home',
+      flights: 'Flights',
+      hotels: 'Hotels',
       experiences: 'Experiences',
       events: 'Events',
       villas: 'Villas',
@@ -145,6 +149,8 @@ export default {
   fr: {
     nav: {
       home: 'Accueil',
+      flights: 'Vols',
+      hotels: 'Hôtels',
       experiences: 'Expériences',
       events: 'Événements',
       villas: 'Villas',
@@ -216,6 +222,8 @@ export default {
   it: {
     nav: {
       home: 'Home',
+      flights: 'Voli',
+      hotels: 'Hotel',
       experiences: 'Esperienze',
       events: 'Eventi',
       villas: 'Ville',

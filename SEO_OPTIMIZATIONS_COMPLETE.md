@@ -435,3 +435,4 @@ Con la página hub "Guía Completa de Tulum", homepage optimizada, todas las pá
 **Estado**: Fase 2 completada (80%)  
 **Siguiente Paso**: Agregar Service Schema a tours individuales y optimizar performance
 
+

@@ -93,7 +93,7 @@ def generate_urls(keyword):
         urls.extend([
             'https://www.tripadvisor.com/Attractions-g150813-Activities-Tulum_Yucatan_Peninsula.html',
             'https://travel.usnews.com/Tulum_Mexico/Things_To_Do/',
-            'https://www.getyourguide.com/s/?q=tulum'
+            'https://www.viator.com/Tulum/d32090-ttd'
         ])
     
     if 'beach' in keyword_lower:
@@ -201,4 +201,5 @@ if __name__ == '__main__':
     input_file = 'Contenido - Primer jale.csv'
     output_file = 'Contenido - Primer jale.csv'
     complete_csv(input_file, output_file)
+
 

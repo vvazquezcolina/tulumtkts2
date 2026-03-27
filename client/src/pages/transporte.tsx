@@ -12,19 +12,24 @@ import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
-import { 
-  Car, 
-  Plane, 
-  Clock, 
-  Users, 
-  MapPin, 
-  Shield, 
-  Fuel, 
+import { generateCarRentalLink, generateTransferLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import {
+  Car,
+  Plane,
+  Clock,
+  Users,
+  MapPin,
+  Shield,
+  Fuel,
   Calendar,
   ArrowRight,
   Bike,
   Truck,
-  Navigation as NavigationIcon
+  Navigation as NavigationIcon,
+  Wifi,
+  CheckCircle,
+  Hotel,
+  Star
 } from "lucide-react";
 
 export default function Transporte() {
@@ -34,6 +39,31 @@ export default function Transporte() {
   const [returnDate, setReturnDate] = useState("");
   const [transferDate, setTransferDate] = useState("");
   const [passengers, setPassengers] = useState("");
+
+  const carRentalUrl = generateCarRentalLink('Cancun');
+  const transferUrl = generateTransferLink('Cancun Airport', 'Tulum');
+  const insuranceUrl = generateAffiliateLink('https://safetywing.com/nomad-insurance', 'safetyWing', 'insurance_tulum');
+  const esimUrl = generateAffiliateLink('https://www.airalo.com/mexico', 'safetyWing', 'esim_mexico');
+
+  const handleCarRentalClick = (carName: string, price: number) => {
+    trackAffiliateClick('discovercars', carName, String(price), 'car-rental');
+    window.open(carRentalUrl, '_blank');
+  };
+
+  const handleTransferClick = (serviceName: string, price: number) => {
+    trackAffiliateClick('kiwitaxi', serviceName, String(price), 'transfer');
+    window.open(transferUrl, '_blank');
+  };
+
+  const handleInsuranceClick = () => {
+    trackAffiliateClick('safetyWing', 'Seguro de Viaje México', '0', 'insurance');
+    window.open(insuranceUrl, '_blank');
+  };
+
+  const handleEsimClick = (plan: string, price: number) => {
+    trackAffiliateClick('airalo', plan, String(price), 'esim');
+    window.open(esimUrl, '_blank');
+  };
 
   const carRentals = [
     {
@@ -298,7 +328,13 @@ export default function Transporte() {
                       </Select>
                     </div>
                     <div className="flex items-end">
-                      <Button className="w-full bg-primary text-white hover:bg-primary/90">
+                      <Button
+                        className="w-full bg-primary text-white hover:bg-primary/90"
+                        onClick={() => {
+                          trackAffiliateClick('discovercars', 'Búsqueda Autos Cancún', '0', 'car-rental');
+                          window.open(carRentalUrl, '_blank');
+                        }}
+                      >
                         {t('buttons.search')}
                       </Button>
                     </div>
@@ -355,8 +391,12 @@ export default function Transporte() {
                           </div>
                         </div>
                         
-                        <Button className="w-full bg-primary text-white hover:bg-primary/90">
+                        <Button
+                          className="w-full bg-primary text-white hover:bg-primary/90"
+                          onClick={() => handleCarRentalClick(car.name, car.price)}
+                        >
                           Reservar Ahora
+                          <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </CardContent>
                     </div>
@@ -424,7 +464,13 @@ export default function Transporte() {
                       </Select>
                     </div>
                     <div className="flex items-end">
-                      <Button className="w-full bg-primary text-white hover:bg-primary/90">
+                      <Button
+                        className="w-full bg-primary text-white hover:bg-primary/90"
+                        onClick={() => {
+                          trackAffiliateClick('kiwitaxi', 'Cotizar Traslado Cancún-Tulum', '0', 'transfer');
+                          window.open(transferUrl, '_blank');
+                        }}
+                      >
                         Cotizar Traslado
                       </Button>
                     </div>
@@ -475,8 +521,12 @@ export default function Transporte() {
                           <span className="text-2xl font-bold text-primary">€{service.price}</span>
                           <span className="text-sm text-gray-500">/viaje</span>
                         </div>
-                        <Button className="bg-primary text-white hover:bg-primary/90">
+                        <Button
+                          className="bg-primary text-white hover:bg-primary/90"
+                          onClick={() => handleTransferClick(service.name, service.price)}
+                        >
                           Reservar
+                          <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </div>
                     </CardContent>
@@ -547,8 +597,12 @@ export default function Transporte() {
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-primary text-white hover:bg-primary/90">
+                    <Button
+                      className="w-full bg-primary text-white hover:bg-primary/90"
+                      onClick={() => handleCarRentalClick(transport.name, transport.price)}
+                    >
                       Rentar Ahora
+                      <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Card>
                 ))}
@@ -590,6 +644,236 @@ export default function Transporte() {
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+      </section>
+
+      {/* Travel Insurance Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
+              <Shield className="w-7 h-7 text-green-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Seguro de Viaje para México</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Viaja tranquilo con cobertura médica, cancelación y equipaje. Protege tu viaje a Tulum desde solo $1.50 USD/día.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-semibold text-gray-900">Cobertura médica internacional</p>
+                    <p className="text-sm text-gray-600">Hasta $250,000 USD en gastos médicos de emergencia en México.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-semibold text-gray-900">Cancelación del viaje</p>
+                    <p className="text-sm text-gray-600">Recupera tus gastos si tu viaje se cancela por causas imprevistas.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-semibold text-gray-900">Protección de equipaje</p>
+                    <p className="text-sm text-gray-600">Cobertura por pérdida, robo o daño de tu equipaje.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-semibold text-gray-900">Asistencia 24/7 en español</p>
+                    <p className="text-sm text-gray-600">Línea de emergencias disponible las 24 horas, los 7 días.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <Card className="p-8 border-2 border-green-100 bg-green-50">
+              <div className="text-center mb-6">
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-1">Desde</p>
+                <p className="text-4xl font-bold text-green-600">$1.50 <span className="text-lg font-normal text-gray-500">USD/día</span></p>
+                <p className="text-sm text-gray-500 mt-1">Con SafetyWing Nomad Insurance</p>
+              </div>
+              <ul className="text-sm text-gray-600 space-y-2 mb-6">
+                <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Sin edad mínima requerida</li>
+                <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Activa en minutos, antes o durante tu viaje</li>
+                <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Cancela cuando quieras</li>
+              </ul>
+              <Button
+                className="w-full bg-green-600 hover:bg-green-700 text-white text-base font-semibold py-3"
+                onClick={handleInsuranceClick}
+              >
+                Cotizar Seguro
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <p className="text-xs text-gray-400 text-center mt-3">Serás redirigido a SafetyWing para completar tu compra</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* eSIM Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
+              <Wifi className="w-7 h-7 text-blue-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Internet Móvil en México</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Mantente conectado con una eSIM. Sin cambiar de chip, actívala antes de viajar y llega a Tulum con internet desde el primer momento.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {/* Plan 1 */}
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="mb-4">
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium">Básico</p>
+                <p className="text-3xl font-bold text-blue-600 mt-1">$4.50 <span className="text-base font-normal text-gray-500">USD</span></p>
+              </div>
+              <div className="mb-6">
+                <p className="text-lg font-semibold text-gray-800">1 GB</p>
+                <p className="text-sm text-gray-500">Válido 7 días</p>
+                <p className="text-xs text-gray-400 mt-2">Ideal para estancias cortas o uso básico de mapas y mensajería</p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={() => handleEsimClick('eSIM 1GB 7 días', 4.50)}
+              >
+                Comprar eSIM
+              </Button>
+            </Card>
+
+            {/* Plan 2 - Popular */}
+            <Card className="p-6 text-center border-2 border-blue-500 relative hover:shadow-lg transition-shadow">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <Badge className="bg-blue-600 text-white px-3 py-1">Más Popular</Badge>
+              </div>
+              <div className="mb-4">
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium">Recomendado</p>
+                <p className="text-3xl font-bold text-blue-600 mt-1">$11 <span className="text-base font-normal text-gray-500">USD</span></p>
+              </div>
+              <div className="mb-6">
+                <p className="text-lg font-semibold text-gray-800">3 GB</p>
+                <p className="text-sm text-gray-500">Válido 30 días</p>
+                <p className="text-xs text-gray-400 mt-2">Perfecto para una semana completa explorando Tulum y la Riviera Maya</p>
+              </div>
+              <Button
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                onClick={() => handleEsimClick('eSIM 3GB 30 días', 11)}
+              >
+                Comprar eSIM
+              </Button>
+            </Card>
+
+            {/* Plan 3 */}
+            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
+              <div className="mb-4">
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium">Premium</p>
+                <p className="text-3xl font-bold text-blue-600 mt-1">$16 <span className="text-base font-normal text-gray-500">USD</span></p>
+              </div>
+              <div className="mb-6">
+                <p className="text-lg font-semibold text-gray-800">5 GB</p>
+                <p className="text-sm text-gray-500">Válido 30 días</p>
+                <p className="text-xs text-gray-400 mt-2">Para trabajadores remotos y viajeros que necesitan conectividad constante</p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                onClick={() => handleEsimClick('eSIM 5GB 30 días', 16)}
+              >
+                Comprar eSIM
+              </Button>
+            </Card>
+          </div>
+
+          <div className="bg-blue-50 rounded-xl p-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div>
+              <p className="text-lg font-bold text-blue-700">Sin chip físico</p>
+              <p className="text-sm text-gray-500">Actívala digitalmente</p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-blue-700">Cobertura 4G/5G</p>
+              <p className="text-sm text-gray-500">En toda la Riviera Maya</p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-blue-700">Activa online</p>
+              <p className="text-sm text-gray-500">Antes o durante el viaje</p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-blue-700">Compatible iPhone & Android</p>
+              <p className="text-sm text-gray-500">Con soporte eSIM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cross-sell: Completa tu viaje */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Completa tu viaje</h2>
+            <p className="text-gray-600">Todo lo que necesitas para tu aventura en Tulum, en un solo lugar.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a
+              href="/vuelos"
+              className="group block"
+              onClick={() => trackAffiliateClick('aviasales', 'Cross-sell Vuelos', '0', 'cross-sell')}
+            >
+              <Card className="p-6 hover:shadow-lg transition-all group-hover:border-primary border-2 border-transparent">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Plane className="w-6 h-6 text-primary" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-1 text-lg">Vuelos Baratos</h3>
+                <p className="text-sm text-gray-600">Encuentra vuelos baratos a Cancún desde tu ciudad. Compara precios y ahorra en tu billete.</p>
+              </Card>
+            </a>
+
+            <a
+              href="/hoteles"
+              className="group block"
+            >
+              <Card className="p-6 hover:shadow-lg transition-all group-hover:border-primary border-2 border-transparent">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Hotel className="w-6 h-6 text-primary" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-1 text-lg">Hoteles en Tulum</h3>
+                <p className="text-sm text-gray-600">Reserva tu hotel en Tulum al mejor precio. Desde eco-lodges hasta resorts de lujo en la selva.</p>
+              </Card>
+            </a>
+
+            <a
+              href="/experiencias"
+              className="group block"
+            >
+              <Card className="p-6 hover:shadow-lg transition-all group-hover:border-primary border-2 border-transparent">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Star className="w-6 h-6 text-primary" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-primary transition-colors" />
+                </div>
+                <h3 className="font-bold text-gray-900 mb-1 text-lg">Actividades Increíbles</h3>
+                <p className="text-sm text-gray-600">Descubre los cenotes, ruinas mayas, y tours más populares de Tulum y la Riviera Maya.</p>
+              </Card>
+            </a>
+          </div>
         </div>
       </section>
     </div>

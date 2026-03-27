@@ -88,3 +88,4 @@ console.log(`✅ Archivo TypeScript generado: ${outputPath}`);
 console.log(`📊 Total de artículos: ${articles.length}`);
 console.log(`💾 Tamaño del archivo: ${(typescriptContent.length / 1024 / 1024).toFixed(2)} MB`);
 
+

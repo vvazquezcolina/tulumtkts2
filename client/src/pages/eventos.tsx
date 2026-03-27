@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { CrossSell } from "@/components/cross-sell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -356,6 +357,8 @@ export default function Eventos() {
           </div>
         </div>
       </section>
+
+      <CrossSell exclude={["experiencias"]} />
     </div>
   );
 }

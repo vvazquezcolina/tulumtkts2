@@ -86,3 +86,4 @@ export function getCurrentPathWithoutLocale(currentPath: string): string {
   return getPathWithoutLocale(currentPath);
 }
 
+

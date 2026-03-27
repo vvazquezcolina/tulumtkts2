@@ -1,67 +1,95 @@
-// Affiliate Link Management System - Travelpayouts Only
-export interface AffiliateProvider {
-  name: string;
-  baseUrl: string;
-  partnerId: string;
-  campaign?: string;
-  commission: number;
+// Affiliate Link Management System - Travelpayouts Only (tp.media redirect)
+const TP_MARKER = '9a350c3ebd492165ade7135359165af9';
+
+// Travelpayouts program IDs
+export const TP_PROGRAMS = {
+  aviasales: '4114',      // Flights
+  hotellook: '4110',      // Hotels
+  viator: '2584',         // Activities/Tours (Viator) - primary activities provider
+  discovercars: '3958',   // Car Rental
+  kiwitaxi: '1944',       // Transfers
+  safetyWing: '4068',     // Travel Insurance
+} as const;
+
+export type TPProgram = keyof typeof TP_PROGRAMS;
+
+/**
+ * Generate a Travelpayouts affiliate link using tp.media redirect.
+ * This wraps any target URL through TP tracking.
+ */
+export function generateAffiliateLink(
+  targetUrl: string,
+  program: TPProgram = 'viator',
+  campaignId?: string
+): string {
+  const programId = TP_PROGRAMS[program];
+  const encoded = encodeURIComponent(targetUrl);
+  let url = `https://tp.media/r?marker=${TP_MARKER}&p=${programId}&u=${encoded}`;
+  if (campaignId) {
+    url += `&campaign_id=${campaignId}`;
+  }
+  return url;
 }
 
-export const AFFILIATE_PROVIDERS: Record<string, AffiliateProvider> = {
-  travelpayouts: {
-    name: 'Travelpayouts',
-    baseUrl: 'https://www.travelpayouts.com',
-    partnerId: '9a350c3ebd492165ade7135359165af9',
-    campaign: 'tulum_experiences',
-    commission: 10 // 10% average commission rate (varies by product)
-  }
-};
-
-// Generate affiliate link for Travelpayouts experiences
-export function generateAffiliateLink(
-  provider: keyof typeof AFFILIATE_PROVIDERS,
-  productUrl?: string,
-  activityId?: string
+/**
+ * Generate flight search affiliate link
+ */
+export function generateFlightLink(
+  origin: string,
+  destination: string,
+  departureDate?: string,
+  returnDate?: string
 ): string {
-  const affiliate = AFFILIATE_PROVIDERS[provider];
-  
-  if (!affiliate) {
-    throw new Error(`Unknown affiliate provider: ${provider}`);
-  }
+  let searchUrl = `https://www.aviasales.com/search/${origin}${departureDate || ''}${destination}${returnDate || ''}`;
+  return generateAffiliateLink(searchUrl, 'aviasales', `flights_${origin}_${destination}`);
+}
 
-  // Base affiliate link with partner tracking
-  let affiliateUrl = `${affiliate.baseUrl}?partner_id=${affiliate.partnerId}`;
-  
-  if (affiliate.campaign) {
-    affiliateUrl += `&cmp=${affiliate.campaign}`;
-  }
+/**
+ * Generate hotel search affiliate link
+ */
+export function generateHotelLink(
+  location: string,
+  checkIn?: string,
+  checkOut?: string
+): string {
+  const params = new URLSearchParams();
+  if (checkIn) params.set('checkIn', checkIn);
+  if (checkOut) params.set('checkOut', checkOut);
+  const query = params.toString();
+  const searchUrl = `https://www.hotellook.com/hotels/${location}${query ? '?' + query : ''}`;
+  return generateAffiliateLink(searchUrl, 'hotellook', `hotels_${location}`);
+}
 
-  // Add specific activity tracking if provided
-  if (activityId) {
-    affiliateUrl += `&activity_id=${activityId}`;
-  }
+/**
+ * Generate car rental affiliate link
+ */
+export function generateCarRentalLink(location: string = 'Cancun'): string {
+  const searchUrl = `https://www.discovercars.com/search?location=${encodeURIComponent(location)}`;
+  return generateAffiliateLink(searchUrl, 'discovercars', `cars_${location}`);
+}
 
-  // Add source tracking for analytics
-  affiliateUrl += '&utm_source=tulumtkts&utm_medium=affiliate&utm_campaign=tulum_experiences';
-
-  return affiliateUrl;
+/**
+ * Generate transfer affiliate link
+ */
+export function generateTransferLink(from: string = 'Cancun Airport', to: string = 'Tulum'): string {
+  const searchUrl = `https://kiwitaxi.com/mexico/${encodeURIComponent(from)}+to+${encodeURIComponent(to)}`;
+  return generateAffiliateLink(searchUrl, 'kiwitaxi', `transfer_${from}_${to}`);
 }
 
 // Track affiliate click events
 export function trackAffiliateClick(
-  provider: string,
+  program: string,
   experienceTitle: string,
   experiencePrice: string,
   category: string
 ) {
-  // Analytics tracking for affiliate performance
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'affiliate_click', {
       event_category: 'Affiliate',
-      event_label: `${provider}_${category}`,
+      event_label: `${program}_${category}`,
       value: parseInt(experiencePrice.replace(/[^0-9]/g, '')) || 0,
       custom_parameters: {
-        provider,
+        program,
         experience_title: experienceTitle,
         experience_price: experiencePrice,
         category
@@ -69,9 +97,8 @@ export function trackAffiliateClick(
     });
   }
 
-  // Store click data for revenue tracking
   const clickData = {
-    provider,
+    program,
     experienceTitle,
     experiencePrice,
     category,
@@ -79,22 +106,21 @@ export function trackAffiliateClick(
     sessionId: Math.random().toString(36).substr(2, 9)
   };
 
-  // Save to localStorage for tracking
   const existingClicks = JSON.parse(localStorage.getItem('affiliate_clicks') || '[]');
   existingClicks.push(clickData);
-  localStorage.setItem('affiliate_clicks', JSON.stringify(existingClicks.slice(-100))); // Keep last 100 clicks
+  localStorage.setItem('affiliate_clicks', JSON.stringify(existingClicks.slice(-100)));
 }
 
-// Revenue estimation based on clicks and conversion rates
+// Revenue estimation
 export function estimateRevenue(clicks: number, averageOrderValue: number = 200): {
   estimatedBookings: number;
   estimatedRevenue: number;
   commission: number;
 } {
-  const conversionRate = 0.03; // 3% conversion rate estimate
+  const conversionRate = 0.03;
   const estimatedBookings = Math.floor(clicks * conversionRate);
-  const commission = estimatedBookings * averageOrderValue * 0.10; // 10% Travelpayouts commission
-  
+  const commission = estimatedBookings * averageOrderValue * 0.06; // ~6% blended average
+
   return {
     estimatedBookings,
     estimatedRevenue: estimatedBookings * averageOrderValue,
@@ -102,10 +128,10 @@ export function estimateRevenue(clicks: number, averageOrderValue: number = 200)
   };
 }
 
-// Get analytics data for affiliate performance
+// Get analytics data
 export function getAffiliateAnalytics() {
   if (typeof window === 'undefined') return null;
-  
+
   const clicks = JSON.parse(localStorage.getItem('affiliate_clicks') || '[]');
   const totalClicks = clicks.length;
   const last30Days = clicks.filter((click: any) => {
@@ -125,7 +151,7 @@ export function getAffiliateAnalytics() {
 }
 
 function getTopCategories(clicks: any[]) {
-  const categoryCount = clicks.reduce((acc, click) => {
+  const categoryCount = clicks.reduce((acc: Record<string, number>, click: any) => {
     acc[click.category] = (acc[click.category] || 0) + 1;
     return acc;
   }, {});
@@ -137,7 +163,7 @@ function getTopCategories(clicks: any[]) {
 }
 
 function getTopExperiences(clicks: any[]) {
-  const experienceCount = clicks.reduce((acc, click) => {
+  const experienceCount = clicks.reduce((acc: Record<string, number>, click: any) => {
     acc[click.experienceTitle] = (acc[click.experienceTitle] || 0) + 1;
     return acc;
   }, {});

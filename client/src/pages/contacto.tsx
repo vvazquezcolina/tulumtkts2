@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useI18n } from "@/contexts/i18n-context";
+import { CrossSell } from "@/components/cross-sell";
 import { 
   Phone, 
   Mail, 
@@ -340,6 +341,12 @@ export default function Contacto() {
           </Card>
         </div>
       </section>
+
+      {/* Cross-sell */}
+      <CrossSell
+        title="Mientras tanto, planifica tu viaje"
+        items={["vuelos", "hoteles", "experiencias", "transporte", "comoLlegar", "cuantoCuesta"]}
+      />
     </div>
   );
 }

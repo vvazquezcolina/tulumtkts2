@@ -32,6 +32,11 @@ export async function generateSitemap(siteUrl: string = 'https://tulumtkts.com')
     { url: '/experiencias', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
     { url: '/eventos', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
     { url: '/villas', priority: '0.85', changefreq: 'weekly', lastmod: currentDate },
+    { url: '/vuelos', priority: '0.85', changefreq: 'daily', lastmod: currentDate },
+    { url: '/hoteles', priority: '0.85', changefreq: 'daily', lastmod: currentDate },
+    { url: '/como-llegar-a-tulum', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
+    { url: '/cuanto-cuesta-viajar-a-tulum', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
+    { url: '/mejores-hoteles-tulum', priority: '0.9', changefreq: 'weekly', lastmod: currentDate },
     { url: '/transporte', priority: '0.7', changefreq: 'monthly', lastmod: currentDate },
     { url: '/contacto', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
   ];

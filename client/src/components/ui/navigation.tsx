@@ -5,20 +5,22 @@ import { MobileMenu } from "@/components/ui/mobile-menu";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { getPathWithoutLocale } from "@/lib/routing";
-import { 
+import {
   Calendar,
   MapPin,
   Home as HomeIcon,
   Car,
   BookOpen,
-  Phone
+  Phone,
+  Plane,
+  Hotel
 } from "lucide-react";
 
 const navigationItems = [
   { href: "/", labelKey: "nav.home", icon: HomeIcon },
-  { href: "/eventos", labelKey: "nav.events", icon: Calendar },
+  { href: "/vuelos", labelKey: "nav.flights", icon: Plane },
+  { href: "/hoteles", labelKey: "nav.hotels", icon: Hotel },
   { href: "/experiencias", labelKey: "nav.experiences", icon: MapPin },
-  { href: "/villas", labelKey: "nav.villas", icon: HomeIcon },
   { href: "/transporte", labelKey: "nav.transport", icon: Car },
   { href: "/blog", labelKey: "nav.blog", icon: BookOpen },
   { href: "/contacto", labelKey: "nav.contact", icon: Phone }

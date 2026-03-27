@@ -1,0 +1,243 @@
+// Traducciones para página Vuelos
+export default {
+  es: {
+    title: 'Vuelos Baratos a Cancún (CUN) y Tulum 2025 | TulumTkts',
+    description: 'Encuentra y compara vuelos baratos a Cancún (CUN), el aeropuerto más cercano a Tulum. Rutas desde CDMX, Nueva York, Miami, Los Ángeles, Madrid y más. Reserva con las mejores ofertas.',
+    breadcrumb: {
+      home: 'Inicio',
+      guide: 'Guía Completa',
+      current: 'Vuelos',
+    },
+    hero: {
+      title: 'Vuelos a Tulum / Cancún',
+      subtitle: 'Encuentra las mejores tarifas aéreas al aeropuerto de Cancún (CUN), puerta de entrada a Tulum',
+    },
+    search: {
+      title: 'Buscar vuelos a Cancún',
+      origin: 'Ciudad de origen',
+      originPlaceholder: 'Ciudad de origen, ej: CDMX, NYC, LAX',
+      departure: 'Fecha de ida',
+      return: 'Fecha de vuelta (opcional)',
+      searchButton: 'Buscar vuelos',
+      searching: 'Buscando...',
+    },
+    popularRoutes: {
+      title: 'Vuelos populares a Cancún',
+      subtitle: 'Rutas frecuentes con los mejores precios hacia el aeropuerto CUN',
+      from: 'desde',
+      searchRoute: 'Buscar este vuelo',
+    },
+    tips: {
+      title: 'Consejos para volar a Tulum',
+      subtitle: 'Todo lo que necesitas saber antes de comprar tu vuelo',
+      bookAhead: {
+        title: 'Reserva con anticipación',
+        description: 'Lo ideal es reservar tu vuelo con 2 a 3 meses de anticipación para encontrar las mejores tarifas. Los precios suelen subir considerablemente en las últimas semanas.',
+      },
+      cheapMonths: {
+        title: 'Meses más económicos',
+        description: 'Mayo, junio, septiembre y octubre son los meses con tarifas más bajas. Evita Semana Santa, Navidad y julio-agosto si buscas precios accesibles.',
+      },
+      airport: {
+        title: 'Aeropuerto de Cancún (CUN)',
+        description: 'El aeropuerto internacional de Cancún está ubicado a 130 km de Tulum, aproximadamente 2 horas en auto. Es el principal punto de entrada a la Riviera Maya.',
+      },
+      transfer: {
+        title: 'Traslado del aeropuerto a Tulum',
+        description: 'Una vez que aterrices en Cancún, necesitarás un traslado al hotel. Puedes contratar transfer privado, shuttle compartido o renta de auto.',
+        linkText: 'Ver opciones de traslado',
+      },
+    },
+    transferCta: {
+      title: '¿Ya tienes tu vuelo?',
+      subtitle: 'Reserva tu transfer del aeropuerto de Cancún a tu hotel en Tulum',
+      description: 'Traslados privados y compartidos disponibles. Desde CUN hasta cualquier hotel en Tulum, con conductores profesionales y vehículos cómodos.',
+      button: 'Reservar transfer a Tulum',
+      features: {
+        private: 'Transfer privado disponible',
+        professional: 'Conductores profesionales',
+        distance: '130 km · ~2 horas',
+      },
+    },
+  },
+  en: {
+    title: 'Cheap Flights to Cancun (CUN) and Tulum 2025 | TulumTkts',
+    description: 'Find and compare cheap flights to Cancun (CUN), the closest airport to Tulum. Routes from CDMX, New York, Miami, Los Angeles, Madrid and more. Book with the best deals.',
+    breadcrumb: {
+      home: 'Home',
+      guide: 'Complete Guide',
+      current: 'Flights',
+    },
+    hero: {
+      title: 'Flights to Tulum / Cancun',
+      subtitle: 'Find the best airfares to Cancun Airport (CUN), gateway to Tulum',
+    },
+    search: {
+      title: 'Search flights to Cancun',
+      origin: 'Origin city',
+      originPlaceholder: 'Origin city, e.g.: CDMX, NYC, LAX',
+      departure: 'Departure date',
+      return: 'Return date (optional)',
+      searchButton: 'Search flights',
+      searching: 'Searching...',
+    },
+    popularRoutes: {
+      title: 'Popular flights to Cancun',
+      subtitle: 'Frequent routes with the best prices to CUN airport',
+      from: 'from',
+      searchRoute: 'Search this flight',
+    },
+    tips: {
+      title: 'Tips for flying to Tulum',
+      subtitle: 'Everything you need to know before buying your flight',
+      bookAhead: {
+        title: 'Book in advance',
+        description: 'The ideal is to book your flight 2 to 3 months in advance to find the best fares. Prices tend to rise considerably in the last few weeks.',
+      },
+      cheapMonths: {
+        title: 'Cheapest months',
+        description: 'May, June, September, and October are the months with the lowest fares. Avoid Easter, Christmas, and July-August if you are looking for affordable prices.',
+      },
+      airport: {
+        title: 'Cancun Airport (CUN)',
+        description: 'Cancun International Airport is located 130 km from Tulum, approximately 2 hours by car. It is the main gateway to the Riviera Maya.',
+      },
+      transfer: {
+        title: 'Transfer from airport to Tulum',
+        description: 'Once you land in Cancun, you will need a transfer to your hotel. You can book a private transfer, shared shuttle, or car rental.',
+        linkText: 'See transfer options',
+      },
+    },
+    transferCta: {
+      title: 'Already have your flight?',
+      subtitle: 'Book your transfer from Cancun Airport to your hotel in Tulum',
+      description: 'Private and shared transfers available. From CUN to any hotel in Tulum, with professional drivers and comfortable vehicles.',
+      button: 'Book transfer to Tulum',
+      features: {
+        private: 'Private transfer available',
+        professional: 'Professional drivers',
+        distance: '130 km · ~2 hours',
+      },
+    },
+  },
+  fr: {
+    title: 'Vols Pas Chers vers Cancún (CUN) et Tulum 2025 | TulumTkts',
+    description: 'Trouvez et comparez des vols pas chers vers Cancún (CUN), l\'aéroport le plus proche de Tulum. Itinéraires depuis CDMX, New York, Miami, Los Angeles, Madrid et plus. Réservez aux meilleurs prix.',
+    breadcrumb: {
+      home: 'Accueil',
+      guide: 'Guide Complet',
+      current: 'Vols',
+    },
+    hero: {
+      title: 'Vols vers Tulum / Cancún',
+      subtitle: 'Trouvez les meilleures tarifs aériens vers l\'aéroport de Cancún (CUN), porte d\'entrée de Tulum',
+    },
+    search: {
+      title: 'Rechercher des vols vers Cancún',
+      origin: 'Ville d\'origine',
+      originPlaceholder: 'Ville d\'origine, ex: CDMX, NYC, LAX',
+      departure: 'Date de départ',
+      return: 'Date de retour (optionnel)',
+      searchButton: 'Rechercher des vols',
+      searching: 'Recherche en cours...',
+    },
+    popularRoutes: {
+      title: 'Vols populaires vers Cancún',
+      subtitle: 'Itinéraires fréquents avec les meilleurs prix vers l\'aéroport CUN',
+      from: 'à partir de',
+      searchRoute: 'Rechercher ce vol',
+    },
+    tips: {
+      title: 'Conseils pour voler à Tulum',
+      subtitle: 'Tout ce que vous devez savoir avant d\'acheter votre billet',
+      bookAhead: {
+        title: 'Réservez à l\'avance',
+        description: 'L\'idéal est de réserver votre vol 2 à 3 mois à l\'avance pour trouver les meilleurs tarifs. Les prix ont tendance à augmenter considérablement dans les dernières semaines.',
+      },
+      cheapMonths: {
+        title: 'Mois les moins chers',
+        description: 'Mai, juin, septembre et octobre sont les mois avec les tarifs les plus bas. Évitez Pâques, Noël et juillet-août si vous cherchez des prix abordables.',
+      },
+      airport: {
+        title: 'Aéroport de Cancún (CUN)',
+        description: 'L\'aéroport international de Cancún est situé à 130 km de Tulum, soit environ 2 heures en voiture. C\'est la principale porte d\'entrée de la Riviera Maya.',
+      },
+      transfer: {
+        title: 'Transfert de l\'aéroport à Tulum',
+        description: 'Une fois atterri à Cancún, vous aurez besoin d\'un transfert vers votre hôtel. Vous pouvez réserver un transfert privé, un navette partagée ou une location de voiture.',
+        linkText: 'Voir les options de transfert',
+      },
+    },
+    transferCta: {
+      title: 'Vous avez déjà votre vol ?',
+      subtitle: 'Réservez votre transfert de l\'aéroport de Cancún à votre hôtel à Tulum',
+      description: 'Transferts privés et partagés disponibles. De CUN à n\'importe quel hôtel à Tulum, avec des chauffeurs professionnels et des véhicules confortables.',
+      button: 'Réserver un transfert à Tulum',
+      features: {
+        private: 'Transfert privé disponible',
+        professional: 'Chauffeurs professionnels',
+        distance: '130 km · ~2 heures',
+      },
+    },
+  },
+  it: {
+    title: 'Voli Economici per Cancún (CUN) e Tulum 2025 | TulumTkts',
+    description: 'Trova e confronta voli economici per Cancún (CUN), l\'aeroporto più vicino a Tulum. Rotte da CDMX, New York, Miami, Los Angeles, Madrid e altro. Prenota con le migliori offerte.',
+    breadcrumb: {
+      home: 'Home',
+      guide: 'Guida Completa',
+      current: 'Voli',
+    },
+    hero: {
+      title: 'Voli per Tulum / Cancún',
+      subtitle: 'Trova le migliori tariffe aeree per l\'aeroporto di Cancún (CUN), porta d\'ingresso a Tulum',
+    },
+    search: {
+      title: 'Cerca voli per Cancún',
+      origin: 'Città di origine',
+      originPlaceholder: 'Città di origine, es: CDMX, NYC, LAX',
+      departure: 'Data di partenza',
+      return: 'Data di ritorno (facoltativa)',
+      searchButton: 'Cerca voli',
+      searching: 'Ricerca in corso...',
+    },
+    popularRoutes: {
+      title: 'Voli popolari per Cancún',
+      subtitle: 'Rotte frequenti con i migliori prezzi per l\'aeroporto CUN',
+      from: 'da',
+      searchRoute: 'Cerca questo volo',
+    },
+    tips: {
+      title: 'Consigli per volare a Tulum',
+      subtitle: 'Tutto quello che devi sapere prima di acquistare il tuo volo',
+      bookAhead: {
+        title: 'Prenota in anticipo',
+        description: 'L\'ideale è prenotare il volo con 2-3 mesi di anticipo per trovare le migliori tariffe. I prezzi tendono ad aumentare considerevolmente nelle ultime settimane.',
+      },
+      cheapMonths: {
+        title: 'Mesi più economici',
+        description: 'Maggio, giugno, settembre e ottobre sono i mesi con le tariffe più basse. Evita Pasqua, Natale e luglio-agosto se cerchi prezzi accessibili.',
+      },
+      airport: {
+        title: 'Aeroporto di Cancún (CUN)',
+        description: 'L\'aeroporto internazionale di Cancún si trova a 130 km da Tulum, circa 2 ore in auto. È il principale punto di ingresso alla Riviera Maya.',
+      },
+      transfer: {
+        title: 'Trasferimento dall\'aeroporto a Tulum',
+        description: 'Una volta atterrato a Cancún, avrai bisogno di un trasferimento al tuo hotel. Puoi prenotare un trasferimento privato, navetta condivisa o noleggio auto.',
+        linkText: 'Vedi le opzioni di trasferimento',
+      },
+    },
+    transferCta: {
+      title: 'Hai già il tuo volo?',
+      subtitle: 'Prenota il tuo trasferimento dall\'aeroporto di Cancún al tuo hotel a Tulum',
+      description: 'Trasferimenti privati e condivisi disponibili. Da CUN a qualsiasi hotel a Tulum, con autisti professionisti e veicoli confortevoli.',
+      button: 'Prenota trasferimento a Tulum',
+      features: {
+        private: 'Trasferimento privato disponibile',
+        professional: 'Autisti professionisti',
+        distance: '130 km · ~2 ore',
+      },
+    },
+  },
+};

@@ -12,22 +12,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { 
-  Menu, 
+import {
+  Menu,
   Calendar,
   MapPin,
   Home as HomeIcon,
   Car,
   BookOpen,
   Phone,
-  User
+  User,
+  Plane,
+  Hotel
 } from "lucide-react";
 
 const navigationItems = [
   { href: "/", labelKey: "nav.home", icon: HomeIcon },
-  { href: "/eventos", labelKey: "nav.events", icon: Calendar },
+  { href: "/vuelos", labelKey: "nav.flights", icon: Plane },
+  { href: "/hoteles", labelKey: "nav.hotels", icon: Hotel },
   { href: "/experiencias", labelKey: "nav.experiences", icon: MapPin },
-  { href: "/villas", labelKey: "nav.villas", icon: HomeIcon },
   { href: "/transporte", labelKey: "nav.transport", icon: Car },
   { href: "/blog", labelKey: "nav.blog", icon: BookOpen },
   { href: "/contacto", labelKey: "nav.contact", icon: Phone }

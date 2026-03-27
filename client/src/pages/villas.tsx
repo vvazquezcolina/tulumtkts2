@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { CrossSell } from "@/components/cross-sell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,21 +13,24 @@ import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
-import { 
-  Search, 
-  Filter, 
-  Star, 
-  Heart, 
-  Users, 
-  Bed, 
-  Bath, 
-  Wifi, 
-  Car, 
+import { TripPlanner } from "@/components/trip-planner";
+import { generateHotelLink, generateTransferLink, trackAffiliateClick } from "@/lib/affiliate";
+import {
+  Search,
+  Filter,
+  Star,
+  Heart,
+  Users,
+  Bed,
+  Bath,
+  Wifi,
+  Car,
   Utensils,
   Waves,
   TreePine,
   MapPin,
-  Calendar
+  Calendar,
+  ExternalLink
 } from "lucide-react";
 
 export default function Villas() {
@@ -435,8 +439,15 @@ export default function Villas() {
                   </div>
                   
                   <div className="flex gap-2">
-                    <Button className="flex-1 bg-primary text-white hover:bg-primary/90">
-                      {t('villas.villa.viewAvailability')}
+                    <Button
+                      className="flex-1 bg-primary text-white hover:bg-primary/90"
+                      onClick={() => {
+                        const url = generateHotelLink('Tulum');
+                        trackAffiliateClick('hotellook', villa.title, String(villa.pricePerNight), 'villas');
+                        window.open(url, '_blank');
+                      }}
+                    >
+                      {t('villas.villa.viewAvailability')} <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                     <Button variant="outline" size="icon">
                       <Calendar className="w-4 h-4" />
@@ -539,7 +550,15 @@ export default function Villas() {
                         <div className="text-lg font-bold text-gray-900">€{villa.pricePerNight}</div>
                         <span className="text-xs text-gray-500">/noche</span>
                       </div>
-                      <Button size="sm" className="bg-primary text-white hover:bg-primary/90">
+                      <Button
+                        size="sm"
+                        className="bg-primary text-white hover:bg-primary/90"
+                        onClick={() => {
+                          const url = generateHotelLink('Tulum');
+                          trackAffiliateClick('hotellook', villa.title, String(villa.pricePerNight), 'villas');
+                          window.open(url, '_blank');
+                        }}
+                      >
                         Ver Villa
                       </Button>
                     </div>
@@ -550,6 +569,87 @@ export default function Villas() {
           </div>
         </div>
       </section>
+
+      {/* Buscar más opciones de hospedaje - Hotellook affiliate */}
+      <section className="py-14 bg-gradient-to-br from-teal-50 to-cyan-50 border-t border-teal-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-teal-100">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <Badge className="mb-3 bg-teal-100 text-teal-800 border-0">Hospedaje en Tulum</Badge>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  ¿No encontraste lo que buscas?
+                </h2>
+                <p className="text-gray-600 leading-relaxed">
+                  Busca entre cientos de hoteles, villas y hostales en Tulum con los mejores precios garantizados. Compara opciones y reserva con total seguridad.
+                </p>
+                <ul className="mt-3 space-y-1 text-sm text-gray-500">
+                  <li className="flex items-center gap-2"><span className="text-teal-500">✓</span> Más de 500 propiedades en Tulum</li>
+                  <li className="flex items-center gap-2"><span className="text-teal-500">✓</span> Cancelación gratuita en la mayoría</li>
+                  <li className="flex items-center gap-2"><span className="text-teal-500">✓</span> Precio más bajo garantizado</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-3 min-w-[200px]">
+                <Button
+                  size="lg"
+                  className="bg-teal-600 hover:bg-teal-700 text-white font-semibold"
+                  onClick={() => {
+                    trackAffiliateClick('hotellook', 'Buscar hospedaje Tulum', '0', 'villas_search_cta');
+                    window.open(generateHotelLink('Tulum'), '_blank');
+                  }}
+                >
+                  Buscar Hospedaje <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+                <p className="text-xs text-gray-400 text-center">Vía Hotellook — sin cargo extra</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ¿Necesitas transporte? — Kiwitaxi transfer affiliate */}
+      <section className="py-12 bg-white border-t">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-cyan-600 to-teal-600 rounded-2xl p-8 text-white">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-2">¿Necesitas transporte desde el aeropuerto?</h2>
+                <p className="text-white/90 leading-relaxed">
+                  Llega a tu villa sin estrés. Reserva un traslado privado desde el Aeropuerto de Cancún directamente a tu alojamiento en Tulum.
+                </p>
+                <p className="mt-2 text-white/75 text-sm">~2 horas de trayecto • Conductor privado • Precio fijo</p>
+              </div>
+              <div className="flex flex-col gap-3 min-w-[200px]">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="bg-white text-teal-700 hover:bg-white/90 font-semibold"
+                  onClick={() => {
+                    trackAffiliateClick('kiwitaxi', 'Traslado Cancun-Tulum', '0', 'villas_transfer_cta');
+                    window.open(generateTransferLink('Cancun Airport', 'Tulum'), '_blank');
+                  }}
+                >
+                  Reservar Traslado <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+                <p className="text-xs text-white/60 text-center">Vía Kiwitaxi — precio fijo garantizado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TripPlanner */}
+      <section className="py-14 bg-gray-50 border-t">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Planifica todo tu viaje a Tulum</h2>
+            <p className="text-gray-600 mt-2">Vuelos, hospedaje, traslados y actividades en un solo lugar.</p>
+          </div>
+          <TripPlanner />
+        </div>
+      </section>
+
+      <CrossSell exclude={["hoteles"]} />
     </div>
   );
 }

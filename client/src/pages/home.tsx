@@ -8,7 +8,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/ui/navigation";
 import { Star, Clock, Heart, Search, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
-import { generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
+import { generateAffiliateLink, generateFlightLink, generateHotelLink, trackAffiliateClick } from "@/lib/affiliate";
+import { TripPlanner } from "@/components/trip-planner";
+import { CrossSell } from "@/components/cross-sell";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
 import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelpayouts";
 import { SEOHead } from "@/components/seo-head";
@@ -563,6 +565,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trip Planner Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <TripPlanner />
+        </div>
+      </section>
+
+      {/* Cross-sell Section */}
+      <CrossSell
+        items={["vuelos", "hoteles", "experiencias", "transporte", "seguro", "esim"]}
+        title="Todo lo que necesitas para tu viaje"
+      />
+
       {/* FAQs Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -587,8 +602,8 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+            <div className="md:col-span-2 lg:col-span-2">
               <h3 className="text-2xl font-bold text-primary mb-4">TulumTkts</h3>
               <p className="text-gray-300 mb-6 max-w-md">
                 {t('footer.description')}
@@ -622,13 +637,26 @@ export default function Home() {
             </div>
             
             <div>
+              <h4 className="font-semibold text-lg mb-4">Planifica tu Viaje</h4>
+              <ul className="space-y-2">
+                <li><a href={getLocalizedLink('/vuelos')} className="text-gray-300 hover:text-primary transition-colors">Vuelos a Cancun</a></li>
+                <li><a href={getLocalizedLink('/hoteles')} className="text-gray-300 hover:text-primary transition-colors">Hoteles en Tulum</a></li>
+                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">Tours y Actividades</a></li>
+                <li><a href={getLocalizedLink('/transporte')} className="text-gray-300 hover:text-primary transition-colors">Transporte y Autos</a></li>
+                <li><a href={getLocalizedLink('/como-llegar-a-tulum')} className="text-gray-300 hover:text-primary transition-colors">Como Llegar a Tulum</a></li>
+                <li><a href={getLocalizedLink('/cuanto-cuesta-viajar-a-tulum')} className="text-gray-300 hover:text-primary transition-colors">Cuanto Cuesta Viajar</a></li>
+                <li><a href={getLocalizedLink('/mejores-hoteles-tulum')} className="text-gray-300 hover:text-primary transition-colors">Mejores Hoteles</a></li>
+              </ul>
+            </div>
+
+            <div>
               <h4 className="font-semibold text-lg mb-4">{t('footer.experiences')}</h4>
               <ul className="space-y-2">
                 <li><a href={getLocalizedLink('/cenotes-tulum')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.cenotes')}</a></li>
                 <li><a href={getLocalizedLink('/experiencias?category=arqueologia')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.mayanRuins')}</a></li>
                 <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.beachTours')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.adventureSports')}</a></li>
-                <li><a href={getLocalizedLink('/experiencias')} className="text-gray-300 hover:text-primary transition-colors">{t('footer.experienceLinks.culturalTours')}</a></li>
+                <li><a href={getLocalizedLink('/tulum-guia-completa')} className="text-gray-300 hover:text-primary transition-colors">Guia Completa de Tulum</a></li>
+                <li><a href={getLocalizedLink('/blog')} className="text-gray-300 hover:text-primary transition-colors">Blog de Viajes</a></li>
               </ul>
             </div>
             

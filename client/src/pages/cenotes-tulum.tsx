@@ -1,4 +1,5 @@
 import { useLocation } from "wouter";
+import { CrossSell } from "@/components/cross-sell";
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
@@ -7,9 +8,11 @@ import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Star, ArrowRight, Droplet, Users, Camera } from "lucide-react";
+import { MapPin, Clock, Star, ArrowRight, Droplet, Users, Camera, ExternalLink } from "lucide-react";
 import { useI18n } from "@/contexts/i18n-context";
 import { cenotesTulum as translations } from "@/translations/pages/cenotes-tulum";
+import { TripPlanner } from "@/components/trip-planner";
+import { generateHotelLink, generateCarRentalLink, generateAffiliateLink, trackAffiliateClick } from "@/lib/affiliate";
 
 /**
  * Página de Destino: Cenotes en Tulum
@@ -217,14 +220,64 @@ export default function CenotesTulum() {
                     </div>
                   </div>
                   <Button
-                    onClick={() => setLocation('/experiencias?q=cenote')}
+                    onClick={() => {
+                      const url = generateAffiliateLink(
+                        'https://www.viator.com/Tulum/d4254-ttd?q=cenote',
+                        'viator',
+                        'cenotes_card_cta'
+                      );
+                      trackAffiliateClick('viator', cenote.name, cenote.price, 'cenotes');
+                      window.open(url, '_blank');
+                    }}
                     className="w-full bg-primary text-white hover:bg-primary/90"
                   >
-                    {t('topCenotes.viewTours')} <ArrowRight className="w-4 h-4 ml-2" />
+                    {t('topCenotes.viewTours')} <ExternalLink className="w-4 h-4 ml-2" />
                   </Button>
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reserva tu tour de cenotes - Viator affiliate CTA */}
+      <section className="py-14 bg-gradient-to-br from-cyan-50 to-teal-50 border-t border-cyan-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-cyan-100">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <Badge className="mb-3 bg-cyan-100 text-cyan-800 border-0">Tours Guiados</Badge>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Reserva tu tour de cenotes
+                </h2>
+                <p className="text-gray-600 leading-relaxed">
+                  Visita los mejores cenotes de Tulum con guías expertos. Incluye transporte, equipo de snorkel y acceso a múltiples cenotes en un solo día.
+                </p>
+                <ul className="mt-3 space-y-1 text-sm text-gray-500">
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Transporte incluido desde Tulum</li>
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Guía certificado en español e inglés</li>
+                  <li className="flex items-center gap-2"><span className="text-cyan-500">✓</span> Equipo de snorkel incluido</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-3 min-w-[200px]">
+                <Button
+                  size="lg"
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold"
+                  onClick={() => {
+                    const url = generateAffiliateLink(
+                      'https://www.viator.com/Tulum/d4254-ttd?q=cenote+tour',
+                      'viator',
+                      'cenotes_main_cta'
+                    );
+                    trackAffiliateClick('viator', 'Tour de Cenotes Tulum', '0', 'cenotes_cta');
+                    window.open(url, '_blank');
+                  }}
+                >
+                  Ver Tours de Cenotes <ExternalLink className="w-4 h-4 ml-2" />
+                </Button>
+                <p className="text-xs text-gray-400 text-center">Vía Viator — cancelación gratuita</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -245,6 +298,54 @@ export default function CenotesTulum() {
             <p className="text-lg text-gray-700 leading-relaxed">
               {t('howToGet.paragraph3')}
             </p>
+          </div>
+
+          {/* ¿Cómo llegar? — Transport affiliate CTAs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+            <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border border-teal-100">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">🚗</span>
+                <h3 className="font-bold text-gray-900">Renta un auto</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-4">
+                La forma más cómoda de visitar varios cenotes en un día. Recoge tu auto en Cancún o Tulum y explora a tu ritmo.
+              </p>
+              <Button
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white"
+                onClick={() => {
+                  trackAffiliateClick('discovercars', 'Renta auto cenotes Tulum', '0', 'cenotes_car_cta');
+                  window.open(generateCarRentalLink('Tulum'), '_blank');
+                }}
+              >
+                Buscar Autos <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+              <p className="text-xs text-gray-400 text-center mt-2">Vía DiscoverCars</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-2xl">🤿</span>
+                <h3 className="font-bold text-gray-900">Tour guiado todo incluido</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-4">
+                Sin preocupaciones: transporte, guía, equipo de snorkel y entrada a cenotes en un solo paquete.
+              </p>
+              <Button
+                className="w-full bg-cyan-600 hover:bg-cyan-700 text-white"
+                onClick={() => {
+                  const url = generateAffiliateLink(
+                    'https://www.viator.com/Tulum/d4254-ttd?q=cenote+tour+all+inclusive',
+                    'viator',
+                    'cenotes_guided_tour_cta'
+                  );
+                  trackAffiliateClick('viator', 'Tour guiado cenotes Tulum', '0', 'cenotes_guided_cta');
+                  window.open(url, '_blank');
+                }}
+              >
+                Ver Tours Guiados <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+              <p className="text-xs text-gray-400 text-center mt-2">Vía Viator</p>
+            </div>
           </div>
         </div>
       </section>
@@ -296,6 +397,8 @@ export default function CenotesTulum() {
           </div>
         </div>
       </section>
+
+      <CrossSell exclude={["experiencias"]} />
     </div>
   );
 }

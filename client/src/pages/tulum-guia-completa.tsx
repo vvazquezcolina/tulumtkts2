@@ -1,4 +1,5 @@
 import { useLocation } from "wouter";
+import { CrossSell } from "@/components/cross-sell";
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
@@ -276,6 +277,8 @@ export default function TulumGuiaCompleta() {
           </div>
         </div>
       </section>
+
+      <CrossSell exclude={[]} />
 
       {/* Footer con Enlaces Rápidos */}
       <section className="py-12 bg-gray-100">

@@ -40,6 +40,18 @@ export interface CSVActivity {
   descripcion_larga: string;
 }
 
+// Travelpayouts affiliate configuration
+const TRAVELPAYOUTS_MARKER = process.env.TRAVELPAYOUTS_MARKER || process.env.TRAVELPAYOUTS_API_TOKEN || '9a350c3ebd492165ade7135359165af9';
+const GYG_PROGRAM_ID = '2074'; // GetYourGuide program ID in Travelpayouts
+
+/**
+ * Wraps a target URL through Travelpayouts tp.media redirect for affiliate tracking.
+ */
+function buildTravelpayoutsUrl(targetUrl: string, activityId: string): string {
+  const encodedUrl = encodeURIComponent(targetUrl);
+  return `https://tp.media/r?marker=${TRAVELPAYOUTS_MARKER}&p=${GYG_PROGRAM_ID}&u=${encodedUrl}&campaign_id=activity_${activityId}`;
+}
+
 export function parseCSVActivities(): TravelpayoutsActivity[] {
   try {
     // Log environment info for debugging
@@ -186,10 +198,8 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
           longitude: -87.4286
         },
         categories: categories,
-        // Update affiliate URL with Travelpayouts affiliate marker
-        // Note: URLs from CSV are kept as they are, but we track clicks through Travelpayouts system
-        url: link_gyg.replace(/partner_id=[^&]*/, `partner_id=${process.env.TRAVELPAYOUTS_MARKER || process.env.TRAVELPAYOUTS_API_TOKEN || ''}`).replace(/cmp=[^&]*/, 'cmp=tulumtkts-travelpayouts'),
-        supplier: { name: 'Travelpayouts' },
+        url: buildTravelpayoutsUrl(link_gyg, activityId),
+        supplier: { name: 'TulumTkts' },
         bookable: true,
         instant_confirmation: true,
         free_cancellation: true

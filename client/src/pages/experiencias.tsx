@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, MapPin, Search, Filter, Star, Heart, Users, Camera } from "lucide-react";
 import { trackAffiliateClick } from "@/lib/affiliate";
 import { AffiliateBanner } from "@/components/ui/affiliate-banner";
+import { CrossSell } from "@/components/cross-sell";
 import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelpayouts";
 import { TravelpayoutsActivity } from "@/lib/travelpayouts";
 import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
@@ -489,6 +490,9 @@ export default function Experiencias() {
           ]} className="bg-white rounded-lg shadow-md p-6" />
         </div>
       </section>
+
+      {/* Cross-sell */}
+      <CrossSell exclude={["experiencias"]} />
     </div>
   );
 }

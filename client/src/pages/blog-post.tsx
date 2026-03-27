@@ -2,7 +2,8 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, Eye, ArrowLeft, Link2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Calendar, Clock, User, Eye, ArrowLeft, Link2, Plane, Hotel, Compass, Car, ArrowRight, Mail } from "lucide-react";
 import { Navigation } from "@/components/ui/navigation";
 import { getBlogPostBySlug, allBlogPosts } from "@/data/blogPosts";
 import { BlogImage } from "@/components/blog-image";
@@ -10,8 +11,263 @@ import { SEOHead } from "@/components/seo-head";
 import { ArticleSchema, BreadcrumbSchema } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { OrganizationSchema } from "@/components/organization-schema";
+import { CrossSell } from "@/components/cross-sell";
+import { generateFlightLink, generateHotelLink, generateAffiliateLink, generateCarRentalLink, generateTransferLink, trackAffiliateClick } from "@/lib/affiliate";
 
-// Old blog posts data (kept for backward compatibility if needed)
+// ─── Contextual affiliate CTA ────────────────────────────────────────────────
+
+interface CTAConfig {
+  icon: React.ElementType;
+  title: string;
+  pitch: string;
+  buttonText: string;
+  link: string;
+  trackKey: string;
+}
+
+function getCtaConfig(keywords: string[], category: string): CTAConfig {
+  const text = [...keywords, category].join(" ").toLowerCase();
+
+  if (text.includes("cenote") || text.includes("tour") || text.includes("aventura") || text.includes("actividad") || text.includes("snorkel") || text.includes("buceo")) {
+    return {
+      icon: Compass,
+      title: "Reserva tu tour de cenotes",
+      pitch: "Explora los cenotes más espectaculares de Tulum con guías expertos. ¡Tours desde $11 USD!",
+      buttonText: "Ver tours disponibles",
+      link: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_activities_cta"),
+      trackKey: "blog_activities",
+    };
+  }
+
+  if (text.includes("hotel") || text.includes("hospedaje") || text.includes("alojamiento") || text.includes("hostel") || text.includes("resort") || text.includes("villa")) {
+    return {
+      icon: Hotel,
+      title: "Encuentra tu hotel ideal en Tulum",
+      pitch: "Hoteles con cancelación gratuita desde $50/noche. Compara precios y reserva al instante.",
+      buttonText: "Buscar hoteles",
+      link: generateHotelLink("Tulum"),
+      trackKey: "blog_hotels",
+    };
+  }
+
+  if (text.includes("vuelo") || text.includes("viajar") || text.includes("llegar") || text.includes("flight") || text.includes("aeropuerto") || text.includes("avion") || text.includes("cancun")) {
+    return {
+      icon: Plane,
+      title: "Vuelos baratos a Cancún",
+      pitch: "Compara cientos de aerolíneas y encuentra el mejor precio para tu vuelo a Cancún (CUN).",
+      buttonText: "Buscar vuelos",
+      link: generateFlightLink("MEX", "CUN"),
+      trackKey: "blog_flights",
+    };
+  }
+
+  if (text.includes("transporte") || text.includes("transfer") || text.includes("traslado") || text.includes("taxi") || text.includes("bus") || text.includes("ado")) {
+    return {
+      icon: Car,
+      title: "Transfer privado aeropuerto → Tulum",
+      pitch: "Traslado cómodo y seguro desde el Aeropuerto de Cancún hasta Tulum. Reserva con anticipación.",
+      buttonText: "Reservar transfer",
+      link: generateTransferLink("Cancun Airport", "Tulum"),
+      trackKey: "blog_transfers",
+    };
+  }
+
+  // Default
+  return {
+    icon: Plane,
+    title: "Planifica tu viaje a Tulum",
+    pitch: "Encuentra los mejores vuelos a Cancún y empieza a vivir la magia de Tulum.",
+    buttonText: "Buscar vuelos baratos",
+    link: generateFlightLink("MEX", "CUN"),
+    trackKey: "blog_default",
+  };
+}
+
+interface BlogAffiliateCTAProps {
+  keywords: string[];
+  category: string;
+}
+
+function BlogAffiliateCTA({ keywords, category }: BlogAffiliateCTAProps) {
+  const config = getCtaConfig(keywords, category);
+  const Icon = config.icon;
+
+  const handleClick = () => {
+    trackAffiliateClick(config.trackKey, config.title, "0", "blog_inline");
+    window.open(config.link, "_blank", "noopener");
+  };
+
+  return (
+    <div className="my-8 not-prose">
+      <Card className="border-l-4 border-l-teal-500 border border-teal-100 bg-gradient-to-r from-teal-50 to-cyan-50 shadow-md rounded-xl overflow-hidden">
+        <CardContent className="p-5 sm:p-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
+              <Icon className="w-6 h-6 text-teal-600" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-0.5">
+                Recomendado
+              </p>
+              <h4 className="text-lg font-bold text-gray-900 mb-1">
+                {config.title}
+              </h4>
+              <p className="text-sm text-gray-600">
+                {config.pitch}
+              </p>
+            </div>
+            <Button
+              onClick={handleClick}
+              className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg px-5 py-2.5 text-sm font-semibold shrink-0 transition-colors"
+            >
+              {config.buttonText}
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Bottom sidebar / trip CTA ───────────────────────────────────────────────
+
+function BlogTripCTA() {
+  const links = [
+    {
+      icon: Plane,
+      label: "Buscar vuelos",
+      sub: "Desde $120 USD ida y vuelta",
+      href: generateFlightLink("MEX", "CUN"),
+      track: "blog_trip_flights",
+    },
+    {
+      icon: Hotel,
+      label: "Reservar hotel",
+      sub: "Desde $50/noche en Tulum",
+      href: generateHotelLink("Tulum"),
+      track: "blog_trip_hotels",
+    },
+    {
+      icon: Compass,
+      label: "Ver actividades",
+      sub: "Tours y cenotes desde $11 USD",
+      href: generateAffiliateLink("https://www.viator.com/Tulum/d5397", "viator", "blog_trip_activities"),
+      track: "blog_trip_activities",
+    },
+  ];
+
+  const handleClick = (href: string, track: string, label: string) => {
+    trackAffiliateClick(track, label, "0", "blog_trip_cta");
+    window.open(href, "_blank", "noopener");
+  };
+
+  return (
+    <Card className="border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl shadow-md mt-12">
+      <CardContent className="p-6 md:p-8">
+        <h3 className="text-xl font-bold text-gray-900 mb-1">
+          Planifica tu viaje a Tulum
+        </h3>
+        <p className="text-sm text-gray-500 mb-5">
+          Todo lo que necesitas para un viaje perfecto, en un solo lugar.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {links.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.track}
+                onClick={() => handleClick(item.href, item.track, item.label)}
+                className="flex items-center gap-3 p-4 bg-white rounded-lg hover:shadow-md border border-teal-100 hover:border-teal-300 transition-all text-left group"
+              >
+                <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-teal-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900 text-sm group-hover:text-teal-700 transition-colors">
+                    {item.label}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">{item.sub}</p>
+                </div>
+                <ArrowRight className="w-4 h-4 text-teal-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+              </button>
+            );
+          })}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// ─── Newsletter CTA ──────────────────────────────────────────────────────────
+
+function NewsletterCTA() {
+  return (
+    <div className="my-10">
+      <Card className="bg-gradient-to-r from-teal-600 to-cyan-600 border-0 rounded-xl shadow-lg">
+        <CardContent className="p-6 md:p-8 text-center">
+          <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+            <Mail className="w-6 h-6 text-white" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">
+            Recibe guías exclusivas de Tulum
+          </h3>
+          <p className="text-teal-100 text-sm mb-5 max-w-md mx-auto">
+            Suscríbete y recibe consejos de viaje, ofertas en hoteles y actividades, y guías actualizadas directo en tu email.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-sm mx-auto">
+            <Input
+              type="email"
+              placeholder="tu@email.com"
+              className="flex-1 bg-white border-0 text-gray-900 placeholder:text-gray-400"
+            />
+            <Button className="bg-white text-teal-700 hover:bg-teal-50 font-semibold px-6 transition-colors">
+              Suscribirse
+            </Button>
+          </div>
+          <p className="text-xs text-teal-200 mt-3">Sin spam. Cancela cuando quieras.</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+// ─── Content renderer that injects inline CTA after 2nd–3rd paragraph ────────
+
+interface BlogContentProps {
+  html: string;
+  keywords: string[];
+  category: string;
+}
+
+function BlogContent({ html, keywords, category }: BlogContentProps) {
+  // Split the HTML on closing paragraph tags so we can inject the CTA
+  const parts = html.split(/(?<=<\/p>)/i);
+
+  // Find the injection point (after 2nd or 3rd </p> tag)
+  const injectionIndex = Math.min(3, Math.max(2, Math.floor(parts.length / 4)));
+
+  const before = parts.slice(0, injectionIndex).join("");
+  const after = parts.slice(injectionIndex).join("");
+
+  return (
+    <>
+      <div
+        className="text-gray-700 leading-relaxed space-y-4 blog-content"
+        dangerouslySetInnerHTML={{ __html: before }}
+        itemProp="articleBody"
+      />
+      <BlogAffiliateCTA keywords={keywords} category={category} />
+      <div
+        className="text-gray-700 leading-relaxed space-y-4 blog-content"
+        dangerouslySetInnerHTML={{ __html: after }}
+      />
+    </>
+  );
+}
+
+// ─── Old blog posts data (kept for backward compatibility) ───────────────────
+
 const oldBlogPosts: Record<string, {
   id: string;
   title: string;
@@ -131,11 +387,12 @@ const oldBlogPosts: Record<string, {
   }
 };
 
+// ─── Main page component ─────────────────────────────────────────────────────
+
 export default function BlogPost() {
   const [, setLocation] = useLocation();
   const [, params] = useRoute<{ slug: string }>("/blog/:slug");
-  
-  // Get post slug from route params
+
   const postSlug = params?.slug || '';
   const post = getBlogPostBySlug(postSlug);
 
@@ -157,11 +414,10 @@ export default function BlogPost() {
 
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
   const canonicalUrl = `${siteUrl}/blog/${post.slug}`;
-  
-  // Get related posts (same category or same keywords)
+
   const relatedPosts = allBlogPosts
     .filter(p => p.id !== post.id && (
-      p.category === post.category || 
+      p.category === post.category ||
       p.keywords.some(k => post.keywords.includes(k))
     ))
     .slice(0, 3);
@@ -200,13 +456,13 @@ export default function BlogPost() {
           { name: post.title, url: `/blog/${post.slug}` },
         ]}
       />
-      <OrganizationSchema 
+      <OrganizationSchema
         name="TulumTkts"
         url={siteUrl}
         description="Guías de viaje y blog sobre Tulum, México."
       />
       <Navigation />
-      
+
       {/* Breadcrumbs */}
       <div className="max-w-4xl mx-auto px-4 pt-8">
         <Breadcrumbs
@@ -217,11 +473,11 @@ export default function BlogPost() {
           ]}
         />
       </div>
-      
+
       {/* Back Button */}
       <div className="max-w-4xl mx-auto px-4">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           onClick={() => setLocation('/blog')}
           className="mb-4"
         >
@@ -246,7 +502,7 @@ export default function BlogPost() {
       </div>
 
       {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-4 pb-16">
+      <article className="max-w-4xl mx-auto px-4 pb-8">
         <Card className="border-0 shadow-lg">
           <CardContent className="p-8 md:p-12">
             {/* Header */}
@@ -261,11 +517,11 @@ export default function BlogPost() {
                   </Badge>
                 )}
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 {post.title}
               </h1>
-              
+
               <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
                 <div className="flex items-center">
                   <User className="w-4 h-4 mr-2" />
@@ -273,10 +529,10 @@ export default function BlogPost() {
                 </div>
                 <div className="flex items-center">
                   <Calendar className="w-4 h-4 mr-2" />
-                  <span>{new Date(post.publishDate).toLocaleDateString('es-ES', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
+                  <span>{new Date(post.publishDate).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                   })}</span>
                 </div>
                 <div className="flex items-center">
@@ -290,25 +546,28 @@ export default function BlogPost() {
               </div>
             </div>
 
-            {/* Content */}
+            {/* Content with inline CTA injected */}
             <article className="prose prose-lg max-w-none">
               <p className="text-xl text-gray-700 mb-6 font-medium" role="doc-subtitle">
                 {post.excerpt}
               </p>
-              
-              <div 
-                className="text-gray-700 leading-relaxed space-y-4 blog-content"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-                itemProp="articleBody"
+
+              <BlogContent
+                html={post.content}
+                keywords={post.keywords}
+                category={post.category}
               />
             </article>
+
+            {/* Bottom trip planning CTA */}
+            <BlogTripCTA />
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Compartir este artículo</h3>
               <div className="flex gap-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => {
                     const url = encodeURIComponent(canonicalUrl);
@@ -318,8 +577,8 @@ export default function BlogPost() {
                 >
                   Facebook
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => {
                     const url = encodeURIComponent(canonicalUrl);
@@ -329,8 +588,8 @@ export default function BlogPost() {
                 >
                   Twitter
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => {
                     const url = encodeURIComponent(canonicalUrl);
@@ -340,8 +599,8 @@ export default function BlogPost() {
                 >
                   WhatsApp
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => {
                     navigator.clipboard.writeText(canonicalUrl);
@@ -359,7 +618,7 @@ export default function BlogPost() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Artículos Relacionados</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedPosts.map((relatedPost) => (
-                    <Card 
+                    <Card
                       key={relatedPost.id}
                       className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
                       onClick={() => setLocation(`/blog/${relatedPost.slug}`)}
@@ -381,8 +640,8 @@ export default function BlogPost() {
                         <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                           {relatedPost.excerpt}
                         </p>
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="sm"
                           className="w-full text-primary text-sm"
                           onClick={(e) => {
@@ -401,7 +660,14 @@ export default function BlogPost() {
           </CardContent>
         </Card>
       </article>
+
+      {/* Newsletter CTA */}
+      <div className="max-w-4xl mx-auto px-4 pb-8">
+        <NewsletterCTA />
+      </div>
+
+      {/* CrossSell */}
+      <CrossSell title="Completa tu viaje a Tulum" />
     </div>
   );
 }
-

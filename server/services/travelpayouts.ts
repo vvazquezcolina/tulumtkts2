@@ -101,34 +101,23 @@ class TravelpayoutsService {
     this.marker = process.env.TRAVELPAYOUTS_MARKER || this.token;
   }
 
-  // Generate affiliate URL for flights
+  // Generate affiliate URL for flights via tp.media redirect
   generateFlightAffiliateUrl(origin: string, destination: string, departureDate?: string, returnDate?: string): string {
-    const baseUrl = 'https://www.aviasales.com';
-    let url = `${baseUrl}/search/${origin}${departureDate ? departureDate : ''}${destination}${returnDate ? returnDate : ''}`;
-    url += `?marker=${this.marker}`;
-    url += '&utm_source=tulumtkts&utm_medium=affiliate&utm_campaign=tulum_flights';
-    return url;
+    const searchUrl = `https://www.aviasales.com/search/${origin}${departureDate || ''}${destination}${returnDate || ''}`;
+    const encoded = encodeURIComponent(searchUrl);
+    return `https://tp.media/r?marker=${this.marker}&p=4114&u=${encoded}&campaign_id=flights_${origin}_${destination}`;
   }
 
-  // Generate affiliate URL for hotels
+  // Generate affiliate URL for hotels via tp.media redirect
   generateHotelAffiliateUrl(location: string, checkIn?: string, checkOut?: string, hotelId?: string): string {
-    const baseUrl = 'https://www.hotellook.com';
-    let url = `${baseUrl}/hotels/${location}`;
     const params = new URLSearchParams();
-    
     if (checkIn) params.set('checkIn', checkIn);
     if (checkOut) params.set('checkOut', checkOut);
     if (hotelId) params.set('hotelId', hotelId);
-    params.set('marker', this.marker);
-    params.set('utm_source', 'tulumtkts');
-    params.set('utm_medium', 'affiliate');
-    params.set('utm_campaign', 'tulum_hotels');
-    
-    const queryString = params.toString();
-    if (queryString) {
-      url += `?${queryString}`;
-    }
-    return url;
+    const query = params.toString();
+    const searchUrl = `https://www.hotellook.com/hotels/${location}${query ? '?' + query : ''}`;
+    const encoded = encodeURIComponent(searchUrl);
+    return `https://tp.media/r?marker=${this.marker}&p=4110&u=${encoded}&campaign_id=hotels_${location}`;
   }
 
   // Search hotels using Hotellook API
@@ -267,19 +256,10 @@ class TravelpayoutsService {
     }
   }
 
-  // Generate affiliate URL for activities/tours
-  // Note: Activities come from CSV with affiliate URLs, which we track through Travelpayouts system
-  generateActivityAffiliateUrl(activityId?: string, destination: string = 'tulum'): string {
-    // For activities, we use the URLs from the CSV but track clicks through Travelpayouts
-    // This is a fallback - the CSV parser should provide the URLs directly
-    const baseUrl = 'https://www.travelpayouts.com';
-    let url = `${baseUrl}/search?destination=${destination}`;
-    if (activityId) {
-      url += `&activity=${activityId}`;
-    }
-    url += `&marker=${this.marker}`;
-    url += '&utm_source=tulumtkts&utm_medium=affiliate&utm_campaign=tulum_experiences';
-    return url;
+  // Generate affiliate URL for activities/tours via tp.media redirect
+  generateActivityAffiliateUrl(targetUrl: string): string {
+    const encoded = encodeURIComponent(targetUrl);
+    return `https://tp.media/r?marker=${this.marker}&p=2074&u=${encoded}`;
   }
 
   // Search flights
@@ -554,279 +534,6 @@ class TravelpayoutsService {
       console.error('Error fetching activity details from CSV:', error);
       return null;
     }
-  }
-
-  // DEPRECATED: This fallback should not be used. CSV parser should always work.
-  // Keeping for reference only - should return empty instead
-  private getRealTulumData(options: any): ActivitiesResponse {
-    const realActivities: TravelpayoutsActivity[] = [
-      // 🏛️ ARQUEOLOGÍA Y CULTURA
-      {
-        activity_id: 'tp-814206',
-        title: 'Tulum: Zona Arqueológica – tour guiado a pie',
-        abstract: 'Tour guiado por la Zona Arqueológica de Tulum con guías locales certificados.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/040b67511d57d3ab541d9e3cae988cfa8e1a24d1314da47630a1ebc58c478176.png',
-        rating: 4.7,
-        number_of_ratings: 1847,
-        price: {
-          values: [{ amount: 32, currency: 'USD' }]
-        },
-        duration: '3 horas',
-        location: { name: 'Tulum, Quintana Roo, Mexico', latitude: 20.2114, longitude: -87.4286 },
-        categories: ['arqueologia', 'cultura', 'historia'],
-        url: this.generateActivityAffiliateUrl('tp-814206'),
-        supplier: { name: 'Travelpayouts' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      {
-        activity_id: 'tp-529582',
-        title: 'Coba: Ruinas + Cenote (desde Tulum)',
-        abstract: 'Excursión a Cobá con subida a estructuras y nado en cenote cercano.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/040b67511d57d3ab541d9e3cae988cfa8e1a24d1314da47630a1ebc58c478176.png',
-        rating: 4.8,
-        number_of_ratings: 1456,
-        price: {
-          values: [{ amount: 175, currency: 'USD' }]
-        },
-        duration: '8 horas',
-        location: { name: 'Cobá desde Tulum', latitude: 20.2242, longitude: -87.3478 },
-        categories: ['arqueologia', 'cenotes', 'aventura'],
-        url: this.generateActivityAffiliateUrl('tp-529582'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      {
-        activity_id: 'tp-599923',
-        title: 'Ek Balam + cenote Xcanché',
-        abstract: 'Acrópolis monumental y nado en cenote cercano.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/040b67511d57d3ab541d9e3cae988cfa8e1a24d1314da47630a1ebc58c478176.png',
-        rating: 4.6,
-        number_of_ratings: 987,
-        price: {
-          values: [{ amount: 140, currency: 'USD' }]
-        },
-        duration: '10 horas',
-        location: { name: 'Ek Balam desde Tulum', latitude: 20.2114, longitude: -87.4286 },
-        categories: ['arqueologia', 'cenotes', 'cultura'],
-        url: this.generateActivityAffiliateUrl('tp-599923'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // 🏊 CENOTES Y LAGUNAS
-      {
-        activity_id: 'tp-697964',
-        title: 'Tulum: Tour guiado Cenotes Casa Tortuga (entrada básica)',
-        abstract: 'Visita guiada a 4 cenotes en Casa Tortuga: 2 semiabiertos y 2 abiertos.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/b6cc7d2dea6e6fc9b9f596168245a3f0ee4ea5defce1b1f133d293c85383fc58.jpeg',
-        rating: 4.6,
-        number_of_ratings: 987,
-        price: {
-          values: [{ amount: 11, currency: 'USD' }]
-        },
-        duration: '4 horas',
-        location: { name: 'Tulum, Mexico', latitude: 20.2114, longitude: -87.4286 },
-        categories: ['cenotes', 'aventura', 'naturaleza'],
-        url: this.generateActivityAffiliateUrl('tp-697964'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      {
-        activity_id: 'tp-751044',
-        title: 'Tulum: Laguna Kaan Luum + 3 Cenotes',
-        abstract: 'Combo de naturaleza: laguna Kaan Luum y 3 cenotes icónicos.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/b6cc7d2dea6e6fc9b9f596168245a3f0ee4ea5defce1b1f133d293c85383fc58.jpeg',
-        rating: 4.9,
-        number_of_ratings: 743,
-        price: {
-          values: [{ amount: 137, currency: 'USD' }]
-        },
-        duration: '8 horas',
-        location: { name: 'Laguna Kaan Luum, Tulum', latitude: 20.0947, longitude: -87.6336 },
-        categories: ['cenotes', 'lagunas', 'naturaleza'],
-        url: this.generateActivityAffiliateUrl('tp-751044'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      {
-        activity_id: 'tp-828977',
-        title: 'Cenote Dos Ojos: entrada / tour',
-        abstract: 'Sistema de cuevas con tonos azules; ideal para fotos y snorkel.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/b6cc7d2dea6e6fc9b9f596168245a3f0ee4ea5defce1b1f133d293c85383fc58.jpeg',
-        rating: 4.7,
-        number_of_ratings: 1234,
-        price: {
-          values: [{ amount: 108, currency: 'USD' }]
-        },
-        duration: '4 horas',
-        location: { name: 'Cenote Dos Ojos, Tulum', latitude: 20.0947, longitude: -87.6336 },
-        categories: ['cenotes', 'snorkel', 'fotografia'],
-        url: this.generateActivityAffiliateUrl('tp-828977'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // 🤿 SNORKEL Y BUCEO
-      {
-        activity_id: 'tp-600898',
-        title: 'Tulum: Snorkel en 2 puntos del Arrecife (2h)',
-        abstract: 'Salida en lancha para snorkelear en dos puntos del arrecife dentro del Parque Nacional.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/d1a32888cdfe62a2c31b1f79d735a604f16d5e2457cc3ad816987893f4af12b3.png',
-        rating: 4.8,
-        number_of_ratings: 2156,
-        price: {
-          values: [{ amount: 47, currency: 'USD' }]
-        },
-        duration: '2 horas',
-        location: { name: 'Arrecife de Tulum', latitude: 20.1947, longitude: -87.4661 },
-        categories: ['snorkel', 'arrecife', 'marino'],
-        url: this.generateActivityAffiliateUrl('tp-600898'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      {
-        activity_id: 'tp-832301',
-        title: 'Yal-Kú: snorkel laguna',
-        abstract: 'Estuario con peces tropicales, ideal para principiantes.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/d1a32888cdfe62a2c31b1f79d735a604f16d5e2457cc3ad816987893f4af12b3.png',
-        rating: 4.5,
-        number_of_ratings: 654,
-        price: {
-          values: [{ amount: 81, currency: 'USD' }]
-        },
-        duration: '3 horas',
-        location: { name: 'Yal-Kú, Akumal', latitude: 20.3956, longitude: -87.3156 },
-        categories: ['snorkel', 'laguna', 'principiantes'],
-        url: this.generateActivityAffiliateUrl('tp-832301'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // ⛵ NAVEGACIÓN Y CATAMARANES
-      {
-        activity_id: 'tp-486480',
-        title: 'Tulum: Velero de lujo medio día con barra libre',
-        abstract: 'Experiencia premium en catamarán con barra libre, snorkel y paddle.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/64ab70608e0d3.jpeg',
-        rating: 4.5,
-        number_of_ratings: 987,
-        price: {
-          values: [{ amount: 149, currency: 'USD' }]
-        },
-        duration: '4 horas',
-        location: { name: 'Costa de Tulum', latitude: 20.1947, longitude: -87.4661 },
-        categories: ['catamaran', 'lujo', 'snorkel'],
-        url: this.generateActivityAffiliateUrl('tp-486480'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // 🌿 AVENTURA EN LA SELVA
-      {
-        activity_id: 'tp-354206',
-        title: 'Tulum: ATV + Cenote + Tirolesas + Rappel',
-        abstract: 'Aventura en la selva: ATV, rappel, tirolesas y cenote.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/d1a32888cdfe62a2c31b1f79d735a604f16d5e2457cc3ad816987893f4af12b3.png',
-        rating: 4.6,
-        number_of_ratings: 1876,
-        price: {
-          values: [{ amount: 89, currency: 'USD' }]
-        },
-        duration: '6 horas',
-        location: { name: 'Selva Maya, Tulum', latitude: 20.2114, longitude: -87.4286 },
-        categories: ['aventura', 'atv', 'tirolesas'],
-        url: this.generateActivityAffiliateUrl('tp-354206'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // 🏞️ PARQUES Y RESERVAS
-      {
-        activity_id: 'tp-671649',
-        title: 'Sian Ka\'an: Reserva y canales mayas (Muyil)',
-        abstract: 'Reserva de Sian Ka\'an: paseo en lancha y flotado por canales mayas.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/95b79a985cd5308e65c9e812033d12d973469cc5c943d69bcea208a5e0f50430.jpg',
-        rating: 4.9,
-        number_of_ratings: 743,
-        price: {
-          values: [{ amount: 160, currency: 'USD' }]
-        },
-        duration: '8 horas',
-        location: { name: 'Sian Ka\'an, Tulum', latitude: 20.0947, longitude: -87.6336 },
-        categories: ['reserva', 'naturaleza', 'eco-tour'],
-        url: this.generateActivityAffiliateUrl('tp-671649'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      },
-      // 🍽️ GASTRONOMÍA Y CIUDAD
-      {
-        activity_id: 'tp-150560',
-        title: 'Tulum Bike Tour',
-        abstract: 'City tour en bici por playas, arte y spots foodie.',
-        image_url: 'https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcontain%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D1440%2Cheight%3D650%2Cdpr%3D1/tour_img/040b67511d57d3ab541d9e3cae988cfa8e1a24d1314da47630a1ebc58c478176.png',
-        rating: 4.7,
-        number_of_ratings: 1234,
-        price: {
-          values: [{ amount: 95, currency: 'USD' }]
-        },
-        duration: '4 horas',
-        location: { name: 'Tulum Centro', latitude: 20.2114, longitude: -87.4286 },
-        categories: ['ciudad', 'bicicleta', 'gastronomia'],
-        url: this.generateActivityAffiliateUrl('tp-150560'),
-        supplier: { name: 'Travelpayouts Partner' },
-        bookable: true,
-        instant_confirmation: true,
-        free_cancellation: true
-      }
-    ];
-
-    // Apply filtering based on options
-    let filteredActivities = [...realActivities];
-    
-    if (options.category) {
-      filteredActivities = filteredActivities.filter(activity => 
-        activity.categories.includes(options.category)
-      );
-    }
-
-    // Apply sorting
-    if (options.sort_by === 'rating') {
-      filteredActivities.sort((a, b) => b.rating - a.rating);
-    } else if (options.sort_by === 'price') {
-      filteredActivities.sort((a, b) => a.price.values[0].amount - b.price.values[0].amount);
-    }
-
-    // Pagination
-    const page = options.page || 1;
-    const perPage = options.per_page || 10;
-    const startIndex = (page - 1) * perPage;
-    const paginatedResults = filteredActivities.slice(startIndex, startIndex + perPage);
-
-    return {
-      data: paginatedResults,
-      meta: {
-        total_count: filteredActivities.length,
-        page: page,
-        per_page: perPage
-      }
-    };
   }
 
   // Check if API is properly configured

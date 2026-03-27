@@ -5,6 +5,8 @@ import eventosTranslations from './eventos';
 import villasTranslations from './villas';
 import transporteTranslations from './transporte';
 import contactoTranslations from './contacto';
+import vuelosTranslations from './vuelos';
+import hotelesTranslations from './hoteles';
 import { cenotesTulum } from './cenotes-tulum';
 import { tulumGuiaCompleta } from './tulum-guia-completa';
 
@@ -16,6 +18,8 @@ export default {
     villas: villasTranslations.es,
     transporte: transporteTranslations.es,
     contacto: contactoTranslations.es,
+    vuelos: vuelosTranslations.es,
+    hoteles: hotelesTranslations.es,
     cenotesTulum: cenotesTulum.es,
     tulumGuiaCompleta: tulumGuiaCompleta.es,
   },
@@ -26,6 +30,8 @@ export default {
     villas: villasTranslations.en,
     transporte: transporteTranslations.en,
     contacto: contactoTranslations.en,
+    vuelos: vuelosTranslations.en,
+    hoteles: hotelesTranslations.en,
     cenotesTulum: cenotesTulum.en,
     tulumGuiaCompleta: tulumGuiaCompleta.en,
   },
@@ -36,6 +42,8 @@ export default {
     villas: villasTranslations.fr,
     transporte: transporteTranslations.fr,
     contacto: contactoTranslations.fr,
+    vuelos: vuelosTranslations.fr,
+    hoteles: hotelesTranslations.fr,
     cenotesTulum: cenotesTulum.fr,
     tulumGuiaCompleta: tulumGuiaCompleta.fr,
   },
@@ -46,6 +54,8 @@ export default {
     villas: villasTranslations.it,
     transporte: transporteTranslations.it,
     contacto: contactoTranslations.it,
+    vuelos: vuelosTranslations.it,
+    hoteles: hotelesTranslations.it,
     cenotesTulum: cenotesTulum.it,
     tulumGuiaCompleta: tulumGuiaCompleta.it,
   },
