@@ -631,6 +631,102 @@ export default {
         subtitle: 'Todo lo que necesitas saber antes de instalarte a trabajar desde Tulum.',
       },
     },
+    bodas: {
+      seo: {
+        title: 'Bodas en Tulum - Guía Completa para tu Boda en la Playa | TulumTkts',
+        description: 'Planifica tu boda o luna de miel en Tulum. Venues, presupuesto, experiencias románticas y todo lo que necesitas.',
+      },
+      hero: {
+        badge: 'Bodas & Luna de Miel',
+        title: 'Tu Boda Soñada en Tulum',
+        subtitle: 'Ceremonia frente al mar, cena bajo las estrellas y el paraíso caribeño como telón de fondo.',
+      },
+      sections: {
+        whyTulum: {
+          title: '¿Por Qué Casarse en Tulum?',
+          subtitle: 'Tulum es el destino perfecto para bodas de ensueño.',
+        },
+        venues: {
+          title: 'Venues para Bodas',
+          subtitle: 'Los mejores lugares para tu ceremonia y recepción.',
+        },
+        honeymoon: {
+          title: 'Experiencias de Luna de Miel',
+          subtitle: 'Momentos románticos que nunca olvidarán.',
+        },
+        budget: {
+          title: 'Presupuesto de Boda',
+          subtitle: 'Rangos de precios para diferentes tamaños de boda.',
+        },
+        faq: {
+          title: 'Preguntas Frecuentes',
+          subtitle: 'Todo sobre bodas en Tulum.',
+        },
+      },
+      labels: {
+        capacity: 'Capacidad',
+        priceRange: 'Rango de Precio',
+        style: 'Estilo',
+        viewVenue: 'Ver Venue',
+        bookNow: 'Reservar',
+        crossSellTitle: 'Planifica tu Viaje de Bodas',
+      },
+    },
+    buceo: {
+      seo: { title: 'Buceo y Snorkel en Tulum - Guía Completa 2026 | TulumTkts', description: 'Descubre los mejores sitios de buceo y snorkel en Tulum: arrecifes, cenotes y más.' },
+      breadcrumbs: { home: 'Inicio', guide: 'Guía Tulum', current: 'Buceo & Snorkel' },
+      hero: { badge: 'Buceo & Snorkel 2026', title: 'Buceo y Snorkel en Tulum', subtitle: 'Explora el segundo arrecife más grande del mundo y los cenotes cristalinos de la Riviera Maya.' },
+      stats: { sites: '6+ Sitios de Buceo', visibility: 'Visibilidad 30m+', season: 'Todo el año' },
+      sections: {
+        diveSites: { title: 'Mejores Sitios de Buceo', subtitle: 'Los spots más espectaculares para sumergirte.' },
+        types: { title: 'Tipos de Experiencia', subtitle: 'Desde snorkel para principiantes hasta buceo en cavernas.' },
+        certifications: { title: 'Certificaciones PADI & SSI', subtitle: 'Obtén tu licencia de buceo en el paraíso.' },
+        tips: { title: 'Equipo y Consejos', subtitle: 'Todo lo que necesitas saber antes de sumergirte.' },
+        season: { title: 'Mejor Temporada', subtitle: 'Cuándo es el mejor momento para bucear en Tulum.' },
+        faq: { title: 'Preguntas Frecuentes', subtitle: 'Todo sobre buceo y snorkel en Tulum.' },
+      },
+      labels: { depth: 'Profundidad', level: 'Nivel', type: 'Tipo', highlights: 'Destacados', bookDive: 'Reservar Inmersión', crossSellTitle: 'Completa tu Aventura Acuática' },
+      types: {
+        snorkeling: { title: 'Snorkel', description: 'Explora los arrecifes de coral y cenotes desde la superficie. Perfecto para todas las edades, sin certificación requerida. Equipo incluido en la mayoría de los tours.', badge: 'Sin certificación', price: 'Desde $30 USD', icon: 'waves' },
+        openWater: { title: 'Buceo Open Water', description: 'Sumérgete en el Gran Arrecife Mesoamericano con guías certificados. Ideal para buceadores certificados Open Water y superiores.', badge: 'Certificación requerida', price: 'Desde $65 USD', icon: 'anchor' },
+        cenoteDiving: { title: 'Buceo en Cenotes', description: 'Desciende a los misterios del inframundo maya. Los cenotes de Tulum ofrecen visibilidad cristalina, estalactitas y la famosa nube de ácido sulfhídrico en Angelita.', badge: 'Experiencia única', price: 'Desde $80 USD', icon: 'droplet' },
+        nightDiving: { title: 'Buceo Nocturno', description: 'Descubre la vida marina que despierta al caer el sol. Pulpos, rayas, cangrejos y corales nocturnos en una inmersión completamente diferente.', badge: 'Avanzado', price: 'Desde $90 USD', icon: 'moon' },
+      },
+      certifications: {
+        intro: 'Tulum es uno de los mejores lugares del mundo para obtener tu certificación de buceo. Aguas cálidas, visibilidad excepcional y una gran variedad de ecosistemas hacen del aprendizaje una experiencia extraordinaria.',
+        courses: [
+          { name: 'Discover Scuba (DSD)', duration: '1 día', price: '$70–$100 USD', description: 'Prueba el buceo sin compromisos. Inmersión supervisada sin certificación previa.' },
+          { name: 'Open Water Diver', duration: '3–4 días', price: '$350–$450 USD', description: 'La certificación básica internacional. Bucea hasta 18m en cualquier lugar del mundo.' },
+          { name: 'Advanced Open Water', duration: '2–3 días', price: '$280–$380 USD', description: 'Amplía tus habilidades: navegación, profundidad, flotabilidad y más.' },
+          { name: 'Rescue Diver', duration: '3–4 días', price: '$350–$480 USD', description: 'Aprende a responder en situaciones de emergencia bajo el agua.' },
+          { name: 'Cavern Diver', duration: '2 días', price: '$400–$550 USD', description: 'Especialidad para explorar las entradas de cuevas con luz natural en cenotes.' },
+          { name: 'Cave Diver', duration: '4–5 días', price: '$600–$900 USD', description: 'El pináculo del buceo en cenotes. Explora los laberintos subacuáneos de Tulum.' },
+        ],
+      },
+      tips: {
+        bring: { title: '¿Qué llevar?', items: ['Traje de baño', 'Toalla de microfibra', 'Protector solar biodegradable', 'Cámara acuática / GoPro', 'Efectivo (USD o MXN)', 'Certificación de buceo (si aplica)'] },
+        provided: { title: '¿Qué incluye el tour?', items: ['Equipo completo de snorkel o buceo', 'Traje de neopreno (cenotes)', 'Guía certificado', 'Transporte desde Tulum (en la mayoría)', 'Seguro básico de actividad'] },
+        warnings: { title: 'Importante', items: ['No uses protector solar convencional en cenotes', 'Respeta la vida marina — no toques los corales', 'Reserva con al menos 24h de antelación en temporada alta', 'Hidratación: bebe agua antes y después de bucear'] },
+      },
+      season: {
+        intro: 'Tulum ofrece buenas condiciones para bucear y hacer snorkel durante todo el año, pero hay períodos óptimos según lo que busques.',
+        months: [
+          { period: 'Nov – Abr', title: 'Temporada Alta', description: 'Clima seco, aguas calmas y máxima visibilidad. La mejor época para snorkel y buceo en arrecifes. Los cenotes alcanzan su temperatura ideal (24–26°C).', rating: 5, badge: 'Mejor época' },
+          { period: 'May – Jun', title: 'Transición', description: 'Antes de las lluvias. Temperaturas más cálidas, menos turistas. Buena visibilidad en cenotes. Ideal para buceo en arrecifes más profundos.', rating: 4, badge: 'Muy buena' },
+          { period: 'Jul – Oct', title: 'Temporada de Lluvias', description: 'Posibilidad de lluvias y huracanes. Los cenotes mantienen su visibilidad cristalina todo el año. El buceo en arrecife puede verse afectado por corrientes.', rating: 3, badge: 'Aceptable' },
+        ],
+      },
+      faq: {
+        items: [
+          { question: '¿Necesito certificación para bucear en Tulum?', answer: 'Para el snorkel y el Discover Scuba Diving (DSD) no necesitas certificación. Para buceo autónomo en arrecifes o cenotes sí se requiere Open Water Diver como mínimo. Para buceo en cuevas se necesita certificación específica de caverna o cueva.' },
+          { question: '¿Cuánto cuesta bucear en Tulum?', answer: 'El snorkel cuesta entre $30–$60 USD por tour. Un fun dive certificado en arrecife cuesta $65–$100 USD (2 inmersiones). El buceo en cenote oscila entre $80–$150 USD. Las certificaciones PADI/SSI van desde $350 (Open Water) hasta $900 (Cave Diver).' },
+          { question: '¿Cuál es la mejor época para bucear en Tulum?', answer: 'De noviembre a abril es la temporada óptima: cielos despejados, aguas calmas y visibilidad máxima en arrecifes (hasta 30m). Los cenotes tienen excelente visibilidad durante todo el año gracias a sus aguas subterráneas protegidas.' },
+          { question: '¿Es seguro bucear en los cenotes de Tulum?', answer: 'Sí, siempre que se haga con operadores certificados y se respeten los límites de cada nivel. El buceo en cenotes requiere certificación específica de caverna o cueva para áreas sin luz natural. Sigue siempre las instrucciones del guía y nunca bucees más allá de tus límites de certificación.' },
+          { question: '¿Puedo ver tortugas haciendo snorkel en Tulum?', answer: 'Sí. Akumal Bay es famosa por sus tortugas verdes que se pueden observar haciendo snorkel. Gran Cenote también alberga tortugas. El arrecife de Tulum tiene poca profundidad en algunas zonas y es posible ver tortugas desde la superficie con snorkel.' },
+        ],
+      },
+      cta: { title: '¿Listo para Explorar el Mundo Submarino de Tulum?', description: 'Reserva tu inmersión con los mejores operadores de buceo y snorkel. Grupos pequeños, guías certificados y equipo de calidad.', button: 'Ver Tours de Buceo y Snorkel', viatorUrl: 'https://www.viator.com/Tulum/d4254-ttd?q=diving+snorkeling' },
+    },
   },
   en: {
     nav: {
@@ -1262,6 +1358,102 @@ export default {
         title: 'FAQ — Digital Nomad in Tulum',
         subtitle: 'Everything you need to know before setting up to work from Tulum.',
       },
+    },
+    bodas: {
+      seo: {
+        title: 'Weddings in Tulum - Complete Guide to Your Beach Wedding | TulumTkts',
+        description: 'Plan your wedding or honeymoon in Tulum. Venues, budget, romantic experiences and everything you need.',
+      },
+      hero: {
+        badge: 'Weddings & Honeymoon',
+        title: 'Your Dream Wedding in Tulum',
+        subtitle: 'A ceremony by the sea, dinner under the stars, and the Caribbean paradise as your backdrop.',
+      },
+      sections: {
+        whyTulum: {
+          title: 'Why Get Married in Tulum?',
+          subtitle: 'Tulum is the perfect destination for a dream wedding.',
+        },
+        venues: {
+          title: 'Wedding Venues',
+          subtitle: 'The best places for your ceremony and reception.',
+        },
+        honeymoon: {
+          title: 'Honeymoon Experiences',
+          subtitle: 'Romantic moments you will never forget.',
+        },
+        budget: {
+          title: 'Wedding Budget',
+          subtitle: 'Price ranges for different wedding sizes.',
+        },
+        faq: {
+          title: 'Frequently Asked Questions',
+          subtitle: 'Everything about weddings in Tulum.',
+        },
+      },
+      labels: {
+        capacity: 'Capacity',
+        priceRange: 'Price Range',
+        style: 'Style',
+        viewVenue: 'View Venue',
+        bookNow: 'Book Now',
+        crossSellTitle: 'Plan Your Wedding Trip',
+      },
+    },
+    buceo: {
+      seo: { title: 'Diving & Snorkeling in Tulum - Complete Guide 2026 | TulumTkts', description: 'Discover the best diving and snorkeling spots in Tulum: reefs, cenotes and more.' },
+      breadcrumbs: { home: 'Home', guide: 'Tulum Guide', current: 'Diving & Snorkeling' },
+      hero: { badge: 'Diving & Snorkeling 2026', title: 'Diving & Snorkeling in Tulum', subtitle: 'Explore the world\'s second-largest reef and the crystal-clear cenotes of the Riviera Maya.' },
+      stats: { sites: '6+ Dive Sites', visibility: '30m+ Visibility', season: 'Year-round' },
+      sections: {
+        diveSites: { title: 'Best Dive Sites', subtitle: 'The most spectacular spots to plunge into.' },
+        types: { title: 'Experience Types', subtitle: 'From beginner snorkeling to cavern diving.' },
+        certifications: { title: 'PADI & SSI Certifications', subtitle: 'Get your diving license in paradise.' },
+        tips: { title: 'Gear & Tips', subtitle: 'Everything you need to know before diving in.' },
+        season: { title: 'Best Season', subtitle: 'When to dive and snorkel for the best conditions.' },
+        faq: { title: 'Frequently Asked Questions', subtitle: 'Everything about diving and snorkeling in Tulum.' },
+      },
+      labels: { depth: 'Depth', level: 'Level', type: 'Type', highlights: 'Highlights', bookDive: 'Book a Dive', crossSellTitle: 'Complete Your Aquatic Adventure' },
+      types: {
+        snorkeling: { title: 'Snorkeling', description: 'Explore coral reefs and cenotes from the surface. Perfect for all ages, no certification required. Gear included in most tours.', badge: 'No certification', price: 'From $30 USD', icon: 'waves' },
+        openWater: { title: 'Open Water Diving', description: 'Dive into the Great Mesoamerican Reef with certified guides. Ideal for Open Water certified divers and above.', badge: 'Certification required', price: 'From $65 USD', icon: 'anchor' },
+        cenoteDiving: { title: 'Cenote Diving', description: 'Descend into the mysteries of the Mayan underworld. Tulum\'s cenotes offer crystal visibility, stalactites and the famous hydrogen sulfide cloud at Angelita.', badge: 'Unique experience', price: 'From $80 USD', icon: 'droplet' },
+        nightDiving: { title: 'Night Diving', description: 'Discover the marine life that awakens after sunset. Octopuses, rays, crabs and nocturnal corals in a completely different dive.', badge: 'Advanced', price: 'From $90 USD', icon: 'moon' },
+      },
+      certifications: {
+        intro: 'Tulum is one of the best places in the world to earn your diving certification. Warm water, exceptional visibility and a wide variety of ecosystems make learning an extraordinary experience.',
+        courses: [
+          { name: 'Discover Scuba (DSD)', duration: '1 day', price: '$70–$100 USD', description: 'Try diving with no commitment. Supervised dive with no prior certification needed.' },
+          { name: 'Open Water Diver', duration: '3–4 days', price: '$350–$450 USD', description: 'The basic international certification. Dive to 18m anywhere in the world.' },
+          { name: 'Advanced Open Water', duration: '2–3 days', price: '$280–$380 USD', description: 'Expand your skills: navigation, deep diving, buoyancy and more.' },
+          { name: 'Rescue Diver', duration: '3–4 days', price: '$350–$480 USD', description: 'Learn to respond to underwater emergency situations.' },
+          { name: 'Cavern Diver', duration: '2 days', price: '$400–$550 USD', description: 'Specialty for exploring cave entrances with natural light in cenotes.' },
+          { name: 'Cave Diver', duration: '4–5 days', price: '$600–$900 USD', description: 'The pinnacle of cenote diving. Explore Tulum\'s underwater labyrinths.' },
+        ],
+      },
+      tips: {
+        bring: { title: 'What to bring', items: ['Swimsuit', 'Microfiber towel', 'Biodegradable sunscreen', 'Underwater camera / GoPro', 'Cash (USD or MXN)', 'Dive certification card (if applicable)'] },
+        provided: { title: 'What the tour includes', items: ['Full snorkel or scuba gear', 'Wetsuit (cenotes)', 'Certified guide', 'Transport from Tulum (most tours)', 'Basic activity insurance'] },
+        warnings: { title: 'Important', items: ['No conventional sunscreen in cenotes', 'Respect marine life — don\'t touch the corals', 'Book at least 24h in advance in high season', 'Hydration: drink water before and after diving'] },
+      },
+      season: {
+        intro: 'Tulum offers good conditions for diving and snorkeling year-round, but there are optimal periods depending on what you\'re looking for.',
+        months: [
+          { period: 'Nov – Apr', title: 'High Season', description: 'Dry weather, calm waters and maximum visibility. The best time for reef snorkeling and diving. Cenotes reach their ideal temperature (24–26°C).', rating: 5, badge: 'Best time' },
+          { period: 'May – Jun', title: 'Shoulder Season', description: 'Before the rains. Warmer temperatures, fewer tourists. Good cenote visibility. Ideal for deeper reef diving.', rating: 4, badge: 'Very good' },
+          { period: 'Jul – Oct', title: 'Rainy Season', description: 'Risk of rain and hurricanes. Cenotes maintain crystal-clear visibility year-round. Reef diving can be affected by currents.', rating: 3, badge: 'Acceptable' },
+        ],
+      },
+      faq: {
+        items: [
+          { question: 'Do I need a certification to dive in Tulum?', answer: 'For snorkeling and Discover Scuba Diving (DSD) no certification is needed. For autonomous scuba diving on reefs or cenotes an Open Water Diver certification is the minimum. Cave diving requires a specific cavern or cave diving certification.' },
+          { question: 'How much does it cost to dive in Tulum?', answer: 'Snorkeling tours cost between $30–$60 USD. A certified fun dive on a reef costs $65–$100 USD (2 dives). Cenote diving ranges from $80–$150 USD. PADI/SSI certifications run from $350 (Open Water) to $900 (Cave Diver).' },
+          { question: 'When is the best time to dive in Tulum?', answer: 'November to April is the optimal season: clear skies, calm waters and maximum reef visibility (up to 30m). Cenotes have excellent visibility year-round thanks to their protected underground waters.' },
+          { question: 'Is it safe to dive in Tulum\'s cenotes?', answer: 'Yes, as long as you use certified operators and respect the limits of your certification level. Cenote diving requires a specific cavern or cave certification for areas without natural light. Always follow the guide\'s instructions and never dive beyond your certification limits.' },
+          { question: 'Can I see turtles while snorkeling in Tulum?', answer: 'Yes. Akumal Bay is famous for its green sea turtles that can be observed while snorkeling. Gran Cenote also has turtles. Some parts of Tulum\'s reef are shallow enough to spot turtles from the surface with a snorkel.' },
+        ],
+      },
+      cta: { title: 'Ready to Explore Tulum\'s Underwater World?', description: 'Book your dive with the best diving and snorkeling operators. Small groups, certified guides and quality gear.', button: 'View Diving & Snorkeling Tours', viatorUrl: 'https://www.viator.com/Tulum/d4254-ttd?q=diving+snorkeling' },
     },
   },
   fr: {
@@ -1895,6 +2087,102 @@ export default {
         subtitle: 'Tout ce que vous devez savoir avant de vous installer pour travailler depuis Tulum.',
       },
     },
+    bodas: {
+      seo: {
+        title: 'Mariages à Tulum - Guide Complet pour votre Mariage sur la Plage | TulumTkts',
+        description: 'Planifiez votre mariage ou lune de miel à Tulum. Venues, budget, expériences romantiques et tout ce dont vous avez besoin.',
+      },
+      hero: {
+        badge: 'Mariages & Lune de Miel',
+        title: 'Votre Mariage de Rêve à Tulum',
+        subtitle: 'Une cérémonie au bord de la mer, un dîner sous les étoiles et le paradis des Caraïbes en toile de fond.',
+      },
+      sections: {
+        whyTulum: {
+          title: 'Pourquoi se Marier à Tulum ?',
+          subtitle: 'Tulum est la destination parfaite pour un mariage de rêve.',
+        },
+        venues: {
+          title: 'Lieux de Mariage',
+          subtitle: 'Les meilleurs endroits pour votre cérémonie et réception.',
+        },
+        honeymoon: {
+          title: 'Expériences de Lune de Miel',
+          subtitle: 'Des moments romantiques que vous n\'oublierez jamais.',
+        },
+        budget: {
+          title: 'Budget Mariage',
+          subtitle: 'Fourchettes de prix pour différentes tailles de mariage.',
+        },
+        faq: {
+          title: 'Questions Fréquentes',
+          subtitle: 'Tout sur les mariages à Tulum.',
+        },
+      },
+      labels: {
+        capacity: 'Capacité',
+        priceRange: 'Fourchette de Prix',
+        style: 'Style',
+        viewVenue: 'Voir le Lieu',
+        bookNow: 'Réserver',
+        crossSellTitle: 'Planifiez votre Voyage de Noces',
+      },
+    },
+    buceo: {
+      seo: { title: 'Plongée & Snorkeling à Tulum - Guide Complet 2026 | TulumTkts', description: 'Découvrez les meilleurs sites de plongée et de snorkeling à Tulum : récifs, cénotes et plus encore.' },
+      breadcrumbs: { home: 'Accueil', guide: 'Guide Tulum', current: 'Plongée & Snorkeling' },
+      hero: { badge: 'Plongée & Snorkeling 2026', title: 'Plongée & Snorkeling à Tulum', subtitle: 'Explorez le deuxième plus grand récif du monde et les cénotes cristallins de la Riviera Maya.' },
+      stats: { sites: '6+ Sites de Plongée', visibility: 'Visibilité 30m+', season: 'Toute l\'année' },
+      sections: {
+        diveSites: { title: 'Meilleurs Sites de Plongée', subtitle: 'Les spots les plus spectaculaires pour plonger.' },
+        types: { title: 'Types d\'Expériences', subtitle: 'Du snorkeling débutant à la plongée en caverne.' },
+        certifications: { title: 'Certifications PADI & SSI', subtitle: 'Obtenez votre brevet de plongée au paradis.' },
+        tips: { title: 'Équipement & Conseils', subtitle: 'Tout ce que vous devez savoir avant de plonger.' },
+        season: { title: 'Meilleure Saison', subtitle: 'Quand plonger et faire du snorkeling dans les meilleures conditions.' },
+        faq: { title: 'Questions Fréquentes', subtitle: 'Tout sur la plongée et le snorkeling à Tulum.' },
+      },
+      labels: { depth: 'Profondeur', level: 'Niveau', type: 'Type', highlights: 'Points forts', bookDive: 'Réserver une Plongée', crossSellTitle: 'Complétez votre Aventure Aquatique' },
+      types: {
+        snorkeling: { title: 'Snorkeling', description: 'Explorez les récifs coralliens et cénotes depuis la surface. Parfait pour tous les âges, aucune certification requise. Équipement inclus dans la plupart des tours.', badge: 'Sans certification', price: 'Dès 30 USD', icon: 'waves' },
+        openWater: { title: 'Plongée Open Water', description: 'Plongez dans le Grand Récif Mésoaméricain avec des guides certifiés. Idéal pour les plongeurs certifiés Open Water et au-delà.', badge: 'Certification requise', price: 'Dès 65 USD', icon: 'anchor' },
+        cenoteDiving: { title: 'Plongée en Cénote', description: 'Descendez dans les mystères du monde souterrain maya. Les cénotes de Tulum offrent une visibilité cristalline, des stalactites et le célèbre nuage de sulfure à Angelita.', badge: 'Expérience unique', price: 'Dès 80 USD', icon: 'droplet' },
+        nightDiving: { title: 'Plongée de Nuit', description: 'Découvrez la vie marine qui s\'éveille au coucher du soleil. Pieuvres, raies, crabes et coraux nocturnes dans une plongée totalement différente.', badge: 'Avancé', price: 'Dès 90 USD', icon: 'moon' },
+      },
+      certifications: {
+        intro: 'Tulum est l\'un des meilleurs endroits au monde pour obtenir votre certification de plongée. Eaux chaudes, visibilité exceptionnelle et une grande variété d\'écosystèmes font de l\'apprentissage une expérience extraordinaire.',
+        courses: [
+          { name: 'Discover Scuba (DSD)', duration: '1 jour', price: '70–100 USD', description: 'Essayez la plongée sans engagement. Plongée supervisée sans certification préalable.' },
+          { name: 'Open Water Diver', duration: '3–4 jours', price: '350–450 USD', description: 'La certification internationale de base. Plongez jusqu\'à 18m partout dans le monde.' },
+          { name: 'Advanced Open Water', duration: '2–3 jours', price: '280–380 USD', description: 'Développez vos compétences : navigation, profondeur, flottabilité et plus.' },
+          { name: 'Rescue Diver', duration: '3–4 jours', price: '350–480 USD', description: 'Apprenez à réagir dans les situations d\'urgence sous l\'eau.' },
+          { name: 'Cavern Diver', duration: '2 jours', price: '400–550 USD', description: 'Spécialité pour explorer les entrées de grottes avec lumière naturelle dans les cénotes.' },
+          { name: 'Cave Diver', duration: '4–5 jours', price: '600–900 USD', description: 'Le sommet de la plongée en cénote. Explorez les labyrinthes sous-marins de Tulum.' },
+        ],
+      },
+      tips: {
+        bring: { title: 'Quoi apporter ?', items: ['Maillot de bain', 'Serviette en microfibre', 'Crème solaire biodégradable', 'Appareil photo aquatique / GoPro', 'Espèces (USD ou MXN)', 'Carte de certification de plongée (si applicable)'] },
+        provided: { title: 'Ce que le tour inclut', items: ['Équipement complet de snorkeling ou de plongée', 'Combinaison de plongée (cénotes)', 'Guide certifié', 'Transport depuis Tulum (la plupart des tours)', 'Assurance activité de base'] },
+        warnings: { title: 'Important', items: ['Pas de crème solaire classique dans les cénotes', 'Respectez la vie marine — ne touchez pas les coraux', 'Réservez au moins 24h à l\'avance en haute saison', 'Hydratation : buvez de l\'eau avant et après la plongée'] },
+      },
+      season: {
+        intro: 'Tulum offre de bonnes conditions pour plonger et faire du snorkeling toute l\'année, mais il existe des périodes optimales selon ce que vous recherchez.',
+        months: [
+          { period: 'Nov – Avr', title: 'Haute Saison', description: 'Temps sec, eaux calmes et visibilité maximale. La meilleure période pour le snorkeling et la plongée sur les récifs. Les cénotes atteignent leur température idéale (24–26°C).', rating: 5, badge: 'Meilleure période' },
+          { period: 'Mai – Jun', title: 'Saison Intermédiaire', description: 'Avant les pluies. Températures plus chaudes, moins de touristes. Bonne visibilité dans les cénotes. Idéal pour la plongée profonde sur les récifs.', rating: 4, badge: 'Très bonne' },
+          { period: 'Jul – Oct', title: 'Saison des Pluies', description: 'Risque de pluie et d\'ouragans. Les cénotes maintiennent leur visibilité cristalline toute l\'année. La plongée sur récif peut être affectée par les courants.', rating: 3, badge: 'Acceptable' },
+        ],
+      },
+      faq: {
+        items: [
+          { question: 'Ai-je besoin d\'une certification pour plonger à Tulum ?', answer: 'Pour le snorkeling et le Discover Scuba Diving (DSD), aucune certification n\'est requise. Pour la plongée autonome sur les récifs ou dans les cénotes, la certification Open Water Diver est le minimum. La plongée en grotte nécessite une certification spécifique de caverne ou de grotte.' },
+          { question: 'Combien coûte la plongée à Tulum ?', answer: 'Les tours de snorkeling coûtent entre 30 et 60 USD. Une plongée certifiée sur récif coûte 65–100 USD (2 plongées). La plongée en cénote varie entre 80 et 150 USD. Les certifications PADI/SSI vont de 350 USD (Open Water) à 900 USD (Cave Diver).' },
+          { question: 'Quelle est la meilleure période pour plonger à Tulum ?', answer: 'De novembre à avril est la saison optimale : ciel dégagé, eaux calmes et visibilité maximale sur les récifs (jusqu\'à 30m). Les cénotes ont une excellente visibilité toute l\'année grâce à leurs eaux souterraines protégées.' },
+          { question: 'Est-il sûr de plonger dans les cénotes de Tulum ?', answer: 'Oui, à condition d\'utiliser des opérateurs certifiés et de respecter les limites de son niveau de certification. La plongée en cénote nécessite une certification spécifique pour les zones sans lumière naturelle. Suivez toujours les instructions du guide et ne plongez jamais au-delà de vos limites.' },
+          { question: 'Peut-on voir des tortues en faisant du snorkeling à Tulum ?', answer: 'Oui. La Baie d\'Akumal est célèbre pour ses tortues marines vertes que l\'on peut observer en snorkeling. Gran Cenote abrite également des tortues. Certaines parties du récif de Tulum sont assez peu profondes pour apercevoir des tortues depuis la surface.' },
+        ],
+      },
+      cta: { title: 'Prêt à Explorer le Monde Sous-Marin de Tulum ?', description: 'Réservez votre plongée avec les meilleurs opérateurs. Petits groupes, guides certifiés et équipement de qualité.', button: 'Voir les Tours de Plongée & Snorkeling', viatorUrl: 'https://www.viator.com/Tulum/d4254-ttd?q=diving+snorkeling' },
+    },
   },
   it: {
     nav: {
@@ -2526,6 +2814,102 @@ export default {
         title: 'FAQ — Nomade Digitale a Tulum',
         subtitle: 'Tutto quello che devi sapere prima di stabilirti per lavorare da Tulum.',
       },
+    },
+    bodas: {
+      seo: {
+        title: 'Matrimoni a Tulum - Guida Completa per il tuo Matrimonio in Spiaggia | TulumTkts',
+        description: 'Pianifica il tuo matrimonio o luna di miele a Tulum. Venue, budget, esperienze romantiche e tutto ciò di cui hai bisogno.',
+      },
+      hero: {
+        badge: 'Matrimoni & Luna di Miele',
+        title: 'Il tuo Matrimonio da Sogno a Tulum',
+        subtitle: 'Una cerimonia sul mare, una cena sotto le stelle e il paradiso caraibico come sfondo.',
+      },
+      sections: {
+        whyTulum: {
+          title: 'Perché Sposarsi a Tulum?',
+          subtitle: 'Tulum è la destinazione perfetta per un matrimonio da sogno.',
+        },
+        venues: {
+          title: 'Location per Matrimoni',
+          subtitle: 'I migliori posti per la tua cerimonia e il ricevimento.',
+        },
+        honeymoon: {
+          title: 'Esperienze di Luna di Miele',
+          subtitle: 'Momenti romantici che non dimenticherete mai.',
+        },
+        budget: {
+          title: 'Budget Matrimonio',
+          subtitle: 'Fasce di prezzo per diverse dimensioni di matrimonio.',
+        },
+        faq: {
+          title: 'Domande Frequenti',
+          subtitle: 'Tutto sui matrimoni a Tulum.',
+        },
+      },
+      labels: {
+        capacity: 'Capacità',
+        priceRange: 'Fascia di Prezzo',
+        style: 'Stile',
+        viewVenue: 'Vedi Location',
+        bookNow: 'Prenota',
+        crossSellTitle: 'Pianifica il tuo Viaggio di Nozze',
+      },
+    },
+    buceo: {
+      seo: { title: 'Immersioni & Snorkeling a Tulum - Guida Completa 2026 | TulumTkts', description: 'Scopri i migliori siti di immersione e snorkeling a Tulum: barriere coralline, cenote e molto altro.' },
+      breadcrumbs: { home: 'Home', guide: 'Guida Tulum', current: 'Immersioni & Snorkeling' },
+      hero: { badge: 'Immersioni & Snorkeling 2026', title: 'Immersioni & Snorkeling a Tulum', subtitle: 'Esplora la seconda barriera corallina più grande del mondo e le cenote cristalline della Riviera Maya.' },
+      stats: { sites: '6+ Siti d\'Immersione', visibility: 'Visibilità 30m+', season: 'Tutto l\'anno' },
+      sections: {
+        diveSites: { title: 'Migliori Siti di Immersione', subtitle: 'Gli spot più spettacolari in cui immergersi.' },
+        types: { title: 'Tipi di Esperienza', subtitle: 'Dallo snorkeling per principianti alle immersioni in caverna.' },
+        certifications: { title: 'Certificazioni PADI & SSI', subtitle: 'Ottieni il brevetto di immersione in paradiso.' },
+        tips: { title: 'Attrezzatura & Consigli', subtitle: 'Tutto quello che devi sapere prima di immergerti.' },
+        season: { title: 'Miglior Stagione', subtitle: 'Quando immergersi e fare snorkeling nelle condizioni migliori.' },
+        faq: { title: 'Domande Frequenti', subtitle: 'Tutto sulle immersioni e lo snorkeling a Tulum.' },
+      },
+      labels: { depth: 'Profondità', level: 'Livello', type: 'Tipo', highlights: 'In evidenza', bookDive: 'Prenota un\'Immersione', crossSellTitle: 'Completa la tua Avventura Acquatica' },
+      types: {
+        snorkeling: { title: 'Snorkeling', description: 'Esplora le barriere coralline e le cenote dalla superficie. Perfetto per tutte le età, nessuna certificazione richiesta. Attrezzatura inclusa nella maggior parte dei tour.', badge: 'Senza certificazione', price: 'Da $30 USD', icon: 'waves' },
+        openWater: { title: 'Immersione Open Water', description: 'Immergiti nella Grande Barriera Mesoamericana con guide certificate. Ideale per subacquei certificati Open Water e superiori.', badge: 'Certificazione richiesta', price: 'Da $65 USD', icon: 'anchor' },
+        cenoteDiving: { title: 'Immersione in Cenote', description: 'Scendi nei misteri del mondo sotterraneo maya. Le cenote di Tulum offrono visibilità cristallina, stalattiti e la famosa nube di idrogeno solforato ad Angelita.', badge: 'Esperienza unica', price: 'Da $80 USD', icon: 'droplet' },
+        nightDiving: { title: 'Immersione Notturna', description: 'Scopri la vita marina che si risveglia al tramonto. Polpi, razze, granchi e coralli notturni in un\'immersione completamente diversa.', badge: 'Avanzato', price: 'Da $90 USD', icon: 'moon' },
+      },
+      certifications: {
+        intro: 'Tulum è uno dei migliori posti al mondo per ottenere la certificazione di immersione. Acque calde, visibilità eccezionale e una grande varietà di ecosistemi rendono l\'apprendimento un\'esperienza straordinaria.',
+        courses: [
+          { name: 'Discover Scuba (DSD)', duration: '1 giorno', price: '$70–$100 USD', description: 'Prova l\'immersione senza impegno. Immersione supervisionata senza certificazione previa.' },
+          { name: 'Open Water Diver', duration: '3–4 giorni', price: '$350–$450 USD', description: 'La certificazione internazionale di base. Immergiti fino a 18m ovunque nel mondo.' },
+          { name: 'Advanced Open Water', duration: '2–3 giorni', price: '$280–$380 USD', description: 'Amplia le tue competenze: navigazione, profondità, galleggiamento e altro.' },
+          { name: 'Rescue Diver', duration: '3–4 giorni', price: '$350–$480 USD', description: 'Impara a rispondere in situazioni di emergenza sott\'acqua.' },
+          { name: 'Cavern Diver', duration: '2 giorni', price: '$400–$550 USD', description: 'Specialità per esplorare gli ingressi delle grotte con luce naturale nelle cenote.' },
+          { name: 'Cave Diver', duration: '4–5 giorni', price: '$600–$900 USD', description: 'Il massimo dell\'immersione in cenote. Esplora i labirinti sottomarini di Tulum.' },
+        ],
+      },
+      tips: {
+        bring: { title: 'Cosa portare', items: ['Costume da bagno', 'Asciugamano in microfibra', 'Crema solare biodegradabile', 'Fotocamera subacquea / GoPro', 'Contanti (USD o MXN)', 'Tesserino di certificazione subacquea (se applicabile)'] },
+        provided: { title: 'Cosa include il tour', items: ['Attrezzatura completa da snorkeling o subacquea', 'Muta (cenote)', 'Guida certificata', 'Trasporto da Tulum (nella maggior parte)', 'Assicurazione attività di base'] },
+        warnings: { title: 'Importante', items: ['No crema solare convenzionale nelle cenote', 'Rispetta la vita marina — non toccare i coralli', 'Prenota almeno 24h prima in alta stagione', 'Idratazione: bevi acqua prima e dopo l\'immersione'] },
+      },
+      season: {
+        intro: 'Tulum offre buone condizioni per immergersi e fare snorkeling tutto l\'anno, ma ci sono periodi ottimali in base a cosa stai cercando.',
+        months: [
+          { period: 'Nov – Apr', title: 'Alta Stagione', description: 'Tempo secco, acque calme e visibilità massima. Il periodo migliore per snorkeling e immersioni sui reef. Le cenote raggiungono la loro temperatura ideale (24–26°C).', rating: 5, badge: 'Periodo migliore' },
+          { period: 'Mag – Giu', title: 'Stagione di Transizione', description: 'Prima delle piogge. Temperature più calde, meno turisti. Buona visibilità nelle cenote. Ideale per immersioni profonde sui reef.', rating: 4, badge: 'Molto buona' },
+          { period: 'Lug – Ott', title: 'Stagione delle Piogge', description: 'Rischio di piogge e uragani. Le cenote mantengono la loro visibilità cristallina tutto l\'anno. Le immersioni sui reef possono essere influenzate dalle correnti.', rating: 3, badge: 'Accettabile' },
+        ],
+      },
+      faq: {
+        items: [
+          { question: 'Ho bisogno di una certificazione per immergermi a Tulum?', answer: 'Per lo snorkeling e il Discover Scuba Diving (DSD) non è richiesta alcuna certificazione. Per le immersioni autonome sui reef o nelle cenote è richiesta come minimo la certificazione Open Water Diver. Per le immersioni in grotta è necessaria una certificazione specifica di caverna o grotta.' },
+          { question: 'Quanto costa immergersi a Tulum?', answer: 'I tour di snorkeling costano tra $30 e $60 USD. Un\'immersione certificata su reef costa $65–$100 USD (2 immersioni). L\'immersione in cenote varia tra $80 e $150 USD. Le certificazioni PADI/SSI vanno da $350 (Open Water) a $900 (Cave Diver).' },
+          { question: 'Qual è il periodo migliore per immergersi a Tulum?', answer: 'Da novembre ad aprile è la stagione ottimale: cielo sereno, acque calme e visibilità massima sui reef (fino a 30m). Le cenote hanno un\'eccellente visibilità tutto l\'anno grazie alle loro acque sotterranee protette.' },
+          { question: 'È sicuro immergersi nelle cenote di Tulum?', answer: 'Sì, purché si utilizzino operatori certificati e si rispettino i limiti del proprio livello di certificazione. L\'immersione nelle cenote richiede una certificazione specifica per le aree senza luce naturale. Segui sempre le istruzioni della guida e non immergerti mai oltre i tuoi limiti di certificazione.' },
+          { question: 'Posso vedere tartarughe durante lo snorkeling a Tulum?', answer: 'Sì. La Baia di Akumal è famosa per le sue tartarughe marine verdi che si possono osservare in snorkeling. Gran Cenote ospita anche tartarughe. Alcune parti del reef di Tulum sono abbastanza basse da avvistare tartarughe dalla superficie con il boccaglio.' },
+        ],
+      },
+      cta: { title: 'Pronto ad Esplorare il Mondo Subacqueo di Tulum?', description: 'Prenota la tua immersione con i migliori operatori di diving e snorkeling. Gruppi piccoli, guide certificate e attrezzatura di qualità.', button: 'Vedi Tour di Immersione & Snorkeling', viatorUrl: 'https://www.viator.com/Tulum/d4254-ttd?q=diving+snorkeling' },
     },
   },
 };
