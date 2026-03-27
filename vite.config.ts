@@ -23,6 +23,13 @@ export default defineConfig({
     // Copy sitemap data file if it exists
     rollupOptions: {
       // Ensure static files are copied
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-accordion', '@radix-ui/react-tabs', '@radix-ui/react-tooltip', '@radix-ui/react-popover'],
+          'vendor-query': ['@tanstack/react-query'],
+        },
+      },
     },
   },
   publicDir: path.resolve(__dirname, "public"),
