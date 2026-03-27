@@ -472,7 +472,7 @@ export default function Villas() {
                       onClick={() => {
                         const url = generateHotelLink('Tulum');
                         trackAffiliateClick('hotellook', villa.title, String(villa.pricePerNight), 'villas');
-                        window.open(url, '_blank');
+                        window.open(url, '_blank', 'noopener,noreferrer');
                       }}
                     >
                       {t('villas.villa.viewAvailability')} <ExternalLink className="w-4 h-4 ml-2" />
@@ -585,7 +585,7 @@ export default function Villas() {
                         onClick={() => {
                           const url = generateHotelLink('Tulum');
                           trackAffiliateClick('hotellook', villa.title, String(villa.pricePerNight), 'villas');
-                          window.open(url, '_blank');
+                          window.open(url, '_blank', 'noopener,noreferrer');
                         }}
                       >
                         Ver Villa
@@ -624,7 +624,7 @@ export default function Villas() {
                   className="bg-teal-600 hover:bg-teal-700 text-white font-semibold"
                   onClick={() => {
                     trackAffiliateClick('hotellook', 'Buscar hospedaje Tulum', '0', 'villas_search_cta');
-                    window.open(generateHotelLink('Tulum'), '_blank');
+                    window.open(generateHotelLink('Tulum'), '_blank', 'noopener,noreferrer');
                   }}
                 >
                   Buscar Hospedaje <ExternalLink className="w-4 h-4 ml-2" />
@@ -655,7 +655,7 @@ export default function Villas() {
                   className="bg-white text-teal-700 hover:bg-white/90 font-semibold"
                   onClick={() => {
                     trackAffiliateClick('kiwitaxi', 'Traslado Cancun-Tulum', '0', 'villas_transfer_cta');
-                    window.open(generateTransferLink('Cancun Airport', 'Tulum'), '_blank');
+                    window.open(generateTransferLink('Cancun Airport', 'Tulum'), '_blank', 'noopener,noreferrer');
                   }}
                 >
                   Reservar Traslado <ExternalLink className="w-4 h-4 ml-2" />

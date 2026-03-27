@@ -41,7 +41,7 @@ function AffiliateAdCard({ ad }: AffiliateAdCardProps) {
 
   const handleClick = () => {
     trackAffiliateClick(ad.trackKey, ad.title, "0", "blog_listing_ad");
-    window.open(ad.href, "_blank", "noopener");
+    window.open(ad.href, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -215,7 +215,7 @@ export default function Blog() {
               className="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 shrink-0 transition-colors"
               onClick={() => {
                 trackAffiliateClick("blog_banner_flights", "Blog Banner Flight CTA", "0", "blog_banner");
-                window.open(generateFlightLink("MEX", "CUN"), "_blank", "noopener");
+                window.open(generateFlightLink("MEX", "CUN"), "_blank", "noopener,noreferrer");
               }}
             >
               {t("blog.banner.cta")}

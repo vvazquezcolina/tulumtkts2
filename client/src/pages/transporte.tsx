@@ -48,22 +48,22 @@ export default function Transporte() {
 
   const handleCarRentalClick = (carName: string, price: number) => {
     trackAffiliateClick('discovercars', carName, String(price), 'car-rental');
-    window.open(carRentalUrl, '_blank');
+    window.open(carRentalUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleTransferClick = (serviceName: string, price: number) => {
     trackAffiliateClick('kiwitaxi', serviceName, String(price), 'transfer');
-    window.open(transferUrl, '_blank');
+    window.open(transferUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleInsuranceClick = () => {
     trackAffiliateClick('safetyWing', 'Seguro de Viaje México', '0', 'insurance');
-    window.open(insuranceUrl, '_blank');
+    window.open(insuranceUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleEsimClick = (plan: string, price: number) => {
     trackAffiliateClick('airalo', plan, String(price), 'esim');
-    window.open(esimUrl, '_blank');
+    window.open(esimUrl, '_blank', 'noopener,noreferrer');
   };
 
   const carRentals = [
@@ -332,7 +332,7 @@ export default function Transporte() {
                         className="w-full bg-primary text-white hover:bg-primary/90"
                         onClick={() => {
                           trackAffiliateClick('discovercars', 'Búsqueda Autos Cancún', '0', 'car-rental');
-                          window.open(carRentalUrl, '_blank');
+                          window.open(carRentalUrl, '_blank', 'noopener,noreferrer');
                         }}
                       >
                         {t('buttons.search')}
@@ -468,7 +468,7 @@ export default function Transporte() {
                         className="w-full bg-primary text-white hover:bg-primary/90"
                         onClick={() => {
                           trackAffiliateClick('kiwitaxi', 'Cotizar Traslado Cancún-Tulum', '0', 'transfer');
-                          window.open(transferUrl, '_blank');
+                          window.open(transferUrl, '_blank', 'noopener,noreferrer');
                         }}
                       >
                         {t('transporte.buttons.quoteTransfer')}

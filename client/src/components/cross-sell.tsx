@@ -104,7 +104,7 @@ export function CrossSell({ items, title, exclude = [] }: CrossSellProps) {
         trackAffiliateClick(item.trackCategory, item.title, "0", item.trackCategory);
       }
       const url = generateAffiliateLink(item.href, "safetyWing", `crosssell_${item.trackCategory}`);
-      window.open(url, "_blank", "noopener");
+      window.open(url, "_blank", "noopener,noreferrer");
     } else {
       window.location.href = getLocalizedLink(item.href);
     }

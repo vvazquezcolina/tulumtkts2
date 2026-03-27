@@ -155,15 +155,15 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative" aria-label="Hero">
-        <div className="h-[600px] relative overflow-hidden">
+        <div className="h-[650px] md:h-[600px] relative overflow-hidden">
           {/* YouTube Video Background */}
           <div className="absolute inset-0 w-full h-full">
             {/* Fallback image — always visible until video loads */}
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
-              }}
+            <img
+              src="https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              fetchPriority="high"
             />
             {videoLoaded && (
               <iframe
@@ -552,12 +552,12 @@ export default function Home() {
                           await trackAffiliateClickAPI(activityId, title, price, 'Featured Home');
                           // Track in GA4
                           trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
-                          window.open(affiliateUrl, '_blank');
+                          window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
                         } catch (error) {
                           // Track in GA4 even if API fails
                           trackGA4AffiliateClick(activityId, title, price, 'Featured Home');
                           // Fallback to direct URL
-                          window.open(affiliateUrl, '_blank');
+                          window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
                         }
                       }}
                     >

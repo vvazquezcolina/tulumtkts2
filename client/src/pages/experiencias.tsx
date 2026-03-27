@@ -806,11 +806,11 @@ function ExperienceCard({ experience, favorites, toggleFavorite, mapCategory, t 
                 await trackAffiliateClickAPI(activityId, experience.title, price, category);
                 // Track in GA4
                 trackGA4AffiliateClick(activityId, experience.title, price, category);
-                window.open(affiliateUrl, '_blank');
+                window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
               } catch (error) {
                 // Track in GA4 even if API fails
                 trackGA4AffiliateClick(activityId, experience.title, price, category);
-                window.open(affiliateUrl, '_blank');
+                window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
               }
             }}
           >

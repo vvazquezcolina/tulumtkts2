@@ -97,7 +97,7 @@ function BlogAffiliateCTA({ keywords, category }: BlogAffiliateCTAProps) {
 
   const handleClick = () => {
     trackAffiliateClick(config.trackKey, config.title, "0", "blog_inline");
-    window.open(config.link, "_blank", "noopener");
+    window.open(config.link, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -164,7 +164,7 @@ function BlogTripCTA() {
 
   const handleClick = (href: string, track: string, label: string) => {
     trackAffiliateClick(track, label, "0", "blog_trip_cta");
-    window.open(href, "_blank", "noopener");
+    window.open(href, "_blank", "noopener,noreferrer");
   };
 
   return (

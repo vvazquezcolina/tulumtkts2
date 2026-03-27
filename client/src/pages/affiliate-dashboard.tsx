@@ -181,7 +181,7 @@ export default function AffiliateDashboard() {
                       variant="outline"
                       onClick={() => {
                         const url = generateAffiliateLink('travelpayouts');
-                        window.open(url, '_blank');
+                        window.open(url, '_blank', 'noopener,noreferrer');
                       }}
                     >
                       <ExternalLink className="w-4 h-4" />

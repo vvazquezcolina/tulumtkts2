@@ -250,7 +250,7 @@ export default function CenotesTulum() {
                         'cenotes_card_cta'
                       );
                       trackAffiliateClick('viator', cenote.name, cenote.price, 'cenotes');
-                      window.open(url, '_blank');
+                      window.open(url, '_blank', 'noopener,noreferrer');
                     }}
                     className="w-full bg-primary text-white hover:bg-primary/90"
                   >
@@ -293,7 +293,7 @@ export default function CenotesTulum() {
                       'cenotes_main_cta'
                     );
                     trackAffiliateClick('viator', 'Tour de Cenotes Tulum', '0', 'cenotes_cta');
-                    window.open(url, '_blank');
+                    window.open(url, '_blank', 'noopener,noreferrer');
                   }}
                 >
                   {t('cta.tour.button')} <ExternalLink className="w-4 h-4 ml-2" />
@@ -337,7 +337,7 @@ export default function CenotesTulum() {
                 className="w-full bg-teal-600 hover:bg-teal-700 text-white"
                 onClick={() => {
                   trackAffiliateClick('discovercars', 'Renta auto cenotes Tulum', '0', 'cenotes_car_cta');
-                  window.open(generateCarRentalLink('Tulum'), '_blank');
+                  window.open(generateCarRentalLink('Tulum'), '_blank', 'noopener,noreferrer');
                 }}
               >
                 {t('cta.carRental.button')} <ExternalLink className="w-4 h-4 ml-2" />
@@ -362,7 +362,7 @@ export default function CenotesTulum() {
                     'cenotes_guided_tour_cta'
                   );
                   trackAffiliateClick('viator', 'Tour guiado cenotes Tulum', '0', 'cenotes_guided_cta');
-                  window.open(url, '_blank');
+                  window.open(url, '_blank', 'noopener,noreferrer');
                 }}
               >
                 {t('cta.guidedTour.button')} <ExternalLink className="w-4 h-4 ml-2" />

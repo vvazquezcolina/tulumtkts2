@@ -87,7 +87,7 @@ export function TripPlanner() {
     if (url.startsWith("/")) {
       window.location.href = url;
     } else {
-      window.open(url, "_blank", "noopener");
+      window.open(url, "_blank", "noopener,noreferrer");
     }
   };
 
