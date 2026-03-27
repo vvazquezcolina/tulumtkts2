@@ -42,7 +42,8 @@ export default function Eventos() {
       date: "31 Dic 2026",
       time: "20:00",
       location: "Playa Paraíso",
-      category: "Festivales",
+      category: t('eventos.categories.music'),
+      categoryKey: "music",
       price: "€85",
       featured: true,
       image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -54,7 +55,8 @@ export default function Eventos() {
       date: "15 Feb 2026",
       time: "18:00",
       location: "Playa Tulum",
-      category: "Festivales de Música",
+      category: t('eventos.categories.music'),
+      categoryKey: "music",
       price: "€120",
       featured: true,
       image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -66,7 +68,8 @@ export default function Eventos() {
       date: "Todos los viernes",
       time: "17:00",
       location: "Taboo Beach Club",
-      category: "Beach Parties",
+      category: t('eventos.categories.beach'),
+      categoryKey: "beach",
       price: "€45",
       featured: false,
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -78,7 +81,8 @@ export default function Eventos() {
       date: "20 Ene 2026",
       time: "21:00",
       location: "Cenote Sagrado",
-      category: "Ceremonias",
+      category: t('eventos.categories.ceremonies'),
+      categoryKey: "ceremonies",
       price: "€65",
       featured: false,
       image: "https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -86,18 +90,18 @@ export default function Eventos() {
   ];
 
   const categories = [
-    t('eventos.categories.all'),
-    t('eventos.categories.music'),
-    t('eventos.categories.beach'),
-    t('eventos.categories.nightclubs'),
-    t('eventos.categories.ceremonies'),
-    t('eventos.categories.concerts')
+    { key: "all", label: t('eventos.categories.all') },
+    { key: "music", label: t('eventos.categories.music') },
+    { key: "beach", label: t('eventos.categories.beach') },
+    { key: "nightclubs", label: t('eventos.categories.nightclubs') },
+    { key: "ceremonies", label: t('eventos.categories.ceremonies') },
+    { key: "concerts", label: t('eventos.categories.concerts') },
   ];
 
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          event.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = !categoryFilter || categoryFilter === t('eventos.categories.all') || event.category === categoryFilter;
+    const matchesCategory = !categoryFilter || categoryFilter === "all" || event.categoryKey === categoryFilter;
     return matchesSearch && matchesCategory;
   });
 
@@ -207,9 +211,9 @@ export default function Eventos() {
                   <SelectValue placeholder={t('eventos.filters.category')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
+                  {categories.map(({ key, label }) => (
+                    <SelectItem key={key} value={key}>
+                      {label}
                     </SelectItem>
                   ))}
                 </SelectContent>

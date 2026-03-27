@@ -32,6 +32,19 @@ export function generateAffiliateLink(
 }
 
 /**
+ * Format a date string from YYYY-MM-DD to DDMM for Aviasales search URLs.
+ * Returns the original string unchanged if it cannot be parsed.
+ */
+function formatDateForAviasales(dateStr: string): string {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr;
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  return `${day}${month}`;
+}
+
+/**
  * Generate flight search affiliate link
  */
 export function generateFlightLink(
@@ -40,7 +53,9 @@ export function generateFlightLink(
   departureDate?: string,
   returnDate?: string
 ): string {
-  let searchUrl = `https://www.aviasales.com/search/${origin}${departureDate || ''}${destination}${returnDate || ''}`;
+  const formattedDeparture = departureDate ? formatDateForAviasales(departureDate) : '';
+  const formattedReturn = returnDate ? formatDateForAviasales(returnDate) : '';
+  const searchUrl = `https://www.aviasales.com/search/${origin}${formattedDeparture}${destination}${formattedReturn}`;
   return generateAffiliateLink(searchUrl, 'aviasales', `flights_${origin}_${destination}`);
 }
 
@@ -103,7 +118,7 @@ export function trackAffiliateClick(
     experiencePrice,
     category,
     timestamp: new Date().toISOString(),
-    sessionId: Math.random().toString(36).substr(2, 9)
+    sessionId: Math.random().toString(36).substring(2, 11)
   };
 
   const existingClicks = JSON.parse(localStorage.getItem('affiliate_clicks') || '[]');
