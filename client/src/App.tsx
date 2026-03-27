@@ -35,6 +35,8 @@ const DigitalNomadTulum = lazy(() => import("@/pages/digital-nomad-tulum"));
 const ExcursionesTulum = lazy(() => import("@/pages/excursiones-tulum"));
 const BodasTulum = lazy(() => import("@/pages/bodas-tulum"));
 const BuceoTulum = lazy(() => import("@/pages/buceo-tulum"));
+const RivieraMaya = lazy(() => import("@/pages/riviera-maya"));
+const ClimaTulum = lazy(() => import("@/pages/clima-tulum"));
 
 function PageLoader() {
   return (
@@ -85,6 +87,8 @@ function Router() {
       {createLocalizedRoutes("/excursiones-tulum", ExcursionesTulum)}
       {createLocalizedRoutes("/bodas-tulum", BodasTulum)}
       {createLocalizedRoutes("/buceo-tulum", BuceoTulum)}
+      {createLocalizedRoutes("/riviera-maya", RivieraMaya)}
+      {createLocalizedRoutes("/clima-tulum", ClimaTulum)}
       {createLocalizedRoutes("/blog/:slug", BlogPost)}
       {createLocalizedRoutes("/blog", Blog)}
       {createLocalizedRoutes("/contacto", Contacto)}

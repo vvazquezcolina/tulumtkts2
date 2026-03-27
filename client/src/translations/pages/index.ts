@@ -9,6 +9,7 @@ import vuelosTranslations from './vuelos';
 import hotelesTranslations from './hoteles';
 import { cenotesTulum } from './cenotes-tulum';
 import { tulumGuiaCompleta } from './tulum-guia-completa';
+import { rivieraMaya } from './riviera-maya';
 
 export default {
   es: {
@@ -22,6 +23,7 @@ export default {
     hoteles: hotelesTranslations.es,
     cenotesTulum: cenotesTulum.es,
     tulumGuiaCompleta: tulumGuiaCompleta.es,
+    rivieraMaya: rivieraMaya.es,
   },
   en: {
     ...homeTranslations.en,
@@ -34,6 +36,7 @@ export default {
     hoteles: hotelesTranslations.en,
     cenotesTulum: cenotesTulum.en,
     tulumGuiaCompleta: tulumGuiaCompleta.en,
+    rivieraMaya: rivieraMaya.en,
   },
   fr: {
     ...homeTranslations.fr,
@@ -46,6 +49,7 @@ export default {
     hoteles: hotelesTranslations.fr,
     cenotesTulum: cenotesTulum.fr,
     tulumGuiaCompleta: tulumGuiaCompleta.fr,
+    rivieraMaya: rivieraMaya.fr,
   },
   it: {
     ...homeTranslations.it,
@@ -58,6 +62,7 @@ export default {
     hoteles: hotelesTranslations.it,
     cenotesTulum: cenotesTulum.it,
     tulumGuiaCompleta: tulumGuiaCompleta.it,
+    rivieraMaya: rivieraMaya.it,
   },
 };
 
