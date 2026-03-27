@@ -31,28 +31,21 @@ export class ErrorBoundary extends Component<Props, State> {
       // You can render any custom fallback UI
       return (
         this.props.fallback || (
-          <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
-              <h1 className="text-2xl font-bold text-gray-900 mb-4">
-                Algo salió mal
+          <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div className="text-center max-w-md">
+              <div className="text-6xl mb-4">🏖️</div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                Something went wrong
               </h1>
-              <p className="text-gray-600 mb-4">
-                Oops, parece que hubo un error. Por favor, intenta recargar la página.
+              <p className="text-gray-600 mb-6">
+                Don't worry, our team is on it. Try refreshing the page.
               </p>
               <button
                 onClick={() => window.location.reload()}
-                className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary/90"
+                className="bg-[#2FBBB9] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#2FBBB9]/90 transition-colors"
               >
-                Recargar página
+                Refresh Page
               </button>
-              {this.state.error && (
-                <details className="mt-4 text-sm text-gray-500">
-                  <summary className="cursor-pointer">Detalles del error</summary>
-                  <pre className="mt-2 overflow-auto text-xs">
-                    {this.state.error.toString()}
-                  </pre>
-                </details>
-              )}
             </div>
           </div>
         )

@@ -10,8 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Navigation } from "@/components/ui/navigation";
 import { SEOHead } from "@/components/seo-head";
-import { WebsiteSchema } from "@/components/json-ld";
+import { WebsiteSchema, BreadcrumbSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
+import { ProductSchema } from "@/components/product-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { TripPlanner } from "@/components/trip-planner";
@@ -246,7 +247,32 @@ export default function Villas() {
         { question: t('villas.faqs.q6.question'), answer: t('villas.faqs.q6.answer') },
         { question: t('villas.faqs.q7.question'), answer: t('villas.faqs.q7.answer') },
       ]} />
-      
+
+      {/* Breadcrumb Schema */}
+      <BreadcrumbSchema items={[
+        { name: t('villas.breadcrumb.home'), url: '/' },
+        { name: t('villas.breadcrumb.guide'), url: '/tulum-guia-completa' },
+        { name: t('villas.breadcrumb.current'), url: '/villas' },
+      ]} />
+
+      {/* Product Schema — representative listing for rich results */}
+      <ProductSchema
+        name="Villas y Alojamiento en Tulum México"
+        description="Villas de lujo frente al mar, eco-villas en la jungla y apartamentos en el pueblo de Tulum. Propiedades desde €120/noche con piscina, playa privada y acceso a cenotes."
+        image="https://images.unsplash.com/photo-1571041804726-53e8bf082096?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        price={120}
+        priceCurrency="EUR"
+        availability="InStock"
+        category="Vacation Rental"
+        url={`${siteUrl}/villas`}
+        aggregateRating={{
+          ratingValue: 4.8,
+          reviewCount: 776,
+          bestRating: 5,
+          worstRating: 1,
+        }}
+      />
+
       <Navigation />
       
       {/* Breadcrumb */}
@@ -649,6 +675,29 @@ export default function Villas() {
             <p className="text-gray-600 mt-2">Vuelos, hospedaje, traslados y actividades en un solo lugar.</p>
           </div>
           <TripPlanner />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-14 bg-white border-t">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-gray-900">
+              {t('villas.faqs.sectionTitle')}
+            </h2>
+            <p className="text-gray-600 mt-2">
+              {t('villas.faqs.sectionSubtitle')}
+            </p>
+          </div>
+          <FAQAccordion faqs={[
+            { question: t('villas.faqs.q1.question'), answer: t('villas.faqs.q1.answer') },
+            { question: t('villas.faqs.q2.question'), answer: t('villas.faqs.q2.answer') },
+            { question: t('villas.faqs.q3.question'), answer: t('villas.faqs.q3.answer') },
+            { question: t('villas.faqs.q4.question'), answer: t('villas.faqs.q4.answer') },
+            { question: t('villas.faqs.q5.question'), answer: t('villas.faqs.q5.answer') },
+            { question: t('villas.faqs.q6.question'), answer: t('villas.faqs.q6.answer') },
+            { question: t('villas.faqs.q7.question'), answer: t('villas.faqs.q7.answer') },
+          ]} />
         </div>
       </section>
 

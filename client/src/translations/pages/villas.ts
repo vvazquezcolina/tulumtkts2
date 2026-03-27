@@ -51,6 +51,8 @@ export default {
       lagoon: 'Laguna',
     },
     faqs: {
+      sectionTitle: 'Preguntas Frecuentes sobre Hoteles y Villas en Tulum',
+      sectionSubtitle: 'Todo lo que necesitas saber antes de reservar tu alojamiento en Tulum',
       q1: {
         question: '¿Cuáles son los mejores hoteles en Tulum?',
         answer: 'Los mejores hoteles en Tulum incluyen resorts de lujo en la playa como Azulik, Be Tulum, y Habitas Tulum, hoteles boutique ecológicos como Coco Limited y Diamante K, y villas privadas en la zona hotelera. La elección depende de tu presupuesto y preferencias: zona playa para acceso directo al mar y vida nocturna, o pueblo de Tulum para autenticidad y precios más accesibles.',
@@ -130,6 +132,8 @@ export default {
       lagoon: 'Lagoon',
     },
     faqs: {
+      sectionTitle: 'Frequently Asked Questions about Hotels & Villas in Tulum',
+      sectionSubtitle: 'Everything you need to know before booking your stay in Tulum',
       q1: {
         question: 'What are the best hotels in Tulum?',
         answer: 'The best hotels in Tulum include luxury beach resorts like Azulik, Be Tulum, and Habitas Tulum, eco-friendly boutique hotels like Coco Limited and Diamante K, and private villas in the hotel zone. The choice depends on your budget and preferences: beach zone for direct access to the sea and nightlife, or Tulum town for authenticity and more affordable prices.',
@@ -209,6 +213,8 @@ export default {
       lagoon: 'Lagon',
     },
     faqs: {
+      sectionTitle: 'Foire aux Questions sur les Hôtels et Villas à Tulum',
+      sectionSubtitle: 'Tout ce que vous devez savoir avant de réserver votre hébergement à Tulum',
       q1: {
         question: 'Quels sont les meilleurs hôtels à Tulum?',
         answer: 'Les meilleurs hôtels à Tulum incluent des resorts de luxe sur la plage comme Azulik, Be Tulum, et Habitas Tulum, des hôtels boutique écologiques comme Coco Limited et Diamante K, et des villas privées dans la zone hôtelière. Le choix dépend de votre budget et préférences: zone plage pour accès direct à la mer et vie nocturne, ou village de Tulum pour authenticité et prix plus abordables.',
@@ -288,6 +294,8 @@ export default {
       lagoon: 'Laguna',
     },
     faqs: {
+      sectionTitle: 'Domande Frequenti su Hotel e Ville a Tulum',
+      sectionSubtitle: 'Tutto quello che devi sapere prima di prenotare il tuo alloggio a Tulum',
       q1: {
         question: 'Quali sono i migliori hotel a Tulum?',
         answer: 'I migliori hotel a Tulum includono resort di lusso sulla spiaggia come Azulik, Be Tulum, e Habitas Tulum, hotel boutique ecologici come Coco Limited e Diamante K, e ville private nella zona alberghiera. La scelta dipende dal tuo budget e preferenze: zona spiaggia per accesso diretto al mare e vita notturna, o centro di Tulum per autenticità e prezzi più accessibili.',

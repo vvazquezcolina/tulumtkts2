@@ -122,6 +122,7 @@ export default function Home() {
         ]}
         canonicalUrl={siteUrl}
         ogType="website"
+        ogImage="https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
       />
       <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
       <OrganizationSchema 
