@@ -43,6 +43,8 @@ export default function Contacto() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
+
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
@@ -55,7 +57,7 @@ export default function Contacto() {
           'ayuda tulum',
           'reservas tulum',
         ]}
-        canonicalUrl="/contacto"
+        canonicalUrl={`${siteUrl}/contacto`}
       />
       <Navigation />
       {/* Hero Section */}

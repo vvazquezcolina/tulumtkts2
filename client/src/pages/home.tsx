@@ -154,7 +154,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative" aria-label="Hero">
+      <section id="main-content" className="relative" aria-label="Hero">
         <div className="h-[650px] md:h-[600px] relative overflow-hidden">
           {/* YouTube Video Background */}
           <div className="absolute inset-0 w-full h-full">
