@@ -170,7 +170,7 @@ export default function Experiencias() {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 page-enter">
       <SEOHead
         title={t('experiencias.title')}
         description={t('experiencias.description')}

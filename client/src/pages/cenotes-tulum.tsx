@@ -89,7 +89,7 @@ export default function CenotesTulum() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 page-enter">
       <SEOHead
         title="Cenotes en Tulum México 2026: Los Mejores Cenotes para Visitar | TulumTkts"
         description="Descubre los mejores cenotes en Tulum México 2026: Gran Cenote, Dos Ojos, Calavera y más. Guía completa con precios, cómo llegar, tours y consejos para tu visita. Reserva tours a cenotes con los mejores precios."

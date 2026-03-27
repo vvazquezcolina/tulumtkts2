@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/ui/navigation";
-import { Star, Clock, Heart, Search, ArrowRight, MapPin } from "lucide-react";
+import { Star, Clock, Heart, Search, ArrowRight, MapPin, Mail, CheckCircle } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { generateAffiliateLink, generateFlightLink, generateHotelLink, trackAffiliateClick } from "@/lib/affiliate";
 import { TripPlanner } from "@/components/trip-planner";
@@ -36,6 +36,7 @@ export default function Home() {
   const [searchDate, setSearchDate] = useState("");
   const [searchGuests, setSearchGuests] = useState("");
   const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
@@ -92,7 +93,7 @@ export default function Home() {
 
   const handleNewsletterSignup = () => {
     if (email) {
-      // TODO: Implement newsletter signup API call
+      setSubscribed(true);
       setEmail("");
     }
   };
@@ -177,15 +178,15 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white max-w-4xl mx-auto px-4">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in-up">
                 {t('hero.title', { tours: t('hero.tours') })}
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200">
+              <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200 animate-fade-in-up animation-delay-200">
                 {t('hero.subtitle')}
               </p>
 
               {/* Trust Stats */}
-              <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mb-6">
+              <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mb-6 animate-fade-in animation-delay-400">
                 <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   <span className="text-sm font-medium">4.8/5 Rating</span>
@@ -201,7 +202,7 @@ export default function Home() {
               </div>
 
               {/* Search Bar */}
-              <Card role="search" className="p-6 shadow-2xl max-w-3xl mx-auto">
+              <Card role="search" className="p-6 shadow-2xl max-w-3xl mx-auto animate-fade-in-up animation-delay-600">
                 <CardContent className="p-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div className="md:col-span-2 lg:col-span-2">
@@ -359,20 +360,24 @@ export default function Home() {
               {
                 name: t('categories.cenotes'),
                 image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
-                url: "/cenotes-tulum"
+                url: "/cenotes-tulum",
+                count: "50+"
               },
               {
                 name: t('categories.mayanRuins'),
                 image: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
-                url: "/experiencias?category=arqueologia"
+                url: "/experiencias?category=arqueologia",
+                count: "30+"
               },
               {
                 name: t('categories.beachTours'),
-                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+                count: "40+"
               },
               {
                 name: t('categories.adventure'),
-                image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600"
+                image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+                count: "25+"
               }
             ].map((category) => (
               <div 
@@ -395,8 +400,11 @@ export default function Home() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4">
+                  <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 right-2 md:right-4 flex items-end justify-between">
                     <h3 className="text-white font-semibold text-sm md:text-lg">{category.name}</h3>
+                    <span className="text-xs bg-white/25 backdrop-blur-sm text-white rounded-full px-2 py-0.5">
+                      {category.count} tours
+                    </span>
                   </div>
                 </div>
               </div>
@@ -443,7 +451,7 @@ export default function Home() {
                 </Card>
               ))
             ) : (
-              (experiencesData?.data?.slice(0, 6) || []).map((experience) => {
+              (experiencesData?.data?.slice(0, 6) || []).map((experience, index) => {
                 const activityId = experience.activity_id;
                 const title = experience.title;
                 const description = experience.abstract;
@@ -466,6 +474,13 @@ export default function Home() {
                       loading="lazy"
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+                    {index < 2 && (
+                      <div className="absolute bottom-4 left-4">
+                        <Badge className="bg-orange-500 text-white shadow-md">
+                          {t('featured.popular')}
+                        </Badge>
+                      </div>
+                    )}
                     <div className="absolute top-4 left-4">
                       {experience.instant_confirmation && (
                         <Badge className="bg-green-600 text-white mr-2">
@@ -612,32 +627,51 @@ export default function Home() {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-gradient-to-r from-primary to-blue-500">
+      <section className="py-16 bg-gradient-to-br from-primary via-blue-500 to-cyan-400">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t('newsletter.title')}
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            {t('newsletter.subtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input 
-              type="email" 
-              placeholder={t('newsletter.emailPlaceholder')}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 border-0 focus:ring-4 focus:ring-white/30 focus:outline-none"
-            />
-            <Button 
-              onClick={handleNewsletterSignup}
-              className="bg-secondary text-white hover:bg-secondary/90 whitespace-nowrap"
-            >
-              {t('newsletter.subscribe')}
-            </Button>
-          </div>
-          <p className="text-sm text-blue-100 mt-4">
-            {t('newsletter.noSpam')}
-          </p>
+          {subscribed ? (
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                {t('newsletter.successTitle')}
+              </h2>
+              <p className="text-xl text-blue-100">
+                {t('newsletter.successSubtitle')}
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-7 h-7 text-white" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                {t('newsletter.title')}
+              </h2>
+              <p className="text-xl text-blue-100 mb-8">
+                {t('newsletter.subtitle')}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <Input
+                  type="email"
+                  placeholder={t('newsletter.emailPlaceholder')}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 border-0 focus:ring-4 focus:ring-white/30 focus:outline-none"
+                />
+                <Button
+                  onClick={handleNewsletterSignup}
+                  className="bg-secondary text-white hover:bg-secondary/90 whitespace-nowrap"
+                >
+                  {t('newsletter.subscribe')}
+                </Button>
+              </div>
+              <p className="text-sm text-blue-100 mt-4">
+                {t('newsletter.noSpam')}
+              </p>
+            </>
+          )}
         </div>
       </section>
 

@@ -104,7 +104,7 @@ export default function Eventos() {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 page-enter">
       <SEOHead
         title={t('eventos.title')}
         description={t('eventos.description')}
@@ -263,6 +263,13 @@ export default function Eventos() {
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Badge variant="outline">{event.category}</Badge>
+                      <div className="flex items-center gap-1.5 ml-auto">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span className="text-xs text-green-600 font-medium">{t('eventos.upcoming.badge')}</span>
+                      </div>
                     </div>
                     
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
@@ -328,7 +335,16 @@ export default function Eventos() {
                   </div>
                   
                   <CardContent className="p-4">
-                    <Badge variant="outline" className="text-xs mb-2">{event.category}</Badge>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="outline" className="text-xs">{event.category}</Badge>
+                      <div className="flex items-center gap-1.5 ml-auto">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span className="text-xs text-green-600 font-medium">{t('eventos.upcoming.badge')}</span>
+                      </div>
+                    </div>
                     
                     <h3 className="font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
                       {event.title}

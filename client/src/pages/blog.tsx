@@ -164,7 +164,7 @@ export default function Blog() {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://tulumtkts.com';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 page-enter">
       <SEOHead
         title="Blog y Guías de Viaje de Tulum | TulumTkts"
         description="Descubre las mejores guías de viaje sobre Tulum: clima, actividades, cenotes, restaurantes, hoteles y más. Tu fuente de información experta sobre Tulum y la Riviera Maya."

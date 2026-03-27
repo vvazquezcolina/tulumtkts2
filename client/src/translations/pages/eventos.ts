@@ -22,6 +22,7 @@ export default {
     },
     upcoming: {
       title: 'Próximos Eventos',
+      badge: 'Próximamente',
     },
     allEvents: {
       title: 'Todos los Eventos',
@@ -88,6 +89,7 @@ export default {
     },
     upcoming: {
       title: 'Upcoming Events',
+      badge: 'Upcoming',
     },
     allEvents: {
       title: 'All Events',
@@ -154,6 +156,7 @@ export default {
     },
     upcoming: {
       title: 'Événements à Venir',
+      badge: 'Prochainement',
     },
     allEvents: {
       title: 'Tous les Événements',
@@ -220,6 +223,7 @@ export default {
     },
     upcoming: {
       title: 'Prossimi Eventi',
+      badge: 'Prossimamente',
     },
     allEvents: {
       title: 'Tutti gli Eventi',
