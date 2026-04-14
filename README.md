@@ -1,187 +1,88 @@
-# TulumTkts - Comprehensive Tourism Platform
+# TulumTkts — Tourism Platform for Tulum (Legacy)
 
-## Overview
+> Trilingual, full-stack tourism booking app for Tulum — React + Express + TypeScript, consolidating events, tours, villas, transfers and travel guides into a single affiliate-aware storefront.
 
-TulumTkts is a comprehensive tourism platform for Tulum, Mexico, built with React frontend and Express.js backend. The platform serves as the #1 booking destination for Tulum experiences, featuring multiple sections: Events & Festivals, Tours & Experiences, Villa Rentals, Transportation, and Travel Guides.
+> **Status: archived / under rewrite.** This is the first public iteration and currently ships with known bugs. A rewrite is in progress in a private repo; the code here is kept for reference, not as a recommended starting point.
 
-## Features
+![Stack](https://img.shields.io/badge/stack-React%20%2B%20Express%20%2B%20TypeScript-3178c6)
+![i18n](https://img.shields.io/badge/i18n-ES%20%7C%20EN%20%7C%20FR-4c9aff)
+![Status](https://img.shields.io/badge/status-legacy-yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-- **Multilingual Support**: Spanish, English, and French
-- **Experience Booking**: Integration with Travelpayouts API
-- **Affiliate Tracking**: Built-in affiliate link generation and tracking via Travelpayouts
-- **Modern UI**: Built with Shadcn/ui components and TailwindCSS
-- **Type Safety**: Full TypeScript implementation
-- **Analytics**: Google Analytics 4 integration
-- **Content Management**: Manual content updates through code
+---
 
-## Tech Stack
+## What it was
 
-### Frontend
-- React 18 + TypeScript
-- Vite (Build tool)
-- TailwindCSS + Shadcn/ui
-- Wouter (Routing)
-- TanStack Query (Data fetching)
+An attempt to consolidate Tulum's fragmented booking ecosystem (events, villas, tours, transfers, flights) into a single trilingual storefront, monetized through the Travelpayouts affiliate network. The goal was a one-stop site where a traveler from Paris, New York or Mexico City could plan a full trip without bouncing between OTAs.
 
-### Backend
-- Express.js + TypeScript
-- Travelpayouts API integration
-- Affiliate tracking system
+## What worked
 
-### External Services
-- **Bookings**: Travelpayouts (activities, flights, hotels)
-- **Analytics**: Google Analytics 4
-- **Content**: Manual management through code
+- **Trilingual routing** — Spanish, English and French with locale-aware SEO
+- **Travelpayouts integration** — activities, flights, hotels and monthly price calendars pulled from a single adapter
+- **Affiliate click tracking** — `POST /api/affiliate/track` logged every outbound booking click
+- **Pexels blog image pipeline** — dynamic cover images with API-key quota protection
+- **Build-time SEO pipeline** — custom scripts embedded sitemap data into the client bundle at build time
+- **40+ accessible UI primitives** via shadcn/ui on top of Radix
+- **Single-artifact deploy to Vercel** — Vite + esbuild pipeline, both client and server bundled in one build
 
-## Deployment to Vercel
+## What didn't
 
-### Prerequisites
+- **API drift** — the Travelpayouts endpoints changed shape and the adapter wasn't versioned; several routes now return errors on the live site.
+- **Monolithic Express server in serverless** — the cold-start characteristics don't match the traffic shape; the rewrite is splitting it into discrete serverless functions.
+- **Content maintenance via CSV** — worked for MVP, hit limits at scale.
 
-1. **Vercel Account**: Sign up at [vercel.com](https://vercel.com)
-2. **GitHub Repository**: Push your code to GitHub
-3. **Travelpayouts API**: Get your API token from [Travelpayouts Partner Portal](https://www.travelpayouts.com/developers/api)
+## Tech stack
 
-### Environment Variables
+| Layer | Choice |
+|---|---|
+| Frontend | React 18 + TypeScript + Vite |
+| UI | Tailwind CSS, shadcn/ui (Radix), Framer Motion |
+| Routing | Wouter |
+| Data | TanStack Query + Zod |
+| Forms | react-hook-form + `@hookform/resolvers` |
+| Backend | Express 4 + TypeScript (tsx dev, esbuild prod) |
+| External APIs | Travelpayouts, Pexels, Google Analytics 4 |
+| Deploy | Vercel (monolithic `vercel.json`) |
 
-Set these environment variables in your Vercel project:
+## Architecture
+
+```
+├── client/              # React frontend (Vite)
+│   └── src/
+│       ├── pages/       # Route-level views (ES / EN / FR)
+│       ├── components/  # shadcn/ui + custom blocks
+│       ├── hooks/
+│       └── lib/
+├── server/              # Express backend (TypeScript)
+│   ├── routes.ts        # REST endpoints
+│   └── services/        # Travelpayouts + Pexels adapters
+├── scripts/             # Build-time sitemap generator
+└── vercel.json
+```
+
+## Running locally
 
 ```bash
-# Travelpayouts API Configuration
-TRAVELPAYOUTS_API_TOKEN=your_travelpayouts_api_token_here
-TRAVELPAYOUTS_MARKER=your_travelpayouts_marker_here  # Optional, defaults to API token
-
-# Pexels API Configuration (for blog images)
-PEXELS_API_KEY=your_pexels_api_key_here  # Get from https://www.pexels.com/api/
-
-# Application Configuration
-NODE_ENV=production
+git clone https://github.com/vvazquezcolina/tulumtkts2.git
+cd tulumtkts2
+npm install
+cp .env.example .env.local   # Travelpayouts + Pexels keys
+npm run dev                  # Vite + Express, http://localhost:5173
 ```
 
-### Deployment Steps
+### Environment variables
 
-1. **Connect Repository**:
-   - Go to Vercel Dashboard
-   - Click "New Project"
-   - Import your GitHub repository
-
-2. **Configure Build Settings**:
-   - Framework Preset: `Other`
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-
-3. **Set Environment Variables**:
-   - Add all required environment variables in the Vercel dashboard
-   - Make sure `TRAVELPAYOUTS_API_TOKEN` is set
-
-4. **Deploy**:
-   - Click "Deploy"
-   - Vercel will automatically build and deploy your application
-
-## Local Development
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Travelpayouts API token (get it from [Travelpayouts Partner Portal](https://www.travelpayouts.com/developers/api))
-
-### Setup
-
-1. **Clone Repository**:
-   ```bash
-   git clone <your-repo-url>
-   cd TulumTkts
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Environment Setup**:
-   ```bash
-   # Create .env.local file with your configuration
-   echo "TRAVELPAYOUTS_API_TOKEN=your_travelpayouts_api_token_here" > .env.local
-   echo "TRAVELPAYOUTS_MARKER=your_travelpayouts_marker_here" >> .env.local  # Optional
-   echo "PEXELS_API_KEY=your_pexels_api_key_here" >> .env.local  # For blog images
-   ```
-
-4. **Start Development Server**:
-   ```bash
-   npm run dev
-   ```
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run check` - Type checking
-
-## Project Structure
-
+```bash
+TRAVELPAYOUTS_API_TOKEN=...
+TRAVELPAYOUTS_MARKER=...   # optional, defaults to token
+PEXELS_API_KEY=...         # for blog images
+NODE_ENV=development
 ```
-TulumTkts/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── pages/         # Page components
-│   │   ├── hooks/         # Custom hooks
-│   │   └── lib/           # Utilities
-│   └── index.html
-├── server/                # Express.js backend
-│   ├── routes.ts          # API routes
-│   └── services/          # External service integrations
-└── vercel.json           # Vercel configuration
-```
-
-## API Endpoints
-
-- `GET /api/experiences/tulum` - Get Tulum experiences
-- `GET /api/experiences/:activityId` - Get specific activity details
-- `GET /api/travelpayouts/status` - Get Travelpayouts API status
-- `GET /api/flights/search` - Search flights
-- `GET /api/flights/cheap` - Get cheap flights
-- `GET /api/flights/monthly` - Get monthly flight prices
-- `GET /api/flights/calendar` - Get calendar prices
-- `GET /api/hotels/search` - Search hotels
-- `GET /api/hotels/:hotelId` - Get hotel details
-- `POST /api/affiliate/track` - Track affiliate clicks
-
-## Content Management
-
-Content is managed manually through code:
-
-1. **Experiences**: Update CSV file `TulumTkts_Activities.csv` with activity data
-2. **Pages**: Edit React components in `client/src/pages/`
-3. **UI Components**: Modify Shadcn/ui components in `client/src/components/`
-4. **Styling**: Update TailwindCSS classes and custom styles
-
-The platform uses Travelpayouts API for:
-- Activities/Tours (loaded from CSV with affiliate links)
-- Flight searches and bookings
-- Hotel searches and bookings
-
-## Analytics Setup
-
-Google Analytics 4 is integrated for tracking:
-
-- Page views
-- User interactions
-- Affiliate link clicks
-- Conversion tracking
-- Performance metrics
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT — see `LICENSE`.
 
+---
+
+**Author:** [Victor Vazquez](https://github.com/vvazquezcolina) — digital strategist and builder, Cancún MX.
