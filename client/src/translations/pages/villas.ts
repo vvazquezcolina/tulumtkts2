@@ -44,6 +44,9 @@ export default {
       title: 'Villas Destacadas',
       subtitle: 'Nuestras propiedades más exclusivas y populares',
     },
+    allVillas: {
+      title: 'Todas las Propiedades',
+    },
     locations: {
       beach: 'Playa',
       jungle: 'Jungla',
