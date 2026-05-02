@@ -317,7 +317,7 @@ export default function Transporte() {
                       <Label className="block text-sm font-medium mb-2">{t('transporte.search.passengers')}</Label>
                       <Select value={passengers} onValueChange={setPassengers}>
                         <SelectTrigger>
-                          <SelectValue placeholder={t('labels.selectGuests')} />
+                          <SelectValue placeholder={t('buttons.selectGuests')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="2">2 {t('transporte.search.passengers')}</SelectItem>

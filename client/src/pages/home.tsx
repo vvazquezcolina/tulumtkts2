@@ -130,7 +130,7 @@ export default function Home() {
         ]}
         canonicalUrl={siteUrl}
         ogType="website"
-        ogImage="https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
+        ogImage="https://images.unsplash.com/photo-1518638150340-f706e86654de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630"
       />
       <WebsiteSchema siteUrl={siteUrl} siteName="TulumTkts" />
       <OrganizationSchema 
@@ -160,7 +160,7 @@ export default function Home() {
           <div className="absolute inset-0 w-full h-full">
             {/* Fallback image — always visible until video loads */}
             <img
-              src="https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+              src="https://images.unsplash.com/photo-1518638150340-f706e86654de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
               fetchPriority="high"

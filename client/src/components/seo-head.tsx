@@ -61,8 +61,16 @@ export function SEOHead({
     const baseTitle = baseTitles[locale] || baseTitles['es'];
     const baseDescription = baseDescriptions[locale] || baseDescriptions['es'];
     
-    // Update document title
-    document.title = title ? `${title} | ${baseTitle.split(' - ')[0]}` : baseTitle;
+    // Update document title — many page-level translations already end with
+    // "| TulumTkts", so don't append a second copy when that's the case.
+    const siteName = baseTitle.split(' - ')[0];
+    if (!title) {
+      document.title = baseTitle;
+    } else if (title.toLowerCase().includes(siteName.toLowerCase())) {
+      document.title = title;
+    } else {
+      document.title = `${title} | ${siteName}`;
+    }
 
     // Update or create meta tags
     const updateMetaTag = (name: string, content: string, isProperty = false) => {
