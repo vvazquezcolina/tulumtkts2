@@ -27,7 +27,7 @@ const destinations = [
     description: "Bohemian beach town with Mayan ruins and cenotes",
     highlights: ["Beach ruins", "Cenotes", "Eco-resorts"],
     link: "/",
-    image: "https://images.unsplash.com/photo-1574181419028-e8c44c95a6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    image: "https://images.unsplash.com/photo-1518638150340-f706e86654de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
   },
   {
     name: "Playa del Carmen",
