@@ -13,6 +13,7 @@ import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { generateAffiliateLink } from "@/lib/affiliate";
+import { HotelSearchWidget } from "@/components/travelpayouts/hotel-search-widget";
 import {
   Search,
   Star,
@@ -405,6 +406,21 @@ export default function Hoteles() {
               {t("hoteles.search.searchCaption")}
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Live Hotellook widget — real-time prices across 70+ booking sites */}
+      <section className="py-10 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              Compara precios en tiempo real
+            </h2>
+            <p className="text-sm text-gray-600">
+              Booking, Expedia, Hotels.com y 70+ sitios — todo en un solo lugar
+            </p>
+          </div>
+          <HotelSearchWidget destination="Tulum" locale="es" currency="usd" />
         </div>
       </section>
 

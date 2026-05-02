@@ -40,16 +40,13 @@ export interface CSVActivity {
   descripcion_larga: string;
 }
 
-// Travelpayouts affiliate configuration
-const TRAVELPAYOUTS_MARKER = process.env.TRAVELPAYOUTS_MARKER || process.env.TRAVELPAYOUTS_API_TOKEN || '9a350c3ebd492165ade7135359165af9';
-const GYG_PROGRAM_ID = '2074'; // GetYourGuide program ID in Travelpayouts
-
-/**
- * Wraps a target URL through Travelpayouts tp.media redirect for affiliate tracking.
- */
-function buildTravelpayoutsUrl(targetUrl: string, activityId: string): string {
-  const encodedUrl = encodeURIComponent(targetUrl);
-  return `https://tp.media/r?marker=${TRAVELPAYOUTS_MARKER}&p=${GYG_PROGRAM_ID}&u=${encodedUrl}&campaign_id=activity_${activityId}`;
+// 2026-05 — `https://tp.media/r?p=2074` (GetYourGuide via Travelpayouts) returns
+// HTTP 400 for this account, which surfaces in the UI as a "schema error" page
+// when users tap a "Reservar" button. The CSV's `link_gyg` column already
+// contains a valid GetYourGuide affiliate URL with `partner_id=EBGURF8` —
+// pass it through untouched so the click actually lands on a tour page.
+function buildActivityUrl(targetUrl: string, _activityId: string): string {
+  return targetUrl;
 }
 
 export function parseCSVActivities(): TravelpayoutsActivity[] {
@@ -198,7 +195,7 @@ export function parseCSVActivities(): TravelpayoutsActivity[] {
           longitude: -87.4286
         },
         categories: categories,
-        url: buildTravelpayoutsUrl(link_gyg, activityId),
+        url: buildActivityUrl(link_gyg, activityId),
         supplier: { name: 'TulumTkts' },
         bookable: true,
         instant_confirmation: true,
