@@ -14,6 +14,8 @@ import { useTulumExperiences, trackAffiliateClickAPI } from "@/hooks/use-travelp
 import { TravelpayoutsActivity } from "@/lib/travelpayouts";
 import { ApiStatusIndicator } from "@/components/ui/api-status-indicator";
 import { Navigation } from "@/components/ui/navigation";
+import { GetYourGuideWidget } from "@/components/travelpayouts/getyourguide-widget";
+import { HotelSearchWidget } from "@/components/travelpayouts/hotel-search-widget";
 import { SEOHead } from "@/components/seo-head";
 import { WebsiteSchema } from "@/components/json-ld";
 import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
@@ -283,6 +285,21 @@ export default function Experiencias() {
             <ApiStatusIndicator />
           </div>
           <AffiliateBanner />
+        </div>
+      </section>
+
+      {/* Live tour catalog (GetYourGuide widget — instant booking, real availability) */}
+      <section className="py-8 bg-white border-y">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              {t('experiencias.hero.title')}
+            </h2>
+            <p className="text-sm text-gray-600">
+              Disponibilidad en tiempo real · Cancelación gratuita en la mayoría de tours
+            </p>
+          </div>
+          <GetYourGuideWidget query="Tulum" variant="activities" numberOfItems={8} />
         </div>
       </section>
 
@@ -704,6 +721,21 @@ export default function Experiencias() {
             { question: t('experiencias.faqs.q7.question'), answer: t('experiencias.faqs.q7.answer') },
             { question: t('experiencias.faqs.q8.question'), answer: t('experiencias.faqs.q8.answer') },
           ]} className="bg-white rounded-lg shadow-md p-6" />
+        </div>
+      </section>
+
+      {/* Hotel cross-sell — visitors planning tours usually need lodging too */}
+      <section className="py-12 bg-white border-t">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              ¿Ya tienes dónde dormir en Tulum?
+            </h2>
+            <p className="text-sm text-gray-600">
+              Compara precios de eco-resorts, hoteles boutique y opciones económicas
+            </p>
+          </div>
+          <HotelSearchWidget destination="Tulum" />
         </div>
       </section>
 

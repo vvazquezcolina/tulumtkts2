@@ -101,23 +101,22 @@ class TravelpayoutsService {
     this.marker = process.env.TRAVELPAYOUTS_MARKER || this.token;
   }
 
-  // Generate affiliate URL for flights via tp.media redirect
+  // 2026-05 — direct partner URLs with `?marker=` injected. The
+  // tp.media/r?p=… redirect returns HTTP 400 for every program except
+  // Aviasales on this account, so we no longer wrap.
   generateFlightAffiliateUrl(origin: string, destination: string, departureDate?: string, returnDate?: string): string {
-    const searchUrl = `https://www.aviasales.com/search/${origin}${departureDate || ''}${destination}${returnDate || ''}`;
-    const encoded = encodeURIComponent(searchUrl);
-    return `https://tp.media/r?marker=${this.marker}&p=4114&u=${encoded}&campaign_id=flights_${origin}_${destination}`;
+    const params = new URLSearchParams({ marker: this.marker });
+    params.set('campaign_id', `flights_${origin}_${destination}`);
+    return `https://www.aviasales.com/search/${origin}${departureDate || ''}${destination}${returnDate || ''}?${params.toString()}`;
   }
 
-  // Generate affiliate URL for hotels via tp.media redirect
   generateHotelAffiliateUrl(location: string, checkIn?: string, checkOut?: string, hotelId?: string): string {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams({ destination: location, marker: this.marker });
     if (checkIn) params.set('checkIn', checkIn);
     if (checkOut) params.set('checkOut', checkOut);
     if (hotelId) params.set('hotelId', hotelId);
-    const query = params.toString();
-    const searchUrl = `https://www.hotellook.com/hotels/${location}${query ? '?' + query : ''}`;
-    const encoded = encodeURIComponent(searchUrl);
-    return `https://tp.media/r?marker=${this.marker}&p=4110&u=${encoded}&campaign_id=hotels_${location}`;
+    params.set('campaign_id', `hotels_${location}`);
+    return `https://search.hotellook.com/?${params.toString()}`;
   }
 
   // Search hotels using Hotellook API
@@ -256,10 +255,11 @@ class TravelpayoutsService {
     }
   }
 
-  // Generate affiliate URL for activities/tours via tp.media redirect
+  // 2026-05 — pass through the GetYourGuide affiliate URL stored in the CSV
+  // (already carries `partner_id=EBGURF8`). The tp.media `p=2074` redirect
+  // returns 400 on this account so wrapping it produces broken links.
   generateActivityAffiliateUrl(targetUrl: string): string {
-    const encoded = encodeURIComponent(targetUrl);
-    return `https://tp.media/r?marker=${this.marker}&p=2074&u=${encoded}`;
+    return targetUrl;
   }
 
   // Search flights

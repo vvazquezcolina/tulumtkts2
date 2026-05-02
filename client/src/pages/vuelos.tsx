@@ -12,6 +12,7 @@ import { FAQSchema, FAQAccordion } from "@/components/faq-schema";
 import { useI18n } from "@/contexts/i18n-context";
 import { useLocalizedLink } from "@/hooks/use-localized-link";
 import { generateFlightLink, trackAffiliateClick } from "@/lib/affiliate";
+import { FlightSearchWidget } from "@/components/travelpayouts/flight-search-widget";
 import {
   Plane,
   Search,
@@ -335,6 +336,21 @@ export default function Vuelos() {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Live Aviasales widget — searches across 100+ airlines, books on aviasales.com */}
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              Compara vuelos a Cancún (CUN)
+            </h2>
+            <p className="text-sm text-gray-600">
+              Más de 100 aerolíneas y agencias en tiempo real
+            </p>
+          </div>
+          <FlightSearchWidget destination="CUN" locale="es" currency="usd" />
         </div>
       </section>
 
