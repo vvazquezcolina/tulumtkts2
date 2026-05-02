@@ -273,15 +273,15 @@ export default function Transporte() {
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="cars" className="flex items-center gap-2">
                 <Car className="w-4 h-4" />
-                {t('transporte.tabs.carRentals')}
+                {t('transporte.tabs.carRentals._label')}
               </TabsTrigger>
               <TabsTrigger value="transfers" className="flex items-center gap-2">
                 <Plane className="w-4 h-4" />
-                {t('transporte.tabs.transfers')}
+                {t('transporte.tabs.transfers._label')}
               </TabsTrigger>
               <TabsTrigger value="other" className="flex items-center gap-2">
                 <Bike className="w-4 h-4" />
-                {t('transporte.tabs.other')}
+                {t('transporte.tabs.other._label')}
               </TabsTrigger>
             </TabsList>
 
