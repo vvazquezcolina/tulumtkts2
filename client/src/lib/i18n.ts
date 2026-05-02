@@ -68,15 +68,30 @@ export function t(
   return key; // Fallback final
 }
 
-// Función para registrar traducciones
+// Deep-merge plain-object translations.
+//
+// 2026-05 — earlier this used a shallow `{...a, ...b}`. When a page-level
+// translation file (e.g. home.ts) declared a top-level `crossSell: {title}`
+// it overwrote the entire `crossSell.items` block from common.ts, leaving
+// every cross-sell card rendering raw keys like `crossSell.items.flights.title`.
+function deepMerge(target: Translations, source: Translations): Translations {
+  const out: Translations = { ...target };
+  for (const key of Object.keys(source)) {
+    const a = out[key];
+    const b = source[key];
+    const bothPlainObjects =
+      a && b && typeof a === 'object' && typeof b === 'object' &&
+      !Array.isArray(a) && !Array.isArray(b);
+    out[key] = bothPlainObjects ? deepMerge(a, b) : b;
+  }
+  return out;
+}
+
 export function registerTranslations(
   locale: SupportedLocale,
   translation: Translations
 ) {
-  translations[locale] = {
-    ...translations[locale],
-    ...translation,
-  };
+  translations[locale] = deepMerge(translations[locale] || {}, translation);
 }
 
 // Función para obtener el idioma del navegador

@@ -13,9 +13,67 @@ export default {
       subtitle: 'Renta de autos, traslados del aeropuerto, shuttles y más opciones de transporte en Tulum',
     },
     tabs: {
-      carRentals: 'Renta de Autos',
-      transfers: 'Traslados',
-      other: 'Otras Opciones',
+      carRentals: {
+        _label: 'Renta de Autos',
+        title: 'Renta de Autos en Tulum',
+        description: 'Compara cientos de coches de las principales agencias en Cancún y Tulum. Tarifas transparentes, cancelación gratuita y seguro incluido.',
+        searchTitle: '¿Cuándo necesitas el auto?',
+      },
+      transfers: {
+        _label: 'Traslados',
+        title: 'Traslados Aeropuerto Cancún → Tulum',
+        description: 'Llega seguro y cómodo desde el aeropuerto de Cancún hasta tu hotel. Conductores certificados, precio fijo y monitoreo de vuelo en tiempo real.',
+        searchTitle: 'Cotiza tu traslado',
+      },
+      other: {
+        _label: 'Otras Opciones',
+        title: 'Otras Opciones de Transporte',
+        description: 'Renta de bicicletas, scooters y motos para moverte por Tulum. Ideal para distancias cortas y para experimentar la zona como un local.',
+      },
+    },
+    units: {
+      perDay: 'por día',
+      perTrip: 'por viaje',
+      people: 'personas',
+      bags: 'maletas',
+      more: 'más',
+    },
+    buttons: {
+      bookNow: 'Reservar Ahora',
+      quoteTransfer: 'Cotizar Traslado',
+      book: 'Reservar',
+      rentNow: 'Rentar Ahora',
+    },
+    form: {
+      flightDate: 'Fecha del vuelo',
+      arrivalTime: 'Hora de llegada',
+      passengers: 'Pasajeros',
+      quantity: 'Cantidad',
+      passengerOptions: {
+        one: '1 pasajero',
+        two: '2 pasajeros',
+        threeFour: '3-4 pasajeros',
+        fiveSix: '5-6 pasajeros',
+        sevenPlus: '7+ pasajeros',
+      },
+    },
+    tips: {
+      title: 'Consejos para moverte en Tulum',
+    },
+    insurance: {
+      title: 'Seguro de Viaje',
+      subtitle: 'Viaja protegido con cobertura médica internacional, equipaje y cancelación.',
+      from: 'desde',
+      perDay: '/día',
+    },
+    esim: {
+      title: 'eSIM México',
+      subtitle: 'Internet móvil al instante. Sin cambiar de SIM. Activa tu eSIM antes de aterrizar.',
+      buy: 'Comprar eSIM',
+    },
+    crossSell: {
+      title: 'Completa tu viaje a Tulum',
+      subtitle: 'Vuelos, hoteles y experiencias — todo en un solo lugar.',
     },
     carRental: {
       features: 'Características',

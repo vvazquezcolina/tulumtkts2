@@ -238,7 +238,7 @@ export default function Home() {
                       <Label className="block text-sm font-medium text-gray-700 mb-2 text-left">{t('hero.guestsLabel')}</Label>
                       <Select value={searchGuests} onValueChange={setSearchGuests}>
                         <SelectTrigger className="focus:ring-2 focus:ring-primary focus:border-transparent">
-                          <SelectValue placeholder={t('labels.selectGuests')} />
+                          <SelectValue placeholder={t('buttons.selectGuests')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="1">{t('hero.guestOptions.one')}</SelectItem>

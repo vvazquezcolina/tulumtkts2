@@ -3,6 +3,19 @@ export default {
   es: {
     title: 'Hoteles en Tulum - Encuentra el Mejor Alojamiento | TulumTkts',
     description: 'Busca y compara hoteles en Tulum. Eco-resorts de lujo en la Zona Hotelera, boutiques económicos en el pueblo y retiros en la selva. Precios desde $50/noche con cancelación gratuita.',
+    seo: {
+      title: 'Hoteles en Tulum - Encuentra el Mejor Alojamiento | TulumTkts',
+      description: 'Busca y compara hoteles en Tulum. Eco-resorts de lujo en la Zona Hotelera, boutiques económicos en el pueblo y retiros en la selva. Precios desde $50/noche con cancelación gratuita.',
+    },
+    search: {
+      checkIn: 'Entrada',
+      checkOut: 'Salida',
+      guests: 'Huéspedes',
+      guestSingular: 'huésped',
+      guestPlural: 'huéspedes',
+      searchButton: 'Buscar hoteles',
+      searchCaption: 'Comparamos precios en cientos de webs. Sin cargos extra al reservar.',
+    },
     breadcrumb: {
       home: 'Inicio',
       guide: 'Guía de Tulum',
@@ -24,6 +37,15 @@ export default {
       securePay: 'Pago seguro',
       instantConfirm: 'Confirmación instantánea',
       hotelsCount: '+500 hoteles en Tulum',
+      hotelCount: '+500 hoteles en Tulum',
+    },
+    crossSell: {
+      title: 'Completa tu viaje a Tulum',
+      subtitle: 'Tu hotel ya está listo. Ahora prepara el resto de tu aventura.',
+    },
+    faq: {
+      title: 'Preguntas Frecuentes sobre Hoteles en Tulum',
+      subtitle: 'Resuelve tus dudas antes de reservar',
     },
     zones: {
       title: 'Zonas para hospedarse',
