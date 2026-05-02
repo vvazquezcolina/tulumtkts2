@@ -93,44 +93,11 @@ export default function Experiencias() {
   // Use real Travelpayouts data from CSV
   const experiences: Experience[] = formattedExperiences;
 
-  // Helper function to map categories from CSV to display categories
-  const mapCategory = (category: string): string => {
-    return mapCategoryFromCSV(category);
-  };
-
-  // Categorías organizadas basadas en los datos reales del CSV
-  const categories = [
-    t('experiencias.filters.all'),
-    t('experiencias.filters.categories.archaeology'),
-    t('experiencias.filters.categories.cenotes'), 
-    t('experiencias.filters.categories.snorkel'),
-    t('experiencias.filters.categories.navigation'),
-    t('experiencias.filters.categories.adventure'),
-    t('experiencias.filters.categories.parks'),
-    t('experiencias.filters.categories.gastronomy'),
-    t('experiencias.filters.categories.wellness'),
-    t('experiencias.filters.categories.transport'),
-    t('experiencias.filters.categories.excursions')
-  ];
-
-  const filteredExperiences = experiences.filter(experience => {
-    try {
-      const searchText = experience.abstract || '';
-      const matchesSearch = !searchQuery || 
-        experience.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        searchText.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const experienceCategory = mapCategory(experience.categories?.[0] || 'otros');
-      const matchesCategory = !categoryFilter || categoryFilter === t('experiencias.filters.all') || 
-                             experienceCategory === categoryFilter;
-      return matchesSearch && matchesCategory;
-    } catch (error) {
-      // TODO: Log error to error tracking service
-      return false;
-    }
-  });
-
-  // Función para mapear categorías del CSV a las categorías de la web
+  // Map a CSV-style category slug to its localised display label.
+  // Defined BEFORE filteredExperiences so the filter callback doesn't hit
+  // the temporal-dead-zone — that bug was silently dropping every card via
+  // the surrounding try/catch and produced a "No se encontraron experiencias"
+  // empty state on prod even though the API returned 40 activities.
   const mapCategoryFromCSV = (category: string): string => {
     const categoryMap: Record<string, string> = {
       'arqueologia': t('experiencias.filters.categories.archaeology'),
@@ -160,6 +127,40 @@ export default function Experiencias() {
     };
     return categoryMap[category.toLowerCase()] || t('experiencias.filters.categories.archaeology');
   };
+
+  const mapCategory = (category: string): string => mapCategoryFromCSV(category);
+
+  // Categorías organizadas basadas en los datos reales del CSV
+  const categories = [
+    t('experiencias.filters.all'),
+    t('experiencias.filters.categories.archaeology'),
+    t('experiencias.filters.categories.cenotes'),
+    t('experiencias.filters.categories.snorkel'),
+    t('experiencias.filters.categories.navigation'),
+    t('experiencias.filters.categories.adventure'),
+    t('experiencias.filters.categories.parks'),
+    t('experiencias.filters.categories.gastronomy'),
+    t('experiencias.filters.categories.wellness'),
+    t('experiencias.filters.categories.transport'),
+    t('experiencias.filters.categories.excursions')
+  ];
+
+  const filteredExperiences = experiences.filter(experience => {
+    try {
+      const searchText = experience.abstract || '';
+      const matchesSearch = !searchQuery ||
+        experience.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        searchText.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const experienceCategory = mapCategory(experience.categories?.[0] || 'otros');
+      const matchesCategory = !categoryFilter || categoryFilter === t('experiencias.filters.all') ||
+                             experienceCategory === categoryFilter;
+      return matchesSearch && matchesCategory;
+    } catch (error) {
+      // TODO: Log error to error tracking service
+      return false;
+    }
+  });
 
   const experiencesByCategory = categories.slice(1).reduce((acc, category) => {
     acc[category] = experiences.filter(exp => {
